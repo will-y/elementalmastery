@@ -1,0 +1,49 @@
+1.1 CHANGELOG
+    -Fixed the name of the flame shovel
+    -Fixed the recipes for speed and strength sword
+    -changed the crafting recipes of the advanced tools
+    -Added 4 new mobs
+        -Strength Creeper: A slow creeper that has a large explosion
+        -Healing Creeper: A creeper with small damage, but it's explosion poisons players in the area and heals nearby monsters (Not fully implemented)
+        -Soeedy Creeper: A very fast creeper that blows up fast, but the explosion is not very powerful
+        -Fire Creeoer: Explodes in a ball of fire, sets all entities and the ground around it on fire (Not fully implemented)
+        
+1.2 CHANGELOG
+    -Fixed recipes for all multi-tools
+    -Added new tool materials for advanced tools
+    -Added armor for all of the gems
+    -Added advanced armors
+        -Strength armor- full set provides strength and resistance
+        -Speed armor - full set provides speed, jump boost, and step assist
+        -Fire armor - full set provides fire resistance
+        -Health armor - full set provides regeneration
+    -Fully Implemented the fire and healing creepers (Healing Creeper works but there are currently not particle effects that show that)
+    
+
+1.3 CHANGELOG
+    -Fixed the effects on the healing axe
+    -Added Energy Cores (Rare drops from the respective creeper)
+    -Added Energy Core Fragments
+    _Added dust and small piles of dust for each gem
+    -Added Active Energy Cores
+    -Added Basic Collector - Collects gem particles out of this air
+    -Added a Capacitor Multiblock made out of the following components:
+        -Capacitor Controller
+        -Capacitor Wall
+        -Capacitor Glass
+        -Speed Capacitor
+        -Fire Capacitor
+        -Health Capacitor
+        -Strength Capacitor
+    -Added Basic Generator
+    -Added Speed Generator
+    -Added Fire Generator
+    -Added Health Generator
+    -Added Strength Generator
+    -Added Speed Collector
+    -Added Strength Collector
+    -Added Cleaner
+    -Added Basic Extractor
+    -Added Speed Extractor
+    -Added Strength Extractor
+    -Added Fire Extractor

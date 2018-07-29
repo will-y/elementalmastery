@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:minergold"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "m": {
+            "item": "minecraft:gold_ingot"
+        },
+        "s": {
+            "item": "minecraft:golden_shovel"
+        },
+        "p": {
+            "item": "minecraft:golden_pickaxe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

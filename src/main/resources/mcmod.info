@@ -1,0 +1,16 @@
+[
+{
+  "modid": "elementalmastery",
+  "name": "Elemental Mastery",
+  "description": "A mod that adds four new gems to minecraft and allows you to make many tools, and items with them.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Eyeroh"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

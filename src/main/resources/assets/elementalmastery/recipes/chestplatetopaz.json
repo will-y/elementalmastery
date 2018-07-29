@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:chestplatetopaz"
+    },
+    "pattern": [
+        "o o",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        }
+    }
+}

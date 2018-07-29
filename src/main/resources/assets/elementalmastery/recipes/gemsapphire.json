@@ -1,0 +1,13 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:blocksapphire"
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:gemsapphire",
+        "count": 9
+    }
+}

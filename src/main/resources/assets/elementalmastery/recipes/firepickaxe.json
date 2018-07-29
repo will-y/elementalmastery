@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:firepickaxe"
+    },
+    "pattern": [
+        "obo",
+        " s ",
+        " s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "b": {
+            "item": "elementalmastery:blocktopaz"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

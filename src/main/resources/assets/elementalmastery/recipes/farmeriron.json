@@ -1,0 +1,31 @@
+{
+    "result": {
+        "item": "elementalmastery:farmeriron"
+    },
+    "pattern": [
+        "m2m",
+        "1b3",
+        " s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "m": {
+            "item": "minecraft:iron_ingot"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "1": {
+            "item": "minecraft:iron_hoe"
+        },
+        "2": {
+            "item": "minecraft:iron_shovel"
+        },
+        "3": {
+            "item": "minecraft:iron_axe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

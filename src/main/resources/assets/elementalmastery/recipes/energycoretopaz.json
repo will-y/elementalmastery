@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:energycoretopaz"
+    },
+    "pattern": [
+        " f ",
+        "fgf",
+        " f " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "f": {
+            "item": "elementalmastery:energycorefragment"
+        },
+        "g": {
+            "item": "elementalmastery:gemtopaz"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:gemopal"
+        }, 
+        {
+            "item": "elementalmastery:gemtopaz"
+        }, 
+        {
+            "item": "elementalmastery:gemruby"
+        }, 
+        {
+            "item": "elementalmastery:gemsapphire"
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:gemmulti",
+        "count": 1
+    }
+}

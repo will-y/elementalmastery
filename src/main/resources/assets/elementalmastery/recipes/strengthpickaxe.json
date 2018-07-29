@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:strengthpickaxe"
+    },
+    "pattern": [
+        "obo",
+        " s ",
+        " s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:blocksapphire"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients":[
+        {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        },
+        {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        },
+        {
+            "item": "elementalmastery:toolbinder"
+        },
+        {
+            "item": "minecraft:stick"
+        },
+        {
+            "item": "minecraft:wooden_sword",
+            "data": 0
+        },
+        {
+            "item": "minecraft:wooden_shovel",
+            "data": 0
+        },
+        {
+            "item": "minecraft:wooden_pickaxe",
+            "data": 0
+        },
+        {
+            "item": "minecraft:wooden_hoe",
+            "data": 0
+        },
+        {
+            "item": "minecraft:wooden_axe",
+            "data": 0
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:multiwood"
+    }
+}

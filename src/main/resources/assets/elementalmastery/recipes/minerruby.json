@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:minerruby"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "m": {
+            "item": "elementalmastery:gemruby"
+        },
+        "s": {
+            "item": "elementalmastery:shovelruby"
+        },
+        "p": {
+            "item": "elementalmastery:pickaxeruby"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:chestplatesapphire"
+    },
+    "pattern": [
+        "o o",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        }
+    }
+}

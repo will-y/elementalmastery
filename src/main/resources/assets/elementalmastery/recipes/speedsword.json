@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:speedsword"
+    },
+    "pattern": [
+        "o",
+        "b",
+        "s" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "b": {
+            "item": "elementalmastery:blockopal"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

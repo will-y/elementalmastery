@@ -1,0 +1,32 @@
+{
+    "result": {
+        "item": "elementalmastery:farmerstone"
+    },
+    "pattern": [
+        "m2m",
+        "1b3",
+        " s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "m": {
+            "type": "forge:ore_dict",
+            "ore": "stone"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "1": {
+            "item": "minecraft:stone_hoe"
+        },
+        "2": {
+            "item": "minecraft:stone_shovel"
+        },
+        "3": {
+            "item": "minecraft:stone_axe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

@@ -1,0 +1,36 @@
+MOBS:
+    Creepers:
+        Speed: super jump boost, fast
+        Fire: set on fire
+        Strength: slow, large explosion
+        Heal: Aura heal, heal mobs poison player
+    
+    Gem Monsters:
+        Some type of monster that spawns in the dimension, drops used for some machines?
+        
+MACHINES:
+    Crusher
+    Compressor
+    Upgrader
+    Player Upgrader
+    Advanced Factory
+    Collector: collects things out of the gem dimension chance for fossil pieces, just a chest that collects items overtime, cant put in, only take out
+    
+ITEMS:
+    Fossil: Some way to spawn a boss
+    
+TOOLS:
+    
+    Only Strength Hoe, 3x3
+   
+    Speed Axe: fast
+    
+DIMENSION:
+    Dirt and stone can drop gem shards (dirty or something maybe have to clean)
+    different drop from actual block to avoid farming
+    Same with trees
+    All normal biomes
+    New Gem biome:
+        -create plants and crops
+        -different trees
+        -bushes for gems?

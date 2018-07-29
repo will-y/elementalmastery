@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "elementalmastery:helmettopaz"
+    },
+    "pattern": [
+        "ooo",
+        "o o" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        }
+    }
+}

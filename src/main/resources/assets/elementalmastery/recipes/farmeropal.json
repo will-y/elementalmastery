@@ -1,0 +1,31 @@
+{
+    "result": {
+        "item": "elementalmastery:farmeropal"
+    },
+    "pattern": [
+        "m2m",
+        "1b3",
+        " s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "m": {
+            "item": "elementalmastery:gemopal"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "1": {
+            "item": "elementalmastery:hoeopal"
+        },
+        "2": {
+            "item": "elementalmastery:shovelopal"
+        },
+        "3": {
+            "item": "elementalmastery:axeopal"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

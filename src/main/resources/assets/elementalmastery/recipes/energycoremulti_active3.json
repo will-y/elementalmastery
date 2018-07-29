@@ -1,0 +1,27 @@
+{
+    "result": {
+        "item": "elementalmastery:energycoremulti_active"
+    },
+    "pattern": [
+        "rdr",
+        "gcg",
+        "rdr" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "d": {
+            "item": "elementalmastery:dustruby"
+        },
+        "r": {
+            "type": "forge:ore_dict",
+            "ore": "dustRedstone"
+        },
+        "g": {
+            "type": "forge:ore_dict",
+            "ore": "dustGlowstone"
+        },
+        "c": {
+            "item": "elementalmastery:energycoremulti"
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "elementalmastery:bootssapphire"
+    },
+    "pattern": [
+        "o o",
+        "o o"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:hoetopaz"
+    },
+    "pattern": [
+        "oo",
+        "s ",
+        "s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

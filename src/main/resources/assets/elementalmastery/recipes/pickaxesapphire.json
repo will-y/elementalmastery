@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:pickaxesapphire"
+    },
+    "pattern": [
+        "ooo",
+        " s ",
+        " s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

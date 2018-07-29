@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:shovelopal"
+    },
+    "pattern": [
+        "o",
+        "s",
+        "s" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

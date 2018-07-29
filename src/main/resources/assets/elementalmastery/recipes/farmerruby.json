@@ -1,0 +1,31 @@
+{
+    "result": {
+        "item": "elementalmastery:farmerruby"
+    },
+    "pattern": [
+        "m2m",
+        "1b3",
+        " s " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "m": {
+            "item": "elementalmastery:gemruby"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "1": {
+            "item": "elementalmastery:hoeruby"
+        },
+        "2": {
+            "item": "elementalmastery:shovelruby"
+        },
+        "3": {
+            "item": "elementalmastery:axeruby"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

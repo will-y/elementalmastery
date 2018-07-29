@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "elementalmastery:bootstopaz"
+    },
+    "pattern": [
+        "o o",
+        "o o"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        }
+    }
+}

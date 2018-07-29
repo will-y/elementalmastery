@@ -1,0 +1,18 @@
+{
+    "result": {
+        "item": "elementalmastery:bootsspeed"
+    },
+    "pattern": [
+        "b b",
+        "o o"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "b": {
+            "item": "elementalmastery:blockopal"
+        }
+    }
+}

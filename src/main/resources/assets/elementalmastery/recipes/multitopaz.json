@@ -1,0 +1,41 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:gemtopaz"
+        },
+        {
+            "item": "elementalmastery:gemtopaz"
+        },
+        {
+            "item": "elementalmastery:toolbinder"
+        },
+        {
+            "item": "minecraft:stick"
+        },
+        {
+            "item": "elementalmastery:swordtopaz",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:shoveltopaz",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:pickaxetopaz",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:hoetopaz",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:axetopaz",
+            "data": 0
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:multitopaz"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "result": {
+        "item": "elementalmastery:minerwood"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "m": {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        },
+        "s": {
+            "item": "minecraft:wooden_shovel"
+        },
+        "p": {
+            "item": "minecraft:wooden_pickaxe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

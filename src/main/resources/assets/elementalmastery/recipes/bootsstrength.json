@@ -1,0 +1,18 @@
+{
+    "result": {
+        "item": "elementalmastery:bootsstrength"
+    },
+    "pattern": [
+        "b b",
+        "o o"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:blocksapphire"
+        }
+    }
+}
