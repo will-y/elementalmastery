@@ -1,22 +1,22 @@
-package eyeroh.elementalmastery.machine.collector;
+package eyeroh.elementalmastery.machine.generator;
 
 import javax.annotation.Nullable;
 
+import eyeroh.elementalmastery.machine.collector.CollectorSlot;
+import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class CollectorContainer extends Container {
-    private CollectorTileEntity te;
-
-    public CollectorContainer(InventoryPlayer playerInventory, IInventory iInventory, CollectorTileEntity te) {
+public class GeneratorContainer extends Container{
+	private GeneratorTileEntity te;
+	
+	public GeneratorContainer(InventoryPlayer playerInventory, IInventory iInventory, GeneratorTileEntity te) {
         this.te = te;
 
         addOwnSlots();

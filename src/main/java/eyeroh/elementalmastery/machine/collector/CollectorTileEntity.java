@@ -4,11 +4,14 @@ import java.util.Random;
 
 import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -16,11 +19,14 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class CollectorTileEntity extends TileEntity implements ITickable{
+public class CollectorTileEntity extends TileEntity implements ITickable, ISidedInventory{
 	public static final int SIZE = 4;
+	public final int[] slotArray = {0, 1, 2, 3};
 	private Random rand = new Random();
 	int timeBetweenCollect = 80;
 	int counter = 0;
+	
+	private NonNullList<ItemStack> collectorItemStacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 
     // This item handler will hold our nine inventory slots
     private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
@@ -110,6 +116,110 @@ public class CollectorTileEntity extends TileEntity implements ITickable{
     public void addItem(ItemStack itemStack, int slotID) {
     	itemStackHandler.insertItem(slotID, itemStack, false);
     }
+
+	@Override
+	public int getSizeInventory() {
+		System.out.println("getSizeInventory");
+		return this.SIZE;
+	}
+
+	public boolean isEmpty()
+    {
+        for (ItemStack itemstack : this.collectorItemStacks)
+        {
+            if (!itemstack.isEmpty())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+	@Override
+	public ItemStack getStackInSlot(int index) {
+		//System.out.println("getStackInSlot");
+		return this.collectorItemStacks.get(index);
+	}
+
+	@Override
+	public ItemStack decrStackSize(int index, int count) {
+		//System.out.println("decrease");
+		return ItemStackHelper.getAndSplit(this.collectorItemStacks, index, count);
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		return ItemStackHelper.getAndRemove(this.collectorItemStacks, index);
+	}
+
+	@Override
+	public void setInventorySlotContents(int index, ItemStack stack) {
+		//System.out.println("setInventoryContents");
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		//System.out.println("getInventoryStackLimit");
+		return 64;
+	}
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		//System.out.println("isUsableByPlayer");
+		return true;
+	}
+
+	public void openInventory(EntityPlayer player) {
+	}
+
+	public void closeInventory(EntityPlayer player) {
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		//System.out.println("isItemValidForSlot");
+		return false;
+	}
+
+	@Override
+	public int getField(int id) {
+		//System.out.println("getField");
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		//System.out.println("setField");
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		//System.out.println("getFieldCount");
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		//System.out.println("clear");
+		this.collectorItemStacks.clear();
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		return new int[] {4};
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		return true;
+	}
     
     
 }
