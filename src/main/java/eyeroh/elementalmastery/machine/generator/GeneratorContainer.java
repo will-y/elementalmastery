@@ -2,6 +2,8 @@ package eyeroh.elementalmastery.machine.generator;
 
 import javax.annotation.Nullable;
 
+import eyeroh.elementalmastery.block.ModBlocks;
+import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.collector.CollectorSlot;
 import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,9 +11,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class GeneratorContainer extends Container{
 	private GeneratorTileEntity te;
@@ -27,32 +32,26 @@ public class GeneratorContainer extends Container{
         // Slots for the main inventory
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 9; ++col) {
-                int x = 9 + col * 18;
-                int y = row * 18 + 70;
+                int x = 8 + col * 18;
+                int y = row * 18 + 84;
                 this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 9, x, y));
             }
         }
 
         // Slots for the hotbar
         for (int row = 0; row < 9; ++row) {
-            int x = 9 + row * 18;
-            int y = 58 + 70;
+            int x = 8 + row * 18;
+            int y = 142;
             this.addSlotToContainer(new Slot(playerInventory, row, x, y));
         }
     }
 
     private void addOwnSlots() {
         IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        int x = 20;
-        int y = 30;
-
-        // Add our own slots
-        int slotIndex = 0;
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            addSlotToContainer(new CollectorSlot(itemHandler, slotIndex, x, y));
-            slotIndex++;
-            x += 40;
-        }
+        int x = 27;
+        int y = 35;
+        
+        addSlotToContainer(new GeneratorSlot(itemHandler, 0, x, y, new Item[] {ModItems.gemOpal, Item.getItemFromBlock(ModBlocks.blockopal)}));
     }
     
     @Nullable
@@ -83,8 +82,8 @@ public class GeneratorContainer extends Container{
         return itemstack;
     }
 
-    @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return te.canInteractWith(playerIn);
-    }
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return te.canInteractWith(playerIn);
+	}
 }

@@ -11,11 +11,11 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 public class GeneratorGui extends GuiContainer{
-	public static final int WIDTH = 180;
-    public static final int HEIGHT = 152;
+	public static final int WIDTH = 176;
+    public static final int HEIGHT = 166;
     public GeneratorTileEntity tileEntity = new GeneratorTileEntity();
 
-    private static final ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/basicgui.png");
+    private static final ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png");
 
     public GeneratorGui(GeneratorTileEntity tileEntity, GeneratorContainer container) {
         super(container);

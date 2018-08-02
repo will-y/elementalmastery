@@ -32,8 +32,6 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
     private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
         @Override
         protected void onContentsChanged(int slot) {
-            // We need to tell the tile entity that something has changed so
-            // that the chest contents is persisted
             CollectorTileEntity.this.markDirty();
         }
     };

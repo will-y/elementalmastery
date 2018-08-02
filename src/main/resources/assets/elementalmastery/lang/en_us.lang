@@ -162,6 +162,8 @@ tile.elementalmastery.capacitorsapphire.name=Multi Capacitor
 
 tile.elementalmastery.collectorbasic.name=Basic Collector
 
+tile.elementalmastery.generatoropal.name=Opal Generator
+
 message.elementalmastery.farmer_mode=Mode Changed To: %d
 message.elementalmastery.capacitor_formed=%d
 message.elementalmastery.capacitor_amount=%d

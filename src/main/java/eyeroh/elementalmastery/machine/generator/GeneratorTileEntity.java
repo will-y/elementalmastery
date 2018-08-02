@@ -2,8 +2,12 @@ package eyeroh.elementalmastery.machine.generator;
 
 import java.util.Random;
 
+import eyeroh.elementalmastery.block.ModBlocks;
+import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -15,7 +19,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class GeneratorTileEntity extends TileEntity implements ITickable{
+public class GeneratorTileEntity extends TileEntity implements ITickable, IInventory{
 	public static final int SIZE = 1;
 	private Random rand = new Random();
 	public String name;
@@ -47,7 +51,6 @@ public class GeneratorTileEntity extends TileEntity implements ITickable{
     }
 
     public boolean canInteractWith(EntityPlayer playerIn) {
-        // If we are too far away from this tile entity you cannot use it
         return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
     }
 
@@ -68,7 +71,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable{
     }
     
     public String getName() {
-		return "tile.elementalmastery." + name + ".name";
+		return "tile.elementalmastery.generatoropal.name";
 	}
 
 	public boolean hasCustomName() {
@@ -82,5 +85,87 @@ public class GeneratorTileEntity extends TileEntity implements ITickable{
 	
 	public void update() {
 		
+	}
+
+	@Override
+	public int getSizeInventory() {
+		return 1;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int index, int count) {
+		return null;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		return null;
+	}
+
+	@Override
+	public void setInventorySlotContents(int index, ItemStack stack) {
+		
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 64;
+	}
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return true;
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {
+		
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+		
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		if (stack.isItemEqual(new ItemStack(ModItems.gemOpal)) || stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int index) {
+		return new ItemStack(ModItems.gemOpal);
 	}
 }
