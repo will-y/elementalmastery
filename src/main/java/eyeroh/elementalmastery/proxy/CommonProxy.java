@@ -23,6 +23,7 @@ import eyeroh.elementalmastery.item.tool.GemSword;
 import eyeroh.elementalmastery.item.tool.HealAxe;
 import eyeroh.elementalmastery.item.tool.HealSword;
 import eyeroh.elementalmastery.item.tool.ItemFarmer;
+import eyeroh.elementalmastery.item.tool.ItemLinker;
 import eyeroh.elementalmastery.item.tool.ItemMiner;
 import eyeroh.elementalmastery.item.tool.ItemMultiTool;
 import eyeroh.elementalmastery.item.tool.ModTools;
@@ -280,5 +281,7 @@ public class CommonProxy {
     	event.getRegistry().register(new GemItem("dusttopazsmall"));
     	event.getRegistry().register(new GemItem("dustrubysmall"));
     	event.getRegistry().register(new GemItem("dustsapphiresmall"));
+    	
+    	event.getRegistry().register(new ItemLinker());
     }
 }

@@ -4,7 +4,6 @@ import java.util.Random;
 
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -12,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -24,13 +24,18 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	private Random rand = new Random();
 	public String name;
 	public int type;
+	
+	public BlockPos linkedCapacitor = null;
+	public boolean linked = false;
+	public boolean active = false;
+	public int maxProgress;
+	public int currentProgress = 0;
+	public int maxEnergy = 10000;
+	public int currentEnergy = 0;
 
-    // This item handler will hold our nine inventory slots
     private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
         @Override
         protected void onContentsChanged(int slot) {
-            // We need to tell the tile entity that something has changed so
-            // that the chest contents is persisted
             GeneratorTileEntity.this.markDirty();
         }
     };

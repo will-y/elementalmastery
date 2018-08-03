@@ -140,6 +140,8 @@ item.elementalmastery.dusttopazsmall.name=Small Pile of Topaz Dust
 item.elementalmastery.dustrubysmall.name=Small Pile of Ruby Dust
 item.elementalmastery.dustsapphiresmall.name=Small Pile of Sapphire Dust
 
+item.elementalmastery.linker.name=Linking Tool
+
 tile.elementalmastery.blockopal.name=Opal Block
 tile.elementalmastery.blocktopaz.name=Topaz Block
 tile.elementalmastery.blockruby.name=Ruby Block

@@ -153,6 +153,9 @@ public class ModTools {
 	@GameRegistry.ObjectHolder("elementalmastery:healaxe")
 	public static HealAxe healAxe;
 	
+	@GameRegistry.ObjectHolder("elementalmastery:linker")
+	public static ItemLinker linker;
+	
 	
 	@SideOnly(Side.CLIENT)
 	public static void initModels() {
@@ -225,5 +228,7 @@ public class ModTools {
 		
 		healSword.initModel();
 		healAxe.initModel();
+		
+		linker.initModel();
 	}
 }
