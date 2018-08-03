@@ -19,7 +19,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class CollectorTileEntity extends TileEntity implements ITickable, ISidedInventory{
+public class CollectorTileEntity extends TileEntity implements ITickable, ISidedInventory {
 	public static final int SIZE = 4;
 	public final int[] slotArray = {0, 1, 2, 3};
 	private Random rand = new Random();
@@ -51,7 +51,6 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
     }
 
     public boolean canInteractWith(EntityPlayer playerIn) {
-        // If we are too far away from this tile entity you cannot use it
         return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
     }
 

@@ -47,3 +47,17 @@
     -Added Speed Extractor
     -Added Strength Extractor
     -Added Fire Extractor
+    
+1.3.1 CHANGELOG
+    -Fixed Item names not appearing in guis
+    -Fixed special axe recipes being inconsistent
+    -Added a new collector gui
+    -Added Opal Generator
+    -Added Topaz Generator
+    -Added Ruby Generator
+    -Added Sapphire Generator
+    -Added Linking Tool
+    
+1.4 CHANGELOG
+    -Added experience to special tools
+    -Added a skill points gui for the tools
