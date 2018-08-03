@@ -38,4 +38,10 @@ public class GeneratorGui extends GuiContainer{
 		fontRenderer.drawString(tileEntity.getDisplayName().getUnformattedText(), LABEL_XPOS, LABEL_YPOS, Color.darkGray.getRGB());
 		
 	}
+    
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    	super.drawScreen(mouseX, mouseY, partialTicks);
+    	renderHoveredToolTip(mouseX, mouseY);
+    }
 }
