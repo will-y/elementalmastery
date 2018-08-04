@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.collector;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -8,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -55,5 +57,19 @@ public class CollectorBlock extends Block implements ITileEntityProvider{
         }
         player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
+    }
+    
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    	TileEntity te = world.getTileEntity(pos);
+    	if(te instanceof CollectorTileEntity) {
+    		CollectorTileEntity tileEntity = (CollectorTileEntity) te;
+    		
+    		for(int i = 0; i < tileEntity.SIZE; i++) {
+    			ItemStack stack = tileEntity.getItemStackHandler().getStackInSlot(i);
+    			InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+    		}
+    		
+    	}
     }
 }

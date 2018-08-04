@@ -4,6 +4,7 @@ import java.util.Random;
 
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
+import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -28,10 +29,13 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	public BlockPos linkedCapacitor = null;
 	public boolean linked = false;
 	public boolean active = false;
-	public int maxProgress;
+	public int maxProgress = 200;
 	public int currentProgress = 0;
 	public int maxEnergy = 10000;
 	public int currentEnergy = 0;
+	public int energyPerSecond = 1000;
+	private int counter = 0;
+	private int maxCounter = 20;
 
     private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
         @Override
@@ -46,12 +50,27 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
         if (compound.hasKey("items")) {
             itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
         }
+        linked = compound.getBoolean("linked");
+        active = compound.getBoolean("active");
+        maxProgress = compound.getInteger("maxProgress");
+        currentProgress = compound.getInteger("currentProgress");
+        currentEnergy = compound.getInteger("currentEnergy");
+        counter = compound.getInteger("counter");
+        linkedCapacitor = BlockPos.fromLong(compound.getLong("linkedCapacitor"));
+        
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("items", itemStackHandler.serializeNBT());
+        compound.setBoolean("linked", linked);
+        compound.setBoolean("active", active);
+        compound.setInteger("maxProgress", maxProgress);
+        compound.setInteger("currentProgress", currentProgress);
+        compound.setInteger("currentEnergy", currentEnergy);
+        compound.setInteger("counter", counter);
+        compound.setLong("linkedCapacitor", linkedCapacitor.toLong());
         return compound;
     }
 
@@ -86,10 +105,6 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	@Override
 	public ITextComponent getDisplayName() {
 		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
-	}
-	
-	public void update() {
-		
 	}
 
 	@Override
@@ -172,5 +187,82 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	@Override
 	public ItemStack getStackInSlot(int index) {
 		return new ItemStack(ModItems.gemOpal);
+	}
+	
+	public void setCapacitor(BlockPos pos) {
+		this.linkedCapacitor = pos;
+		linked = true;
+	}
+	
+	public boolean canExportPower() {
+		if(linked) {
+			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
+			if(capacitor != null && capacitor instanceof TileEntityCapacitorController) {
+				if(((TileEntityCapacitorController) capacitor).canAcceptPower("opal", this.energyPerSecond)) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	public void sendPower(int amount) {
+		TileEntity capacitor = world.getTileEntity(linkedCapacitor);
+		((TileEntityCapacitorController) capacitor).addEnergy("opal", amount);
+	}
+	
+	public void updateSecond() {
+		if(active) {
+			if(canExportPower()) {
+				sendPower(energyPerSecond);
+			}
+		}
+	}
+	
+	public void update() {
+		if(!world.isRemote) {
+			if(counter >= maxCounter) {
+				counter = 0;
+				updateSecond();
+			}
+			counter++;
+			if(active) {
+				currentProgress++;
+				if(currentProgress >= maxProgress) {
+					active = false;
+					currentProgress = 0;
+				}
+			} else {
+				ItemStack stack = itemStackHandler.getStackInSlot(0);
+				if(stack.isItemEqual(new ItemStack(ModItems.gemOpal))) {
+					maxProgress = 100;
+					itemStackHandler.extractItem(0, 1, false);
+					active = true;
+				} else if (stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
+					maxProgress = 900;
+					itemStackHandler.extractItem(0, 1, false);
+					active = true;
+				}
+			}
+		}
+		
+	}
+	
+	public int getCurrentProgress() {
+		return this.currentProgress;
+	}
+	
+	public int getMaxProgress() {
+		return this.maxProgress;
+	}
+	
+	public ItemStackHandler getItemStackHandler() {
+		return itemStackHandler;
 	}
 }

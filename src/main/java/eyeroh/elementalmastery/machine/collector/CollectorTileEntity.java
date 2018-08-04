@@ -216,6 +216,8 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
 		return true;
 	}
-    
-    
+	
+	public ItemStackHandler getItemStackHandler() {
+		return itemStackHandler;
+	}
 }

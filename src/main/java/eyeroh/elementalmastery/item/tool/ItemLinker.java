@@ -6,12 +6,14 @@ import javax.annotation.Nullable;
 
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.GemItem;
+import eyeroh.elementalmastery.machine.ModMachines;
+import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -41,14 +43,21 @@ public class ItemLinker extends GemItem {
 					blockStored = BlockPos.fromLong(nbt.getLong("position"));
 				}
 				
+				if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorSpeed) && blockStored.toLong() != 0) {
+					TileEntity te = world.getTileEntity(pos);
+					if(te instanceof GeneratorTileEntity) {
+						((GeneratorTileEntity) te).setCapacitor(blockStored);
+					}
+				}
+				
 				System.out.println(nbt);
 				nbt.setLong("position", blockStored.toLong());
 				nbt.setString("tooltip", toolTip);
 				player.getHeldItem(hand).setTagCompound(nbt);
 			} else {
 				NBTTagCompound compound = new NBTTagCompound();
-				System.out.println("Item Created from capacitor click");
 				player.getHeldItem(hand).setTagCompound(compound);
+				this.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
 			}
 		}
 		return EnumActionResult.PASS;

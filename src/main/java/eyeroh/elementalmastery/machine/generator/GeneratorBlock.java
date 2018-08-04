@@ -1,7 +1,6 @@
 package eyeroh.elementalmastery.machine.generator;
 
 import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -9,7 +8,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -47,7 +48,6 @@ public class GeneratorBlock extends Block implements ITileEntityProvider {
     
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        // Only execute on the server
         if (world.isRemote) {
             return true;
         }
@@ -57,5 +57,15 @@ public class GeneratorBlock extends Block implements ITileEntityProvider {
         }
         player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
+    }
+    
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+    	TileEntity te = world.getTileEntity(pos);
+    	if(te instanceof GeneratorTileEntity) {
+    		GeneratorTileEntity tileEntity = (GeneratorTileEntity) te;
+    		ItemStack stack = tileEntity.getItemStackHandler().getStackInSlot(0);
+    		InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+    	}
     }
 }
