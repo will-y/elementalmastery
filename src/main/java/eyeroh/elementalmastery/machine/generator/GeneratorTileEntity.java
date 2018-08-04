@@ -9,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -43,6 +45,23 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
             GeneratorTileEntity.this.markDirty();
         }
     };
+    
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        this.readFromNBT(packet.getNbtCompound());
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -57,7 +76,6 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
         currentEnergy = compound.getInteger("currentEnergy");
         counter = compound.getInteger("counter");
         linkedCapacitor = BlockPos.fromLong(compound.getLong("linkedCapacitor"));
-        
     }
 
     @Override
@@ -70,7 +88,10 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
         compound.setInteger("currentProgress", currentProgress);
         compound.setInteger("currentEnergy", currentEnergy);
         compound.setInteger("counter", counter);
-        compound.setLong("linkedCapacitor", linkedCapacitor.toLong());
+        if(linked) {
+        	compound.setLong("linkedCapacitor", linkedCapacitor.toLong());
+        }
+        
         return compound;
     }
 
@@ -226,32 +247,30 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	}
 	
 	public void update() {
-		if(!world.isRemote) {
-			if(counter >= maxCounter) {
-				counter = 0;
-				updateSecond();
+		markDirty();
+		if(counter >= maxCounter) {
+			counter = 0;
+			updateSecond();
+		}
+		counter++;
+		if(active) {
+			currentProgress++;
+			if(currentProgress >= maxProgress) {
+				active = false;
+				currentProgress = 0;
 			}
-			counter++;
-			if(active) {
-				currentProgress++;
-				if(currentProgress >= maxProgress) {
-					active = false;
-					currentProgress = 0;
-				}
-			} else {
-				ItemStack stack = itemStackHandler.getStackInSlot(0);
-				if(stack.isItemEqual(new ItemStack(ModItems.gemOpal))) {
-					maxProgress = 100;
-					itemStackHandler.extractItem(0, 1, false);
-					active = true;
-				} else if (stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
-					maxProgress = 900;
-					itemStackHandler.extractItem(0, 1, false);
-					active = true;
-				}
+		} else {
+			ItemStack stack = itemStackHandler.getStackInSlot(0);
+			if(stack.isItemEqual(new ItemStack(ModItems.gemOpal))) {
+				maxProgress = 100;
+				itemStackHandler.extractItem(0, 1, false);
+				active = true;
+			} else if (stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
+				maxProgress = 900;
+				itemStackHandler.extractItem(0, 1, false);
+				active = true;
 			}
 		}
-		
 	}
 	
 	public int getCurrentProgress() {

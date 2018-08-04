@@ -9,6 +9,7 @@ import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class GeneratorContainer extends Container{
-	private GeneratorTileEntity te;
+	public GeneratorTileEntity te;
 	
 	public GeneratorContainer(InventoryPlayer playerInventory, IInventory iInventory, GeneratorTileEntity te) {
         this.te = te;
@@ -29,7 +30,6 @@ public class GeneratorContainer extends Container{
     }
 
     private void addPlayerSlots(InventoryPlayer playerInventory) {
-        // Slots for the main inventory
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 9; ++col) {
                 int x = 8 + col * 18;
@@ -37,8 +37,6 @@ public class GeneratorContainer extends Container{
                 this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 9, x, y));
             }
         }
-
-        // Slots for the hotbar
         for (int row = 0; row < 9; ++row) {
             int x = 8 + row * 18;
             int y = 142;
@@ -85,5 +83,22 @@ public class GeneratorContainer extends Container{
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
 		return te.canInteractWith(playerIn);
+	}
+	
+	private int progress;
+	
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		
+		int prog = te.getCurrentProgress();
+		
+		for(IContainerListener listener : listeners) {
+			if(prog != progress) {
+				listener.sendWindowProperty(this, 0, prog);
+			}
+		}
+		
+		this.progress = prog;
 	}
 }
