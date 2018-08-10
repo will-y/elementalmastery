@@ -38,6 +38,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	public int energyPerSecond = 1000;
 	private int counter = 0;
 	private int maxCounter = 20;
+	private boolean progressed = true;
 
     private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
         @Override
@@ -253,27 +254,15 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	
 	public void update() {
 		markDirty();
-		if(active) {
-			if(canExportEnergy()) {
-				sendPower((int)energyPerSecond/20);
-			} else {
-				currentEnergy += (int)energyPerSecond/20;
-			}
-		} else if(currentEnergy > 0 && linked) {
-			if(canExportEnergy()) {
-				if(currentEnergy <= (int)energyPerSecond/20) {
-					sendPower(currentEnergy);
-					currentEnergy = 0;
-				} else {
-					sendPower((int)energyPerSecond/20);
-					currentEnergy -= (int)energyPerSecond/20;
-				}
-			}
-		}
 		
 		if(active) {
-			if(canExportEnergy() || currentEnergy < (maxEnergy))
-			currentProgress++;
+			if(canExportEnergy() || currentEnergy < (maxEnergy)) {
+				currentProgress++;
+				progressed = true;
+			} else {
+				progressed = false;
+			}
+			
 			if(currentProgress >= maxProgress) {
 				active = false;
 				currentProgress = 0;
@@ -288,6 +277,24 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 				maxProgress = 900;
 				itemStackHandler.extractItem(0, 1, false);
 				active = true;
+			}
+		}
+		
+		if(active && progressed) {
+			if(canExportEnergy()) {
+				sendPower((int)energyPerSecond/20);
+			} else {
+				currentEnergy += (int)energyPerSecond/20;
+			}
+		} else if(currentEnergy > 0 && linked) {
+			if(canExportEnergy()) {
+				if(currentEnergy <= (int)energyPerSecond/20) {
+					sendPower(currentEnergy);
+					currentEnergy = 0;
+				} else {
+					sendPower((int)energyPerSecond/20);
+					currentEnergy -= (int)energyPerSecond/20;
+				}
 			}
 		}
 	}
