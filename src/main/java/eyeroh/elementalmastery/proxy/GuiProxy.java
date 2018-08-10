@@ -1,13 +1,14 @@
 package eyeroh.elementalmastery.proxy;
 
 import eyeroh.elementalmastery.gui.BasicCollectorGui;
+import eyeroh.elementalmastery.gui.CapacitorGui;
 import eyeroh.elementalmastery.gui.GeneratorGui;
+import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorContainer;
 import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import eyeroh.elementalmastery.machine.generator.GeneratorContainer;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -37,6 +38,9 @@ public class GuiProxy implements IGuiHandler {
         } else if (te instanceof GeneratorTileEntity) {
         	GeneratorTileEntity generatorTileEntity = (GeneratorTileEntity) te;
             return new GeneratorGui(generatorTileEntity, new GeneratorContainer(player.inventory, player.inventory, generatorTileEntity));
+        } else if (te instanceof TileEntityCapacitorController) {
+        	TileEntityCapacitorController capacitorControllerTileEntity = (TileEntityCapacitorController) te;
+        	return new CapacitorGui(capacitorControllerTileEntity);
         }
         return null;
     }

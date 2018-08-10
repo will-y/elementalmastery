@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.capacitor;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -28,6 +29,7 @@ public class BlockCapacitorController extends Block implements ITileEntityProvid
 	
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final int GUI_ID = 2;
 	
 	public BlockCapacitorController() {
 		super(Material.ROCK);
@@ -68,6 +70,16 @@ public class BlockCapacitorController extends Block implements ITileEntityProvid
         		}
         	}
         }
+        
+        TileEntity te = world.getTileEntity(pos);
+        if (!(te instanceof TileEntityCapacitorController)) {
+            return false;
+        }
+        
+        TileEntityCapacitorController tileEntityCapacitorController = (TileEntityCapacitorController) te;
+        
+        if(tileEntityCapacitorController.getActive())
+        player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 	
