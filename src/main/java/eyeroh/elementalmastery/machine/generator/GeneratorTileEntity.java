@@ -215,11 +215,11 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 		linked = true;
 	}
 	
-	public boolean canExportPower() {
+	public boolean canExportEnergy() {
 		if(linked) {
 			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
 			if(capacitor != null && capacitor instanceof TileEntityCapacitorController) {
-				if(((TileEntityCapacitorController) capacitor).canAcceptPower("opal", this.energyPerSecond)) {
+				if(((TileEntityCapacitorController) capacitor).canAcceptEnergy(0, this.energyPerSecond)) {
 					return true;
 				} else {
 					return false;
@@ -247,20 +247,20 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	public void sendPower(int amount) {
 		if(!world.isRemote) {
 			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
-			((TileEntityCapacitorController) capacitor).addEnergy("opal", amount);
+			((TileEntityCapacitorController) capacitor).addEnergy(0, amount);
 		}
 	}
 	
 	public void update() {
 		markDirty();
 		if(active) {
-			if(canExportPower()) {
+			if(canExportEnergy()) {
 				sendPower((int)energyPerSecond/20);
 			} else {
 				currentEnergy += (int)energyPerSecond/20;
 			}
 		} else if(currentEnergy > 0 && linked) {
-			if(canExportPower()) {
+			if(canExportEnergy()) {
 				if(currentEnergy <= (int)energyPerSecond/20) {
 					sendPower(currentEnergy);
 					currentEnergy = 0;
@@ -272,7 +272,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 		}
 		
 		if(active) {
-			if(canExportPower() || currentEnergy < (maxEnergy - energyPerSecond))
+			if(canExportEnergy() || currentEnergy < (maxEnergy))
 			currentProgress++;
 			if(currentProgress >= maxProgress) {
 				active = false;

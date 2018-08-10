@@ -149,49 +149,24 @@ public class TileEntityCapacitorController extends TileEntity {
 		return this.energyMax;
 	}
 	
-	public int getEnergy(String type) {
-		if(type == "opal" && energyAmount[0] < energyMax[0]) {
-			return energyAmount[0];
-		} else if (type == "topaz" && energyAmount[1] < energyMax[1]) {
-			return energyAmount[1];
-		} else if (type == "ruby" && energyAmount[2] < energyMax[2]) {
-			return energyAmount[2];
-		} else if (type == "sapphire" && energyAmount[3] < energyMax[3]) {
-			return energyAmount[3];
-		} else {
-			return 0;
-		}
+	public int getMaxEnergy(int type){
+		return energyMax[type];
+	}
+	
+	public int getEnergy(int type) {
+		return energyAmount[type];
 	}
 	
 	public int[] getEnergy() {
 		return this.energyAmount;
 	}
 	
-	public void addEnergy(String type, int amount) {
-		if(type == "opal") {
-			if(energyAmount[0] + amount >= energyMax[0]) {
-				energyAmount[0] = energyMax[0];
-			} else {
-				energyAmount[0] += amount;
-			}
-		} else if (type == "topaz") {
-			if(energyAmount[1] + amount >= energyMax[1]) {
-				energyAmount[1] = energyMax[1];
-			} else {
-				energyAmount[1] += amount;
-			}
-		} else if (type == "ruby") {
-			if(energyAmount[2] + amount >= energyMax[2]) {
-				energyAmount[2] = energyMax[2];
-			} else {
-				energyAmount[2] += amount;
-			}
-		} else if (type == "sapphire") {
-			if(energyAmount[3] + amount >= energyMax[3]) {
-				energyAmount[3] = energyMax[3];
-			} else {
-				energyAmount[3] += amount;
-			}
+	public void addEnergy(int type, int amount) {
+		
+		if(energyAmount[type] + amount >= energyMax[type]) {
+			energyAmount[type] = energyMax[type];
+		} else {
+			energyAmount[type] += amount;
 		}
 	}
 	
@@ -215,31 +190,13 @@ public class TileEntityCapacitorController extends TileEntity {
 		return new int[] {0, 0, 0, 0};
 	}
 	
-	public boolean canAcceptPower(String type, int amount) {
+	public boolean canAcceptEnergy(int type, int amount) {
 		if(active) {
-			if(type == "opal") {
-				if(energyAmount[0] + amount > energyMax[0]) {
-					return false;
-				}
-				return true;
-			} else if(type == "topaz") {
-				if(energyAmount[1] + amount > energyMax[1]) {
-					return false;
-				}
-				return true;
-			} else if(type == "ruby") {
-				if(energyAmount[2] + amount > energyMax[2]) {
-					return false;
-				}
-				return true;
-			} else if (type == "sapphire") {
-				if(energyAmount[3] + amount > energyMax[3]) {
-					return false;
-				}
-				return true;
-			} else {
+			
+			if(energyAmount[type] + amount > energyMax[type]) {
 				return false;
 			}
+			return true;
 		}
 		return false;		
 	}
@@ -284,26 +241,9 @@ public class TileEntityCapacitorController extends TileEntity {
     }
     
     public boolean isFull(int type) {
-    	switch (type) {
-    	case 0:
-    		if(energyAmount[0] == energyMax[0]) {
-    			return true;
-    		}
-    		break;
-    	case 1:
-    		if(energyAmount[1] == energyMax[1])
-    			return true;
-    		break;
-    	case 2:
-    		if(energyAmount[2] == energyMax[2])
-    			return true;
-    		break;
-    	case 3:
-    		if(energyAmount[3] == energyMax[3])
-    			return true;
-    		break;
-    		default:
-    			return false;
+    	
+    	if(energyAmount[type] == energyMax[type]) {
+    		return true;
     	}
     	return false;
     }
