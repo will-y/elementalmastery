@@ -272,6 +272,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 		}
 		
 		if(active) {
+			if(canExportPower() || currentEnergy < (maxEnergy - energyPerSecond))
 			currentProgress++;
 			if(currentProgress >= maxProgress) {
 				active = false;
