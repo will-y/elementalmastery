@@ -233,26 +233,44 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 		}
 	}
 	
-	public void sendPower(int amount) {
-		TileEntity capacitor = world.getTileEntity(linkedCapacitor);
-		((TileEntityCapacitorController) capacitor).addEnergy("opal", amount);
+	public boolean isCapacitorFull() {
+		if(linked) {
+			TileEntity te = world.getTileEntity(linkedCapacitor);
+			if(te != null && te instanceof TileEntityCapacitorController) {
+				TileEntityCapacitorController capacitor = (TileEntityCapacitorController) te;
+				return capacitor.isFull(0);
+			}
+		}
+		return true;
 	}
 	
-	public void updateSecond() {
-		if(active) {
-			if(canExportPower()) {
-				sendPower(energyPerSecond);
-			}
+	public void sendPower(int amount) {
+		if(!world.isRemote) {
+			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
+			((TileEntityCapacitorController) capacitor).addEnergy("opal", amount);
 		}
 	}
 	
 	public void update() {
 		markDirty();
-		if(counter >= maxCounter) {
-			counter = 0;
-			updateSecond();
+		if(active) {
+			if(canExportPower()) {
+				sendPower((int)energyPerSecond/20);
+			} else {
+				currentEnergy += (int)energyPerSecond/20;
+			}
+		} else if(currentEnergy > 0 && linked) {
+			if(canExportPower()) {
+				if(currentEnergy <= (int)energyPerSecond/20) {
+					sendPower(currentEnergy);
+					currentEnergy = 0;
+				} else {
+					sendPower((int)energyPerSecond/20);
+					currentEnergy -= (int)energyPerSecond/20;
+				}
+			}
 		}
-		counter++;
+		
 		if(active) {
 			currentProgress++;
 			if(currentProgress >= maxProgress) {
@@ -279,6 +297,14 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	
 	public int getMaxProgress() {
 		return this.maxProgress;
+	}
+	
+	public int getCurrentEnergy() {
+		return this.currentEnergy;
+	}
+	
+	public int getMaxEnergy() {
+		return this.maxEnergy;
 	}
 	
 	public ItemStackHandler getItemStackHandler() {

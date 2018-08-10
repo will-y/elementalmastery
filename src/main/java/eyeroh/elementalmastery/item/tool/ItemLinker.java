@@ -32,7 +32,7 @@ public class ItemLinker extends GemItem {
 	
 	@Override
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
-		if(!world.isRemote) {
+		//if(!world.isRemote) {
 			NBTTagCompound nbt = player.getHeldItem(hand).getTagCompound();
 			if(nbt != null) {
 				String toolTip = "No Block Linked";
@@ -59,7 +59,7 @@ public class ItemLinker extends GemItem {
 				player.getHeldItem(hand).setTagCompound(compound);
 				this.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
 			}
-		}
+		//}
 		return EnumActionResult.PASS;
     }
 	
@@ -72,7 +72,6 @@ public class ItemLinker extends GemItem {
 				System.out.println("Item Created from first click --- ");
 				player.getHeldItem(hand).setTagCompound(compound);
 			} else if (player.isSneaking()) {
-				System.out.println("sneaking");
 				clearSelection(player.getHeldItem(hand), world);
 			} else {
 				System.out.println(BlockPos.fromLong(player.getHeldItem(hand).getTagCompound().getLong("position")));

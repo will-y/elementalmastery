@@ -19,7 +19,9 @@ public class GeneratorGui extends GuiContainer{
     private static final ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png");
     
     public static final int progressBarLength = 67;
-    public static final int energyBarLength = 0;
+    public static final int energyBarHeight = 73;
+    public static final int energyBarY = 6;
+    public static final int energyBarTextureY = 0;
     public static final int gemHeight = 16;
     public static final int gemY = 34;
     public static final int gemYTexture = 0;
@@ -45,7 +47,15 @@ public class GeneratorGui extends GuiContainer{
         	int scaledGemY = (int) (gemY + (gemHeight - scaledGemHeight));
         	int scaledGemYTexture = (int) (gemYTexture + (gemHeight - scaledGemHeight));
         	drawTexturedModalRect(guiLeft + 60, guiTop + scaledGemY, 186, scaledGemYTexture, 16, scaledGemHeight);
-        }
+       }
+       if(tileEntity.getCurrentEnergy() > 0) {
+		   float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy() / tileEntity.getMaxEnergy());
+		   int scaledEnergyHeight = (int) (scaledEnergyFactor * energyBarHeight);
+		   int scaledEnergyY = (int) (energyBarY + (energyBarHeight - scaledEnergyHeight));
+		   int scaledEnergyTexture = (int) (energyBarTextureY + (energyBarHeight - scaledEnergyHeight));
+		   drawTexturedModalRect(guiLeft + 158, guiTop + 6, 158, 6, 10, energyBarHeight);
+		   drawTexturedModalRect(guiLeft + 158, guiTop + scaledEnergyY, 176, scaledEnergyTexture, 10, scaledEnergyHeight);
+       }
     }
     
     @Override

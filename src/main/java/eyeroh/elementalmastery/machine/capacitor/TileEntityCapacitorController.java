@@ -5,6 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -243,6 +245,23 @@ public class TileEntityCapacitorController extends TileEntity {
 	}
 	
 	@Override
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        this.readFromNBT(packet.getNbtCompound());
+    }
+	
+	@Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         energyAmount = compound.getIntArray("energy");
@@ -262,5 +281,30 @@ public class TileEntityCapacitorController extends TileEntity {
     public void showEnergyAmount(EntityPlayer player) {
     	TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.capacitor_amount", energyAmount[0] + "/" + energyMax[0] + "(O), " + energyAmount[1] + "/" + energyMax[1] + "(T), " + energyAmount[2] + "/" + energyMax[2] + "(R), " + energyAmount[3] + "/" + energyMax[3] + "(S)");
         player.sendStatusMessage(component, false);
+    }
+    
+    public boolean isFull(int type) {
+    	switch (type) {
+    	case 0:
+    		if(energyAmount[0] == energyMax[0]) {
+    			return true;
+    		}
+    		break;
+    	case 1:
+    		if(energyAmount[1] == energyMax[1])
+    			return true;
+    		break;
+    	case 2:
+    		if(energyAmount[2] == energyMax[2])
+    			return true;
+    		break;
+    	case 3:
+    		if(energyAmount[3] == energyMax[3])
+    			return true;
+    		break;
+    		default:
+    			return false;
+    	}
+    	return false;
     }
 }
