@@ -1,5 +1,6 @@
 package eyeroh.elementalmastery.proxy;
 
+import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.gui.BasicCollectorGui;
 import eyeroh.elementalmastery.gui.CapacitorGui;
 import eyeroh.elementalmastery.gui.GeneratorGui;
@@ -10,6 +11,7 @@ import eyeroh.elementalmastery.machine.generator.GeneratorContainer;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -37,7 +39,19 @@ public class GuiProxy implements IGuiHandler {
             return new BasicCollectorGui(containerTileEntity, new CollectorContainer(player.inventory, player.inventory, containerTileEntity));
         } else if (te instanceof GeneratorTileEntity) {
         	GeneratorTileEntity generatorTileEntity = (GeneratorTileEntity) te;
-            return new GeneratorGui(generatorTileEntity, new GeneratorContainer(player.inventory, player.inventory, generatorTileEntity));
+        	GeneratorContainer generatorContainer = new GeneratorContainer(player.inventory, player.inventory, generatorTileEntity);
+        	switch(generatorTileEntity.getType()) {
+        	case 0:
+        		return new GeneratorGui(generatorTileEntity, generatorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png"));
+        	case 1:
+        		return new GeneratorGui(generatorTileEntity, generatorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatortopaz.png"));
+        	case 2:
+        		return new GeneratorGui(generatorTileEntity, generatorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatorruby.png"));
+        	case 3:
+        		return new GeneratorGui(generatorTileEntity, generatorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatorsapphire.png"));
+        	default:
+        		return new GeneratorGui(generatorTileEntity, generatorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png"));
+        	}
         } else if (te instanceof TileEntityCapacitorController) {
         	TileEntityCapacitorController capacitorControllerTileEntity = (TileEntityCapacitorController) te;
         	return new CapacitorGui(capacitorControllerTileEntity);

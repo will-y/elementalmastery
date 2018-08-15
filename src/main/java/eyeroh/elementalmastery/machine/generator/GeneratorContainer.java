@@ -49,7 +49,21 @@ public class GeneratorContainer extends Container{
         int x = 27;
         int y = 35;
         
-        addSlotToContainer(new GeneratorSlot(itemHandler, 0, x, y, new Item[] {ModItems.gemOpal, Item.getItemFromBlock(ModBlocks.blockopal)}));
+        switch(te.getType()) {
+        case 0:
+        	addSlotToContainer(new GeneratorSlot(itemHandler, 0, x, y, new Item[] {ModItems.gemOpal, Item.getItemFromBlock(ModBlocks.blockopal)}));
+        	break;
+        case 1:
+        	addSlotToContainer(new GeneratorSlot(itemHandler, 0, x, y, new Item[] {ModItems.gemTopaz, Item.getItemFromBlock(ModBlocks.blocktopaz)}));
+        	break;
+        case 2:
+        	addSlotToContainer(new GeneratorSlot(itemHandler, 0, x, y, new Item[] {ModItems.gemRuby, Item.getItemFromBlock(ModBlocks.blockruby)}));
+        	break;
+        case 3:
+        	addSlotToContainer(new GeneratorSlot(itemHandler, 0, x, y, new Item[] {ModItems.gemSapphire, Item.getItemFromBlock(ModBlocks.blocksapphire)}));
+        	break;
+        }
+        
     }
     
     @Nullable

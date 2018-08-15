@@ -168,6 +168,7 @@ public class TileEntityCapacitorController extends TileEntity {
 		} else {
 			energyAmount[type] += amount;
 		}
+		markDirty();
 	}
 	
 	public void setActive() {
@@ -193,7 +194,7 @@ public class TileEntityCapacitorController extends TileEntity {
 	public boolean canAcceptEnergy(int type, int amount) {
 		if(active) {
 			
-			if(energyAmount[type] + amount > energyMax[type]) {
+			if(energyAmount[type] + amount >= energyMax[type]) {
 				return false;
 			}
 			return true;

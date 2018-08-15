@@ -102,7 +102,10 @@ public class CommonProxy {
     	GameRegistry.registerTileEntity(CollectorTileEntity.class, ElementalMastery.MODID + "_collector");
     	
     	event.getRegistry().register(new GeneratorBlock("opal", 0));
-    	GameRegistry.registerTileEntity(GeneratorTileEntity.class, ElementalMastery.MODID + "_generatoropal");
+    	GameRegistry.registerTileEntity(GeneratorTileEntity.class, ElementalMastery.MODID + "_generatorbasic");
+    	event.getRegistry().register(new GeneratorBlock("topaz", 1));
+    	event.getRegistry().register(new GeneratorBlock("ruby", 2));
+    	event.getRegistry().register(new GeneratorBlock("sapphire", 3));
     }
 
     @SubscribeEvent
@@ -134,8 +137,10 @@ public class CommonProxy {
     	//Machines
     	event.getRegistry().register(new ItemBlock(ModMachines.collectorBasic).setRegistryName(ModMachines.collectorBasic.getRegistryName()));
     	
-    	System.out.println(ModMachines.generatorSpeed.getRegistryName());
-    	event.getRegistry().register(new ItemBlock(ModMachines.generatorSpeed).setRegistryName(ModMachines.generatorSpeed.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.generatorOpal).setRegistryName(ModMachines.generatorOpal.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.generatorTopaz).setRegistryName(ModMachines.generatorTopaz.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.generatorRuby).setRegistryName(ModMachines.generatorRuby.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.generatorSapphire).setRegistryName(ModMachines.generatorSapphire.getRegistryName()));
     	
     	//Items
     	event.getRegistry().register(new GemItem("gemopal"));

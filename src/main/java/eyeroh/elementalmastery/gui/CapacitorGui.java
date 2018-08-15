@@ -37,8 +37,8 @@ public class CapacitorGui extends GuiScreen {
         		int scaledEnergyHeight = (int) (scaledEnergyFactor * energyBarHeight);
         		int scaledEnergyY = (int) (energyBarY + (energyBarHeight - scaledEnergyHeight));
         		int scaledEnergyTexture = (int) (energyBarTextureY + (energyBarHeight - scaledEnergyHeight));
-        		drawTexturedModalRect(guiLeft + 21 + i*28, guiTop + 43, 21, 43, energyBarHeight, 20);
-        		drawTexturedModalRect(guiLeft + 21 + i*28, guiTop + scaledEnergyY, 176 + i*20, scaledEnergyTexture, 20, scaledEnergyHeight);
+        		drawTexturedModalRect(guiLeft + 21 + i*38, guiTop + 43, 21, 43, 20, energyBarHeight);
+        		drawTexturedModalRect(guiLeft + 21 + i*38, guiTop + scaledEnergyY, 176 + i*20, scaledEnergyTexture, 20, scaledEnergyHeight);
         	}
         }
     }

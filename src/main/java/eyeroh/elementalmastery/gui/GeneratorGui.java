@@ -16,7 +16,7 @@ public class GeneratorGui extends GuiContainer{
     public GeneratorTileEntity tileEntity;
     public GeneratorContainer container;
 
-    private static final ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png");
+    private ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png");
     
     public static final int progressBarLength = 67;
     public static final int energyBarHeight = 73;
@@ -26,12 +26,13 @@ public class GeneratorGui extends GuiContainer{
     public static final int gemY = 34;
     public static final int gemYTexture = 0;
 
-    public GeneratorGui(GeneratorTileEntity tileEntity, GeneratorContainer container) {
+    public GeneratorGui(GeneratorTileEntity tileEntity, GeneratorContainer container, ResourceLocation resourceLocation) {
         super(container);
         this.tileEntity = tileEntity;
         this.container = container;
         xSize = WIDTH;
         ySize = HEIGHT;
+        this.background = resourceLocation;
     }
 
     @Override

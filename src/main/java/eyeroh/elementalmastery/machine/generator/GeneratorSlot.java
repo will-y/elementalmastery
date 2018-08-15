@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class GeneratorSlot extends SlotItemHandler{
+public class GeneratorSlot extends SlotItemHandler {
 	public Item[] itemsAllowd = {ModItems.gemOpal, Item.getItemFromBlock(ModBlocks.blockopal)};
 	
 	public GeneratorSlot(IItemHandler inventory, int index, int x, int y, Item[] itemsAllowd) {

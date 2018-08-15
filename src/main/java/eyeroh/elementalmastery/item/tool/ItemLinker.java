@@ -42,13 +42,15 @@ public class ItemLinker extends GemItem {
 				} else {
 					blockStored = BlockPos.fromLong(nbt.getLong("position"));
 				}
-				
-				if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorSpeed) && blockStored.toLong() != 0) {
-					TileEntity te = world.getTileEntity(pos);
-					if(te instanceof GeneratorTileEntity) {
-						((GeneratorTileEntity) te).setCapacitor(blockStored);
+				if(blockStored.toLong() != 0) {
+					if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorOpal) || Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorTopaz) || Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorRuby) || Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorSapphire)) {
+						TileEntity te = world.getTileEntity(pos);
+						if(te instanceof GeneratorTileEntity) {
+							((GeneratorTileEntity) te).setCapacitor(blockStored);
+						}
 					}
 				}
+				
 				
 				System.out.println(nbt);
 				nbt.setLong("position", blockStored.toLong());

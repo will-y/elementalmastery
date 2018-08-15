@@ -10,11 +10,20 @@ public class ModMachines {
 	public static CollectorBlock collectorBasic;
 	
 	@GameRegistry.ObjectHolder("elementalmastery:generatoropal")
-	public static GeneratorBlock generatorSpeed;
+	public static GeneratorBlock generatorOpal;
+	@GameRegistry.ObjectHolder("elementalmastery:generatortopaz")
+	public static GeneratorBlock generatorTopaz;
+	@GameRegistry.ObjectHolder("elementalmastery:generatorruby")
+	public static GeneratorBlock generatorRuby;
+	@GameRegistry.ObjectHolder("elementalmastery:generatorsapphire")
+	public static GeneratorBlock generatorSapphire;
 	
 	public static void initModels() {
 		collectorBasic.initModel();
 		
-		generatorSpeed.initModel();
+		generatorOpal.initModel();
+		generatorTopaz.initModel();
+		generatorRuby.initModel();
+		generatorSapphire.initModel();
 	}
 }

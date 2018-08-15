@@ -4,7 +4,9 @@ import java.util.Random;
 
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
+import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -47,6 +49,20 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
         }
     };
     
+    public void setUpTileEntity() {
+    	Block block = world.getBlockState(this.pos).getBlock();
+    	
+    	if(Block.isEqualTo(block, ModMachines.generatorOpal)) {
+    		type = 0;
+    	} else if (Block.isEqualTo(block, ModMachines.generatorTopaz)) {
+    		type = 1;
+    	} else if (Block.isEqualTo(block, ModMachines.generatorRuby)) {
+    		type = 2;
+    	} else if (Block.isEqualTo(block, ModMachines.generatorSapphire)) {
+    		type = 3;
+    	}
+    }
+    
     @Override
     public NBTTagCompound getUpdateTag() {
         return writeToNBT(new NBTTagCompound());
@@ -77,6 +93,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
         currentEnergy = compound.getInteger("currentEnergy");
         counter = compound.getInteger("counter");
         linkedCapacitor = BlockPos.fromLong(compound.getLong("linkedCapacitor"));
+        type = compound.getInteger("type");
     }
 
     @Override
@@ -89,6 +106,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
         compound.setInteger("currentProgress", currentProgress);
         compound.setInteger("currentEnergy", currentEnergy);
         compound.setInteger("counter", counter);
+        compound.setInteger("type", type);
         if(linked) {
         	compound.setLong("linkedCapacitor", linkedCapacitor.toLong());
         }
@@ -176,9 +194,29 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		if (stack.isItemEqual(new ItemStack(ModItems.gemOpal)) || stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
-			return true;
+		switch(type) {
+		case 0:
+			if (stack.isItemEqual(new ItemStack(ModItems.gemOpal)) || stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
+				return true;
+			}
+			break;
+		case 1:
+			if (stack.isItemEqual(new ItemStack(ModItems.gemTopaz)) || stack.isItemEqual(new ItemStack(ModBlocks.blocktopaz))) {
+				return true;
+			}
+			break;
+		case 2:
+			if (stack.isItemEqual(new ItemStack(ModItems.gemRuby)) || stack.isItemEqual(new ItemStack(ModBlocks.blockruby))) {
+				return true;
+			}
+			break;
+		case 3:
+			if (stack.isItemEqual(new ItemStack(ModItems.gemSapphire)) || stack.isItemEqual(new ItemStack(ModBlocks.blocksapphire))) {
+				return true;
+			}
+			break;
 		}
+		
 		return false;
 	}
 
@@ -220,7 +258,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 		if(linked) {
 			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
 			if(capacitor != null && capacitor instanceof TileEntityCapacitorController) {
-				if(((TileEntityCapacitorController) capacitor).canAcceptEnergy(0, this.energyPerSecond)) {
+				if(((TileEntityCapacitorController) capacitor).canAcceptEnergy(type, this.energyPerSecond/20)) {
 					return true;
 				} else {
 					return false;
@@ -239,7 +277,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 			TileEntity te = world.getTileEntity(linkedCapacitor);
 			if(te != null && te instanceof TileEntityCapacitorController) {
 				TileEntityCapacitorController capacitor = (TileEntityCapacitorController) te;
-				return capacitor.isFull(0);
+				return capacitor.isFull(type);
 			}
 		}
 		return true;
@@ -248,7 +286,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	public void sendPower(int amount) {
 		if(!world.isRemote) {
 			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
-			((TileEntityCapacitorController) capacitor).addEnergy(0, amount);
+			((TileEntityCapacitorController) capacitor).addEnergy(type, amount);
 		}
 	}
 	
@@ -269,11 +307,11 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 			}
 		} else {
 			ItemStack stack = itemStackHandler.getStackInSlot(0);
-			if(stack.isItemEqual(new ItemStack(ModItems.gemOpal))) {
+			if(stack.isItemEqual(new ItemStack(ModItems.gemOpal)) || stack.isItemEqual(new ItemStack(ModItems.gemTopaz)) || stack.isItemEqual(new ItemStack(ModItems.gemRuby)) || stack.isItemEqual(new ItemStack(ModItems.gemSapphire))) {
 				maxProgress = 100;
 				itemStackHandler.extractItem(0, 1, false);
 				active = true;
-			} else if (stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
+			} else if (stack.isItemEqual(new ItemStack(ModBlocks.blockopal)) || stack.isItemEqual(new ItemStack(ModBlocks.blocktopaz)) || stack.isItemEqual(new ItemStack(ModBlocks.blockruby)) || stack.isItemEqual(new ItemStack(ModBlocks.blocksapphire))) {
 				maxProgress = 900;
 				itemStackHandler.extractItem(0, 1, false);
 				active = true;
@@ -317,5 +355,9 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	
 	public ItemStackHandler getItemStackHandler() {
 		return itemStackHandler;
+	}
+	
+	public int getType() {
+		return this.type;
 	}
 }

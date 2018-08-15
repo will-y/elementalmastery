@@ -7,6 +7,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class GeneratorBlock extends Block implements ITileEntityProvider {
-	public static final int GUI_ID = 2;
+	public int GUI_ID = 1;
 	public String name;
 	public int type;
 
@@ -34,6 +35,7 @@ public class GeneratorBlock extends Block implements ITileEntityProvider {
         setSoundType(SoundType.STONE);
         this.name = name;
         this.type = type;
+        GUI_ID = GUI_ID + type;
     }
     
     @SideOnly(Side.CLIENT)
@@ -66,6 +68,13 @@ public class GeneratorBlock extends Block implements ITileEntityProvider {
     		GeneratorTileEntity tileEntity = (GeneratorTileEntity) te;
     		ItemStack stack = tileEntity.getItemStackHandler().getStackInSlot(0);
     		InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+    	}
+    }
+    
+    @Override
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    	if(world.getTileEntity(pos) instanceof GeneratorTileEntity) {
+    		((GeneratorTileEntity) world.getTileEntity(pos)).setUpTileEntity();
     	}
     }
 }
