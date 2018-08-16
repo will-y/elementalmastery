@@ -115,4 +115,11 @@ public class GeneratorContainer extends Container{
 		
 		this.progress = prog;
 	}
+	
+	@Override
+	public void updateProgressBar(int id, int data) {
+		if(id == 0) {
+			te.setCurrentProgress(data);
+		}
+	}
 }

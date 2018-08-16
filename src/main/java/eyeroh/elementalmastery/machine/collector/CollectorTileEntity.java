@@ -8,6 +8,8 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -16,6 +18,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -23,7 +27,7 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
 	public static final int SIZE = 4;
 	public final int[] slotArray = {0, 1, 2, 3};
 	private Random rand = new Random();
-	int timeBetweenCollect = 80;
+	int timeBetweenCollect = 200;
 	int counter = 0;
 	
 	private NonNullList<ItemStack> collectorItemStacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
@@ -34,6 +38,23 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
             CollectorTileEntity.this.markDirty();
         }
     };
+    
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        this.readFromNBT(packet.getNbtCompound());
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -41,13 +62,14 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
         if (compound.hasKey("items")) {
             itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
         }
+        counter = compound.getInteger("counter");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
         compound.setTag("items", itemStackHandler.serializeNBT());
-        return compound;
+        compound.setInteger("counter", counter);
+        return super.writeToNBT(compound);
     }
 
     public boolean canInteractWith(EntityPlayer playerIn) {
@@ -85,6 +107,7 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
     
     @Override
     public void update() {
+    	//System.out.println("Counter: " + counter);
     	if(!world.isRemote) {
     		if(counter >= timeBetweenCollect) {
         		int random = rand.nextInt(4);
@@ -107,6 +130,19 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
         		counter++;
         	}
     	}
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public int getCurrentProgress() {
+    	return counter;
+    }
+    
+    public void setCurrentProgress(int data) {
+    	this.counter = data;
+    }
+    
+    public int getMaxProgress() {
+    	return this.timeBetweenCollect;
     }
     
     public void addItem(ItemStack itemStack, int slotID) {

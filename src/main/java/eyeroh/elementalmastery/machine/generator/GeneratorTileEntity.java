@@ -21,6 +21,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -292,7 +294,7 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	
 	public void update() {
 		markDirty();
-		
+		System.out.println(currentProgress + " efertg");
 		if(active) {
 			if(canExportEnergy() || currentEnergy < (maxEnergy)) {
 				currentProgress++;
@@ -337,8 +339,13 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public int getCurrentProgress() {
 		return this.currentProgress;
+	}
+	
+	public void setCurrentProgress(int data) {
+		this.currentProgress = data;
 	}
 	
 	public int getMaxProgress() {
