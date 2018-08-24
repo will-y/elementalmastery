@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class CollectorTileEntity extends TileEntity implements ITickable, ISidedInventory {
+public class CollectorBasicTileEntity extends TileEntity implements ITickable, ISidedInventory {
 	public static final int SIZE = 4;
 	public final int[] slotArray = {0, 1, 2, 3};
 	private Random rand = new Random();
@@ -35,7 +35,7 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
     private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
         @Override
         protected void onContentsChanged(int slot) {
-            CollectorTileEntity.this.markDirty();
+            CollectorBasicTileEntity.this.markDirty();
         }
     };
     
@@ -107,7 +107,6 @@ public class CollectorTileEntity extends TileEntity implements ITickable, ISided
     
     @Override
     public void update() {
-    	//System.out.println("Counter: " + counter);
     	if(!world.isRemote) {
     		if(counter >= timeBetweenCollect) {
         		int random = rand.nextInt(4);

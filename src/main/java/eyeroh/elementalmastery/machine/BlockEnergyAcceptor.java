@@ -1,7 +1,8 @@
-package eyeroh.elementalmastery.machine.collector;
+package eyeroh.elementalmastery.machine;
 
 import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
+import eyeroh.elementalmastery.machine.collector.TileCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -15,60 +16,54 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class CollectorBlock extends Block implements ITileEntityProvider {
-
-    public static final int GUI_ID = 0;
-
-    public CollectorBlock() {
-        super(Material.ROCK);
-        setUnlocalizedName(ElementalMastery.MODID + ".collectorbasic");
-        setRegistryName("collectorbasic");
-        setHardness(3.0f);
-        setResistance(5.0f);
-        setSoundType(SoundType.STONE);
-    }
-
-    @SideOnly(Side.CLIENT)
+public class BlockEnergyAcceptor extends Block  implements ITileEntityProvider{
+	
+	private int machineID = 0;
+	public int GUI_ID = 0;
+	
+	public BlockEnergyAcceptor(int[] storage, int[] usage, String name, int machineID, int GUI_ID) {
+		super(Material.IRON);
+		this.setHardness(3.0F);
+		this.setResistance(5.0F);
+		this.setSoundType(SoundType.STONE);
+		setUnlocalizedName(ElementalMastery.MODID + "." + name);
+		setRegistryName(name);
+		this.machineID = machineID;
+		this.GUI_ID = GUI_ID;
+	}
+	
+	@SideOnly(Side.CLIENT)
     public void initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
-
-    @Override
+	
+	@Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new CollectorBasicTileEntity();
+        switch (machineID) {
+        case 0:
+        	return null;
+        default:
+        	return new CollectorBasicTileEntity();	
+        }
     }
-    
-
-    @Override
+	
+	@Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
         }
         TileEntity te = world.getTileEntity(pos);
-        if (!(te instanceof CollectorBasicTileEntity)) {
+        if (!(te instanceof TileEnergyAcceptor)) {
             return false;
         }
         player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
-    }
-    
-    @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-    	TileEntity te = world.getTileEntity(pos);
-    	if(te instanceof CollectorBasicTileEntity) {
-    		CollectorBasicTileEntity tileEntity = (CollectorBasicTileEntity) te;
-    		
-    		for(int i = 0; i < tileEntity.SIZE; i++) {
-    			ItemStack stack = tileEntity.getItemStackHandler().getStackInSlot(i);
-    			InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-    		}
-    		
-    	}
     }
 }

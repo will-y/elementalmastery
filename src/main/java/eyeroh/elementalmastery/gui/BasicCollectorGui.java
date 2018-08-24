@@ -5,7 +5,7 @@ import java.util.Random;
 
 import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.machine.collector.CollectorContainer;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
@@ -13,7 +13,7 @@ public class BasicCollectorGui extends GuiContainer{
 	public static final int WIDTH = 177;
     public static final int HEIGHT = 167;
     public static final int progressBarLength = 158;
-    public CollectorTileEntity tileEntity = new CollectorTileEntity();
+    public CollectorBasicTileEntity tileEntity = new CollectorBasicTileEntity();
     
     private int progressBarCounter = 0;
     private int progressBarMaxCounter = 5;
@@ -23,7 +23,7 @@ public class BasicCollectorGui extends GuiContainer{
 
     private static final ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/collectorbasic.png");
 
-    public BasicCollectorGui(CollectorTileEntity tileEntity, CollectorContainer container) {
+    public BasicCollectorGui(CollectorBasicTileEntity tileEntity, CollectorContainer container) {
         super(container);
         this.tileEntity = tileEntity;
         xSize = WIDTH;

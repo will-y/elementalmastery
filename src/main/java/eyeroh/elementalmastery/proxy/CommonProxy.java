@@ -36,7 +36,7 @@ import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorBlock;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import eyeroh.elementalmastery.mob.ModEntities;
@@ -99,7 +99,7 @@ public class CommonProxy {
     	
     	//Machines
     	event.getRegistry().register(new CollectorBlock());
-    	GameRegistry.registerTileEntity(CollectorTileEntity.class, ElementalMastery.MODID + "_collector");
+    	GameRegistry.registerTileEntity(CollectorBasicTileEntity.class, ElementalMastery.MODID + "_collector");
     	
     	event.getRegistry().register(new GeneratorBlock("opal", 0));
     	GameRegistry.registerTileEntity(GeneratorTileEntity.class, ElementalMastery.MODID + "_generatorbasic");

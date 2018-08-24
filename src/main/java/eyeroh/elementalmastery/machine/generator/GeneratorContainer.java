@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.collector.CollectorSlot;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -76,8 +76,8 @@ public class GeneratorContainer extends Container{
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < CollectorTileEntity.SIZE) {
-                if (!this.mergeItemStack(itemstack1, CollectorTileEntity.SIZE, this.inventorySlots.size(), true)) {
+            if (index < CollectorBasicTileEntity.SIZE) {
+                if (!this.mergeItemStack(itemstack1, CollectorBasicTileEntity.SIZE, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else {

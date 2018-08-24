@@ -3,7 +3,7 @@ package eyeroh.elementalmastery.gui;
 import java.awt.Color;
 
 import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import eyeroh.elementalmastery.machine.generator.GeneratorContainer;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;

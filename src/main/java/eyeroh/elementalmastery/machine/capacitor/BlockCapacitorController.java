@@ -1,7 +1,7 @@
 package eyeroh.elementalmastery.machine.capacitor;
 
 import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

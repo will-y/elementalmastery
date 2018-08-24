@@ -6,7 +6,7 @@ import eyeroh.elementalmastery.gui.CapacitorGui;
 import eyeroh.elementalmastery.gui.GeneratorGui;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorContainer;
-import eyeroh.elementalmastery.machine.collector.CollectorTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import eyeroh.elementalmastery.machine.generator.GeneratorContainer;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,8 +22,8 @@ public class GuiProxy implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof CollectorTileEntity) {
-            return new CollectorContainer(player.inventory, player.inventory, (CollectorTileEntity) te);
+        if (te instanceof CollectorBasicTileEntity) {
+            return new CollectorContainer(player.inventory, player.inventory, (CollectorBasicTileEntity) te);
         } else if (te instanceof GeneratorTileEntity) {
         	return new GeneratorContainer(player.inventory, player.inventory, (GeneratorTileEntity) te);
         }
@@ -34,8 +34,8 @@ public class GuiProxy implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
-        if (te instanceof CollectorTileEntity) {
-            CollectorTileEntity containerTileEntity = (CollectorTileEntity) te;
+        if (te instanceof CollectorBasicTileEntity) {
+            CollectorBasicTileEntity containerTileEntity = (CollectorBasicTileEntity) te;
             return new BasicCollectorGui(containerTileEntity, new CollectorContainer(player.inventory, player.inventory, containerTileEntity));
         } else if (te instanceof GeneratorTileEntity) {
         	GeneratorTileEntity generatorTileEntity = (GeneratorTileEntity) te;

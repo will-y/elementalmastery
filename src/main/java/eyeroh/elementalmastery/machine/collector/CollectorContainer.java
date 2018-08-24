@@ -13,10 +13,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class CollectorContainer extends Container {
-    private CollectorTileEntity te;
+    private CollectorBasicTileEntity te;
     private int lastProgress = 0;
 
-    public CollectorContainer(InventoryPlayer playerInventory, IInventory iInventory, CollectorTileEntity te) {
+    public CollectorContainer(InventoryPlayer playerInventory, IInventory iInventory, CollectorBasicTileEntity te) {
         this.te = te;
 
         addOwnSlots();
@@ -64,8 +64,8 @@ public class CollectorContainer extends Container {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < CollectorTileEntity.SIZE) {
-                if (!this.mergeItemStack(itemstack1, CollectorTileEntity.SIZE, this.inventorySlots.size(), true)) {
+            if (index < CollectorBasicTileEntity.SIZE) {
+                if (!this.mergeItemStack(itemstack1, CollectorBasicTileEntity.SIZE, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             } else {
