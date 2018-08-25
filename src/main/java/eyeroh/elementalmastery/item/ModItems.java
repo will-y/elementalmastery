@@ -65,6 +65,18 @@ public class ModItems {
 	public static GemItem dustRubySmall;
 	@GameRegistry.ObjectHolder("elementalmastery:dustsapphiresmall")
 	public static GemItem dustSapphireSmall;
+	
+	@GameRegistry.ObjectHolder("elementalmastery:nuggetopal")
+	public static GemItem nuggetOpal;
+	@GameRegistry.ObjectHolder("elementalmastery:nuggettopaz")
+	public static GemItem nuggetTopaz;
+	@GameRegistry.ObjectHolder("elementalmastery:nuggetruby")
+	public static GemItem nuggetRuby;
+	@GameRegistry.ObjectHolder("elementalmastery:nuggetsapphire")
+	public static GemItem nuggetSapphire;
+	
+	@GameRegistry.ObjectHolder("elementalmastery:smallheart")
+	public static GemItem smallHeart;
 
 	@SideOnly(Side.CLIENT)
 	public static void initModels() {
@@ -99,5 +111,12 @@ public class ModItems {
 		dustTopazSmall.initModel();
 		dustRubySmall.initModel();
 		dustSapphireSmall.initModel();
+		
+		nuggetOpal.initModel();
+		nuggetTopaz.initModel();
+		nuggetRuby.initModel();
+		nuggetSapphire.initModel();
+		
+		smallHeart.initModel();
 	}
 }

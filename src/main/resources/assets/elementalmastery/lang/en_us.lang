@@ -140,6 +140,13 @@ item.elementalmastery.dusttopazsmall.name=Small Pile of Topaz Dust
 item.elementalmastery.dustrubysmall.name=Small Pile of Ruby Dust
 item.elementalmastery.dustsapphiresmall.name=Small Pile of Sapphire Dust
 
+item.elementalmastery.nuggetopal.name=Opal Nugget
+item.elementalmastery.nuggettopaz.name=Topaz Nugget
+item.elementalmastery.nuggetruby.name=Ruby Nugget
+item.elementalmastery.nuggetsapphire.name=Sapphire Nugget
+
+item.elementalmastery.smallheart.name=Small Heart
+
 item.elementalmastery.linker.name=Linking Tool
 
 tile.elementalmastery.blockopal.name=Opal Block
@@ -165,6 +172,9 @@ tile.elementalmastery.capacitorsapphire.name=Multi Capacitor
 tile.elementalmastery.collectorbasic.name=Basic Collector
 
 tile.elementalmastery.generatoropal.name=Opal Generator
+tile.elementalmastery.generatortopaz.name=Topaz Generator
+tile.elementalmastery.generatorruby.name=Ruby Generator
+tile.elementalmastery.generatorsapphire.name=Sapphire Generator
 
 message.elementalmastery.farmer_mode=Mode Changed To: %d
 message.elementalmastery.capacitor_formed=%d

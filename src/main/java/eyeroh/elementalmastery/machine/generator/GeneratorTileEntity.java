@@ -137,7 +137,19 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
     }
     
     public String getName() {
-		return "tile.elementalmastery.generatoropal.name";
+    	switch(type) {
+    	case 0:
+    		return "tile.elementalmastery.generatoropal.name";
+    	case 1:
+    		return "tile.elementalmastery.generatortopaz.name";
+    	case 2:
+    		return "tile.elementalmastery.generatorruby.name";
+    	case 3:
+    		return "tile.elementalmastery.generatorsapphire.name";
+    		default:
+    			return "tile.elementalmastery.generatoropal.name";
+    	}
+		
 	}
 
 	public boolean hasCustomName() {
@@ -294,9 +306,8 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	
 	public void update() {
 		markDirty();
-		System.out.println(currentProgress + " efertg");
 		if(active) {
-			if(canExportEnergy() || currentEnergy < (maxEnergy)) {
+			if(canExportEnergy() || currentEnergy <= maxEnergy) {
 				currentProgress++;
 				progressed = true;
 			} else {

@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:gemruby"
+    },
+    "pattern": [
+        "ooo",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:nuggetruby"
+        }
+    }
+}

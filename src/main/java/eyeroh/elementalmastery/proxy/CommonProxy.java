@@ -288,6 +288,13 @@ public class CommonProxy {
     	event.getRegistry().register(new GemItem("dustrubysmall"));
     	event.getRegistry().register(new GemItem("dustsapphiresmall"));
     	
+    	event.getRegistry().register(new GemItem("nuggetopal"));
+    	event.getRegistry().register(new GemItem("nuggettopaz"));
+    	event.getRegistry().register(new GemItem("nuggetruby"));
+    	event.getRegistry().register(new GemItem("nuggetsapphire"));
+    	
+    	event.getRegistry().register(new GemItem("smallheart"));
+    	
     	event.getRegistry().register(new ItemLinker());
     }
 }

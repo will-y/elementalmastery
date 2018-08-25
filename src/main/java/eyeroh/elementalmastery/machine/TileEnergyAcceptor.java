@@ -79,6 +79,10 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
             TileEnergyAcceptor.this.markDirty();
         }
     };
+    
+    public ItemStackHandler getItemStackHandler() {
+    	return itemStackHandler;
+    }
 	
 	@Override
     public void readFromNBT(NBTTagCompound compound) {

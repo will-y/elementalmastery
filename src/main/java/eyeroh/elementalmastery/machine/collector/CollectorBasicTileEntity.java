@@ -27,7 +27,7 @@ public class CollectorBasicTileEntity extends TileEntity implements ITickable, I
 	public static final int SIZE = 4;
 	public final int[] slotArray = {0, 1, 2, 3};
 	private Random rand = new Random();
-	int timeBetweenCollect = 200;
+	int timeBetweenCollect = 300;
 	int counter = 0;
 	
 	private NonNullList<ItemStack> collectorItemStacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);

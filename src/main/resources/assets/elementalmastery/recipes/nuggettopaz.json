@@ -1,0 +1,13 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:gemtopaz"
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:nuggettopaz",
+        "count": 9
+    }
+}
