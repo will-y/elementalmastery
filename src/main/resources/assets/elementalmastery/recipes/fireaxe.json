@@ -4,8 +4,8 @@
     },
     "pattern": [
         "ob",
-        "os",
-        " s" 
+        "so",
+        "s " 
     ],
     "type": "forge:ore_shaped",
     "key": {

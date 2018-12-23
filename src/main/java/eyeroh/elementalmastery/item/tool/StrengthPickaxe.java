@@ -30,7 +30,7 @@ public class StrengthPickaxe extends ItemPickaxe{
             
             RayTraceResult rayTrace = this.rayTrace(world, (EntityPlayer) entityLiving, false);
             
-            EnumFacing facing =  rayTrace.sideHit;
+            EnumFacing facing = rayTrace.sideHit;
             
             BlockPos[] posArray;
             posArray = new BlockPos[8];

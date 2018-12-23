@@ -167,7 +167,7 @@ tile.elementalmastery.capacitoropal.name=Opal Capacitor
 tile.elementalmastery.capacitortopaz.name=Topaz Capacitor
 tile.elementalmastery.capacitorruby.name=Ruby Capacitor
 tile.elementalmastery.capacitorsapphire.name=Sapphire Capacitor
-tile.elementalmastery.capacitorsapphire.name=Multi Capacitor
+tile.elementalmastery.capacitormulti.name=Multi Capacitor
 
 tile.elementalmastery.collectorbasic.name=Basic Collector
 

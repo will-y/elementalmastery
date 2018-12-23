@@ -24,7 +24,7 @@
     -Fixed the effects on the healing axe
     -Added Energy Cores (Rare drops from the respective creeper)
     -Added Energy Core Fragments
-    _Added dust and small piles of dust for each gem
+    -Added dust and small piles of dust for each gem
     -Added Active Energy Cores
     -Added Basic Collector - Collects gem particles out of this air
     -Added a Capacitor Multiblock made out of the following components:
@@ -50,15 +50,18 @@
     
 1.3.1 CHANGELOG
     -Fixed Item names not appearing in guis
-    xFixed special axe recipes being inconsistent
+    -Fixed special axe recipes being inconsistent
     -Fixed Items not dropping when the collector was broken
-    xAdded a new collector gui
+    -Added a new collector gui
     -Added Opal Generator
-    xAdded Topaz Generator
-    xAdded Ruby Generator
-    xAdded Sapphire Generator
+    -Added Topaz Generator
+    -Added Ruby Generator
+    -Added Sapphire Generator
     -Added Linking Tool
     
 1.4 CHANGELOG
     -Added experience to special tools
     -Added a skill points gui for the tools
+    
+1.4.1 CHANGELOG
+    -Code Cleanup

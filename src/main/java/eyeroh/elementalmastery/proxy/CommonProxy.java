@@ -35,8 +35,16 @@ import eyeroh.elementalmastery.item.tool.StrengthSword;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
-import eyeroh.elementalmastery.machine.collector.CollectorBlock;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
+import eyeroh.elementalmastery.machine.collector.CollectorBlock;
+import eyeroh.elementalmastery.machine.collector.CollectorFire;
+import eyeroh.elementalmastery.machine.collector.CollectorHeal;
+import eyeroh.elementalmastery.machine.collector.CollectorSpeed;
+import eyeroh.elementalmastery.machine.collector.CollectorStrength;
+import eyeroh.elementalmastery.machine.collector.TileCollectorFire;
+import eyeroh.elementalmastery.machine.collector.TileCollectorHeal;
+import eyeroh.elementalmastery.machine.collector.TileCollectorSpeed;
+import eyeroh.elementalmastery.machine.collector.TileCollectorStrength;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import eyeroh.elementalmastery.mob.ModEntities;
@@ -46,7 +54,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -98,9 +105,25 @@ public class CommonProxy {
     	event.getRegistry().register(new GemBlock("capacitormulti"));
     	
     	//Machines
-    	event.getRegistry().register(new CollectorBlock());
+    	
+    	//Collectors
+    	event.getRegistry().register(new CollectorBlock(0, "basic"));
     	GameRegistry.registerTileEntity(CollectorBasicTileEntity.class, ElementalMastery.MODID + "_collector");
     	
+    	event.getRegistry().register(new CollectorSpeed());
+    	GameRegistry.registerTileEntity(TileCollectorSpeed.class, ElementalMastery.MODID + "_collectorspeed");
+    	
+    	event.getRegistry().register(new CollectorFire());
+    	GameRegistry.registerTileEntity(TileCollectorFire.class, ElementalMastery.MODID + "_collectorfire");
+    	   	
+    	event.getRegistry().register(new CollectorStrength());
+    	GameRegistry.registerTileEntity(TileCollectorStrength.class, ElementalMastery.MODID + "_collectorstrength");
+    	
+    	event.getRegistry().register(new CollectorHeal());
+    	GameRegistry.registerTileEntity(TileCollectorHeal.class, ElementalMastery.MODID + "_collectorheal");
+    	
+    	
+    	//Generators
     	event.getRegistry().register(new GeneratorBlock("opal", 0));
     	GameRegistry.registerTileEntity(GeneratorTileEntity.class, ElementalMastery.MODID + "_generatorbasic");
     	event.getRegistry().register(new GeneratorBlock("topaz", 1));
@@ -136,11 +159,17 @@ public class CommonProxy {
     	
     	//Machines
     	event.getRegistry().register(new ItemBlock(ModMachines.collectorBasic).setRegistryName(ModMachines.collectorBasic.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.collectorSpeed).setRegistryName(ModMachines.collectorSpeed.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.collectorFire).setRegistryName(ModMachines.collectorFire.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.collectorStrength).setRegistryName(ModMachines.collectorStrength.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.collectorHeal).setRegistryName(ModMachines.collectorHeal.getRegistryName()));
     	
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorOpal).setRegistryName(ModMachines.generatorOpal.getRegistryName()));
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorTopaz).setRegistryName(ModMachines.generatorTopaz.getRegistryName()));
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorRuby).setRegistryName(ModMachines.generatorRuby.getRegistryName()));
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorSapphire).setRegistryName(ModMachines.generatorSapphire.getRegistryName()));
+    	
+    	
     	
     	//Items
     	event.getRegistry().register(new GemItem("gemopal"));

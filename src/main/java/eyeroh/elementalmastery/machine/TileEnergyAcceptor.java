@@ -18,6 +18,7 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 	public int[] currentEnergy = new int[] {0, 0, 0, 0};
 	public int[] storage = new int[] {0, 0, 0, 0};
 	public int[] usage = new int[] {0, 0, 0, 0};
+	public int counter = 0;
 	
 	public boolean active = false;
 	
@@ -57,6 +58,14 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 	
 	public void actionPerTick() {
 		
+	}
+	
+	public void setCurrentProgress(int data) {
+		counter = data;
+	}
+	
+	public int getCurrentProgress() {
+		return counter;
 	}
 
 	@Override

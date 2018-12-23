@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 
 public class TileCollector extends TileEnergyAcceptor {
 	
-	public int counter = 0;
 	public int timeBetweenCollect;
 	public ItemStack[] collectorItems;
 	

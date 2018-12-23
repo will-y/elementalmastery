@@ -23,15 +23,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class CollectorBlock extends Block implements ITileEntityProvider {
 
-    public static final int GUI_ID = 0;
+    public int guiID = 0;
 
-    public CollectorBlock() {
+    public CollectorBlock(int guiID, String name) {
         super(Material.ROCK);
-        setUnlocalizedName(ElementalMastery.MODID + ".collectorbasic");
-        setRegistryName("collectorbasic");
+        setUnlocalizedName(ElementalMastery.MODID + ".collector" + name);
+        setRegistryName("collector" + name);
         setHardness(3.0f);
         setResistance(5.0f);
         setSoundType(SoundType.STONE);
+        this.guiID = guiID;
     }
 
     @SideOnly(Side.CLIENT)
@@ -54,7 +55,7 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
         if (!(te instanceof CollectorBasicTileEntity)) {
             return false;
         }
-        player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+        player.openGui(ElementalMastery.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
     
