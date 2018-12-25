@@ -170,7 +170,6 @@ public class CommonProxy {
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorSapphire).setRegistryName(ModMachines.generatorSapphire.getRegistryName()));
     	
     	
-    	
     	//Items
     	event.getRegistry().register(new GemItem("gemopal"));
     	event.getRegistry().register(new GemItem("gemtopaz"));

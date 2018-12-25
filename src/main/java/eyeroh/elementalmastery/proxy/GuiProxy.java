@@ -3,9 +3,11 @@ package eyeroh.elementalmastery.proxy;
 import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.gui.BasicCollectorGui;
 import eyeroh.elementalmastery.gui.CapacitorGui;
+import eyeroh.elementalmastery.gui.CollectorGui;
 import eyeroh.elementalmastery.gui.GeneratorGui;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorContainer;
+import eyeroh.elementalmastery.machine.collector.TileCollector;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import eyeroh.elementalmastery.machine.generator.GeneratorContainer;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
@@ -23,7 +25,7 @@ public class GuiProxy implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CollectorBasicTileEntity) {
-            return new CollectorContainer(player.inventory, player.inventory, (CollectorBasicTileEntity) te);
+            //return new CollectorContainer(player.inventory, player.inventory, (CollectorBasicTileEntity) te);
         } else if (te instanceof GeneratorTileEntity) {
         	return new GeneratorContainer(player.inventory, player.inventory, (GeneratorTileEntity) te);
         }
@@ -32,14 +34,18 @@ public class GuiProxy implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    	System.out.println("probably not");
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CollectorBasicTileEntity) {
+        	System.out.println("false trigger");
             CollectorBasicTileEntity containerTileEntity = (CollectorBasicTileEntity) te;
-            return new BasicCollectorGui(containerTileEntity, new CollectorContainer(player.inventory, player.inventory, containerTileEntity));
+            return null;
+            //return new BasicCollectorGui(containerTileEntity, new CollectorContainer(player.inventory, player.inventory, containerTileEntity));
         } else if (te instanceof GeneratorTileEntity) {
         	GeneratorTileEntity generatorTileEntity = (GeneratorTileEntity) te;
         	GeneratorContainer generatorContainer = new GeneratorContainer(player.inventory, player.inventory, generatorTileEntity);
+        	System.out.println("generator");
         	switch(generatorTileEntity.getType()) {
         	case 0:
         		return new GeneratorGui(generatorTileEntity, generatorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png"));
@@ -55,6 +61,11 @@ public class GuiProxy implements IGuiHandler {
         } else if (te instanceof TileEntityCapacitorController) {
         	TileEntityCapacitorController capacitorControllerTileEntity = (TileEntityCapacitorController) te;
         	return new CapacitorGui(capacitorControllerTileEntity);
+        } else if (te instanceof  TileCollector) {
+        	TileCollector tileCollector = (TileCollector) te;
+        	CollectorContainer collectorContainer = new CollectorContainer(player.inventory, player.inventory, tileCollector);
+        	System.out.println("working");
+        	return new CollectorGui(tileCollector, collectorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/collectorspeed"));
         }
         return null;
     }

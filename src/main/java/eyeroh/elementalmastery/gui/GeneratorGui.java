@@ -16,7 +16,7 @@ public class GeneratorGui extends GuiContainer{
     public GeneratorTileEntity tileEntity;
     public GeneratorContainer container;
 
-    private ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png");
+    private ResourceLocation background;
     
     public static final int progressBarLength = 67;
     public static final int energyBarHeight = 73;

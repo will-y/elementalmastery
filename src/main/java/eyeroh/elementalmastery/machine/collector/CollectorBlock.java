@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class CollectorBlock extends Block implements ITileEntityProvider {
 
-    public int guiID = 0;
+    public int guiID = 7;
 
     public CollectorBlock(int guiID, String name) {
         super(Material.ROCK);
@@ -32,14 +32,17 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
         setHardness(3.0f);
         setResistance(5.0f);
         setSoundType(SoundType.STONE);
-        this.guiID = guiID;
     }
 
     @SideOnly(Side.CLIENT)
     public void initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
-
+    
+    
+    /*
+     * TODO: make new class or a way to keep this one with basic and other
+     */
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new CollectorBasicTileEntity();
@@ -52,9 +55,10 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
             return true;
         }
         TileEntity te = world.getTileEntity(pos);
-        if (!(te instanceof CollectorBasicTileEntity)) {
+        if (!(te instanceof CollectorBasicTileEntity || te instanceof TileCollector)) {
             return false;
         }
+        System.out.println("open");
         player.openGui(ElementalMastery.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }

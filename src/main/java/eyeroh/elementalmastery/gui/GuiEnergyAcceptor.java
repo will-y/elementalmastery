@@ -13,7 +13,7 @@ public class GuiEnergyAcceptor extends GuiContainer {
 	public static final int WIDTH = 177;
     public static final int HEIGHT = 167;
     public static final int progressBarLength = 158;
-    public CollectorBasicTileEntity tileEntity = new CollectorBasicTileEntity();
+    private CollectorBasicTileEntity tileEntity = new CollectorBasicTileEntity();
     
     private int progressBarCounter = 0;
     private int progressBarMaxCounter = 5;

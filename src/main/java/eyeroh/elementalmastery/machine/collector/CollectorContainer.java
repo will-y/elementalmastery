@@ -13,10 +13,10 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class CollectorContainer extends Container {
-    private CollectorBasicTileEntity te;
+    private TileCollector te;
     private int lastProgress = 0;
 
-    public CollectorContainer(InventoryPlayer playerInventory, IInventory iInventory, CollectorBasicTileEntity te) {
+    public CollectorContainer(InventoryPlayer playerInventory, IInventory iInventory, TileCollector te) {
         this.te = te;
 
         addOwnSlots();
