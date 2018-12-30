@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 public class CollectorSpeed extends CollectorBlock {
 
 	public CollectorSpeed() {
-		super(0, "speed");
+		super("speed", 0);
 	}
 	
 	@Override

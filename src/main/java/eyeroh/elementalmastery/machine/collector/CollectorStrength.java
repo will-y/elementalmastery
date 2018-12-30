@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 public class CollectorStrength extends CollectorBlock {
 
 	public CollectorStrength() {
-		super(0, "strength");
+		super("strength", 2);
 	}
 	
 	@Override

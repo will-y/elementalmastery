@@ -25,13 +25,14 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
 
     public int guiID = 7;
 
-    public CollectorBlock(int guiID, String name) {
+    public CollectorBlock(String name, int type) {
         super(Material.ROCK);
         setUnlocalizedName(ElementalMastery.MODID + ".collector" + name);
         setRegistryName("collector" + name);
         setHardness(3.0f);
         setResistance(5.0f);
         setSoundType(SoundType.STONE);
+        guiID = guiID + type;
     }
 
     @SideOnly(Side.CLIENT)
@@ -39,10 +40,6 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
     
-    
-    /*
-     * TODO: make new class or a way to keep this one with basic and other
-     */
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new CollectorBasicTileEntity();

@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 public class CollectorHeal extends CollectorBlock {
 
 	public CollectorHeal() {
-		super(0, "heal");
+		super("heal", 3);
 	}
 	
 	@Override

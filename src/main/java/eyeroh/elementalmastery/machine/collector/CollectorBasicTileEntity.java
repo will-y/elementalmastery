@@ -239,7 +239,7 @@ public class CollectorBasicTileEntity extends TileEntity implements ITickable, I
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
-		return new int[] {4};
+		return new int[] {0, 1, 2, 3};
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 public class CollectorFire extends CollectorBlock {
 
 	public CollectorFire() {
-		super(0, "fire");
+		super("fire", 2);
 	}
 	
 	@Override

@@ -22,12 +22,15 @@ public class GuiProxy implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    	System.out.println("server?");
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CollectorBasicTileEntity) {
             //return new CollectorContainer(player.inventory, player.inventory, (CollectorBasicTileEntity) te);
         } else if (te instanceof GeneratorTileEntity) {
         	return new GeneratorContainer(player.inventory, player.inventory, (GeneratorTileEntity) te);
+        } else if (te instanceof TileCollector) {
+        	return new CollectorContainer(player.inventory, player.inventory, (TileCollector) te);
         }
         return null;
     }
@@ -40,7 +43,6 @@ public class GuiProxy implements IGuiHandler {
         if (te instanceof CollectorBasicTileEntity) {
         	System.out.println("false trigger");
             CollectorBasicTileEntity containerTileEntity = (CollectorBasicTileEntity) te;
-            return null;
             //return new BasicCollectorGui(containerTileEntity, new CollectorContainer(player.inventory, player.inventory, containerTileEntity));
         } else if (te instanceof GeneratorTileEntity) {
         	GeneratorTileEntity generatorTileEntity = (GeneratorTileEntity) te;
@@ -65,7 +67,7 @@ public class GuiProxy implements IGuiHandler {
         	TileCollector tileCollector = (TileCollector) te;
         	CollectorContainer collectorContainer = new CollectorContainer(player.inventory, player.inventory, tileCollector);
         	System.out.println("working");
-        	return new CollectorGui(tileCollector, collectorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/collectorspeed"));
+        	return new CollectorGui(tileCollector, collectorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/collectorspeed.png"));
         }
         return null;
     }

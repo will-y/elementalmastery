@@ -107,7 +107,7 @@ public class CommonProxy {
     	//Machines
     	
     	//Collectors
-    	event.getRegistry().register(new CollectorBlock(0, "basic"));
+    	event.getRegistry().register(new CollectorBlock("basic", 4));
     	GameRegistry.registerTileEntity(CollectorBasicTileEntity.class, ElementalMastery.MODID + "_collector");
     	
     	event.getRegistry().register(new CollectorSpeed());
