@@ -8,4 +8,14 @@ public class TileCollectorFire extends TileCollector {
 	public TileCollectorFire() {
 		super(new int[] {10000, 0, 0, 0}, new int[] {100, 0, 0, 0}, 4, itemsGenerated, 200);
 	}
+	
+	@Override
+	public String getName() {
+		return "Fire Collector";
+	}
+	
+	@Override
+	public String getFileName() {
+		return "collectorfire";
+	}
 }

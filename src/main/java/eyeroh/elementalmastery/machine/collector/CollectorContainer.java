@@ -13,7 +13,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class CollectorContainer extends Container {
-    private TileCollector te;
+    public TileCollector te;
     private int lastProgress = 0;
 
     public CollectorContainer(InventoryPlayer playerInventory, IInventory iInventory, TileCollector te) {
@@ -41,7 +41,7 @@ public class CollectorContainer extends Container {
         }
     }
 
-    private void addOwnSlots() {
+    public void addOwnSlots() {
         IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         int x = 26;
         int y = 39;

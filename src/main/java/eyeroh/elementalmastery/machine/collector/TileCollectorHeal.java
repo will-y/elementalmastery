@@ -9,6 +9,16 @@ public class TileCollectorHeal extends TileCollector {
 	
 	
 	public TileCollectorHeal() {
-		super(new int[] {10000, 0, 0, 0}, new int[] {100, 0, 0, 0}, 4, getDefaultItemStackArray(), 200);
+		super(new int[] {10000, 0, 0, 0}, new int[] {100, 0, 0, 0}, 5, getDefaultItemStackArray(), 200);
+	}
+	
+	@Override
+	public String getName() {
+		return "Healing Collector";
+	}
+	
+	@Override
+	public String getFileName() {
+		return "collectorheal";
 	}
 }

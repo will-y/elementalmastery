@@ -171,4 +171,8 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
 		return true;
 	}
+	
+	public String getFileName() {
+		return "";
+	}
 }
