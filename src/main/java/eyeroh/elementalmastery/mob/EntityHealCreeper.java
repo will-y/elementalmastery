@@ -69,11 +69,9 @@ public class EntityHealCreeper extends EntityGemCreeper{
             entityList.forEach(entity -> {
             	if(entity.isCreatureType(EnumCreatureType.MONSTER, false)) {
             		((EntityLivingBase) entity).heal(10);
-            		
-            		System.out.println("Healed");
             	} else if(entity.isCreatureType(EnumCreatureType.CREATURE, false)) {
             		((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.getPotionById(19), 55, 1));
-            	} else if((EntityPlayer) entity != null) {
+            	} else if(entity instanceof EntityPlayer) {
             		((EntityPlayer) entity).addPotionEffect(new PotionEffect(Potion.getPotionById(19), 55, 1));
             	}
             });
