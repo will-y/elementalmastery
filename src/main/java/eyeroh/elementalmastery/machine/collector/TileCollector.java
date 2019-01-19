@@ -36,6 +36,14 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
             TileCollector.this.markDirty();
         }
     };
+    
+    public int getCurrentEnergy() {
+    	return 0;
+    }
+    
+    public int getCurrentProgress() {
+    	return 0;
+    }
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {

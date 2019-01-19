@@ -25,7 +25,6 @@ public class GuiProxy implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-    	System.out.println("server?");
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CollectorBasicTileEntity) {
@@ -45,11 +44,9 @@ public class GuiProxy implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-    	System.out.println("probably not");
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CollectorBasicTileEntity) {
-        	System.out.println("false trigger");
             CollectorBasicTileEntity containerTileEntity = (CollectorBasicTileEntity) te;
             //return new BasicCollectorGui(containerTileEntity, new CollectorContainer(player.inventory, player.inventory, containerTileEntity));
         } else if (te instanceof GeneratorTileEntity) {

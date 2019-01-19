@@ -59,6 +59,11 @@
     -Added Sapphire Generator
     -Added Linking Tool
     
+1.3.1 TODO:
+    -NBT on capacitor storing machines
+    -NBT on machines storing energy
+    -Fix gui on collectors
+    
 1.4 CHANGELOG
     -Added experience to special tools
     -Added a skill points gui for the tools

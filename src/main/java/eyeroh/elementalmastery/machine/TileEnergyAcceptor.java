@@ -1,5 +1,11 @@
 package eyeroh.elementalmastery.machine;
 
+import java.util.Collections;
+
+import org.apache.logging.log4j.core.util.Integers;
+
+import com.google.common.primitives.Ints;
+
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,8 +22,8 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEnergyAcceptor extends TileEntity implements ITickable{
 	
 	public int[] currentEnergy = new int[] {0, 0, 0, 0};
-	public int[] storage = new int[] {0, 0, 0, 0};
-	public int[] usage = new int[] {0, 0, 0, 0};
+	public int[] storage;
+	public int[] usage;
 	public int counter = 0;
 	
 	public boolean active = false;
@@ -30,10 +36,12 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 		this.SIZE = size;
 	}
 	
-	public void addEnergy(int type, int amount) {
+	public boolean addEnergy(int type, int amount) {
 		if(currentEnergy[type] + amount <= storage[type]) {
 			currentEnergy[type]+=amount;
+			return true;
 		}
+		return false;
 	}
 	
 	public void useEnergy(int type, int amount) {
@@ -48,12 +56,27 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 		return this.active;
 	}
 	
+	public int[] getUsage() {
+		return usage;
+	}
+	
+	public int getUsage(int type) {
+		if(type > 3) {
+			return -1;
+		}
+		return usage[type];
+	}
+	
 	public int getEnergy(int type) {
 		return currentEnergy[type];
 	}
 	
 	public int getMaxEnergy(int type) {
 		return storage[type];
+	}
+	
+	public int getMaxEnergy() {
+		return Ints.max(storage);
 	}
 	
 	public void actionPerTick() {

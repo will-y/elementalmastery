@@ -6,7 +6,11 @@ import javax.annotation.Nullable;
 
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.GemItem;
+import eyeroh.elementalmastery.machine.BlockEnergyAcceptor;
 import eyeroh.elementalmastery.machine.ModMachines;
+import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
+import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
+import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -43,10 +47,15 @@ public class ItemLinker extends GemItem {
 					blockStored = BlockPos.fromLong(nbt.getLong("position"));
 				}
 				if(blockStored.toLong() != 0) {
-					if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorOpal) || Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorTopaz) || Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorRuby) || Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.generatorSapphire)) {
-						TileEntity te = world.getTileEntity(pos);
-						if(te instanceof GeneratorTileEntity) {
-							((GeneratorTileEntity) te).setCapacitor(blockStored);
+					TileEntity te = world.getTileEntity(pos);
+					if(te instanceof GeneratorTileEntity) {
+						((GeneratorTileEntity) te).setCapacitor(blockStored);
+						System.out.println("capacitor and generator linked");
+					} else if(te instanceof TileEnergyAcceptor) {
+						TileEntity te2 = world.getTileEntity(blockStored);
+						if(te2 instanceof TileEntityCapacitorController) {
+							TileEntityCapacitorController controller = (TileEntityCapacitorController) te2;
+							controller.addMachine((TileEnergyAcceptor)te);
 						}
 					}
 				}
@@ -85,7 +94,7 @@ public class ItemLinker extends GemItem {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		NBTTagCompound nbt = stack.getTagCompound();
-		if(nbt != null && nbt.getString("tooltip") != "") {
+		if(nbt != null && !nbt.getString("tooltip").equals("")) {
 			tooltip.add(nbt.getString("tooltip"));
 		}
 		

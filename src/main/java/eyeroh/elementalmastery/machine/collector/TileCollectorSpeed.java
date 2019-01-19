@@ -15,4 +15,9 @@ public class TileCollectorSpeed extends TileCollector {
 	public String getFileName() {
 		return "collectorspeed";
 	}
+	
+	@Override
+	public int getCurrentEnergy() {
+		return this.currentEnergy[0];
+	}
 }

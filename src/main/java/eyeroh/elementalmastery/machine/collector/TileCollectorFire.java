@@ -18,4 +18,9 @@ public class TileCollectorFire extends TileCollector {
 	public String getFileName() {
 		return "collectorfire";
 	}
+	
+	@Override
+	public int getCurrentEnergy() {
+		return this.currentEnergy[0];
+	}
 }
