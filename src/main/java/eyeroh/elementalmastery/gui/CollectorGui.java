@@ -41,12 +41,12 @@ public class CollectorGui extends GuiContainer{
         if(tileEntity.getCurrentEnergy() > 0) {
         	
         	float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy() / tileEntity.getMaxEnergy());
-        	System.out.println(tileEntity.getCurrentEnergy() + ", " + scaledEnergyFactor);
+        	//System.out.println(tileEntity.getCurrentEnergy() + ", " + scaledEnergyFactor);
         	int scaledEnergyHeight = (int) (scaledEnergyFactor * energyBarHeight);
         	int scaledEnergyY = (int) (energyBarY + (energyBarHeight - scaledEnergyHeight));
         	int scaledEnergyTexture = (int) (energyBarTextureY + (energyBarHeight - scaledEnergyHeight));
-        	drawTexturedModalRect(guiLeft + 158, guiTop + 6, 158, 6, 10, energyBarHeight);
-        	drawTexturedModalRect(guiLeft + 158, guiTop + scaledEnergyY, 176, scaledEnergyTexture, 10, scaledEnergyHeight);
+        	//drawTexturedModalRect(guiLeft + 158, guiTop + 6, 158, 6, 10, energyBarHeight);
+        	drawTexturedModalRect(guiLeft + 161, guiTop + scaledEnergyY, 176, scaledEnergyTexture, 10, scaledEnergyHeight);
         }
     }
     

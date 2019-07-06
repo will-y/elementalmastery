@@ -63,6 +63,9 @@
     -NBT on capacitor storing machines
     -NBT on machines storing energy
     -Fix gui on collectors
+    -Add hovering tooltips for all machine storages
+    -Collector Names
+    -Make collectors work
     
 1.4 CHANGELOG
     -Added experience to special tools
