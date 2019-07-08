@@ -93,14 +93,10 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 
 	@Override
 	public void update() {
-		if(active) {
+		if(this.getActive()) {
 			for(int i = 0; i < 4; i++) {
-				if(currentEnergy[i] - usage[i] <= 0) {
-					setActive(false);
-				} else {
-					currentEnergy[i] -= usage[i];
-					actionPerTick();
-				}
+				currentEnergy[i] -= usage[i];
+				actionPerTick();
 			}
 		}
 	}

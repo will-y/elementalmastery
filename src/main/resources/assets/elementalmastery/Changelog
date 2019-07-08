@@ -66,6 +66,7 @@
     -Add hovering tooltips for all machine storages
     -Collector Names
     -Make collectors work
+    -Make machines accept more energy than they use
     
 1.4 CHANGELOG
     -Added experience to special tools

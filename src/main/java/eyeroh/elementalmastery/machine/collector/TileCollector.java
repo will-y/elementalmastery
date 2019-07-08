@@ -30,7 +30,7 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
 		this.timeBetweenCollect = maxCounter;
 	}
 	
-	private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
+	private ItemStackHandler itemStackHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
             TileCollector.this.markDirty();
@@ -68,7 +68,9 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
 			int itemNum = rand.nextInt(collectorItems.length);
 			addItem(collectorItems[itemNum], itemNum);
 			counter = 0;
+			System.out.println("added item");
 		}
+		System.out.println("doing action");
 		counter++;
 	}
 	
@@ -182,5 +184,9 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
 	
 	public String getFileName() {
 		return "";
+	}
+	
+	public ItemStackHandler getItemStackHandler() {
+		return itemStackHandler;
 	}
 }

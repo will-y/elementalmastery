@@ -14,5 +14,4 @@ public class CollectorSpeed extends CollectorBlock {
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileCollectorSpeed();
     }
-
 }
