@@ -1,12 +1,8 @@
 package eyeroh.elementalmastery.machine;
 
-import java.util.Collections;
-
-import org.apache.logging.log4j.core.util.Integers;
-
 import com.google.common.primitives.Ints;
 
-import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
+import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -19,21 +15,22 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEnergyAcceptor extends TileEntity implements ITickable{
+public abstract class TileEnergyAcceptor extends TileEntity implements ITickable{
 	
 	public int[] currentEnergy = new int[] {0, 0, 0, 0};
 	public int[] storage;
 	public int[] usage;
 	public int counter = 0;
+	public int energyCoolDown = 20;
+	public int energyCounter = 0;
+	public int energyUseCounter = 0;
+	protected TileEntityCapacitorController linkedCapacitor = new TileEntityCapacitorController();
 	
 	public boolean active = false;
-	
-	public int SIZE = 0;
 	
 	public TileEnergyAcceptor(int[] storage, int[] usage, int size) {
 		this.storage = storage;
 		this.usage = usage;
-		this.SIZE = size;
 	}
 	
 	public boolean addEnergy(int type, int amount) {
@@ -45,7 +42,19 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 	}
 	
 	public void useEnergy(int type, int amount) {
-		currentEnergy[type]-=amount;
+		if(energyUseCounter >= energyCoolDown) {
+			energyUseCounter = 0;
+			if(currentEnergy[type] - amount >= 0 ) {
+				currentEnergy[type]-=amount;
+			}
+		}
+		energyUseCounter++;
+	}
+	
+	public void useAllEnergy() {
+		for(int i = 0; i < 4; i++) {
+			this.useEnergy(i, usage[i]);
+		}
 	}
 	
 	public void setActive(boolean active) {
@@ -93,57 +102,30 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 
 	@Override
 	public void update() {
-		if(this.getActive()) {
-			for(int i = 0; i < 4; i++) {
-				currentEnergy[i] -= usage[i];
-				actionPerTick();
-			}
+		actionPerTick();
+		for(int i = 0; i < 4; i++) {
 		}
+		
 	}
 	
-	private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            TileEnergyAcceptor.this.markDirty();
-        }
-    };
-    
-    public ItemStackHandler getItemStackHandler() {
-    	return itemStackHandler;
-    }
-	
-	@Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        if (compound.hasKey("items")) {
-            itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
-        }
-    }
-	
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setTag("items", itemStackHandler.serializeNBT());
-        return super.writeToNBT(compound);
-    }
+	public void retrieveEnergy() {
+		if(this.linkedCapacitor != null && this.canAcceptEnergy(this.usage[this.getType()] * 2, this.getType())) {
+			if(energyCounter >= energyCoolDown) {
+				energyCounter = 0;
+				
+				for(int i = 0; i < 4; i++) {
+					int amount = this.linkedCapacitor.takeEnergy(this.usage[i] * 2, i);
+					
+					this.currentEnergy[i] += amount;
+				}
+				
+			}
+			energyCounter++;
+		}
+	}
     
     public boolean canInteractWith(EntityPlayer playerIn) {
         return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
-    }
-
-    @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return true;
-        }
-        return super.hasCapability(capability, facing);
-    }
-
-    @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(itemStackHandler);
-        }
-        return super.getCapability(capability, facing);
     }
     
     public String getName() {
@@ -158,4 +140,18 @@ public class TileEnergyAcceptor extends TileEntity implements ITickable{
 	public ITextComponent getDisplayName() {
 		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
 	}
+	
+	public void addCapacitor(TileEntityCapacitorController te) {
+		this.linkedCapacitor = te;
+	}
+	
+	public int getCurrentEnergy(int type) {
+		return this.currentEnergy[type];
+	}
+	
+	public boolean canAcceptEnergy(int amount, int type) {
+		return this.currentEnergy[type] + amount <= this.getMaxEnergy(type);
+	}
+	
+	public abstract int getType();
 }

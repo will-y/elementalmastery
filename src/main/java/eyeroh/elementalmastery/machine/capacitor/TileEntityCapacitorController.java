@@ -2,11 +2,15 @@ package eyeroh.elementalmastery.machine.capacitor;
 
 import java.util.ArrayList;
 
+import javax.management.NotificationBroadcaster;
+
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
+import io.netty.channel.MaxBytesRecvByteBufAllocator;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -14,14 +18,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public class TileEntityCapacitorController extends TileEntity implements ITickable{
+public class TileEntityCapacitorController extends TileEntity implements ITickable, INBTSerializable<NBTTagCompound>{
 	
 	private int[] energyAmount = new int[] {0, 0, 0, 0};
 	private int[] energyMax = new int[] {0, 0, 0, 0};
 	private boolean active = false;
 	private CapacitorDirection capacitorDirection;
-	private ArrayList<TileEnergyAcceptor> machines = new ArrayList<TileEnergyAcceptor>();
+	//private ArrayList<TileEnergyAcceptor> machines = new ArrayList<TileEnergyAcceptor>();
 	
 	
 	public boolean checkForMultiBlock() {
@@ -257,29 +262,40 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
     int counter = 0;
 	@Override
 	public void update() {
-		if(counter >= 20) {
-			int[] usage;
-			for(TileEnergyAcceptor machine : machines) {
-				usage = machine.getUsage();
-				for(int i = 0; i < usage.length; i++) {
-					if(energyAmount[i] - usage[i] >= 0) {
-						if(machine.addEnergy(i, usage[i])) {
-							energyAmount[i]  -= usage[i];
-						}
-					}
-				}
-			}
-			counter = 0;
+//		if(counter >= 20) {
+//			int[] usage;
+//			for(TileEnergyAcceptor machine : machines) {
+//				usage = machine.getUsage();
+//				for(int i = 0; i < usage.length; i++) {
+//					if(energyAmount[i] - usage[i] >= 0) {
+//						if(machine.addEnergy(i, usage[i])) {
+//							energyAmount[i]  -= usage[i];
+//						}
+//					}
+//				}
+//			}
+//			counter = 0;
+//		}
+//		counter++;
+	}
+	
+//	public void addMachine(TileEnergyAcceptor machine) {
+//		if(!machines.contains(machine))
+//			machines.add(machine);
+//	}
+	
+//	public void removeMachine(TileEnergyAcceptor machine) {
+//		machines.remove(machine);
+//	}
+//	
+	public int takeEnergy(int amount, int type) {
+		if(this.energyAmount[type] >= amount) {
+			this.energyAmount[type] -= amount;
+			return amount;
+		} else {
+			int temp = energyAmount[type];
+			energyAmount[type] = 0;
+			return temp;
 		}
-		counter++;
-	}
-	
-	public void addMachine(TileEnergyAcceptor machine) {
-		if(!machines.contains(machine))
-			machines.add(machine);
-	}
-	
-	public void removeMachine(TileEnergyAcceptor machine) {
-		machines.remove(machine);
 	}
 }

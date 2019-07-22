@@ -21,4 +21,14 @@ public class TileCollectorHeal extends TileCollector {
 	public String getFileName() {
 		return "collectorheal";
 	}
+
+	@Override
+	public int getCurrentEnergy() {
+		return this.currentEnergy[2];
+	}
+
+	@Override
+	public int getType() {
+		return 3;
+	}
 }

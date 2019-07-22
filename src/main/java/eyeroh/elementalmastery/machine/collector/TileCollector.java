@@ -5,9 +5,13 @@ import java.util.Random;
 import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
@@ -15,8 +19,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileCollector extends TileEnergyAcceptor implements ITickable, ISidedInventory{
-	
+public abstract class TileCollector extends TileEnergyAcceptor implements ITickable, IInventory{
+	public static final int SIZE = 4;
 	public int timeBetweenCollect;
 	public ItemStack[] collectorItems;
 	
@@ -28,22 +32,21 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
 		super(storage, usage, invSize);
 		this.collectorItems = items;
 		this.timeBetweenCollect = maxCounter;
+		System.out.println("Slots: " + itemStackHandler.getSlots());
 	}
 	
-	private ItemStackHandler itemStackHandler = new ItemStackHandler(4) {
+	private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
         @Override
         protected void onContentsChanged(int slot) {
             TileCollector.this.markDirty();
         }
     };
     
-    public int getCurrentEnergy() {
-    	return 0;
-    }
-    
     public int getCurrentProgress() {
     	return 0;
     }
+    
+    public abstract int getCurrentEnergy();
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
@@ -61,20 +64,57 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
         return super.getCapability(capability, facing);
     }
     
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        if (compound.hasKey("items")) {
+            itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
+        }
+        if(compound.hasKey("capacitor")) {
+        	linkedCapacitor.deserializeNBT((NBTTagCompound) compound.getTag("capacitor"));
+        }
+    }
+	
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound.setTag("items", itemStackHandler.serializeNBT());
+        compound.setTag("capacitor", this.linkedCapacitor.serializeNBT());
+        return super.writeToNBT(compound);
+    }
+    
 	
 	@Override
 	public void actionPerTick() {
-		if(counter >= timeBetweenCollect) {
-			int itemNum = rand.nextInt(collectorItems.length);
-			addItem(collectorItems[itemNum], itemNum);
-			counter = 0;
-			System.out.println("added item");
+		this.retrieveEnergy();
+		if(this.getActive()) {
+			this.useEnergy(this.getType(), this.usage[this.getType()]);
+			if(!world.isRemote) {
+				if(counter >= timeBetweenCollect) {
+					
+					int itemNum = rand.nextInt(collectorItems.length);
+					addItem(collectorItems[itemNum], itemNum);
+					counter = 0;
+				}
+				counter++;
+			}
 		}
-		System.out.println("doing action");
-		counter++;
+		
+	}
+	
+	@Override
+	public boolean getActive() {
+		for(int i = 0; i < 4; i++) {
+			if(this.getUsage()[i] != 0) {
+				if(this.getUsage()[i] > this.getCurrentEnergy()) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	public void addItem(ItemStack item, int slot) {
+		System.out.println(getItemStackHandler().getSlots());
 		getItemStackHandler().insertItem(slot, item, false);
 	}
 	
@@ -165,21 +205,6 @@ public class TileCollector extends TileEnergyAcceptor implements ITickable, ISid
 	public void clear() {
 		collectorItemStacks.clear();
 		
-	}
-
-	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		return new int[] {0, 1, 2, 3};
-	}
-
-	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		return false;
-	}
-
-	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		return true;
 	}
 	
 	public String getFileName() {

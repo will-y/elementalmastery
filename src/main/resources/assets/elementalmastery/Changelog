@@ -61,12 +61,15 @@
     
 1.3.1 TODO:
     -NBT on capacitor storing machines
+        -Add it onto the machine interface until I switch to capabilities in 1.14
     -NBT on machines storing energy
-    -Fix gui on collectors
+        -I thought this was done
     -Add hovering tooltips for all machine storages
+        -Probably hold off on until 1.14
     -Collector Names
-    -Make collectors work
     -Make machines accept more energy than they use
+    -Machines show progress on gui
+    -Inventory not working on speed collector
     
 1.4 CHANGELOG
     -Added experience to special tools

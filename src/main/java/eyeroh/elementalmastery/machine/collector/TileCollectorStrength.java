@@ -17,4 +17,16 @@ public class TileCollectorStrength extends TileCollector {
 	public String getFileName() {
 		return "collectorstrength";
 	}
+
+	@Override
+	public int getCurrentEnergy() {
+		return this.currentEnergy[3];
+	}
+
+	@Override
+	public int getType() {
+		return 3;
+	}
+	
+	
 }

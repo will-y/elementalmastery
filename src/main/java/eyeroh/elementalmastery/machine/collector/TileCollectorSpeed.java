@@ -20,9 +20,9 @@ public class TileCollectorSpeed extends TileCollector {
 	public int getCurrentEnergy() {
 		return this.currentEnergy[0];
 	}
-	
+
 	@Override
-    public boolean getActive() {
-		return this.getCurrentEnergy() > 0;
-    }
+	public int getType() {
+		return 0;
+	}
 }

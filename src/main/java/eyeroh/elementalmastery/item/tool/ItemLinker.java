@@ -55,7 +55,7 @@ public class ItemLinker extends GemItem {
 						TileEntity te2 = world.getTileEntity(blockStored);
 						if(te2 instanceof TileEntityCapacitorController) {
 							TileEntityCapacitorController controller = (TileEntityCapacitorController) te2;
-							controller.addMachine((TileEnergyAcceptor)te);
+							((TileEnergyAcceptor)te).addCapacitor(controller);
 						}
 					}
 				}
