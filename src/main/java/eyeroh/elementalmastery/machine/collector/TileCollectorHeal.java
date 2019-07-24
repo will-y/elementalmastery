@@ -5,11 +5,11 @@ import net.minecraft.item.ItemStack;
 
 public class TileCollectorHeal extends TileCollector {
 	
-	private ItemStack[] itemsGenerated = new ItemStack[] {new ItemStack(ModItems.dustOpalSmall), new ItemStack(ModItems.dustTopazSmall), new ItemStack(ModItems.dustRubySmall), new ItemStack(ModItems.dustSapphireSmall), new ItemStack(ModItems.smallHeart)};
+	private static ItemStack[] itemsGenerated = new ItemStack[] {new ItemStack(ModItems.dustOpalSmall), new ItemStack(ModItems.dustTopazSmall), new ItemStack(ModItems.dustRubySmall), new ItemStack(ModItems.dustSapphireSmall), new ItemStack(ModItems.smallHeart)};
 	
 	
 	public TileCollectorHeal() {
-		super(new int[] {10000, 0, 0, 0}, new int[] {100, 0, 0, 0}, 5, getDefaultItemStackArray(), 200);
+		super(new int[] {0, 0, 10000, 0}, new int[] {0, 0, 100, 0}, 5, itemsGenerated, 200);
 	}
 	
 	@Override
@@ -29,6 +29,6 @@ public class TileCollectorHeal extends TileCollector {
 
 	@Override
 	public int getType() {
-		return 3;
+		return 2;
 	}
 }

@@ -17,8 +17,8 @@ public class CollectorHealContainer extends CollectorContainer {
 		int x = 26;
 		int y = 39;
 		int slotIndex = 0;
-		
-		for (int i = 0; i < itemHandler.getSlots(); i++) {
+		System.out.println("Number of slots:" + itemHandler.getSlots());
+		for (int i = 0; i < itemHandler.getSlots() - 1; i++) {
             addSlotToContainer(new CollectorSlot(itemHandler, slotIndex, x, y));
             slotIndex++;
             x += 36;

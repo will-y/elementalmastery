@@ -20,11 +20,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileCollector extends TileEnergyAcceptor implements ITickable, IInventory{
-	public static final int SIZE = 4;
+	public int size;
 	public int timeBetweenCollect;
 	public ItemStack[] collectorItems;
 	
-	private NonNullList<ItemStack> collectorItemStacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	private NonNullList<ItemStack> collectorItemStacks;
+	private ItemStackHandler itemStackHandler; 
 	
 	Random rand = new Random();
 	
@@ -32,15 +33,16 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 		super(storage, usage, invSize);
 		this.collectorItems = items;
 		this.timeBetweenCollect = maxCounter;
-		System.out.println("Slots: " + itemStackHandler.getSlots());
+		this.size = invSize;
+		System.out.println("Number of slots at constructor" + size);
+		NonNullList.<ItemStack>withSize(size, ItemStack.EMPTY);
+		itemStackHandler = new ItemStackHandler(size) {
+	        @Override
+	        protected void onContentsChanged(int slot) {
+	            TileCollector.this.markDirty();
+	        }
+		};
 	}
-	
-	private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            TileCollector.this.markDirty();
-        }
-    };
     
     public int getCurrentProgress() {
     	return 0;

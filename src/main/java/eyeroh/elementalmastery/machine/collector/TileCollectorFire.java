@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 public class TileCollectorFire extends TileCollector {
 	private static ItemStack[] itemsGenerated = new ItemStack[] {new ItemStack(ModItems.nuggetOpal), new ItemStack(ModItems.nuggetTopaz), new ItemStack(ModItems.nuggetRuby), new ItemStack(ModItems.nuggetSapphire)};
 	public TileCollectorFire() {
-		super(new int[] {10000, 0, 0, 0}, new int[] {100, 0, 0, 0}, 4, itemsGenerated, 200);
+		super(new int[] {0, 10000, 0, 0}, new int[] {0, 100, 0, 0}, 4, itemsGenerated, 200);
 	}
 	
 	@Override
@@ -21,7 +21,7 @@ public class TileCollectorFire extends TileCollector {
 	
 	@Override
 	public int getCurrentEnergy() {
-		return this.currentEnergy[0];
+		return this.currentEnergy[1];
 	}
 
 	@Override
