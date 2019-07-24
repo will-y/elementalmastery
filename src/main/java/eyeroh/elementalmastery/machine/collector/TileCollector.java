@@ -92,7 +92,7 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 				if(counter >= timeBetweenCollect) {
 					
 					int itemNum = rand.nextInt(collectorItems.length);
-					addItem(collectorItems[itemNum], itemNum);
+					addItem(collectorItems[itemNum].copy(), itemNum);
 					counter = 0;
 				}
 				counter++;
@@ -114,7 +114,6 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 	}
 	
 	public void addItem(ItemStack item, int slot) {
-		System.out.println(getItemStackHandler().getSlots());
 		getItemStackHandler().insertItem(slot, item, false);
 	}
 	
