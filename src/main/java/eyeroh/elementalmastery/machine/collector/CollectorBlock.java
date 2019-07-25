@@ -63,10 +63,10 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
     	TileEntity te = world.getTileEntity(pos);
-    	if(te instanceof CollectorBasicTileEntity) {
-    		CollectorBasicTileEntity tileEntity = (CollectorBasicTileEntity) te;
+    	if(te instanceof TileCollector) {
+    		TileCollector tileEntity = (TileCollector) te;
     		
-    		for(int i = 0; i < tileEntity.SIZE; i++) {
+    		for(int i = 0; i < tileEntity.size; i++) {
     			ItemStack stack = tileEntity.getItemStackHandler().getStackInSlot(i);
     			InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
     		}

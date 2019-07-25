@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 public class TileCollectorStrength extends TileCollector {
 
 	public TileCollectorStrength() {
-		super(new int[] {0, 0, 0, 10000}, new int[] {0, 0, 0, 100}, 8, getDefaultItemStackArray(), 100);
+		super(new int[] {0, 0, 0, 10000}, new int[] {0, 0, 0, 100}, 8, getDefaultItemStackArray(), 200);
 	}
 	
 	@Override
