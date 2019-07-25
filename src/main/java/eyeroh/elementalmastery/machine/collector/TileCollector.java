@@ -16,6 +16,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -44,9 +46,18 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 		};
 	}
     
+	@SideOnly(Side.CLIENT)
     public int getCurrentProgress() {
-    	return 0;
+    	return this.counter;
     }
+	
+	public void setCurrentProgress(int data) {
+		this.counter = data;
+	}
+	
+	public int getMaxProgress() {
+		return this.timeBetweenCollect;
+	}
     
     public abstract int getCurrentEnergy();
 

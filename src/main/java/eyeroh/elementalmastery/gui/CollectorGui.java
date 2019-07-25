@@ -16,13 +16,18 @@ public class CollectorGui extends GuiContainer{
 
     private ResourceLocation background;
     
-    public static final int progressBarLength = 67;
+    public static final int progressBarLength = 158;
     public static final int energyBarHeight = 73;
     public static final int energyBarY = 6;
     public static final int energyBarTextureY = 0;
     public static final int gemHeight = 16;
     public static final int gemY = 34;
     public static final int gemYTexture = 0;
+    
+    private int progressBarCounter = 0;
+    private int progressBarMaxCounter = 5;
+    private int progressBarTexture = 0;
+    private int progressBarTextures = 4;
     
     public CollectorGui(TileCollector tileEntity, CollectorContainer container, ResourceLocation resourceLocation) {
         super(container);
@@ -47,6 +52,20 @@ public class CollectorGui extends GuiContainer{
         	int scaledEnergyTexture = (int) (energyBarTextureY + (energyBarHeight - scaledEnergyHeight));
         	//drawTexturedModalRect(guiLeft + 158, guiTop + 6, 158, 6, 10, energyBarHeight);
         	drawTexturedModalRect(guiLeft + 161, guiTop + scaledEnergyY, 176, scaledEnergyTexture, 10, scaledEnergyHeight);
+        }
+        if(tileEntity.getCurrentProgress() > 0) {
+        	float scaledProgressFactor = ((float) tileEntity.getCurrentProgress() / tileEntity.getMaxProgress());
+        	int scaledProgressBar = (int) (scaledProgressFactor * progressBarLength);
+        	if(progressBarCounter == progressBarMaxCounter) {
+        		if(progressBarTexture == progressBarTextures-1) {
+        			progressBarTexture = 0;
+        		} else {
+        			progressBarTexture++;
+        		}
+        		progressBarCounter = 0;
+        	}
+        	drawTexturedModalRect(guiLeft + 10, guiTop + 16, 0, 170 + progressBarTexture * 5, scaledProgressBar, 4);
+        	progressBarCounter++;
         }
     }
     
