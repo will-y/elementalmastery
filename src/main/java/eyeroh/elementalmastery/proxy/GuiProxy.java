@@ -1,10 +1,12 @@
 package eyeroh.elementalmastery.proxy;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.gui.BasicCollectorGui;
 import eyeroh.elementalmastery.gui.CapacitorGui;
 import eyeroh.elementalmastery.gui.CollectorGui;
 import eyeroh.elementalmastery.gui.GeneratorGui;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicContainer;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import eyeroh.elementalmastery.machine.collector.CollectorContainer;
 import eyeroh.elementalmastery.machine.collector.CollectorHealContainer;
@@ -28,7 +30,7 @@ public class GuiProxy implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CollectorBasicTileEntity) {
-            //return new CollectorContainer(player.inventory, player.inventory, (CollectorBasicTileEntity) te);
+            return new CollectorBasicContainer(player.inventory, player.inventory, (CollectorBasicTileEntity) te);
         } else if (te instanceof GeneratorTileEntity) {
         	return new GeneratorContainer(player.inventory, player.inventory, (GeneratorTileEntity) te);
         } else if (te instanceof TileCollector) {
@@ -48,7 +50,7 @@ public class GuiProxy implements IGuiHandler {
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CollectorBasicTileEntity) {
             CollectorBasicTileEntity containerTileEntity = (CollectorBasicTileEntity) te;
-            //return new BasicCollectorGui(containerTileEntity, new CollectorContainer(player.inventory, player.inventory, containerTileEntity));
+            return new BasicCollectorGui(containerTileEntity, new CollectorBasicContainer(player.inventory, player.inventory, containerTileEntity));
         } else if (te instanceof GeneratorTileEntity) {
         	GeneratorTileEntity generatorTileEntity = (GeneratorTileEntity) te;
         	GeneratorContainer generatorContainer = new GeneratorContainer(player.inventory, player.inventory, generatorTileEntity);
