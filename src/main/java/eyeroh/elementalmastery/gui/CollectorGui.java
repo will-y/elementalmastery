@@ -16,7 +16,7 @@ public class CollectorGui extends GuiContainer{
 
     private ResourceLocation background;
     
-    public static final int progressBarLength = 158;
+    public static final int progressBarLength = 150;
     public static final int energyBarHeight = 73;
     public static final int energyBarY = 6;
     public static final int energyBarTextureY = 0;
