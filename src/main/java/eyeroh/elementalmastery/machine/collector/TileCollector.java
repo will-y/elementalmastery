@@ -85,7 +85,9 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
         }
         if(compound.hasKey("capacitor")) {
         	linkedCapacitor.deserializeNBT((NBTTagCompound) compound.getTag("capacitor"));
+        	System.out.println("reading in collector");
         }
+        
     }
 	
     @Override
@@ -106,9 +108,11 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 					
 					int itemNum = rand.nextInt(collectorItems.length);
 					addItem(collectorItems[itemNum].copy(), itemNum);
+					this.markDirty();
 					counter = 0;
 				}
 				counter++;
+				this.markDirty();
 			}
 		}
 		
