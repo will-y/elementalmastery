@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.generator;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.ModMachines;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -36,6 +37,7 @@ public class GeneratorBlock extends Block implements ITileEntityProvider {
         this.name = name;
         this.type = type;
         GUI_ID = GUI_ID + type;
+        this.setCreativeTab(ModMachines.tabGemMachines);
     }
     
     @SideOnly(Side.CLIENT)

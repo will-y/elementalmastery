@@ -58,13 +58,16 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
         super.readFromNBT(compound);
         if(compound.hasKey("energy")) {
         	this.currentEnergy = compound.getIntArray("energy");
-        	System.out.println("reading in acceptor: " +  Arrays.toString(this.currentEnergy));
+        }
+        if(compound.hasKey("counter")) {
+        	this.counter = compound.getInteger("counter");
         }
     }
 	
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
     	compound.setIntArray("energy", currentEnergy);
+    	compound.setInteger("counter", this.counter);
         return super.writeToNBT(compound);
     }
 	

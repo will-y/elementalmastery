@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.item.tool;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemPickaxe;
@@ -13,6 +14,7 @@ public class GemHoe extends ItemHoe{
 		super(ModTools.TOOLMATERIALGEM);
 		this.setRegistryName(name);
 		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@SideOnly(Side.CLIENT)

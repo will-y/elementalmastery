@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.item.armor;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
@@ -14,6 +15,7 @@ public class GemArmor extends ItemArmor{
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 		this.setRegistryName(name);
 		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@SideOnly(Side.CLIENT)

@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.collector;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -33,6 +34,7 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
         setResistance(5.0f);
         setSoundType(SoundType.STONE);
         guiID = guiID + type;
+        this.setCreativeTab(ModMachines.tabGemMachines);
     }
 
     @SideOnly(Side.CLIENT)

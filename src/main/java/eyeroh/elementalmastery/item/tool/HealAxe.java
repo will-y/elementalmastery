@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.item.tool;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -25,6 +26,7 @@ public class HealAxe extends ItemAxe {
 		super(ModTools.TOOLMATERIALHEAL, 8.0f, -3.0f);
 		this.setRegistryName("healaxe");
 		this.setUnlocalizedName(ElementalMastery.MODID + ".healaxe");
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@SideOnly(Side.CLIENT)

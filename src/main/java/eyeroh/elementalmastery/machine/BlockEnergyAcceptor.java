@@ -37,6 +37,7 @@ public class BlockEnergyAcceptor extends Block  implements ITileEntityProvider{
 		setRegistryName(name);
 		this.machineID = machineID;
 		this.GUI_ID = GUI_ID;
+		this.setCreativeTab(ModMachines.tabGemMachines);
 	}
 	
 	@SideOnly(Side.CLIENT)

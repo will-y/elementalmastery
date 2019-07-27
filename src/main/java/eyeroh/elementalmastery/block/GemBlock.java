@@ -18,6 +18,7 @@ public class GemBlock extends Block{
 		this.setSoundType(SoundType.STONE);
 		setUnlocalizedName(ElementalMastery.MODID + "." + name);
 		setRegistryName(name);
+		this.setCreativeTab(ModBlocks.tabGemBlocks);
 	}
 	
 	@SideOnly(Side.CLIENT)

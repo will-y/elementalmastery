@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.capacitor;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -35,7 +36,7 @@ public class BlockCapacitorController extends Block implements ITileEntityProvid
 		super(Material.ROCK);
 		setUnlocalizedName(ElementalMastery.MODID + ".capacitorcontroller");
         setRegistryName("capacitorcontroller");
-        
+        this.setCreativeTab(ModMachines.tabGemMachines);
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 	

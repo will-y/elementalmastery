@@ -3,6 +3,7 @@ package eyeroh.elementalmastery.item.tool;
 import java.util.Random;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +25,7 @@ public class FireSword extends ItemSword{
 		super(ModTools.TOOLMATERIALFIRE);
 		this.setRegistryName("firesword");
 		this.setUnlocalizedName(ElementalMastery.MODID + ".firesword");
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override

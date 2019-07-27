@@ -94,6 +94,7 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("items", itemStackHandler.serializeNBT());
         compound.setTag("capacitor", this.linkedCapacitor.serializeNBT());
+        
         return super.writeToNBT(compound);
     }
     

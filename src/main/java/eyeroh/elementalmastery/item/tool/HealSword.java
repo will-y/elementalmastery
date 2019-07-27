@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.item.tool;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +25,7 @@ public class HealSword extends ItemSword{
 		super(ModTools.TOOLMATERIALHEAL);
 		this.setRegistryName("healsword");
 		this.setUnlocalizedName(ElementalMastery.MODID + ".healsword");
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override
