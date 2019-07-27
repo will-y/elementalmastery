@@ -1,0 +1,22 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:dustopal"
+        }, 
+        {
+            "item": "elementalmastery:dusttopaz"
+        }, 
+        {
+            "item": "elementalmastery:dustruby"
+        }, 
+        {
+            "item": "elementalmastery:dustsapphire"
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:dustmulti",
+        "count": 1
+    }
+}
