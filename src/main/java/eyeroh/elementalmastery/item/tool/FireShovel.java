@@ -3,6 +3,7 @@ package eyeroh.elementalmastery.item.tool;
 import java.util.Random;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -27,6 +28,7 @@ public class FireShovel extends ItemSpade{
 		super(ModTools.TOOLMATERIALFIRE);
 		this.setRegistryName("fireshovel");
 		this.setUnlocalizedName(ElementalMastery.MODID + ".fireshovel");
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override

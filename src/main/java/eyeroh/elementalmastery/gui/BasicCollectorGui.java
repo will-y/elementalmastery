@@ -5,6 +5,7 @@ import java.util.Random;
 
 import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.machine.collector.CollectorContainer;
+import eyeroh.elementalmastery.machine.collector.CollectorBasicContainer;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
@@ -23,7 +24,7 @@ public class BasicCollectorGui extends GuiContainer{
 
     private static final ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/collectorbasic.png");
 
-    public BasicCollectorGui(CollectorBasicTileEntity tileEntity, CollectorContainer container) {
+    public BasicCollectorGui(CollectorBasicTileEntity tileEntity, CollectorBasicContainer container) {
         super(container);
         this.tileEntity = tileEntity;
         xSize = WIDTH;

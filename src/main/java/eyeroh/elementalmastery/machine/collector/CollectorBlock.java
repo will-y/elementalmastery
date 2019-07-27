@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.collector;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -33,6 +34,7 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
         setResistance(5.0f);
         setSoundType(SoundType.STONE);
         guiID = guiID + type;
+        this.setCreativeTab(ModMachines.tabGemMachines);
     }
 
     @SideOnly(Side.CLIENT)
@@ -63,10 +65,10 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
     	TileEntity te = world.getTileEntity(pos);
-    	if(te instanceof CollectorBasicTileEntity) {
-    		CollectorBasicTileEntity tileEntity = (CollectorBasicTileEntity) te;
+    	if(te instanceof TileCollector) {
+    		TileCollector tileEntity = (TileCollector) te;
     		
-    		for(int i = 0; i < tileEntity.SIZE; i++) {
+    		for(int i = 0; i < tileEntity.size; i++) {
     			ItemStack stack = tileEntity.getItemStackHandler().getStackInSlot(i);
     			InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
     		}

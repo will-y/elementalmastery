@@ -5,6 +5,8 @@ import com.google.common.primitives.Ints;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -14,6 +16,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import scala.actors.threadpool.Arrays;
 
 public abstract class TileEnergyAcceptor extends TileEntity implements ITickable{
 	
@@ -33,6 +36,41 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		this.usage = usage;
 	}
 	
+	@Override
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        this.readFromNBT(packet.getNbtCompound());
+    }
+	
+	@Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        if(compound.hasKey("energy")) {
+        	this.currentEnergy = compound.getIntArray("energy");
+        }
+        if(compound.hasKey("counter")) {
+        	this.counter = compound.getInteger("counter");
+        }
+    }
+	
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+    	compound.setIntArray("energy", currentEnergy);
+    	compound.setInteger("counter", this.counter);
+        return super.writeToNBT(compound);
+    }
+	
 	public boolean addEnergy(int type, int amount) {
 		if(currentEnergy[type] + amount <= storage[type]) {
 			currentEnergy[type]+=amount;
@@ -46,6 +84,7 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 			energyUseCounter = 0;
 			if(currentEnergy[type] - amount >= 0 ) {
 				currentEnergy[type]-=amount;
+				this.markDirty();
 			}
 		}
 		energyUseCounter++;
@@ -118,6 +157,7 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 					
 					this.currentEnergy[i] += amount;
 				}
+				this.markDirty();
 				
 			}
 			energyCounter++;

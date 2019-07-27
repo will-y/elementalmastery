@@ -1,10 +1,22 @@
 package eyeroh.elementalmastery.block;
 
+import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorBlock;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
+	
+	public static final CreativeTabs tabGemBlocks = (new CreativeTabs("tabGemBlocks") {
+
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModMachines.collectorSpeed);
+		}
+		
+	});
 	
 	//Gem Blocks
 	@GameRegistry.ObjectHolder("elementalmastery:blockopal")

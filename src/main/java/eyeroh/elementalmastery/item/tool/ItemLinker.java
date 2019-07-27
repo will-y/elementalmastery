@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.GemItem;
+import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.BlockEnergyAcceptor;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
@@ -32,6 +33,7 @@ public class ItemLinker extends GemItem {
 	public ItemLinker() {
 		super("linker");
 		setMaxStackSize(1);
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override

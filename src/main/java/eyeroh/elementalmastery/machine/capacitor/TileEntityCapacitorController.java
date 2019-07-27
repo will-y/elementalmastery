@@ -289,6 +289,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 //	}
 //	
 	public int takeEnergy(int amount, int type) {
+		this.markDirty();
 		if(this.energyAmount[type] >= amount) {
 			this.energyAmount[type] -= amount;
 			return amount;

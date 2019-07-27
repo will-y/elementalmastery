@@ -7,10 +7,11 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GemItem extends Item{
+public class GemItem extends Item {
 	public GemItem(String name) {
 		setRegistryName(name);
 		setUnlocalizedName(ElementalMastery.MODID + "." + name);
+		this.setCreativeTab(ModItems.tabGemItems);
 	}
 	
 	@SideOnly(Side.CLIENT)

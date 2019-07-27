@@ -1,11 +1,34 @@
 package eyeroh.elementalmastery.item;
 
+import eyeroh.elementalmastery.item.tool.ModTools;
+import eyeroh.elementalmastery.machine.ModMachines;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ModItems {
+	
+	public static final CreativeTabs tabGemItems = (new CreativeTabs("tabGemItems") {
+
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModItems.gemOpal);
+		}
+		
+	});
+	
+	public static final CreativeTabs tabGemTools = (new CreativeTabs("tabGemTools") {
+
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModTools.pickaxeOpal);
+		}
+		
+	});
+	
 	//Items
 	//Gems
 	@GameRegistry.ObjectHolder("elementalmastery:gemopal")

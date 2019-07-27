@@ -28,6 +28,7 @@ public class OreBlock extends Block{
 		this.setHarvestLevel("pickaxe", 2);
 		setUnlocalizedName(ElementalMastery.MODID + "." + name);
 		setRegistryName(name);
+		this.setCreativeTab(ModBlocks.tabGemBlocks);
 	}
 	
 	@Override

@@ -1,14 +1,26 @@
 package eyeroh.elementalmastery.machine;
 
+import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.collector.CollectorBlock;
 import eyeroh.elementalmastery.machine.collector.CollectorFire;
 import eyeroh.elementalmastery.machine.collector.CollectorHeal;
 import eyeroh.elementalmastery.machine.collector.CollectorSpeed;
 import eyeroh.elementalmastery.machine.collector.CollectorStrength;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModMachines {
+	
+	public static final CreativeTabs tabGemMachines = (new CreativeTabs("tabGemMachines") {
+
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModMachines.collectorSpeed);
+		}
+		
+	});
 	
 	@GameRegistry.ObjectHolder("elementalmastery:collectorbasic")
 	public static CollectorBlock collectorBasic;

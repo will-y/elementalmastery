@@ -170,6 +170,10 @@ tile.elementalmastery.capacitorsapphire.name=Sapphire Capacitor
 tile.elementalmastery.capacitormulti.name=Multi Capacitor
 
 tile.elementalmastery.collectorbasic.name=Basic Collector
+tile.elementalmastery.collectorspeed.name=Speed Collector
+tile.elementalmastery.collectorfire.name=Fire Collector
+tile.elementalmastery.collectorheal.name=Healing Collector
+tile.elementalmastery.collectorstrength.name=Strength Collector
 
 tile.elementalmastery.generatoropal.name=Opal Generator
 tile.elementalmastery.generatortopaz.name=Topaz Generator
@@ -184,3 +188,8 @@ entity.StrengthCreeper.name=Strength Creeper
 entity.SpeedCreeper.name=Speed Creeper
 entity.FireCreeper.name=Fire Creeper
 entity.HealCreeper.name=Healing Creeper
+
+itemGroup.tabGemMachines=Elemental Mastery Machines
+itemGroup.tabGemTools=Elemental Mastery Tools
+itemGroup.tabGemItems=Elemental Mastery Tools
+itemGroup.tabGebBlocks=Elemental Mastery Tools

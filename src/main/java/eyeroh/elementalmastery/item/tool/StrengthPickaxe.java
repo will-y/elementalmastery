@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.item.tool;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -21,6 +22,7 @@ public class StrengthPickaxe extends ItemPickaxe{
 		super(ModTools.TOOLMATERIALSTRENGTH);
 		this.setRegistryName(name);
 		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override

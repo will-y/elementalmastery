@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +22,7 @@ public class ItemMultiTool extends ItemFarmer{
 		super(material, name, material.getDamageVsEntity(), speed);
 		this.efficiency = material.getEfficiencyOnProperMaterial();
 		this.toolHarvestLevel = material.getHarvestLevel();
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override

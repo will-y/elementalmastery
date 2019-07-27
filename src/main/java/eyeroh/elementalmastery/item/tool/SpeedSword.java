@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.item.tool;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,7 @@ public class SpeedSword extends ItemSword{
 		super(ModTools.TOOLMATERIALSPEED);
 		this.setRegistryName("speedsword");
 		this.setUnlocalizedName(ElementalMastery.MODID + ".speedsword");
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override

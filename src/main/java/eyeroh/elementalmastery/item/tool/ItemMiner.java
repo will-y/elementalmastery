@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -31,6 +32,7 @@ public class ItemMiner extends ItemPickaxe{
 		super(material);
 		this.setRegistryName(name);
 		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND, Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER);

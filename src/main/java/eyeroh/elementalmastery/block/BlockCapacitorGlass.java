@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.block;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.ModMachines;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -15,6 +16,7 @@ public class BlockCapacitorGlass extends BlockGlass{
 		super(Material.GLASS, false);
 		setUnlocalizedName(ElementalMastery.MODID + ".capacitorglass");
 		setRegistryName("capacitorglass");
+		this.setCreativeTab(ModMachines.tabGemMachines);
 	}
 	
 	@SideOnly(Side.CLIENT)

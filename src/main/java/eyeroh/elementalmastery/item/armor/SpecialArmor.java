@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -26,6 +27,7 @@ public class SpecialArmor extends ItemArmor{
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 		this.setRegistryName(name);
 		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
+		this.setCreativeTab(ModItems.tabGemTools);
 	}
 	
 	@Override
