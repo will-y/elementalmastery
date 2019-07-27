@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:collectorfire"
+    },
+    "pattern": [
+        "gbg",
+        "clc",
+        "gbg"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "g": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "c": {
+            "item": "elementalmastery:energycoretopaz"
+        },
+        "b": {
+            "item": "elementalmastery:collectorbasic"
+        },
+        "l": {
+            "item": "elementalmastery:blocktopaz"
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:collectorspeed"
+    },
+    "pattern": [
+        "gbg",
+        "clc",
+        "gbg"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "g": {
+            "item": "elementalmastery:gemopal"
+        },
+        "c": {
+            "item": "elementalmastery:energycoreopal"
+        },
+        "b": {
+            "item": "elementalmastery:collectorbasic"
+        },
+        "l": {
+            "item": "elementalmastery:blockopal"
+        }
+    }
+}
