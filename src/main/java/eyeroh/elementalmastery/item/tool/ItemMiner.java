@@ -47,10 +47,11 @@ public class ItemMiner extends ItemPickaxe{
 		return EFFECTIVE_ON.contains(block.getBlock()) ? true : super.canHarvestBlock(block);
 	}
 	
+	
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state){
+	public float getDestroySpeed(ItemStack stack, IBlockState state){
 		Material material = state.getMaterial();
-	    return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK && material !=Material.CLAY && material != Material.CRAFTED_SNOW && material != Material.SNOW && material != Material.SAND && material != Material.GRASS && material != Material.GROUND ? super.getStrVsBlock(stack, state) : this.efficiencyOnProperMaterial;
+	    return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK && material !=Material.CLAY && material != Material.CRAFTED_SNOW && material != Material.SNOW && material != Material.SAND && material != Material.GRASS && material != Material.GROUND ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 	
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)

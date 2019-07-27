@@ -13,6 +13,7 @@ public class ModBlocks {
 
 		@Override
 		public ItemStack getTabIconItem() {
+			// TODO Auto-generated method stub
 			return new ItemStack(ModMachines.collectorSpeed);
 		}
 		

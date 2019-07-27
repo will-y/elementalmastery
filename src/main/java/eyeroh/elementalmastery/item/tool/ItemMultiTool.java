@@ -19,8 +19,8 @@ public class ItemMultiTool extends ItemFarmer{
 	private int toolHarvestLevel;
 
 	public ItemMultiTool(ToolMaterial material, String name, float speed) {
-		super(material, name, material.getDamageVsEntity(), speed);
-		this.efficiency = material.getEfficiencyOnProperMaterial();
+		super(material, name, material.getAttackDamage(), speed);
+		this.efficiency = material.getEfficiency();
 		this.toolHarvestLevel = material.getHarvestLevel();
 		this.setCreativeTab(ModItems.tabGemTools);
 	}
@@ -31,7 +31,7 @@ public class ItemMultiTool extends ItemFarmer{
 	}
 	
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state){
+	public float getDestroySpeed(ItemStack stack, IBlockState state){
 	    return this.efficiency;
 	}
 	

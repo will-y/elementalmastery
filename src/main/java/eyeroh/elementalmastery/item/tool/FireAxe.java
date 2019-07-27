@@ -37,10 +37,12 @@ public class FireAxe extends ItemAxe{
 	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if (!world.isRemote && (double)state.getBlockHardness(world, pos) != 0.0D) {		
             stack.damageItem(1, entityLiving);
-            
-            if(this.getStrVsBlock(stack, state) == this.efficiencyOnProperMaterial) {
+            System.out.println("inside world thing");
+            if(this.canHarvestBlock(stack, state)) {
+            	System.out.println("can harvest");
             	if(OreDictionary.getOres("logWood").toString().contains((new ItemStack(state.getBlock(), 1, OreDictionary.WILDCARD_VALUE)).toString()) ) {
             		ItemStack itemStack2 = new ItemStack(Items.COAL, 1, 1);
+            		System.out.println(itemStack2.toString());
                 	world.setBlockToAir(pos);
                 	EntityItem unsmelted = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
                 	world.spawnEntity(unsmelted);
@@ -48,7 +50,7 @@ public class FireAxe extends ItemAxe{
             	}
             }
         }
-        return true;
+        return false;
     }
 	
 	@Override
@@ -70,5 +72,11 @@ public class FireAxe extends ItemAxe{
 	@SideOnly(Side.CLIENT)
 	public void initModel() {
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
+	
+	
+	public boolean canHarvestBlock(ItemStack stack, IBlockState state) {
+		System.out.println("canHarvestBlock");
+		return this.getDestroySpeed(stack, state) != 1.0F;
 	}
 }

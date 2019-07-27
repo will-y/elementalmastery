@@ -36,7 +36,7 @@ public class FireShovel extends ItemSpade{
         if (!world.isRemote && (double)state.getBlockHardness(world, pos) != 0.0D) {		
             stack.damageItem(1, entityLiving);
             
-            if(this.getStrVsBlock(stack, state) == this.efficiencyOnProperMaterial) {
+            if(this.canHarvestBlock(state, stack)) {
             	ItemStack itemStack = new ItemStack(state.getBlock().getItemDropped(state, new Random(), 0));
           
                 ItemStack smelted = new ItemStack(FurnaceRecipes.instance().getSmeltingResult(itemStack).getItem());

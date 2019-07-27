@@ -32,7 +32,7 @@ public class HealSword extends ItemSword{
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         stack.damageItem(1, attacker);
         
-        healAmount = this.getDamageVsEntity()/3;
+        healAmount = this.getAttackDamage()/3;
         
         attacker.heal(healAmount);
         
