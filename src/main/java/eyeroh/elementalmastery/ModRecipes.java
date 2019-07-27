@@ -10,6 +10,7 @@ public class ModRecipes {
 		GameRegistry.addSmelting(ModItems.dustTopaz, new ItemStack(ModItems.gemTopaz, 1), 1.5f);
 		GameRegistry.addSmelting(ModItems.dustRuby, new ItemStack(ModItems.gemRuby, 1), 1.5f);
 		GameRegistry.addSmelting(ModItems.dustSapphire, new ItemStack(ModItems.gemSapphire, 1), 1.5f);
+		GameRegistry.addSmelting(ModItems.dustMulti, new ItemStack(ModItems.gemMulti, 1), 1.5F);
 	}
 
 }

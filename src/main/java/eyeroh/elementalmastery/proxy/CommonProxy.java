@@ -310,6 +310,7 @@ public class CommonProxy {
     	event.getRegistry().register(new GemItem("dusttopaz"));
     	event.getRegistry().register(new GemItem("dustruby"));
     	event.getRegistry().register(new GemItem("dustsapphire"));
+    	event.getRegistry().register(new GemItem("dustmulti"));
     	
     	event.getRegistry().register(new GemItem("dustopalsmall"));
     	event.getRegistry().register(new GemItem("dusttopazsmall"));

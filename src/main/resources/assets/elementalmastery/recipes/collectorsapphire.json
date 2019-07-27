@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:collectorstrength"
+    },
+    "pattern": [
+        "gbg",
+        "clc",
+        "gbg"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "g": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "c": {
+            "item": "elementalmastery:energycoresapphire"
+        },
+        "b": {
+            "item": "elementalmastery:collectorbasic"
+        },
+        "l": {
+            "item": "elementalmastery:blocksapphire"
+        }
+    }
+}

@@ -79,6 +79,8 @@ public class ModItems {
 	public static GemItem dustRuby;
 	@GameRegistry.ObjectHolder("elementalmastery:dustsapphire")
 	public static GemItem dustSapphire;
+	@GameRegistry.ObjectHolder("elementalmastery:dustmulti")
+	public static GemItem dustMulti;
 	
 	@GameRegistry.ObjectHolder("elementalmastery:dustopalsmall")
 	public static GemItem dustOpalSmall;
@@ -129,6 +131,7 @@ public class ModItems {
 		dustTopaz.initModel();
 		dustRuby.initModel();
 		dustSapphire.initModel();
+		dustMulti.initModel();
 		
 		dustOpalSmall.initModel();
 		dustTopazSmall.initModel();

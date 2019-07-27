@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:generatortopaz"
+    },
+    "pattern": [
+        "gbg",
+        "bfb",
+        "gbg" 
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "g": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "b": {
+            "item": "elementalmastery:blocktopaz"
+        },
+        "f": {
+            "item": "minecraft:furnace"
+        }
+    }
+}

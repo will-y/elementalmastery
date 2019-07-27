@@ -4,7 +4,7 @@
     },
     "pattern": [
         "coc",
-        "smr",
+        "s r",
         "ctc" 
     ],
     "type": "forge:ore_shaped",
@@ -23,9 +23,6 @@
         },
         "r": {
             "item": "elementalmastery:gemruby"
-        },
-        "m": {
-            "item": "elementalmastery:gemmulti"
         }
     }
 }
