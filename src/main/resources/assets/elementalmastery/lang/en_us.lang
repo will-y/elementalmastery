@@ -184,6 +184,9 @@ tile.elementalmastery.generatorsapphire.name=Sapphire Generator
 message.elementalmastery.farmer_mode=Mode Changed To: %d
 message.elementalmastery.capacitor_formed=%d
 message.elementalmastery.capacitor_amount=%d
+message.elementalmastery.capacitor_selected=%d
+message.elementalmastery.generator_linked=%d
+message.elementalmastery.machine_linked=%d
 
 entity.StrengthCreeper.name=Strength Creeper
 entity.SpeedCreeper.name=Speed Creeper

@@ -24,6 +24,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ItemLinker extends GemItem {
@@ -45,6 +47,9 @@ public class ItemLinker extends GemItem {
 				if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModBlocks.capacitorController)) {
 					blockStored = pos;
 					toolTip = "Linked to Capacitor @ " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
+					TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.capacitor_selected", toolTip);
+    	            component.getStyle().setColor(TextFormatting.BLUE);
+    	            player.sendStatusMessage(component, true);
 				} else {
 					blockStored = BlockPos.fromLong(nbt.getLong("position"));
 				}
@@ -52,18 +57,20 @@ public class ItemLinker extends GemItem {
 					TileEntity te = world.getTileEntity(pos);
 					if(te instanceof GeneratorTileEntity) {
 						((GeneratorTileEntity) te).setCapacitor(blockStored);
-						System.out.println("capacitor and generator linked");
+						TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.generator_linked", "Generator and Capacitor Linked");
+	    	            component.getStyle().setColor(TextFormatting.BLUE);
+	    	            player.sendStatusMessage(component, true);
 					} else if(te instanceof TileEnergyAcceptor) {
 						TileEntity te2 = world.getTileEntity(blockStored);
 						if(te2 instanceof TileEntityCapacitorController) {
 							TileEntityCapacitorController controller = (TileEntityCapacitorController) te2;
 							((TileEnergyAcceptor)te).addCapacitor(controller);
+							TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.machine_linked", "Machine and Capacitor Linked");
+		    	            component.getStyle().setColor(TextFormatting.BLUE);
+		    	            player.sendStatusMessage(component, true);
 						}
 					}
 				}
-				
-				
-				System.out.println(nbt);
 				nbt.setLong("position", blockStored.toLong());
 				nbt.setString("tooltip", toolTip);
 				player.getHeldItem(hand).setTagCompound(nbt);

@@ -116,14 +116,20 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 	
 	@Override
 	public boolean getActive() {
-		for(int i = 0; i < 4; i++) {
-			if(this.getUsage()[i] != 0) {
-				if(this.getUsage()[i] > this.getCurrentEnergy()) {
-					return false;
+		try {
+			for(int i = 0; i < 4; i++) {
+				if(this.getUsage()[i] != 0) {
+					if(this.getUsage()[i] > this.getCurrentEnergy()) {
+						return false;
+					}
 				}
 			}
+			return true;
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println("Error in the tile entity, break and replace to fix");
+			return false;
 		}
-		return true;
+		
 	}
 	
 	public void addItem(ItemStack item, int slot) {

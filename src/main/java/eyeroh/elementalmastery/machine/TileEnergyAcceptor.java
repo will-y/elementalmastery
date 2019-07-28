@@ -162,26 +162,30 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	}
 	
 	public void retrieveEnergy() {
-		if(this.linkedCapacitor == null && capacitorPos != null) {
-			TileEntity te = world.getTileEntity(this.capacitorPos);
-			if(te instanceof TileEntityCapacitorController) {
-				this.linkedCapacitor = (TileEntityCapacitorController) te;
-			}
-		}
-		if(this.linkedCapacitor != null && this.canAcceptEnergy(this.usage[this.getType()] * 2, this.getType())) {
-			if(energyCounter >= energyCoolDown) {
-				energyCounter = 0;
-				
-				for(int i = 0; i < 4; i++) {
-					int amount = this.linkedCapacitor.takeEnergy(this.usage[i] * 2, i);
-					this.currentEnergy[i] += amount;
+		try {
+			if(this.linkedCapacitor == null && capacitorPos != null) {
+				TileEntity te = world.getTileEntity(this.capacitorPos);
+				if(te instanceof TileEntityCapacitorController) {
+					this.linkedCapacitor = (TileEntityCapacitorController) te;
 				}
-				
-				
 			}
-			energyCounter++;
+			if(this.linkedCapacitor != null && this.canAcceptEnergy(this.usage[this.getType()] * 2, this.getType())) {
+				if(energyCounter >= energyCoolDown) {
+					energyCounter = 0;
+					
+					for(int i = 0; i < 4; i++) {
+						int amount = this.linkedCapacitor.takeEnergy(this.usage[i] * 2, i);
+						this.currentEnergy[i] += amount;
+					}
+					
+					
+				}
+				energyCounter++;
+			}
+			this.markDirty();
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Error getting energy, break and replace the machine to fix");
 		}
-		this.markDirty();
 	}
     
     public boolean canInteractWith(EntityPlayer playerIn) {
