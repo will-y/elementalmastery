@@ -313,4 +313,10 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 	public String toString() {
 		return "Capacitor at " + this.pos.toString() + "\nWith energy: " + Arrays.toString(this.energyAmount);
 	}
+	
+	public ArrayList<String> getToolTipString(int type) {
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(this.getEnergy(type) + "/" + this.getMaxEnergy(type));
+		return list;
+	}
 }

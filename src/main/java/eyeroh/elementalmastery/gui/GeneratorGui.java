@@ -71,5 +71,12 @@ public class GeneratorGui extends GuiContainer{
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	renderHoveredToolTip(mouseX, mouseY);
+    	drawEnergyToolTip(mouseX, mouseY);
+    }
+    
+    private void drawEnergyToolTip(int x, int y) {
+    	if(x > guiLeft + 158 && x < guiLeft + 168 && y > guiTop + energyBarY && y < guiTop + energyBarY + energyBarHeight) {
+    		this.drawHoveringText(this.tileEntity.getToolTipString(), x, y, this.fontRenderer);
+    	}
     }
 }

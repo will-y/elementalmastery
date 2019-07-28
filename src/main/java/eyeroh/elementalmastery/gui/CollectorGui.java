@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.gui;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import eyeroh.elementalmastery.machine.collector.CollectorContainer;
 import eyeroh.elementalmastery.machine.collector.TileCollector;
@@ -81,5 +82,14 @@ public class CollectorGui extends GuiContainer{
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	renderHoveredToolTip(mouseX, mouseY);
+    	drawEnergyTooltips(mouseX, mouseY);
+    }
+    
+    private void drawEnergyTooltips(int x, int y) {
+    	if(x > guiLeft + 161 && x < guiLeft + 171 && y > guiTop + energyBarY && y < guiTop + energyBarY + energyBarHeight) {
+    		
+            this.drawHoveringText(this.tileEntity.getToolTipString(), x, y, this.fontRenderer);
+    	}
+    	
     }
 }

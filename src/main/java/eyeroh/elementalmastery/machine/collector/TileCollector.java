@@ -1,17 +1,15 @@
 package eyeroh.elementalmastery.machine.collector;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
@@ -20,7 +18,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import scala.actors.threadpool.Arrays;
 
 public abstract class TileCollector extends TileEnergyAcceptor implements ITickable, IInventory{
 	public int size;
@@ -231,5 +228,12 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 	
 	public ItemStackHandler getItemStackHandler() {
 		return itemStackHandler;
+	}
+	
+	public ArrayList<String> getToolTipString() {
+		String result = this.currentEnergy[this.getType()] + "/" + this.getMaxEnergy(this.getType());
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(result);
+		return list;
 	}
 }

@@ -1,5 +1,7 @@
 package eyeroh.elementalmastery.machine.generator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import eyeroh.elementalmastery.block.ModBlocks;
@@ -377,5 +379,11 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	
 	public int getType() {
 		return this.type;
+	}
+
+	public List<String> getToolTipString() {
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(this.currentEnergy + "/" + this.maxEnergy);
+		return result;
 	}
 }
