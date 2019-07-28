@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.collector;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.block.Block;
@@ -57,8 +58,9 @@ public class CollectorBlock extends Block implements ITileEntityProvider {
         if (!(te instanceof CollectorBasicTileEntity || te instanceof TileCollector)) {
             return false;
         }
-        System.out.println("open");
-        player.openGui(ElementalMastery.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
+        if(!player.getHeldItemMainhand().isItemEqual(new ItemStack(ModTools.linker))) {
+        	player.openGui(ElementalMastery.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
+        }
         return true;
     }
     

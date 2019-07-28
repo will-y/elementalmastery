@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.capacitor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.management.NotificationBroadcaster;
 
@@ -16,17 +17,25 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public class TileEntityCapacitorController extends TileEntity implements ITickable, INBTSerializable<NBTTagCompound>{
+public class TileEntityCapacitorController extends TileEntity implements ITickable{
 	
-	private int[] energyAmount = new int[] {0, 0, 0, 0};
-	private int[] energyMax = new int[] {0, 0, 0, 0};
-	private boolean active = false;
+	private int[] energyAmount;
+	private int[] energyMax;
+	private boolean active;
 	private CapacitorDirection capacitorDirection;
 	//private ArrayList<TileEnergyAcceptor> machines = new ArrayList<TileEnergyAcceptor>();
+	
+	public TileEntityCapacitorController() {
+		energyAmount = new int[] {0, 0, 0, 0};
+		energyMax = new int[] {0, 0, 0, 0};
+		active = false;
+	}
 	
 	
 	public boolean checkForMultiBlock() {
@@ -239,16 +248,16 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
         compound.setIntArray("energy", energyAmount);
         compound.setBoolean("active", active);
         compound.setIntArray("energy_max", energyMax);
-        return compound;
+        return super.writeToNBT(compound);
     }
     
     public void showEnergyAmount(EntityPlayer player) {
     	TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.capacitor_amount", energyAmount[0] + "/" + energyMax[0] + "(O), " + energyAmount[1] + "/" + energyMax[1] + "(T), " + energyAmount[2] + "/" + energyMax[2] + "(R), " + energyAmount[3] + "/" + energyMax[3] + "(S)");
-        player.sendStatusMessage(component, false);
+    	component.getStyle().setColor(TextFormatting.BLUE);
+        player.sendStatusMessage(component, true);
     }
     
     public boolean isFull(int type) {
@@ -259,7 +268,6 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
     	return false;
     }
     
-    int counter = 0;
 	@Override
 	public void update() {
 //		if(counter >= 20) {
@@ -289,14 +297,20 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 //	}
 //	
 	public int takeEnergy(int amount, int type) {
-		this.markDirty();
 		if(this.energyAmount[type] >= amount) {
 			this.energyAmount[type] -= amount;
+			this.markDirty();
 			return amount;
 		} else {
 			int temp = energyAmount[type];
 			energyAmount[type] = 0;
+			this.markDirty();
 			return temp;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Capacitor at " + this.pos.toString() + "\nWith energy: " + Arrays.toString(this.energyAmount);
 	}
 }

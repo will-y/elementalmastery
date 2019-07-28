@@ -20,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import scala.actors.threadpool.Arrays;
 
 public abstract class TileCollector extends TileEnergyAcceptor implements ITickable, IInventory{
 	public int size;
@@ -36,8 +37,7 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
 		this.collectorItems = items;
 		this.timeBetweenCollect = maxCounter;
 		this.size = invSize;
-		System.out.println("Number of slots at constructor" + size);
-		NonNullList.<ItemStack>withSize(size, ItemStack.EMPTY);
+		collectorItemStacks = NonNullList.<ItemStack>withSize(size, ItemStack.EMPTY);
 		itemStackHandler = new ItemStackHandler(size) {
 	        @Override
 	        protected void onContentsChanged(int slot) {
@@ -83,34 +83,29 @@ public abstract class TileCollector extends TileEnergyAcceptor implements ITicka
         if (compound.hasKey("items")) {
             itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
         }
-        if(compound.hasKey("capacitor")) {
-        	linkedCapacitor.deserializeNBT((NBTTagCompound) compound.getTag("capacitor"));
-        	System.out.println("reading in collector");
-        }
-        
+        this.timeBetweenCollect = compound.getInteger("time_collect");
     }
 	
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("items", itemStackHandler.serializeNBT());
-        compound.setTag("capacitor", this.linkedCapacitor.serializeNBT());
-        
+        compound.setInteger("time_collect", this.timeBetweenCollect);
         return super.writeToNBT(compound);
     }
     
 	
 	@Override
 	public void actionPerTick() {
+		//System.out.println("Capacitor: " + this.linkedCapacitor.toString() + "\nActive: " + this.getActive() + "\nType: " + this.getType() + "\nUsage: " + Arrays.toString(this.usage) + "\nStorage: " + Arrays.toString(this.storage));
 		this.retrieveEnergy();
 		if(this.getActive()) {
 			this.useEnergy(this.getType(), this.usage[this.getType()]);
 			if(!world.isRemote) {
 				if(counter >= timeBetweenCollect) {
-					
 					int itemNum = rand.nextInt(collectorItems.length);
 					addItem(collectorItems[itemNum].copy(), itemNum);
-					this.markDirty();
 					counter = 0;
+					this.markDirty();
 				}
 				counter++;
 				this.markDirty();

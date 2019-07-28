@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.generator;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.ModMachines;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -59,7 +60,8 @@ public class GeneratorBlock extends Block implements ITileEntityProvider {
         if (!(te instanceof GeneratorTileEntity)) {
             return false;
         }
-        player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+        if(!player.getHeldItemMainhand().isItemEqual(new ItemStack(ModTools.linker)))
+        	player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
     

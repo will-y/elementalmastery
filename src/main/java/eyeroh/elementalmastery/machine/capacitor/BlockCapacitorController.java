@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.capacitor;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.block.Block;
@@ -79,8 +80,8 @@ public class BlockCapacitorController extends Block implements ITileEntityProvid
         
         TileEntityCapacitorController tileEntityCapacitorController = (TileEntityCapacitorController) te;
         
-        if(tileEntityCapacitorController.getActive())
-        player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+        if(tileEntityCapacitorController.getActive() && !player.getHeldItemMainhand().isItemEqual(new ItemStack(ModTools.linker)))
+        	player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 	
