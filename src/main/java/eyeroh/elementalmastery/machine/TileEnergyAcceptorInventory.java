@@ -1,5 +1,7 @@
 package eyeroh.elementalmastery.machine;
 
+import javax.annotation.Nonnull;
+
 import eyeroh.elementalmastery.machine.collector.TileCollector;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,11 +23,18 @@ public abstract class TileEnergyAcceptorInventory extends TileEnergyAcceptor {
 	        protected void onContentsChanged(int slot) {
 	            TileEnergyAcceptorInventory.this.markDirty();
 	        }
+	        
+	        @Override
+	        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+	            return TileEnergyAcceptorInventory.this.isItemValid(slot, stack);
+	        }
 		};
 	}
 
 	@Override
 	public abstract void doAction();
+	
+	public abstract boolean isItemValid(int slot, ItemStack stack);
 	
 	@Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {

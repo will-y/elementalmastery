@@ -4,6 +4,7 @@ import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.gui.BasicCollectorGui;
 import eyeroh.elementalmastery.gui.CapacitorGui;
 import eyeroh.elementalmastery.gui.CollectorGui;
+import eyeroh.elementalmastery.gui.CoreCrafterGui;
 import eyeroh.elementalmastery.gui.GeneratorGui;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicContainer;
@@ -14,6 +15,8 @@ import eyeroh.elementalmastery.machine.collector.CollectorStrengthContainer;
 import eyeroh.elementalmastery.machine.collector.TileCollector;
 import eyeroh.elementalmastery.machine.collector.TileCollectorHeal;
 import eyeroh.elementalmastery.machine.collector.TileCollectorStrength;
+import eyeroh.elementalmastery.machine.crafting.CoreCrafterContainer;
+import eyeroh.elementalmastery.machine.crafting.TileEnergyCoreCrafter;
 import eyeroh.elementalmastery.machine.generator.GeneratorContainer;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,6 +43,8 @@ public class GuiProxy implements IGuiHandler {
         		return new CollectorHealContainer(player.inventory, player.inventory, (TileCollector)te);
         	}
         	return new CollectorContainer(player.inventory, player.inventory, (TileCollector) te);
+        } else if (te instanceof TileEnergyCoreCrafter) {
+        	return new CoreCrafterContainer(player.inventory, player.inventory, (TileEnergyCoreCrafter) te);
         }
         return null;
     }
@@ -81,6 +86,9 @@ public class GuiProxy implements IGuiHandler {
         		collectorContainer = new CollectorContainer(player.inventory, player.inventory, tileCollector);
         	}
         	return new CollectorGui(tileCollector, collectorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/" + tileCollector.getFileName() + ".png"));
+        } else if(te instanceof TileEnergyCoreCrafter) {
+        	TileEnergyCoreCrafter tile = (TileEnergyCoreCrafter) te;
+        	return new CoreCrafterGui(tile, new CoreCrafterContainer(player.inventory, player.inventory, tile), new ResourceLocation(ElementalMastery.MODID, "textures/gui/corecrafter.png"));
         }
         return null;
     }

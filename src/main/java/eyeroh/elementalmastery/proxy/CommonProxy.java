@@ -45,6 +45,8 @@ import eyeroh.elementalmastery.machine.collector.TileCollectorFire;
 import eyeroh.elementalmastery.machine.collector.TileCollectorHeal;
 import eyeroh.elementalmastery.machine.collector.TileCollectorSpeed;
 import eyeroh.elementalmastery.machine.collector.TileCollectorStrength;
+import eyeroh.elementalmastery.machine.crafting.BlockCoreCrafter;
+import eyeroh.elementalmastery.machine.crafting.TileEnergyCoreCrafter;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import eyeroh.elementalmastery.mob.ModEntities;
@@ -54,7 +56,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -130,6 +132,10 @@ public class CommonProxy {
     	event.getRegistry().register(new GeneratorBlock("topaz", 1));
     	event.getRegistry().register(new GeneratorBlock("ruby", 2));
     	event.getRegistry().register(new GeneratorBlock("sapphire", 3));
+    	
+    	//Energy Core Crafter
+    	event.getRegistry().register(new BlockCoreCrafter());
+    	GameRegistry.registerTileEntity(TileEnergyCoreCrafter.class, new ResourceLocation(ElementalMastery.MODID + "_corecrafter"));
     }
 
     @SubscribeEvent
@@ -169,6 +175,8 @@ public class CommonProxy {
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorTopaz).setRegistryName(ModMachines.generatorTopaz.getRegistryName()));
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorRuby).setRegistryName(ModMachines.generatorRuby.getRegistryName()));
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorSapphire).setRegistryName(ModMachines.generatorSapphire.getRegistryName()));
+    	
+    	event.getRegistry().register(new ItemBlock(ModMachines.coreCrafter).setRegistryName(ModMachines.coreCrafter.getRegistryName()));
     	
     	
     	//Items

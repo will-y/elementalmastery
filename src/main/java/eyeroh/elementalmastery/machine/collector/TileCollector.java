@@ -41,9 +41,15 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
 		};
 	}
 	
+	
 	public abstract int getType();
     
     public abstract int getCurrentEnergy();
+    
+    @Override
+    public boolean isItemValid(int slot, ItemStack stack) {
+    	return false;
+    }
     
     @Override
     public void readFromNBT(NBTTagCompound compound) {

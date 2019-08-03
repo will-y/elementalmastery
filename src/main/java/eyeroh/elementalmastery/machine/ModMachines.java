@@ -43,6 +43,9 @@ public class ModMachines {
 	@GameRegistry.ObjectHolder("elementalmastery:generatorsapphire")
 	public static GeneratorBlock generatorSapphire;
 	
+	@GameRegistry.ObjectHolder("elementalmastery:corecrafter")
+	public static BlockEnergyAcceptor coreCrafter;
+	
 	public static void initModels() {
 		collectorBasic.initModel();
 		
@@ -55,5 +58,7 @@ public class ModMachines {
 		collectorFire.initModel();
 		collectorHeal.initModel();
 		collectorStrength.initModel();
+		
+		coreCrafter.initModel();
 	}
 }
