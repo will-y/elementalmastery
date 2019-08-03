@@ -18,25 +18,28 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class TileEnergyAcceptor extends TileEntity implements ITickable{
 	
 	public int[] currentEnergy = new int[] {0, 0, 0, 0};
 	public int[] storage;
 	public int[] usage;
-	public int counter = 0;
 	public int energyCoolDown = 20;
 	public int energyCounter = 0;
 	public int energyUseCounter = 0;
 	protected TileEntityCapacitorController linkedCapacitor = null;
 	private BlockPos capacitorPos;
+	private int maxProgress;
+	private int currentProgress = 0;
 	
 	public boolean active = false;
 	
-	public TileEnergyAcceptor(int[] storage, int[] usage, int size) {
+	public TileEnergyAcceptor(int[] storage, int[] usage, int maxProgress) {
 		this.storage = storage;
 		this.usage = usage;
-		
+		this.maxProgress = maxProgress;
 	}
 	
 	@Override
@@ -60,23 +63,23 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
     	this.currentEnergy = compound.getIntArray("energy");
-    	this.counter = compound.getInteger("counter");
     	this.usage = compound.getIntArray("usage");
+    	this.currentProgress = compound.getInteger("progress");
+    	this.maxProgress = compound.getInteger("max_progress");
     	this.storage = compound.getIntArray("storage");
     	this.energyCounter = compound.getInteger("energy_counter");
     	this.energyUseCounter = compound.getInteger("energy_use_counter");
         if(compound.hasKey("capacitor")) {
         	this.capacitorPos = BlockPos.fromLong(compound.getLong("capacitor"));
         }
-        
-        
     }
 	
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
     	compound.setIntArray("energy", currentEnergy);
-    	compound.setInteger("counter", this.counter);
     	compound.setIntArray("usage", this.usage);
+    	compound.setInteger("progress", this.currentProgress);
+    	compound.setInteger("max_progress", this.maxProgress);
     	compound.setIntArray("storage", this.storage);
     	compound.setInteger("energy_counter", this.energyCounter);
     	compound.setInteger("energy_use_counter", this.energyUseCounter);
@@ -143,21 +146,35 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		return Ints.max(storage);
 	}
 	
-	public void actionPerTick() {
-		
-	}
+	public abstract void doAction();
+	
+	@SideOnly(Side.CLIENT)
+    public int getCurrentProgress() {
+    	return this.currentProgress;
+    }
 	
 	public void setCurrentProgress(int data) {
-		counter = data;
+		this.currentProgress = data;
 	}
 	
-	public int getCurrentProgress() {
-		return counter;
+	public int getMaxProgress() {
+		return this.maxProgress;
 	}
 
 	@Override
 	public void update() {
-		actionPerTick();
+		retrieveEnergy();
+		if(this.getActive()) {
+			if(!world.isRemote) {
+				if(currentProgress >= maxProgress) {
+					doAction();
+					currentProgress = 0;
+					markDirty();
+				}
+				currentProgress++;
+			}
+		}
+		
 		
 	}
 	
@@ -169,13 +186,15 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 					this.linkedCapacitor = (TileEntityCapacitorController) te;
 				}
 			}
-			if(this.linkedCapacitor != null && this.canAcceptEnergy(this.usage[this.getType()] * 2, this.getType())) {
+			if(this.linkedCapacitor != null) {
 				if(energyCounter >= energyCoolDown) {
 					energyCounter = 0;
 					
 					for(int i = 0; i < 4; i++) {
-						int amount = this.linkedCapacitor.takeEnergy(this.usage[i] * 2, i);
-						this.currentEnergy[i] += amount;
+						if(this.canAcceptEnergy(this.usage[i] * 2, i)) {
+							int amount = this.linkedCapacitor.takeEnergy(this.usage[i] * 2, i);
+							this.currentEnergy[i] += amount;
+						}
 					}
 					
 					
@@ -216,6 +235,4 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	public boolean canAcceptEnergy(int amount, int type) {
 		return this.currentEnergy[type] + amount <= this.getMaxEnergy(type);
 	}
-	
-	public abstract int getType();
 }

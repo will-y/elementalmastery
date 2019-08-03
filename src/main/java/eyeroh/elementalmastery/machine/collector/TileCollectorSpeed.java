@@ -21,7 +21,6 @@ public class TileCollectorSpeed extends TileCollector {
 		return this.currentEnergy[0];
 	}
 
-	@Override
 	public int getType() {
 		return 0;
 	}
