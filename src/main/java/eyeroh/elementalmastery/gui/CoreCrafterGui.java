@@ -86,7 +86,6 @@ public class CoreCrafterGui extends GuiContainer {
         int progress = tileEntity.getCurrentProgress();
         float progressPercentage = ((float)progress / maxProgress) * 100;
         float scaledProgress;
-        System.out.println("current: " + progress + " max: " + maxProgress + " percent: " + progressPercentage);
         
         if(progressPercentage >= PROGRESS_1_START) {
         	scaledProgress = progressPercentage / (PROGRESS_1_END - PROGRESS_1_START);

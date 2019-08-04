@@ -10,25 +10,15 @@ public class CoreCrafterUtilities {
 	private static ArrayList<ItemStack> validCenter = new ArrayList<ItemStack>();
 	
 	public CoreCrafterUtilities () {
-		validEdge.add(new ItemStack(Items.REDSTONE));
-		validCenter.add(new ItemStack(Items.STICK));
+		
+		
 	}
 	
 	public static boolean isItemValidOutside(ItemStack stackIn) {
-		for(ItemStack stack : validEdge) {
-			if(stackIn.isItemEqual(stack)) {
-				return true;
-			}
-		}
-		return false;
+		return stackIn.isItemEqual(new ItemStack(Items.REDSTONE));
 	}
 	
 	public static boolean isItemValidInside(ItemStack stackIn) {
-		for(ItemStack stack : validCenter) {
-			if(stackIn.isItemEqual(stack)) {
-				return true;
-			}
-		}
-		return false;
+		return stackIn.isItemEqual(new ItemStack(Items.STICK));
 	}
 }

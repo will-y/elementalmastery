@@ -21,10 +21,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class TileCollector extends TileEnergyAcceptorInventory implements ITickable {
 	public int size;
-	public ItemStack[] collectorItems;
-	
-	private NonNullList<ItemStack> collectorItemStacks;
-	private ItemStackHandler itemStackHandler; 
+	public ItemStack[] collectorItems; 
 	
 	Random rand = new Random();
 	
@@ -32,13 +29,6 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
 		super(storage, usage, invSize, maxCounter);
 		this.collectorItems = items;
 		this.size = invSize;
-		collectorItemStacks = NonNullList.<ItemStack>withSize(size, ItemStack.EMPTY);
-		itemStackHandler = new ItemStackHandler(size) {
-	        @Override
-	        protected void onContentsChanged(int slot) {
-	            TileCollector.this.markDirty();
-	        }
-		};
 	}
 	
 	
