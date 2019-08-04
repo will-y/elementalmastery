@@ -64,7 +64,6 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
 	
 	@Override
 	public void doAction() {
-		this.useEnergy(this.getType(), this.usage[this.getType()]);
 		int itemNum = rand.nextInt(collectorItems.length);
 		addItem(collectorItems[itemNum].copy(), itemNum);
 		

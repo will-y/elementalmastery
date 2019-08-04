@@ -99,20 +99,20 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	}
 	
 	public void useEnergy(int type, int amount) {
-		if(energyUseCounter >= energyCoolDown) {
-			energyUseCounter = 0;
-			if(currentEnergy[type] - amount >= 0 ) {
-				currentEnergy[type]-=amount;
-				this.markDirty();
-			}
+		if(currentEnergy[type] - amount >= 0 ) {
+			currentEnergy[type] -= amount;
+			this.markDirty();
 		}
-		energyUseCounter++;
 	}
 	
 	public void useAllEnergy() {
-		for(int i = 0; i < 4; i++) {
-			this.useEnergy(i, usage[i]);
+		if(energyUseCounter >= energyCoolDown) {
+			energyUseCounter = 0;
+			for(int i = 0; i < 4; i++) {
+				this.useEnergy(i, usage[i]);
+			}
 		}
+		energyUseCounter++;
 	}
 	
 	public int[] getUsage() {
@@ -174,6 +174,7 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	public void update() {
 		retrieveEnergy();
 		if(this.getActive()) {
+			this.useAllEnergy();
 			if(!world.isRemote) {
 				if(currentProgress >= maxProgress) {
 					doAction();

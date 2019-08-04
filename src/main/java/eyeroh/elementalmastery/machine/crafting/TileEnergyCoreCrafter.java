@@ -15,6 +15,7 @@ public class TileEnergyCoreCrafter extends TileEnergyAcceptorInventory{
 
 	@Override
 	public void doAction() {
+		
 	}
 	
 	@Override
