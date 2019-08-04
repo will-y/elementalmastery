@@ -115,14 +115,6 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		}
 	}
 	
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	
-	public boolean getActive() {
-		return this.active;
-	}
-	
 	public int[] getUsage() {
 		return usage;
 	}
@@ -147,6 +139,23 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	}
 	
 	public abstract void doAction();
+	
+	public boolean getActive() {
+		try {
+			for(int i = 0; i < 4; i++) {
+				if(this.getUsage()[i] != 0) {
+					if(this.getUsage()[i] > this.getCurrentEnergy(i)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println("Error in the tile entity, break and replace to fix");
+			return false;
+		}
+		
+	}
 	
 	@SideOnly(Side.CLIENT)
     public int getCurrentProgress() {

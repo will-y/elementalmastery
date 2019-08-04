@@ -70,24 +70,6 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
 		
 	}
 	
-	@Override
-	public boolean getActive() {
-		try {
-			for(int i = 0; i < 4; i++) {
-				if(this.getUsage()[i] != 0) {
-					if(this.getUsage()[i] > this.getCurrentEnergy()) {
-						return false;
-					}
-				}
-			}
-			return true;
-		} catch(IndexOutOfBoundsException e) {
-			System.out.println("Error in the tile entity, break and replace to fix");
-			return false;
-		}
-		
-	}
-	
 	public static ItemStack[] getDefaultItemStackArray() {
 		return new ItemStack[] {new ItemStack(ModItems.dustOpalSmall), new ItemStack(ModItems.dustTopazSmall), new ItemStack(ModItems.dustRubySmall), new ItemStack(ModItems.dustSapphireSmall)};
 	}
