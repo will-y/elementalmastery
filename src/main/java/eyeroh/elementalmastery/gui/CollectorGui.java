@@ -45,7 +45,6 @@ public class CollectorGui extends GuiContainer{
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
         if(tileEntity.getCurrentEnergy() > 0) {
-        	
         	float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy() / tileEntity.getMaxEnergy());
         	//System.out.println(tileEntity.getCurrentEnergy() + ", " + scaledEnergyFactor);
         	int scaledEnergyHeight = (int) (scaledEnergyFactor * energyBarHeight);

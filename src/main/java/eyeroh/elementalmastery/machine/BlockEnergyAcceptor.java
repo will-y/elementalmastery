@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine;
 
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import eyeroh.elementalmastery.machine.collector.TileCollector;
 import net.minecraft.block.Block;
@@ -64,7 +65,9 @@ public class BlockEnergyAcceptor extends Block implements ITileEntityProvider{
         if (!(te instanceof TileEnergyAcceptor)) {
             return false;
         }
-        player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+        if(!player.getHeldItemMainhand().isItemEqual(new ItemStack(ModTools.linker))) {
+        	player.openGui(ElementalMastery.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
+        }
         return true;
     }
 }
