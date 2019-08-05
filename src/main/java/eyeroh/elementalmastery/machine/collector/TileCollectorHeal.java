@@ -27,7 +27,6 @@ public class TileCollectorHeal extends TileCollector {
 		return this.currentEnergy[2];
 	}
 
-	@Override
 	public int getType() {
 		return 2;
 	}

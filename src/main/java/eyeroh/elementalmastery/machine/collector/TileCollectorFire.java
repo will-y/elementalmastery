@@ -24,7 +24,6 @@ public class TileCollectorFire extends TileCollector {
 		return this.currentEnergy[1];
 	}
 
-	@Override
 	public int getType() {
 		return 1;
 	}

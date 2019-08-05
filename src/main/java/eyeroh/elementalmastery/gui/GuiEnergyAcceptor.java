@@ -1,52 +1,62 @@
 package eyeroh.elementalmastery.gui;
 
 import java.awt.Color;
-import java.util.Random;
 
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
-import eyeroh.elementalmastery.machine.collector.CollectorContainer;
+import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiEnergyAcceptor extends GuiContainer {
-	public static final int WIDTH = 177;
-    public static final int HEIGHT = 167;
-    public static final int progressBarLength = 158;
-    private CollectorBasicTileEntity tileEntity = new CollectorBasicTileEntity();
+	
+	public int width;
+	public int height;
+	private ResourceLocation background;
+	
+	//Energy Fields
+	private int energyX;
+	private int energyY;
+	private int energySpace;
+	private int energyTextureX;
+	private int energyTextureY;
+	private int[] energyTypes;
+	
+	private static final int ENERGY_WIDTH = 10;
+	private static final int ENERGY_HEIGHT = 72;
     
-    private int progressBarCounter = 0;
-    private int progressBarMaxCounter = 5;
-    private int progressBarTexture = 0;
-    private int progressBarTextures = 4;
-    Random rand = new Random();
-
-    private static final ResourceLocation background = new ResourceLocation(ElementalMastery.MODID, "textures/gui/collectorbasic.png");
-
-    public GuiEnergyAcceptor(CollectorBasicTileEntity tileEntity, CollectorContainer container) {
+	TileEnergyAcceptor tileEntity;
+    
+    public GuiEnergyAcceptor(TileEnergyAcceptor tileEntity, Container container, int width, int height, ResourceLocation background, int energyX, int energyY, int energySpace, int energyTextureX, int energyTextureY, int[] energyTypes) {
         super(container);
+        this.width = width;
+        this.height = height;
+        this.background = background;
+        this.energyX = energyX;
+        this.energyY = energyY;
+        this.energySpace = energySpace;
+        this.energyTextureX = energyTextureX;
+        this.energyTextureY = energyTextureY;
         this.tileEntity = tileEntity;
-        xSize = WIDTH;
-        ySize = HEIGHT;
+        this.energyTypes = energyTypes;
+        xSize = width;
+		ySize = height;
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    	//draw background
+    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        if(tileEntity.getCurrentProgress() > 0) {
-        	float scaledProgressFactor = ((float) tileEntity.getCurrentProgress() / tileEntity.getMaxProgress());
-        	int scaledProgressBar = (int) (scaledProgressFactor * progressBarLength);
-        	if(progressBarCounter == progressBarMaxCounter) {
-        		if(progressBarTexture == progressBarTextures-1) {
-        			progressBarTexture = 0;
-        		} else {
-        			progressBarTexture++;
-        		}
-        		progressBarCounter = 0;
-        	}
-        	drawTexturedModalRect(guiLeft + 10, guiTop + 16, 0, 170 + progressBarTexture * 5, scaledProgressBar, 4);
-        	progressBarCounter++;
+        
+        //draw energy
+        for(int i = 0; i < energyTypes.length; i++) {
+        	float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy(energyTypes[i]) / tileEntity.getMaxEnergy(energyTypes[i]));
+        	int scaledEnergyHeight = (int) (scaledEnergyFactor * ENERGY_HEIGHT);
+        	int scaledEnergyY = (int) (energyY + (ENERGY_HEIGHT - scaledEnergyHeight));
+        	int scaledEnergyTexture = (int) (energyTextureY + (ENERGY_HEIGHT - scaledEnergyHeight));
+        	drawTexturedModalRect(guiLeft + energyX + i * (ENERGY_WIDTH + energySpace), guiTop + scaledEnergyY, energyTextureX + ENERGY_WIDTH * i, scaledEnergyTexture, ENERGY_WIDTH, scaledEnergyHeight);
         }
     }
     
@@ -61,5 +71,14 @@ public class GuiEnergyAcceptor extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	renderHoveredToolTip(mouseX, mouseY);
+    	drawEnergyTooltips(mouseX, mouseY);
+    }
+    
+    private void drawEnergyTooltips(int x, int y) {
+    	for(int i = 0; i < energyTypes.length; i++) {
+    		if(x > guiLeft + energyX + ENERGY_WIDTH * i && x < guiLeft + energyX + ENERGY_WIDTH * (i + 1) && y > guiTop + energyY && y < guiTop + energyY + ENERGY_HEIGHT) {
+    			this.drawHoveringText(this.tileEntity.getToolTipString(energyTypes[i]), x, y, this.fontRenderer);
+    		}
+    	}
     }
 }
