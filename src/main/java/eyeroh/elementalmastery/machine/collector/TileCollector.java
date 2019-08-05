@@ -64,11 +64,4 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
 	}
 	
 	public abstract String getFileName();
-	
-	public ArrayList<String> getToolTipString() {
-		String result = this.currentEnergy[this.getType()] + "/" + this.getMaxEnergy(this.getType());
-		ArrayList<String> list = new ArrayList<String>();
-		list.add(result);
-		return list;
-	}
 }

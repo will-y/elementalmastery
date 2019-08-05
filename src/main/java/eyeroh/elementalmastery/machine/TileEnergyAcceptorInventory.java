@@ -1,5 +1,7 @@
 package eyeroh.elementalmastery.machine;
 
+import java.util.ArrayList;
+
 import javax.annotation.Nonnull;
 
 import eyeroh.elementalmastery.machine.collector.TileCollector;
@@ -73,5 +75,4 @@ public abstract class TileEnergyAcceptorInventory extends TileEnergyAcceptor {
     public ItemStackHandler getItemStackHandler() {
 		return itemStackHandler;
 	}
-
 }

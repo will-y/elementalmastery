@@ -6,7 +6,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class CoreCrafterGui extends GuiContainer {
+public class CoreCrafterGui extends GuiEnergyAcceptor {
 	public static final int WIDTH = 172;
 	public static final int HEIGHT = 182;
 	public TileEnergyCoreCrafter tileEntity;
@@ -59,7 +59,7 @@ public class CoreCrafterGui extends GuiContainer {
 	private int maxProgress;
 	
 	public CoreCrafterGui(TileEnergyCoreCrafter tileEntity, CoreCrafterContainer container, ResourceLocation resource) {
-		super(container);
+		super(tileEntity, container, WIDTH, HEIGHT, resource, GUI_ENERGY_X, GUI_ENERGY_Y, GUI_ENERGY_SPACE, ENERGY_X, ENERGY_Y, new int[] {0, 1, 2, 3});
 		this.tileEntity = tileEntity;
 		this.container = container;
 		this.background = resource;
@@ -70,18 +70,7 @@ public class CoreCrafterGui extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.getTextureManager().bindTexture(background);
-        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        
-        //draw energy
-        for(int i = 0; i < 4; i++) {
-        	float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy(i) / tileEntity.getMaxEnergy(i));
-        	int scaledEnergyHeight = (int) (scaledEnergyFactor * ENERGY_HEIGHT);
-        	int scaledEnergyY = (int) (GUI_ENERGY_Y + (ENERGY_HEIGHT - scaledEnergyHeight));
-        	int scaledEnergyTexture = (int) (ENERGY_Y + (ENERGY_HEIGHT - scaledEnergyHeight));
-        	drawTexturedModalRect(guiLeft + GUI_ENERGY_X + i * (ENERGY_WIDTH + GUI_ENERGY_SPACE), guiTop + scaledEnergyY, ENERGY_X + ENERGY_WIDTH * i, scaledEnergyTexture, ENERGY_WIDTH, scaledEnergyHeight);
-        }
+		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
         //draw progress
         int progress = tileEntity.getCurrentProgress();
         float progressPercentage = ((float)progress / maxProgress) * 100;

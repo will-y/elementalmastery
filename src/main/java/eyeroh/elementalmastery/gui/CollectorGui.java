@@ -9,7 +9,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class CollectorGui extends GuiContainer{
+public class CollectorGui extends GuiEnergyAcceptor {
 	public static final int WIDTH = 176;
     public static final int HEIGHT = 166;
     public TileCollector tileEntity;
@@ -31,7 +31,7 @@ public class CollectorGui extends GuiContainer{
     private int progressBarTextures = 4;
     
     public CollectorGui(TileCollector tileEntity, CollectorContainer container, ResourceLocation resourceLocation) {
-        super(container);
+        super(tileEntity, container, WIDTH, HEIGHT, resourceLocation, 161, energyBarY, 1, 176, energyBarTextureY, new int[] {tileEntity.getType()});
         this.tileEntity = tileEntity;
         this.container = container;
         xSize = WIDTH;
@@ -41,18 +41,18 @@ public class CollectorGui extends GuiContainer{
     
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.getTextureManager().bindTexture(background);
-        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        if(tileEntity.getCurrentEnergy() > 0) {
-        	float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy() / tileEntity.getMaxEnergy());
-        	//System.out.println(tileEntity.getCurrentEnergy() + ", " + scaledEnergyFactor);
-        	int scaledEnergyHeight = (int) (scaledEnergyFactor * energyBarHeight);
-        	int scaledEnergyY = (int) (energyBarY + (energyBarHeight - scaledEnergyHeight));
-        	int scaledEnergyTexture = (int) (energyBarTextureY + (energyBarHeight - scaledEnergyHeight));
-        	//drawTexturedModalRect(guiLeft + 158, guiTop + 6, 158, 6, 10, energyBarHeight);
-        	drawTexturedModalRect(guiLeft + 161, guiTop + scaledEnergyY, 176, scaledEnergyTexture, 10, scaledEnergyHeight);
-        }
+    	super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+//    	GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+//        mc.getTextureManager().bindTexture(background);
+//        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+//        if(tileEntity.getCurrentEnergy() > 0) {
+//        	float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy() / tileEntity.getMaxEnergy());
+//        	int scaledEnergyHeight = (int) (scaledEnergyFactor * energyBarHeight);
+//        	int scaledEnergyY = (int) (energyBarY + (energyBarHeight - scaledEnergyHeight));
+//        	int scaledEnergyTexture = (int) (energyBarTextureY + (energyBarHeight - scaledEnergyHeight));
+//        	drawTexturedModalRect(guiLeft + 161, guiTop + scaledEnergyY, 176, scaledEnergyTexture, 10, scaledEnergyHeight);
+//        }
+    	
         if(tileEntity.getCurrentProgress() > 0) {
         	float scaledProgressFactor = ((float) tileEntity.getCurrentProgress() / tileEntity.getMaxProgress());
         	int scaledProgressBar = (int) (scaledProgressFactor * progressBarLength);
@@ -81,14 +81,13 @@ public class CollectorGui extends GuiContainer{
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     	super.drawScreen(mouseX, mouseY, partialTicks);
     	renderHoveredToolTip(mouseX, mouseY);
-    	drawEnergyTooltips(mouseX, mouseY);
     }
     
-    private void drawEnergyTooltips(int x, int y) {
-    	if(x > guiLeft + 161 && x < guiLeft + 171 && y > guiTop + energyBarY && y < guiTop + energyBarY + energyBarHeight) {
-    		
-            this.drawHoveringText(this.tileEntity.getToolTipString(), x, y, this.fontRenderer);
-    	}
-    	
-    }
+//    private void drawEnergyTooltips(int x, int y) {
+//    	if(x > guiLeft + 161 && x < guiLeft + 171 && y > guiTop + energyBarY && y < guiTop + energyBarY + energyBarHeight) {
+//    		
+//            this.drawHoveringText(this.tileEntity.getToolTipString(), x, y, this.fontRenderer);
+//    	}
+//    	
+//    }
 }

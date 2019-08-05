@@ -1,5 +1,7 @@
 package eyeroh.elementalmastery.machine;
 
+import java.util.ArrayList;
+
 import javax.annotation.Nullable;
 
 import com.google.common.primitives.Ints;
@@ -245,4 +247,11 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	public boolean canAcceptEnergy(int amount, int type) {
 		return this.currentEnergy[type] + amount <= this.getMaxEnergy(type);
 	}
+	
+	public ArrayList<String> getToolTipString(int type) {
+    	String result = this.currentEnergy[type] + "/" + this.getMaxEnergy(type);
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(result);
+		return list;
+    }
 }
