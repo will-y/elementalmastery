@@ -1,19 +1,19 @@
-package eyeroh.elementalmastery.machine.crafting;
+package eyeroh.elementalmastery.machine.miner;
 
 import eyeroh.elementalmastery.machine.BlockEnergyAcceptor;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockCoreCrafter extends BlockEnergyAcceptor {
+public class BlockMiner extends BlockEnergyAcceptor {
 
-	public BlockCoreCrafter() {
-		super("corecrafter", 0, 0);
+	public BlockMiner() {
+		super("miner", 0, 0);
 	}
 	
 	@Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEnergyCoreCrafter();
+        return new TileMiner();
     }
 
 }

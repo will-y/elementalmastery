@@ -49,6 +49,8 @@ import eyeroh.elementalmastery.machine.crafting.BlockCoreCrafter;
 import eyeroh.elementalmastery.machine.crafting.TileEnergyCoreCrafter;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
+import eyeroh.elementalmastery.machine.miner.BlockMiner;
+import eyeroh.elementalmastery.machine.miner.TileMiner;
 import eyeroh.elementalmastery.mob.ModEntities;
 import eyeroh.elementalmastery.world.OreGen;
 import net.minecraft.block.Block;
@@ -136,6 +138,10 @@ public class CommonProxy {
     	//Energy Core Crafter
     	event.getRegistry().register(new BlockCoreCrafter());
     	GameRegistry.registerTileEntity(TileEnergyCoreCrafter.class, new ResourceLocation(ElementalMastery.MODID + "_corecrafter"));
+    	
+    	//Miner
+    	event.getRegistry().register(new BlockMiner());
+    	GameRegistry.registerTileEntity(TileMiner.class, new ResourceLocation(ElementalMastery.MODID + "_miner"));
     }
 
     @SubscribeEvent
@@ -177,6 +183,8 @@ public class CommonProxy {
     	event.getRegistry().register(new ItemBlock(ModMachines.generatorSapphire).setRegistryName(ModMachines.generatorSapphire.getRegistryName()));
     	
     	event.getRegistry().register(new ItemBlock(ModMachines.coreCrafter).setRegistryName(ModMachines.coreCrafter.getRegistryName()));
+    	
+    	event.getRegistry().register(new ItemBlock(ModMachines.miner).setRegistryName(ModMachines.miner.getRegistryName()));
     	
     	
     	//Items

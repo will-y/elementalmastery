@@ -1,12 +1,12 @@
 package eyeroh.elementalmastery.machine;
 
-import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.collector.CollectorBlock;
 import eyeroh.elementalmastery.machine.collector.CollectorFire;
 import eyeroh.elementalmastery.machine.collector.CollectorHeal;
 import eyeroh.elementalmastery.machine.collector.CollectorSpeed;
 import eyeroh.elementalmastery.machine.collector.CollectorStrength;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
+import eyeroh.elementalmastery.machine.miner.BlockMiner;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -46,6 +46,9 @@ public class ModMachines {
 	@GameRegistry.ObjectHolder("elementalmastery:corecrafter")
 	public static BlockEnergyAcceptor coreCrafter;
 	
+	@GameRegistry.ObjectHolder("elementalmastery:miner")
+	public static BlockMiner miner;
+	
 	public static void initModels() {
 		collectorBasic.initModel();
 		
@@ -60,5 +63,7 @@ public class ModMachines {
 		collectorStrength.initModel();
 		
 		coreCrafter.initModel();
+		
+		miner.initModel();
 	}
 }

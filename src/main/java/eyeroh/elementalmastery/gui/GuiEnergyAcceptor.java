@@ -76,7 +76,7 @@ public class GuiEnergyAcceptor extends GuiContainer {
     
     private void drawEnergyTooltips(int x, int y) {
     	for(int i = 0; i < energyTypes.length; i++) {
-    		if(x > guiLeft + energyX + ENERGY_WIDTH * i && x < guiLeft + energyX + ENERGY_WIDTH * (i + 1) && y > guiTop + energyY && y < guiTop + energyY + ENERGY_HEIGHT) {
+    		if(x >= guiLeft + energyX + (ENERGY_WIDTH + energySpace) * i && x < guiLeft + energyX + (ENERGY_WIDTH + energySpace) * (i + 1) && y >= guiTop + energyY && y < guiTop + energyY + ENERGY_HEIGHT) {
     			this.drawHoveringText(this.tileEntity.getToolTipString(energyTypes[i]), x, y, this.fontRenderer);
     		}
     	}
