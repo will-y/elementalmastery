@@ -39,6 +39,7 @@ public class ModBlocks {
 	@GameRegistry.ObjectHolder("elementalmastery:oresapphire")
 	public static OreBlock oresapphire;
 	
+	// Capacitor stuff
 	@GameRegistry.ObjectHolder("elementalmastery:capacitorwall")
 	public static GemBlock capacitorWall;
 	@GameRegistry.ObjectHolder("elementalmastery:capacitorcontroller")
@@ -57,9 +58,15 @@ public class ModBlocks {
 	@GameRegistry.ObjectHolder("elementalmastery:capacitormulti")
 	public static GemBlock capacitorMulti;
 	
-	//Machines
-	
-	
+	// Miner Upgrades
+	@GameRegistry.ObjectHolder("elementalmastery:upgradespeed")
+	public static UpgradeBlock upgradeSpeed;
+	@GameRegistry.ObjectHolder("elementalmastery:upgradefire")
+	public static UpgradeBlock upgradeFire;
+	@GameRegistry.ObjectHolder("elementalmastery:upgradeheal")
+	public static UpgradeBlock upgradeHeal;
+	@GameRegistry.ObjectHolder("elementalmastery:upgradestrength")
+	public static UpgradeBlock upgradeStrength;
 
 	public static void initModels() {
 		//Gem Blocks
@@ -84,6 +91,10 @@ public class ModBlocks {
 		capacitorSapphire.initModel();
 		capacitorMulti.initModel();
 		
+		upgradeSpeed.initModel();
+		upgradeFire.initModel();
+		upgradeHeal.initModel();
+		upgradeStrength.initModel();
 		
 	}
 }

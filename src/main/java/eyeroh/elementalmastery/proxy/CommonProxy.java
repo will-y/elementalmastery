@@ -6,6 +6,7 @@ import eyeroh.elementalmastery.block.BlockCapacitorGlass;
 import eyeroh.elementalmastery.block.GemBlock;
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.block.OreBlock;
+import eyeroh.elementalmastery.block.UpgradeBlock;
 import eyeroh.elementalmastery.item.GemItem;
 import eyeroh.elementalmastery.item.GemShinyItem;
 import eyeroh.elementalmastery.item.armor.GemArmor;
@@ -142,6 +143,12 @@ public class CommonProxy {
     	//Miner
     	event.getRegistry().register(new BlockMiner());
     	GameRegistry.registerTileEntity(TileMiner.class, new ResourceLocation(ElementalMastery.MODID + "_miner"));
+    	
+    	// Miner Upgrades
+    	event.getRegistry().register(new UpgradeBlock("upgradespeed", 0));
+    	event.getRegistry().register(new UpgradeBlock("upgradefire", 1));
+    	event.getRegistry().register(new UpgradeBlock("upgradeheal", 2));
+    	event.getRegistry().register(new UpgradeBlock("upgradestrength", 3));
     }
 
     @SubscribeEvent
@@ -186,6 +193,11 @@ public class CommonProxy {
     	
     	event.getRegistry().register(new ItemBlock(ModMachines.miner).setRegistryName(ModMachines.miner.getRegistryName()));
     	
+    	// Miner Upgrades
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeSpeed).setRegistryName(ModBlocks.upgradeSpeed.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeFire).setRegistryName(ModBlocks.upgradeFire.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeHeal).setRegistryName(ModBlocks.upgradeHeal.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeStrength).setRegistryName(ModBlocks.upgradeStrength.getRegistryName()));
     	
     	//Items
     	event.getRegistry().register(new GemItem("gemopal"));
