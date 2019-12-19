@@ -101,7 +101,7 @@ public class CommonProxy {
     	//Capcitor Blocks
     	event.getRegistry().register(new GemBlock("capacitorwall"));
     	event.getRegistry().register(new BlockCapacitorController());
-    	GameRegistry.registerTileEntity(TileEntityCapacitorController.class, ElementalMastery.MODID + "_capacitorcontroller");
+    	GameRegistry.registerTileEntity(TileEntityCapacitorController.class, new ResourceLocation(ElementalMastery.MODID + "_capacitorcontroller"));
     	event.getRegistry().register(new BlockCapacitorGlass());
     	
     	event.getRegistry().register(new GemBlock("capacitoropal"));
@@ -114,24 +114,24 @@ public class CommonProxy {
     	
     	//Collectors
     	event.getRegistry().register(new CollectorBlock("basic", 4));
-    	GameRegistry.registerTileEntity(CollectorBasicTileEntity.class, ElementalMastery.MODID + "_collector");
+    	GameRegistry.registerTileEntity(CollectorBasicTileEntity.class, new ResourceLocation(ElementalMastery.MODID + "_collector"));
     	
     	event.getRegistry().register(new CollectorSpeed());
-    	GameRegistry.registerTileEntity(TileCollectorSpeed.class, ElementalMastery.MODID + "_collectorspeed");
+    	GameRegistry.registerTileEntity(TileCollectorSpeed.class, new ResourceLocation(ElementalMastery.MODID + "_collectorspeed"));
     	
     	event.getRegistry().register(new CollectorFire());
-    	GameRegistry.registerTileEntity(TileCollectorFire.class, ElementalMastery.MODID + "_collectorfire");
+    	GameRegistry.registerTileEntity(TileCollectorFire.class, new ResourceLocation(ElementalMastery.MODID + "_collectorfire"));
     	   	
     	event.getRegistry().register(new CollectorStrength());
-    	GameRegistry.registerTileEntity(TileCollectorStrength.class, ElementalMastery.MODID + "_collectorstrength");
+    	GameRegistry.registerTileEntity(TileCollectorStrength.class, new ResourceLocation(ElementalMastery.MODID + "_collectorstrength"));
     	
     	event.getRegistry().register(new CollectorHeal());
-    	GameRegistry.registerTileEntity(TileCollectorHeal.class, ElementalMastery.MODID + "_collectorheal");
+    	GameRegistry.registerTileEntity(TileCollectorHeal.class, new ResourceLocation(ElementalMastery.MODID + "_collectorheal"));
     	
     	
     	//Generators
     	event.getRegistry().register(new GeneratorBlock("opal", 0));
-    	GameRegistry.registerTileEntity(GeneratorTileEntity.class, ElementalMastery.MODID + "_generatorbasic");
+    	GameRegistry.registerTileEntity(GeneratorTileEntity.class, new ResourceLocation(ElementalMastery.MODID + "_generatorbasic"));
     	event.getRegistry().register(new GeneratorBlock("topaz", 1));
     	event.getRegistry().register(new GeneratorBlock("ruby", 2));
     	event.getRegistry().register(new GeneratorBlock("sapphire", 3));
