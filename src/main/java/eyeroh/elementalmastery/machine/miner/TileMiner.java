@@ -1,5 +1,7 @@
 package eyeroh.elementalmastery.machine.miner;
 
+import java.util.Arrays;
+
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,6 +22,8 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private int maxY;
 	private boolean done = false;
 	private boolean on = false;
+	// stores the upgrade counts
+	private int[] upgradeCount = new int[] {0, 0, 0, 0};
 	
 	public TileMiner() {
 		super(new int[] {20000, 20000, 20000, 20000}, new int[] {0, 0, 0, 0}, 10, 5);
@@ -123,5 +127,9 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	
 	public boolean getOn() {
 		return on;
+	}
+	
+	public void changeUpgrades(int[] newUpgrades) {
+		upgradeCount = newUpgrades;
 	}
 }

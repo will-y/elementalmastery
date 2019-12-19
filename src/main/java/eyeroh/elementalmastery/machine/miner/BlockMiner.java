@@ -1,11 +1,10 @@
 package eyeroh.elementalmastery.machine.miner;
 
+import eyeroh.elementalmastery.block.UpgradeBlock;
 import eyeroh.elementalmastery.machine.BlockEnergyAcceptor;
-import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -24,10 +23,46 @@ public class BlockMiner extends BlockEnergyAcceptor {
     }
 	
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		TileMiner miner = (TileMiner) worldIn.getTileEntity(pos);
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		TileMiner miner = (TileMiner) world.getTileEntity(pos);
 		
-		miner.setOn(worldIn.isBlockPowered(pos));
+		miner.setOn(world.isBlockPowered(pos));
+		
+		int[] upgrades = new int[] {0, 0, 0, 0};
+		
+		BlockPos temp = pos;
+		
+		temp = pos.add(1, 0, 0);
+		if(world.getBlockState(temp).getBlock() instanceof UpgradeBlock) {
+			upgrades[((UpgradeBlock) (world.getBlockState(temp).getBlock())).getType()]++;
+		}
+		
+		temp = pos.add(-1, 0, 0);
+		if(world.getBlockState(temp).getBlock() instanceof UpgradeBlock) {
+			upgrades[((UpgradeBlock) (world.getBlockState(temp).getBlock())).getType()]++;
+		}
+		
+		temp = pos.add(0, 1, 0);
+		if(world.getBlockState(temp).getBlock() instanceof UpgradeBlock) {
+			upgrades[((UpgradeBlock) (world.getBlockState(temp).getBlock())).getType()]++;
+		}
+		
+		temp = pos.add(0, -1, 0);
+		if(world.getBlockState(temp).getBlock() instanceof UpgradeBlock) {
+			upgrades[((UpgradeBlock) (world.getBlockState(temp).getBlock())).getType()]++;
+		}
+		
+		temp = pos.add(0, 0, 1);
+		if(world.getBlockState(temp).getBlock() instanceof UpgradeBlock) {
+			upgrades[((UpgradeBlock) (world.getBlockState(temp).getBlock())).getType()]++;
+		}
+		
+		temp = pos.add(0, 0, -1);
+		if(world.getBlockState(temp).getBlock() instanceof UpgradeBlock) {
+			upgrades[((UpgradeBlock) (world.getBlockState(temp).getBlock())).getType()]++;
+		}
+		
+		miner.changeUpgrades(upgrades);
     }
 	
 	@Override
