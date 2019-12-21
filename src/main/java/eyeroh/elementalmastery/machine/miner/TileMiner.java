@@ -47,11 +47,6 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 			return false;
 		}
 	}
-
-	@Override
-	public void onLoad() {
-		super.onLoad();
-	}
 	
 	@Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -93,12 +88,21 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	protected void calculateValues() {
 		Chunk currentChunk = this.getWorld().getChunkFromBlockCoords(this.pos);
 		ChunkPos pos = currentChunk.getPos();
-		minX = pos.getXStart();
-		maxX = pos.getXEnd();
-		minZ = pos.getZStart();
-		maxZ = pos.getZEnd();
+		ChunkPos topRight = this.getWorld().getChunkFromChunkCoords(pos.x + upgradeCount[3], pos.z + upgradeCount[3]).getPos();
+		ChunkPos bottomLeft = this.getWorld().getChunkFromChunkCoords(pos.x - upgradeCount[3], pos.z - upgradeCount[3]).getPos();
+		
+		
+		minX = bottomLeft.getXStart();
+		minZ = bottomLeft.getZStart();
+		maxX = topRight.getXEnd();
+		maxZ = topRight.getZEnd();
+		
+		
 		maxY = this.pos.getY() - 1;
 		minY = 0;
+	}
+	
+	protected void setCurrents() {
 		currentX = minX;
 		currentY = maxY;
 		currentZ = minZ;

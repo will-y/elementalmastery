@@ -63,11 +63,13 @@ public class BlockMiner extends BlockEnergyAcceptor {
 		}
 		
 		miner.changeUpgrades(upgrades);
+		miner.calculateValues();
     }
 	
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		TileMiner miner = (TileMiner) worldIn.getTileEntity(pos);
 		miner.calculateValues();
+		miner.setCurrents();
 	}
 }
