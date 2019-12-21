@@ -12,7 +12,9 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.chunk.Chunk;
 
 public class TileMiner extends TileEnergyAcceptorInventory {
-
+	
+	private static final int baseProgress = 13;
+	
 	private int currentX;
 	private int currentZ;
 	private int currentY;
@@ -28,7 +30,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private int[] upgradeCount = new int[] {0, 0, 0, 0};
 	
 	public TileMiner() {
-		super(new int[] {20000, 20000, 20000, 20000}, new int[] {0, 0, 0, 0}, 10, 5);
+		super(new int[] {20000, 20000, 20000, 20000}, new int[] {0, 0, 0, 0}, 10, baseProgress);
 	}
 
 	@Override
@@ -148,5 +150,6 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	
 	public void changeUpgrades(int[] newUpgrades) {
 		upgradeCount = newUpgrades;
+		this.setMaxProgress(baseProgress - upgradeCount[0] * 2);
 	}
 }

@@ -257,4 +257,8 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		list.add(result);
 		return list;
     }
+	
+	public void setMaxProgress(int max) {
+		this.maxProgress = max;
+	}
 }
