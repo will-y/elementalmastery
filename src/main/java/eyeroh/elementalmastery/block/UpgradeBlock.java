@@ -26,7 +26,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class UpgradeBlock extends Block {
-
+	// opal 0
+	// topaz 1
+	// ruby 2
+	// sapphire 3
 	private int type;
 	
 	public UpgradeBlock(String name, int type) {

@@ -98,7 +98,7 @@ public class CommonProxy {
     	event.getRegistry().register(new OreBlock("oreruby"));
     	event.getRegistry().register(new OreBlock("oresapphire"));
     	
-    	//Capcitor Blocks
+    	//Capacitor Blocks
     	event.getRegistry().register(new GemBlock("capacitorwall"));
     	event.getRegistry().register(new BlockCapacitorController());
     	GameRegistry.registerTileEntity(TileEntityCapacitorController.class, new ResourceLocation(ElementalMastery.MODID + "_capacitorcontroller"));

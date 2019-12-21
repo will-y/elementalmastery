@@ -3,6 +3,8 @@ package eyeroh.elementalmastery.machine.miner;
 import java.util.Arrays;
 
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -62,7 +64,12 @@ public class TileMiner extends TileEnergyAcceptorInventory {
         maxY = compound.getInteger("maxY");
         maxZ = compound.getInteger("maxZ");
         on = compound.getBoolean("on");
-        System.out.println("X: " + currentX + " Y: " + currentY + " Z: " + currentZ);
+        if (compound.hasKey("upgrades")) {
+        	upgradeCount = compound.getIntArray("upgrades");
+        } else {
+        	upgradeCount = new int[] {0, 0, 0, 0};
+        }
+        
     }
 	
     @Override
@@ -77,6 +84,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
         compound.setInteger("maxY", maxY);
         compound.setInteger("maxZ", maxZ);
         compound.setBoolean("on", on);
+        compound.setIntArray("upgrades", upgradeCount);
         return super.writeToNBT(compound);
     }
 	
@@ -100,7 +108,16 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	}
 	
 	private void breakNextBlock() {
-		this.getWorld().destroyBlock(new BlockPos(currentX, currentY, currentZ), true);
+		try {
+			BlockPos pos = new BlockPos(currentX, currentY, currentZ);
+			this.getWorld().destroyBlock(pos, true);
+			if(upgradeCount[2] > 0) { 
+				this.getWorld().setBlockState(pos, Blocks.DIRT.getDefaultState());
+			}
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private void incrementValues() {
