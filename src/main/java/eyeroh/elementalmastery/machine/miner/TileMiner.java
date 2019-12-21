@@ -116,7 +116,10 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private void breakNextBlock() {
 		try {
 			BlockPos pos = new BlockPos(currentX, currentY, currentZ);
-			this.getWorld().destroyBlock(pos, true);
+			if (!this.getWorld().destroyBlock(pos, false)) {
+				this.incrementValues();
+				this.breakNextBlock();
+			}
 			if(upgradeCount[2] > 0) { 
 				this.getWorld().setBlockState(pos, Blocks.DIRT.getDefaultState());
 			}
