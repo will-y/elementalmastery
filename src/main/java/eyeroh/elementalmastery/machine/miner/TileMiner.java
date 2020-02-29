@@ -29,6 +29,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	// stores the upgrade counts
 	private int[] upgradeCount = new int[] {0, 0, 0, 0};
 	IInventory targetInventory;
+	ItemStack buffer;
 	
 	public TileMiner() {
 		super(new int[] {20000, 20000, 20000, 20000}, new int[] {0, 0, 0, 0}, 10, baseProgress);
@@ -42,10 +43,30 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	
 	@Override
 	public boolean getActive() {
-		if (!done && on) {
-			return super.getActive() && (targetInventory != null);
-		} else {
-			return false;
+		return !done && on && super.getActive() && (targetInventory != null);
+	}
+	
+	@Override
+	public void update() {
+		retrieveEnergy();
+		if(this.getActive()) {
+			this.useAllEnergy();
+			if(!world.isRemote) {
+				if(this.getCurrentProgress() >= this.getMaxProgress()) {
+					if(buffer == null) {
+						doAction();
+						this.setCurrentProgress(0);
+						markDirty();
+					} else {
+						if(this.insertItem(buffer, targetInventory)) {
+							buffer = null;
+						}
+						this.setCurrentProgress(0);
+						markDirty();
+					}
+				}
+				this.setCurrentProgress(this.getCurrentProgress() + 1);
+			}
 		}
 	}
 	
@@ -179,7 +200,8 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		this.targetInventory = inventory;
 	}
 	
-	private void insertItem(ItemStack item, IInventory inventory) {
+	//TODO: fix deleting items if stack is full
+	private boolean insertItem(ItemStack item, IInventory inventory) {
 		int size = inventory.getSizeInventory();
 		int stackSize = inventory.getInventoryStackLimit();
 		int insertSize = item.getCount();
@@ -187,23 +209,26 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		for (int i = 0; i < size; i++) {
 			if(inventory.isItemValidForSlot(i, item)) {
 				ItemStack chestStack = inventory.getStackInSlot(i);
-				if(ItemStack.areItemsEqual(item, chestStack) || chestStack.isEmpty()) {
-					int chestSize = chestStack.getCount();
+				int chestSize = chestStack.getCount();
+				if((ItemStack.areItemsEqual(item, chestStack) || chestStack.isEmpty()) && chestSize < stackSize) {
 					if(chestSize + insertSize <= stackSize) {
 						item.setCount(chestSize + insertSize);
 						inventory.setInventorySlotContents(i, item);
 						inventory.markDirty();
-						return;
+						return true;
 					} else {
 						item.setCount(stackSize);
 						inventory.setInventorySlotContents(i, item);
 						inventory.markDirty();
 						item.setCount(insertSize + chestSize - stackSize);
-						insertItem(item, inventory);
-						return;
+						return insertItem(item, inventory);
 					}
 				}
 			}
 		}
+		// deactivate here?
+		// some way to buffer an item?
+		buffer = item;
+		return false;
 	}
 }

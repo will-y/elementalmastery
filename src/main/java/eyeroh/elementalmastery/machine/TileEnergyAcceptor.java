@@ -189,8 +189,6 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 				currentProgress++;
 			}
 		}
-		
-		
 	}
 	
 	public void retrieveEnergy() {
