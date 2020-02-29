@@ -1,12 +1,12 @@
 package eyeroh.elementalmastery.machine.miner;
 
-import java.util.Arrays;
-
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.chunk.Chunk;
@@ -28,6 +28,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private boolean on = false;
 	// stores the upgrade counts
 	private int[] upgradeCount = new int[] {0, 0, 0, 0};
+	IInventory targetInventory;
 	
 	public TileMiner() {
 		super(new int[] {20000, 20000, 20000, 20000}, new int[] {0, 0, 0, 0}, 10, baseProgress);
@@ -42,7 +43,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	@Override
 	public boolean getActive() {
 		if (!done && on) {
-			return super.getActive();
+			return super.getActive() && (targetInventory != null);
 		} else {
 			return false;
 		}
@@ -116,12 +117,26 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private void breakNextBlock() {
 		try {
 			BlockPos pos = new BlockPos(currentX, currentY, currentZ);
-			if (!this.getWorld().destroyBlock(pos, false)) {
+			IBlockState state = world.getBlockState(pos);
+			float hardness = state.getBlockHardness(world, pos);
+			
+			if(hardness == -1.0F) {
 				this.incrementValues();
 				this.breakNextBlock();
-			}
-			if(upgradeCount[2] > 0) { 
-				this.getWorld().setBlockState(pos, Blocks.DIRT.getDefaultState());
+			} else {
+				NonNullList<ItemStack> drops = NonNullList.create();
+				state.getBlock().getDrops(drops, world, pos, state, 0);
+				if(!this.getWorld().destroyBlock(pos, false)) {
+					this.incrementValues();
+					this.breakNextBlock();
+				} else {
+					for(ItemStack stack : drops) {
+						this.insertItem(stack, targetInventory);
+					}
+					if(upgradeCount[2] > 0) { 
+						this.getWorld().setBlockState(pos, Blocks.DIRT.getDefaultState());
+					}
+				}
 			}
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
@@ -158,5 +173,37 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	public void changeUpgrades(int[] newUpgrades) {
 		upgradeCount = newUpgrades;
 		this.setMaxProgress(baseProgress - upgradeCount[0] * 2);
+	}
+	
+	public void setTargetInventory(IInventory inventory) {
+		this.targetInventory = inventory;
+	}
+	
+	private void insertItem(ItemStack item, IInventory inventory) {
+		int size = inventory.getSizeInventory();
+		int stackSize = inventory.getInventoryStackLimit();
+		int insertSize = item.getCount();
+		//System.out.println("Item: " + item.toString() + "size: " + size + "stackSize: " + stackSize + "insertSize: " + insertSize);
+		for (int i = 0; i < size; i++) {
+			if(inventory.isItemValidForSlot(i, item)) {
+				ItemStack chestStack = inventory.getStackInSlot(i);
+				if(ItemStack.areItemsEqual(item, chestStack) || chestStack.isEmpty()) {
+					int chestSize = chestStack.getCount();
+					if(chestSize + insertSize <= stackSize) {
+						item.setCount(chestSize + insertSize);
+						inventory.setInventorySlotContents(i, item);
+						inventory.markDirty();
+						return;
+					} else {
+						item.setCount(stackSize);
+						inventory.setInventorySlotContents(i, item);
+						inventory.markDirty();
+						item.setCount(insertSize + chestSize - stackSize);
+						insertItem(item, inventory);
+						return;
+					}
+				}
+			}
+		}
 	}
 }
