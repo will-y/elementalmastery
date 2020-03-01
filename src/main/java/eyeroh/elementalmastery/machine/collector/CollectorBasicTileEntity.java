@@ -150,7 +150,6 @@ public class CollectorBasicTileEntity extends TileEntity implements ITickable, I
 
 	@Override
 	public int getSizeInventory() {
-		System.out.println("getSizeInventory");
 		return this.SIZE;
 	}
 

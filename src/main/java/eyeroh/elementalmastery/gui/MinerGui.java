@@ -1,8 +1,10 @@
 package eyeroh.elementalmastery.gui;
 
+import java.awt.Color;
 import java.util.Random;
 
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
+import eyeroh.elementalmastery.machine.miner.TileMiner;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,7 +14,7 @@ public class MinerGui extends GuiEnergyAcceptor {
 	public static final int HEIGHT = 166;
 	
 	// values for moving pickaxe
-	public static final int PICK_X = 55;
+	public static final int PICK_X = 15;
 	public static final int PICK_Y = 35;
 	public static final int PICK_SIZE = 13;
 	public static final int PICK_TEXTURE_X = 176;
@@ -21,8 +23,8 @@ public class MinerGui extends GuiEnergyAcceptor {
 	public static final int PICK_RETURN_DELAY = 10;
 	
 	// values for the breaking block
-	public static final int BLOCK_X = 55;
-	public static final int BLOCK_Y = 65;
+	public static final int BLOCK_X = 15;
+	public static final int BLOCK_Y = 60;
 	public static final int BLOCK_SIZE = 16;
 	public static final int BLOCK_TEXTURE_X = 216;
 	public static final int BLOCK_TEXTURE_Y = 0;
@@ -32,7 +34,7 @@ public class MinerGui extends GuiEnergyAcceptor {
 	private boolean pickState = false;
 	private int counter = 0;
 	
-	public MinerGui(TileEnergyAcceptor tileEntity, Container container, ResourceLocation background) {
+	public MinerGui(TileMiner tileEntity, Container container, ResourceLocation background) {
 		super(tileEntity, container, WIDTH, HEIGHT, background, 128, 6, 1, 176, 0, new int[] {0, 1, 2, 3});
 	}
 	
@@ -65,6 +67,20 @@ public class MinerGui extends GuiEnergyAcceptor {
 		if(current == max) {
 			pickState = true;
 		}
-		
     }
+	
+	@Override
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+		
+		// draw blocks mined (maybe later)
+		//fontRenderer.drawString("Blocked Mined: " + ((TileMiner) tileEntity).getBlocksMined(), 45, 38, Color.darkGray.getRGB());
+		
+		// draw togo (maybe later)
+		// draw upgrades
+		fontRenderer.drawString(String.valueOf(((TileMiner) tileEntity).getUpgrades()[0]), 47, 17, Color.darkGray.getRGB());
+		fontRenderer.drawString(String.valueOf(((TileMiner) tileEntity).getUpgrades()[1]), 66, 17, Color.darkGray.getRGB());
+		fontRenderer.drawString(String.valueOf(((TileMiner) tileEntity).getUpgrades()[2]), 85, 17, Color.darkGray.getRGB());
+		fontRenderer.drawString(String.valueOf(((TileMiner) tileEntity).getUpgrades()[3]), 104, 17, Color.darkGray.getRGB());
+	}
 }

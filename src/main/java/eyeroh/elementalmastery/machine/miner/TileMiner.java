@@ -1,15 +1,19 @@
 package eyeroh.elementalmastery.machine.miner;
 
+import eyeroh.elementalmastery.block.UpgradeBlock;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileMiner extends TileEnergyAcceptorInventory {
 	
@@ -24,11 +28,12 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private int maxX;
 	private int maxZ;
 	private int maxY;
+	private int blocksMined = 0;
 	private boolean done = false;
 	private boolean on = false;
 	// stores the upgrade counts
 	private int[] upgradeCount = new int[] {0, 0, 0, 0};
-	IInventory targetInventory;
+	BlockPos targetInventoryPos;
 	ItemStack buffer;
 	
 	public TileMiner() {
@@ -43,7 +48,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	
 	@Override
 	public boolean getActive() {
-		return !done && on && super.getActive() && (targetInventory != null);
+		return !done && on && super.getActive() && (targetInventoryPos != null);
 	}
 	
 	@Override
@@ -58,6 +63,12 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 						this.setCurrentProgress(0);
 						markDirty();
 					} else {
+						TileEntity tile = world.getTileEntity(targetInventoryPos);
+						IInventory targetInventory = null;
+						
+						if (tile instanceof IInventory) {
+							targetInventory = (IInventory) tile;
+						}
 						if(this.insertItem(buffer, targetInventory)) {
 							buffer = null;
 						}
@@ -88,7 +99,10 @@ public class TileMiner extends TileEnergyAcceptorInventory {
         } else {
         	upgradeCount = new int[] {0, 0, 0, 0};
         }
-        
+        if (compound.hasKey("inventoryPos")) {
+        	targetInventoryPos = BlockPos.fromLong(compound.getLong("inventoryPos"));
+
+        }      
     }
 	
     @Override
@@ -104,6 +118,9 @@ public class TileMiner extends TileEnergyAcceptorInventory {
         compound.setInteger("maxZ", maxZ);
         compound.setBoolean("on", on);
         compound.setIntArray("upgrades", upgradeCount);
+        if (targetInventoryPos != null) {
+        	compound.setLong("inventoryPos", targetInventoryPos.toLong());
+        }
         return super.writeToNBT(compound);
     }
 	
@@ -141,7 +158,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 			IBlockState state = world.getBlockState(pos);
 			float hardness = state.getBlockHardness(world, pos);
 			
-			if(hardness == -1.0F) {
+			if(hardness == -1.0F || state.getBlock() instanceof UpgradeBlock) {
 				this.incrementValues();
 				this.breakNextBlock();
 			} else {
@@ -151,6 +168,14 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 					this.incrementValues();
 					this.breakNextBlock();
 				} else {
+					blocksMined++;
+					TileEntity tile = world.getTileEntity(targetInventoryPos);
+					IInventory targetInventory = null;
+					
+					if (tile instanceof IInventory) {
+						targetInventory = (IInventory) tile;
+					}
+					
 					for(ItemStack stack : drops) {
 						this.insertItem(stack, targetInventory);
 					}
@@ -196,11 +221,10 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		this.setMaxProgress(baseProgress - upgradeCount[0] * 2);
 	}
 	
-	public void setTargetInventory(IInventory inventory) {
-		this.targetInventory = inventory;
+	public void setTargetInventoryPos(BlockPos inventoryPos) {
+		this.targetInventoryPos = inventoryPos;
 	}
 	
-	//TODO: fix deleting items if stack is full
 	private boolean insertItem(ItemStack item, IInventory inventory) {
 		int size = inventory.getSizeInventory();
 		int stackSize = inventory.getInventoryStackLimit();
@@ -230,5 +254,23 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		// some way to buffer an item?
 		buffer = item;
 		return false;
+	}
+	
+	public int getTotalBlocks() {
+		return (maxX - minX) * (maxZ - minZ) * (maxY - minY);
+	}
+	
+	public int getBlocksMined() {
+		return blocksMined;
+	}
+	
+	@Override
+	public String getName() {
+		return "Miner";
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public int[] getUpgrades() {
+		return this.upgradeCount;
 	}
 }

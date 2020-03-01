@@ -1,5 +1,7 @@
 package eyeroh.elementalmastery.machine.miner;
 
+import java.util.Arrays;
+
 import eyeroh.elementalmastery.block.UpgradeBlock;
 import eyeroh.elementalmastery.machine.BlockEnergyAcceptor;
 import net.minecraft.block.Block;
@@ -44,15 +46,14 @@ public class BlockMiner extends BlockEnergyAcceptor {
 			if(block instanceof UpgradeBlock) {
 				upgrades[((UpgradeBlock) block).getType()]++;
 			} else if(entity instanceof IInventory) {
-				miner.setTargetInventory((IInventory) entity);
+				miner.setTargetInventoryPos(temp);
 				inventoryFound = true;
 			}
 		}
 		
 		if(!inventoryFound) {
-			miner.setTargetInventory(null);
+			miner.setTargetInventoryPos(null);
 		}
-		
 		miner.changeUpgrades(upgrades);
 		miner.calculateValues();
     }
