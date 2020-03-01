@@ -32,7 +32,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	ItemStack buffer;
 	
 	public TileMiner() {
-		super(new int[] {20000, 20000, 20000, 20000}, new int[] {0, 0, 0, 0}, 10, baseProgress);
+		super(new int[] {20000, 20000, 20000, 20000}, new int[] {5, 5, 5, 5}, 10, baseProgress);
 	}
 
 	@Override
