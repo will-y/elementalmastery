@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class BlockCoreCrafter extends BlockEnergyAcceptor {
 
 	public BlockCoreCrafter() {
-		super(new int[] {10000, 10000, 10000, 10000}, new int[] {100, 100, 100, 100}, "corecrafter", 0, 0);
+		super("corecrafter", 0, 0);
 	}
 	
 	@Override

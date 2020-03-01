@@ -23,7 +23,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class TileEnergyAcceptor extends TileEntity implements ITickable{
+public abstract class TileEnergyAcceptor extends TileEntity implements ITickable {
 	
 	public int[] currentEnergy = new int[] {0, 0, 0, 0};
 	public int[] storage;
@@ -140,6 +140,9 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		return Ints.max(storage);
 	}
 	
+	/*
+	 * Action that the machine does with it has enough energy to run
+	 */
 	public abstract void doAction();
 	
 	public boolean getActive() {
@@ -186,8 +189,6 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 				currentProgress++;
 			}
 		}
-		
-		
 	}
 	
 	public void retrieveEnergy() {
@@ -254,4 +255,8 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		list.add(result);
 		return list;
     }
+	
+	public void setMaxProgress(int max) {
+		this.maxProgress = max;
+	}
 }

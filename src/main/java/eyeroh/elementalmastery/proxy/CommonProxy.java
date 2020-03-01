@@ -6,6 +6,7 @@ import eyeroh.elementalmastery.block.BlockCapacitorGlass;
 import eyeroh.elementalmastery.block.GemBlock;
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.block.OreBlock;
+import eyeroh.elementalmastery.block.UpgradeBlock;
 import eyeroh.elementalmastery.item.GemItem;
 import eyeroh.elementalmastery.item.GemShinyItem;
 import eyeroh.elementalmastery.item.armor.GemArmor;
@@ -49,6 +50,8 @@ import eyeroh.elementalmastery.machine.crafting.BlockCoreCrafter;
 import eyeroh.elementalmastery.machine.crafting.TileEnergyCoreCrafter;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
+import eyeroh.elementalmastery.machine.miner.BlockMiner;
+import eyeroh.elementalmastery.machine.miner.TileMiner;
 import eyeroh.elementalmastery.mob.ModEntities;
 import eyeroh.elementalmastery.world.OreGen;
 import net.minecraft.block.Block;
@@ -95,10 +98,10 @@ public class CommonProxy {
     	event.getRegistry().register(new OreBlock("oreruby"));
     	event.getRegistry().register(new OreBlock("oresapphire"));
     	
-    	//Capcitor Blocks
+    	//Capacitor Blocks
     	event.getRegistry().register(new GemBlock("capacitorwall"));
     	event.getRegistry().register(new BlockCapacitorController());
-    	GameRegistry.registerTileEntity(TileEntityCapacitorController.class, ElementalMastery.MODID + "_capacitorcontroller");
+    	GameRegistry.registerTileEntity(TileEntityCapacitorController.class, new ResourceLocation(ElementalMastery.MODID + "_capacitorcontroller"));
     	event.getRegistry().register(new BlockCapacitorGlass());
     	
     	event.getRegistry().register(new GemBlock("capacitoropal"));
@@ -111,24 +114,24 @@ public class CommonProxy {
     	
     	//Collectors
     	event.getRegistry().register(new CollectorBlock("basic", 4));
-    	GameRegistry.registerTileEntity(CollectorBasicTileEntity.class, ElementalMastery.MODID + "_collector");
+    	GameRegistry.registerTileEntity(CollectorBasicTileEntity.class, new ResourceLocation(ElementalMastery.MODID + "_collector"));
     	
     	event.getRegistry().register(new CollectorSpeed());
-    	GameRegistry.registerTileEntity(TileCollectorSpeed.class, ElementalMastery.MODID + "_collectorspeed");
+    	GameRegistry.registerTileEntity(TileCollectorSpeed.class, new ResourceLocation(ElementalMastery.MODID + "_collectorspeed"));
     	
     	event.getRegistry().register(new CollectorFire());
-    	GameRegistry.registerTileEntity(TileCollectorFire.class, ElementalMastery.MODID + "_collectorfire");
+    	GameRegistry.registerTileEntity(TileCollectorFire.class, new ResourceLocation(ElementalMastery.MODID + "_collectorfire"));
     	   	
     	event.getRegistry().register(new CollectorStrength());
-    	GameRegistry.registerTileEntity(TileCollectorStrength.class, ElementalMastery.MODID + "_collectorstrength");
+    	GameRegistry.registerTileEntity(TileCollectorStrength.class, new ResourceLocation(ElementalMastery.MODID + "_collectorstrength"));
     	
     	event.getRegistry().register(new CollectorHeal());
-    	GameRegistry.registerTileEntity(TileCollectorHeal.class, ElementalMastery.MODID + "_collectorheal");
+    	GameRegistry.registerTileEntity(TileCollectorHeal.class, new ResourceLocation(ElementalMastery.MODID + "_collectorheal"));
     	
     	
     	//Generators
     	event.getRegistry().register(new GeneratorBlock("opal", 0));
-    	GameRegistry.registerTileEntity(GeneratorTileEntity.class, ElementalMastery.MODID + "_generatorbasic");
+    	GameRegistry.registerTileEntity(GeneratorTileEntity.class, new ResourceLocation(ElementalMastery.MODID + "_generatorbasic"));
     	event.getRegistry().register(new GeneratorBlock("topaz", 1));
     	event.getRegistry().register(new GeneratorBlock("ruby", 2));
     	event.getRegistry().register(new GeneratorBlock("sapphire", 3));
@@ -136,6 +139,16 @@ public class CommonProxy {
     	//Energy Core Crafter
     	event.getRegistry().register(new BlockCoreCrafter());
     	GameRegistry.registerTileEntity(TileEnergyCoreCrafter.class, new ResourceLocation(ElementalMastery.MODID + "_corecrafter"));
+    	
+    	//Miner
+    	event.getRegistry().register(new BlockMiner());
+    	GameRegistry.registerTileEntity(TileMiner.class, new ResourceLocation(ElementalMastery.MODID + "_miner"));
+    	
+    	// Miner Upgrades
+    	event.getRegistry().register(new UpgradeBlock("upgradespeed", 0));
+    	event.getRegistry().register(new UpgradeBlock("upgradefire", 1));
+    	event.getRegistry().register(new UpgradeBlock("upgradeheal", 2));
+    	event.getRegistry().register(new UpgradeBlock("upgradestrength", 3));
     }
 
     @SubscribeEvent
@@ -178,6 +191,13 @@ public class CommonProxy {
     	
     	event.getRegistry().register(new ItemBlock(ModMachines.coreCrafter).setRegistryName(ModMachines.coreCrafter.getRegistryName()));
     	
+    	event.getRegistry().register(new ItemBlock(ModMachines.miner).setRegistryName(ModMachines.miner.getRegistryName()));
+    	
+    	// Miner Upgrades
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeSpeed).setRegistryName(ModBlocks.upgradeSpeed.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeFire).setRegistryName(ModBlocks.upgradeFire.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeHeal).setRegistryName(ModBlocks.upgradeHeal.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeStrength).setRegistryName(ModBlocks.upgradeStrength.getRegistryName()));
     	
     	//Items
     	event.getRegistry().register(new GemItem("gemopal"));

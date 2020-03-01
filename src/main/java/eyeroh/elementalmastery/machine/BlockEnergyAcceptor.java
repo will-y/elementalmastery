@@ -29,7 +29,7 @@ public class BlockEnergyAcceptor extends Block implements ITileEntityProvider{
 	private int machineID = 0;
 	public int GUI_ID = 0;
 	
-	public BlockEnergyAcceptor(int[] storage, int[] usage, String name, int machineID, int GUI_ID) {
+	public BlockEnergyAcceptor(String name, int machineID, int GUI_ID) {
 		super(Material.IRON);
 		this.setHardness(3.0F);
 		this.setResistance(5.0F);

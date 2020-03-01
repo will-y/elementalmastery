@@ -6,6 +6,8 @@ import eyeroh.elementalmastery.gui.CapacitorGui;
 import eyeroh.elementalmastery.gui.CollectorGui;
 import eyeroh.elementalmastery.gui.CoreCrafterGui;
 import eyeroh.elementalmastery.gui.GeneratorGui;
+import eyeroh.elementalmastery.gui.MinerGui;
+import eyeroh.elementalmastery.machine.ContainerEnergyAcceptor;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicContainer;
 import eyeroh.elementalmastery.machine.collector.CollectorBasicTileEntity;
@@ -19,6 +21,7 @@ import eyeroh.elementalmastery.machine.crafting.CoreCrafterContainer;
 import eyeroh.elementalmastery.machine.crafting.TileEnergyCoreCrafter;
 import eyeroh.elementalmastery.machine.generator.GeneratorContainer;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
+import eyeroh.elementalmastery.machine.miner.TileMiner;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -45,6 +48,8 @@ public class GuiProxy implements IGuiHandler {
         	return new CollectorContainer(player.inventory, player.inventory, (TileCollector) te);
         } else if (te instanceof TileEnergyCoreCrafter) {
         	return new CoreCrafterContainer(player.inventory, player.inventory, (TileEnergyCoreCrafter) te);
+        } else if (te instanceof TileMiner) {
+        	return new ContainerEnergyAcceptor(player.inventory, player.inventory, (TileMiner) te);
         }
         return null;
     }
@@ -59,7 +64,6 @@ public class GuiProxy implements IGuiHandler {
         } else if (te instanceof GeneratorTileEntity) {
         	GeneratorTileEntity generatorTileEntity = (GeneratorTileEntity) te;
         	GeneratorContainer generatorContainer = new GeneratorContainer(player.inventory, player.inventory, generatorTileEntity);
-        	System.out.println("generator");
         	switch(generatorTileEntity.getType()) {
         	case 0:
         		return new GeneratorGui(generatorTileEntity, generatorContainer, new ResourceLocation(ElementalMastery.MODID, "textures/gui/generatoropal.png"));
@@ -89,6 +93,9 @@ public class GuiProxy implements IGuiHandler {
         } else if(te instanceof TileEnergyCoreCrafter) {
         	TileEnergyCoreCrafter tile = (TileEnergyCoreCrafter) te;
         	return new CoreCrafterGui(tile, new CoreCrafterContainer(player.inventory, player.inventory, tile), new ResourceLocation(ElementalMastery.MODID, "textures/gui/corecrafter.png"));
+        } else if(te instanceof TileMiner) {
+        	TileMiner miner = (TileMiner) te;
+        	return new MinerGui(miner, new ContainerEnergyAcceptor(player.inventory, player.inventory, miner), new ResourceLocation(ElementalMastery.MODID, "textures/gui/miner.png"));
         }
         return null;
     }
