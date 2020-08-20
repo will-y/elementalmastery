@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
@@ -177,7 +178,16 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 					}
 					
 					for(ItemStack stack : drops) {
-						this.insertItem(stack, targetInventory);
+						if (upgradeCount[1] > 0) {
+							ItemStack smelted = new ItemStack(FurnaceRecipes.instance().getSmeltingResult(stack).getItem());
+							if (!smelted.isEmpty()) {
+								this.insertItem(smelted, targetInventory);
+							} else {
+								this.insertItem(stack, targetInventory);
+							}
+						} else {
+							this.insertItem(stack, targetInventory);
+						}	
 					}
 					if(upgradeCount[2] > 0) { 
 						this.getWorld().setBlockState(pos, Blocks.DIRT.getDefaultState());

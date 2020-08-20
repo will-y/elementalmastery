@@ -181,6 +181,15 @@ tile.elementalmastery.generatortopaz.name=Topaz Generator
 tile.elementalmastery.generatorruby.name=Ruby Generator
 tile.elementalmastery.generatorsapphire.name=Sapphire Generator
 
+tile.elementalmastery.upgradespeed.name=Speed Upgrade
+tile.elementalmastery.upgradefire.name=Fire Upgrade
+tile.elementalmastery.upgradeheal.name=Heal Upgrade
+tile.elementalmastery.upgradestrength.name=Strength Upgrade
+
+tile.elementalmastery.miner.name=Quarry
+
+tile.elementalmastery.corecraftor.name=Core Crafter
+
 message.elementalmastery.farmer_mode=Mode Changed To: %d
 message.elementalmastery.capacitor_formed=%d
 message.elementalmastery.capacitor_amount=%d
