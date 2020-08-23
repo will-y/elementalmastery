@@ -38,35 +38,6 @@ public class ModBlocks {
 	public static OreBlock oreruby;
 	@GameRegistry.ObjectHolder("elementalmastery:oresapphire")
 	public static OreBlock oresapphire;
-	
-	// Capacitor stuff
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorwall")
-	public static GemBlock capacitorWall;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorcontroller")
-	public static BlockCapacitorController capacitorController;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorglass")
-	public static BlockCapacitorGlass capacitorGlass;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:capacitoropal")
-	public static GemBlock capacitorOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitortopaz")
-	public static GemBlock capacitorTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorruby")
-	public static GemBlock capacitorRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorsapphire")
-	public static GemBlock capacitorSapphire;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitormulti")
-	public static GemBlock capacitorMulti;
-	
-	// Miner Upgrades
-	@GameRegistry.ObjectHolder("elementalmastery:upgradespeed")
-	public static UpgradeBlock upgradeSpeed;
-	@GameRegistry.ObjectHolder("elementalmastery:upgradefire")
-	public static UpgradeBlock upgradeFire;
-	@GameRegistry.ObjectHolder("elementalmastery:upgradeheal")
-	public static UpgradeBlock upgradeHeal;
-	@GameRegistry.ObjectHolder("elementalmastery:upgradestrength")
-	public static UpgradeBlock upgradeStrength;
 
 	public static void initModels() {
 		//Gem Blocks
@@ -80,21 +51,6 @@ public class ModBlocks {
 		oretopaz.initModel();
 		oreruby.initModel();
 		oresapphire.initModel();
-		
-		capacitorWall.initModel();
-		capacitorController.initModel();
-		capacitorGlass.initModel();
-		
-		capacitorOpal.initModel();
-		capacitorTopaz.initModel();
-		capacitorRuby.initModel();
-		capacitorSapphire.initModel();
-		capacitorMulti.initModel();
-		
-		upgradeSpeed.initModel();
-		upgradeFire.initModel();
-		upgradeHeal.initModel();
-		upgradeStrength.initModel();
 		
 	}
 }

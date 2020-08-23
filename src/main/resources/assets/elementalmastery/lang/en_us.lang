@@ -204,5 +204,5 @@ entity.HealCreeper.name=Healing Creeper
 
 itemGroup.tabGemMachines=Elemental Mastery Machines
 itemGroup.tabGemTools=Elemental Mastery Tools
-itemGroup.tabGemItems=Elemental Mastery Tools
-itemGroup.tabGemBlocks=Elemental Mastery Tools
+itemGroup.tabGemItems=Elemental Mastery Items
+itemGroup.tabGemBlocks=Elemental Mastery Blocks

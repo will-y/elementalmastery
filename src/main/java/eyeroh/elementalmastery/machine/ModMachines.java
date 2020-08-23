@@ -1,5 +1,9 @@
 package eyeroh.elementalmastery.machine;
 
+import eyeroh.elementalmastery.block.BlockCapacitorGlass;
+import eyeroh.elementalmastery.block.GemBlock;
+import eyeroh.elementalmastery.block.UpgradeBlock;
+import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorBlock;
 import eyeroh.elementalmastery.machine.collector.CollectorFire;
 import eyeroh.elementalmastery.machine.collector.CollectorHeal;
@@ -17,7 +21,7 @@ public class ModMachines {
 
 		@Override
 		public ItemStack getTabIconItem() {
-			return new ItemStack(ModMachines.collectorSpeed);
+			return new ItemStack(ModMachines.capacitorController);
 		}
 		
 	});
@@ -48,6 +52,35 @@ public class ModMachines {
 	
 	@GameRegistry.ObjectHolder("elementalmastery:miner")
 	public static BlockMiner miner;
+
+	// Capacitor stuff
+	@GameRegistry.ObjectHolder("elementalmastery:capacitorwall")
+	public static GemBlock capacitorWall;
+	@GameRegistry.ObjectHolder("elementalmastery:capacitorcontroller")
+	public static BlockCapacitorController capacitorController;
+	@GameRegistry.ObjectHolder("elementalmastery:capacitorglass")
+	public static BlockCapacitorGlass capacitorGlass;
+
+	@GameRegistry.ObjectHolder("elementalmastery:capacitoropal")
+	public static GemBlock capacitorOpal;
+	@GameRegistry.ObjectHolder("elementalmastery:capacitortopaz")
+	public static GemBlock capacitorTopaz;
+	@GameRegistry.ObjectHolder("elementalmastery:capacitorruby")
+	public static GemBlock capacitorRuby;
+	@GameRegistry.ObjectHolder("elementalmastery:capacitorsapphire")
+	public static GemBlock capacitorSapphire;
+	@GameRegistry.ObjectHolder("elementalmastery:capacitormulti")
+	public static GemBlock capacitorMulti;
+
+	// Miner Upgrades
+	@GameRegistry.ObjectHolder("elementalmastery:upgradespeed")
+	public static UpgradeBlock upgradeSpeed;
+	@GameRegistry.ObjectHolder("elementalmastery:upgradefire")
+	public static UpgradeBlock upgradeFire;
+	@GameRegistry.ObjectHolder("elementalmastery:upgradeheal")
+	public static UpgradeBlock upgradeHeal;
+	@GameRegistry.ObjectHolder("elementalmastery:upgradestrength")
+	public static UpgradeBlock upgradeStrength;
 	
 	public static void initModels() {
 		collectorBasic.initModel();
@@ -65,5 +98,20 @@ public class ModMachines {
 		coreCrafter.initModel();
 		
 		miner.initModel();
+
+		capacitorWall.initModel();
+		capacitorController.initModel();
+		capacitorGlass.initModel();
+
+		capacitorOpal.initModel();
+		capacitorTopaz.initModel();
+		capacitorRuby.initModel();
+		capacitorSapphire.initModel();
+		capacitorMulti.initModel();
+
+		upgradeSpeed.initModel();
+		upgradeFire.initModel();
+		upgradeHeal.initModel();
+		upgradeStrength.initModel();
 	}
 }

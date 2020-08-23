@@ -6,6 +6,7 @@ import java.util.Arrays;
 import javax.management.NotificationBroadcaster;
 
 import eyeroh.elementalmastery.block.ModBlocks;
+import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import io.netty.channel.MaxBytesRecvByteBufAllocator;
 import net.minecraft.block.Block;
@@ -65,7 +66,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 							for(int z = -2; z < 1; z++) {
 								if(!(x==0 && y==0 && z==0)) {
 									if(!(z==-1 && x==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorGlass))) {
+										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
 											return false;
 										}
 									}
@@ -80,7 +81,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 							for(int z = 0; z < 3; z++) {
 								if(!(x==0 && y==0 && z==0)) {
 									if(!(z==1 && x==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorGlass))) {
+										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
 											return false;
 										}
 									}
@@ -97,7 +98,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 							for(int z = -1; z < 2; z++) {
 								if(!(x==0 && y==0 && z==0)) {
 									if(!(x==-1 && z==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorGlass))) {
+										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
 											return false;
 										}
 									}
@@ -112,7 +113,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 							for(int z = -1; z < 2; z++) {
 								if(!(x==0 && y==0 && z==0)) {
 									if(!(x==1 && z==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModBlocks.capacitorGlass))) {
+										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
 											return false;
 										}
 									}
@@ -146,15 +147,15 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 				block = world.getBlockState(this.pos.add(-1, 0, 0)).getBlock();
 			}
 		}
-		if(Block.isEqualTo(block, ModBlocks.capacitorOpal)) {
+		if(Block.isEqualTo(block, ModMachines.capacitorOpal)) {
 			this.energyMax[0] += 100000;
-		} else if(Block.isEqualTo(block, ModBlocks.capacitorTopaz)) {
+		} else if(Block.isEqualTo(block, ModMachines.capacitorTopaz)) {
 			this.energyMax[1] += 100000;
-		} else if(Block.isEqualTo(block, ModBlocks.capacitorRuby)) {
+		} else if(Block.isEqualTo(block, ModMachines.capacitorRuby)) {
 			this.energyMax[2] += 100000;
-		} else if(Block.isEqualTo(block, ModBlocks.capacitorSapphire)) {
+		} else if(Block.isEqualTo(block, ModMachines.capacitorSapphire)) {
 			this.energyMax[3] += 100000;
-		} else if(Block.isEqualTo(block,  ModBlocks.capacitorMulti)) {
+		} else if(Block.isEqualTo(block,  ModMachines.capacitorMulti)) {
 			this.energyMax[0] += 25000;
 			this.energyMax[1] += 25000;
 			this.energyMax[2] += 25000;

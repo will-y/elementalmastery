@@ -167,15 +167,15 @@ public class CommonProxy {
     	event.getRegistry().register(new ItemBlock(ModBlocks.oresapphire).setRegistryName(ModBlocks.oresapphire.getRegistryName()));
     	
     	//capacitor blocks
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorWall).setRegistryName(ModBlocks.capacitorWall.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorController).setRegistryName(ModBlocks.capacitorController.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorGlass).setRegistryName(ModBlocks.capacitorGlass.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorWall).setRegistryName(ModMachines.capacitorWall.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorController).setRegistryName(ModMachines.capacitorController.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorGlass).setRegistryName(ModMachines.capacitorGlass.getRegistryName()));
     	
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorOpal).setRegistryName(ModBlocks.capacitorOpal.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorTopaz).setRegistryName(ModBlocks.capacitorTopaz.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorRuby).setRegistryName(ModBlocks.capacitorRuby.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorSapphire).setRegistryName(ModBlocks.capacitorSapphire.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.capacitorMulti).setRegistryName(ModBlocks.capacitorMulti.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorOpal).setRegistryName(ModMachines.capacitorOpal.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorTopaz).setRegistryName(ModMachines.capacitorTopaz.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorRuby).setRegistryName(ModMachines.capacitorRuby.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorSapphire).setRegistryName(ModMachines.capacitorSapphire.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.capacitorMulti).setRegistryName(ModMachines.capacitorMulti.getRegistryName()));
     	
     	//Machines
     	event.getRegistry().register(new ItemBlock(ModMachines.collectorBasic).setRegistryName(ModMachines.collectorBasic.getRegistryName()));
@@ -194,10 +194,10 @@ public class CommonProxy {
     	event.getRegistry().register(new ItemBlock(ModMachines.miner).setRegistryName(ModMachines.miner.getRegistryName()));
     	
     	// Miner Upgrades
-    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeSpeed).setRegistryName(ModBlocks.upgradeSpeed.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeFire).setRegistryName(ModBlocks.upgradeFire.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeHeal).setRegistryName(ModBlocks.upgradeHeal.getRegistryName()));
-    	event.getRegistry().register(new ItemBlock(ModBlocks.upgradeStrength).setRegistryName(ModBlocks.upgradeStrength.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.upgradeSpeed).setRegistryName(ModMachines.upgradeSpeed.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.upgradeFire).setRegistryName(ModMachines.upgradeFire.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.upgradeHeal).setRegistryName(ModMachines.upgradeHeal.getRegistryName()));
+    	event.getRegistry().register(new ItemBlock(ModMachines.upgradeStrength).setRegistryName(ModMachines.upgradeStrength.getRegistryName()));
     	
     	//Items
     	event.getRegistry().register(new GemItem("gemopal"));

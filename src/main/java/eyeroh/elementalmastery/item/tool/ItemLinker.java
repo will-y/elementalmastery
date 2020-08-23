@@ -44,7 +44,7 @@ public class ItemLinker extends GemItem {
 			NBTTagCompound nbt = player.getHeldItem(hand).getTagCompound();
 			if(nbt != null) {
 				String toolTip = "No Block Linked";
-				if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModBlocks.capacitorController)) {
+				if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.capacitorController)) {
 					blockStored = pos;
 					toolTip = "Linked to Capacitor @ " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
 					TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.capacitor_selected", toolTip);
