@@ -364,6 +364,11 @@ public class CommonProxy {
     	event.getRegistry().register(new GemItem("nuggetsapphire"));
     	
     	event.getRegistry().register(new GemItem("smallheart"));
+
+    	event.getRegistry().register(new GemItem("cellopal"));
+		event.getRegistry().register(new GemItem("celltopaz"));
+		event.getRegistry().register(new GemItem("cellruby"));
+		event.getRegistry().register(new GemItem("cellsapphire"));
     	
     	event.getRegistry().register(new ItemLinker());
     }

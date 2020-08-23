@@ -103,6 +103,15 @@ public class ModItems {
 	@GameRegistry.ObjectHolder("elementalmastery:smallheart")
 	public static GemItem smallHeart;
 
+	@GameRegistry.ObjectHolder("elementalmastery:cellopal")
+	public static GemItem cellOpal;
+	@GameRegistry.ObjectHolder("elementalmastery:celltopaz")
+	public static GemItem cellTopaz;
+	@GameRegistry.ObjectHolder("elementalmastery:cellruby")
+	public static GemItem cellRuby;
+	@GameRegistry.ObjectHolder("elementalmastery:cellsapphire")
+	public static GemItem cellSapphire;
+
 	@SideOnly(Side.CLIENT)
 	public static void initModels() {
 		gemOpal.initModel();
@@ -144,5 +153,10 @@ public class ModItems {
 		nuggetSapphire.initModel();
 		
 		smallHeart.initModel();
+
+		cellOpal.initModel();
+		cellTopaz.initModel();
+		cellRuby.initModel();
+		cellSapphire.initModel();
 	}
 }

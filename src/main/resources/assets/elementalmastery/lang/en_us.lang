@@ -148,6 +148,11 @@ item.elementalmastery.nuggetsapphire.name=Sapphire Nugget
 
 item.elementalmastery.smallheart.name=Small Heart
 
+item.elementalmastery.cellopal.name=Opal Solar Cell
+item.elementalmastery.celltopaz.name=Topaz Solar Cell
+item.elementalmastery.cellruby.name=Ruby Solar Cell
+item.elementalmastery.cellsapphire.name=Sapphire Solar Cell
+
 item.elementalmastery.linker.name=Linking Tool
 
 tile.elementalmastery.blockopal.name=Opal Block
