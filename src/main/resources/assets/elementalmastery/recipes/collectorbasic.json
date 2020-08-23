@@ -4,8 +4,8 @@
     },
     "pattern": [
         "coc",
-        "s r",
-        "ctc" 
+        "s t",
+        "crc"
     ],
     "type": "forge:ore_shaped",
     "key": {

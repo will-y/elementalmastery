@@ -1,0 +1,31 @@
+{
+  "result": {
+    "item": "elementalmastery:corecrafter"
+  },
+  "pattern": [
+    "wow",
+    "srt",
+    "wuw"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "w": {
+      "item": "elementalmastery:capacitorwall"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "o": {
+      "item": "elementalmastery:gemopal"
+    },
+    "t": {
+      "item": "elementalmastery:gemtopaz"
+    },
+    "u": {
+      "item": "elementalmastery:gemruby"
+    },
+    "s": {
+      "item": "elementalmastery:gemsapphire"
+    }
+  }
+}
