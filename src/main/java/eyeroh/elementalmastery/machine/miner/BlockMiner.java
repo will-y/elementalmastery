@@ -36,9 +36,8 @@ public class BlockMiner extends BlockEnergyAcceptor {
 		
 		int[] upgrades = new int[] {0, 0, 0, 0};
 		
-		BlockPos temp = pos;
-		boolean inventoryFound = false;
-		
+		BlockPos temp;
+		miner.clearInventories();
 		for (Vec3i vec : positions) {
 			temp = pos.add(vec);
 			Block block = world.getBlockState(temp).getBlock();
@@ -46,13 +45,8 @@ public class BlockMiner extends BlockEnergyAcceptor {
 			if(block instanceof UpgradeBlock) {
 				upgrades[((UpgradeBlock) block).getType()]++;
 			} else if(entity instanceof IInventory) {
-				miner.setTargetInventoryPos(temp);
-				inventoryFound = true;
+				miner.addTargetInventoryPos(temp);
 			}
-		}
-		
-		if(!inventoryFound) {
-			miner.setTargetInventoryPos(null);
 		}
 		miner.changeUpgrades(upgrades);
 		miner.calculateValues();
