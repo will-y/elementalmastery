@@ -24,7 +24,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockEnergyAcceptor extends Block implements ITileEntityProvider{
+public class BlockEnergyAcceptor extends Block implements ITileEntityProvider {
 	
 	private int machineID = 0;
 	public int GUI_ID = 0;

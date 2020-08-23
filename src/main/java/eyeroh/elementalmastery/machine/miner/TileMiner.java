@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.miner;
 
 import eyeroh.elementalmastery.block.UpgradeBlock;
+import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -42,14 +43,19 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	Random rand = new Random();
 	
 	public TileMiner() {
-		super(new int[] {20000, 20000, 20000, 20000}, new int[] {5, 5, 5, 5}, 10, baseProgress);
+		super(new int[] {20000, 20000, 20000, 20000}, new int[] {5, 5, 5, 5}, 0, baseProgress);
 	}
 
 	@Override
 	public void doAction() {
 		breakNextBlock();
 	}
-	
+
+	@Override
+	public boolean isItemValid(int slot, ItemStack stack) {
+		return false;
+	}
+
 	@Override
 	public boolean getActive() {
 		return !done && on && super.getActive() && targetInventoryPos != null && (targetInventoryPos.size() != 0);
@@ -162,11 +168,6 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		currentX = minX;
 		currentY = maxY;
 		currentZ = minZ;
-	}
-	
-	@Override
-	public boolean isItemValid(int slot, ItemStack stack) {
-		return false;
 	}
 	
 	private void breakNextBlock() {
