@@ -9,6 +9,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -250,10 +252,6 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		this.setMaxProgress(baseProgress - upgradeCount[0] * 2);
 	}
 
-	public void clearTargetInventories() {
-		targetInventoryPos = new ArrayList<>();
-	}
-
 	public void addTargetInventoryPos(BlockPos inventoryPos) {
 		if (this.targetInventoryPos == null) {
 			targetInventoryPos = new ArrayList<>();
@@ -313,5 +311,22 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	@SideOnly(Side.CLIENT)
 	public int[] getUpgrades() {
 		return this.upgradeCount;
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		return writeToNBT(new NBTTagCompound());
+	}
+
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+		this.readFromNBT(packet.getNbtCompound());
 	}
 }

@@ -22,8 +22,7 @@ public class BlockMiner extends BlockEnergyAcceptor {
 	
 	@Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-		TileMiner miner = new TileMiner();
-        return miner;
+		return new TileMiner();
     }
 	
 	@Override
@@ -48,6 +47,7 @@ public class BlockMiner extends BlockEnergyAcceptor {
 		}
 		miner.changeUpgrades(upgrades);
 		miner.calculateValues();
+		world.notifyBlockUpdate(pos, state, state, 2);
     }
 	
 	@Override
