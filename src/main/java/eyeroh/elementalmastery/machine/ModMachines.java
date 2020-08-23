@@ -11,6 +11,7 @@ import eyeroh.elementalmastery.machine.collector.CollectorSpeed;
 import eyeroh.elementalmastery.machine.collector.CollectorStrength;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.miner.BlockMiner;
+import eyeroh.elementalmastery.machine.solar.BlockSolar;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -81,6 +82,16 @@ public class ModMachines {
 	public static UpgradeBlock upgradeHeal;
 	@GameRegistry.ObjectHolder("elementalmastery:upgradestrength")
 	public static UpgradeBlock upgradeStrength;
+
+	// Solars
+	@GameRegistry.ObjectHolder("elementalmastery:solaropal")
+	public static BlockSolar solarOpal;
+	@GameRegistry.ObjectHolder("elementalmastery:solartopaz")
+	public static BlockSolar solarTopaz;
+	@GameRegistry.ObjectHolder("elementalmastery:solarruby")
+	public static BlockSolar solarRuby;
+	@GameRegistry.ObjectHolder("elementalmastery:solarsapphire")
+	public static BlockSolar solarSapphire;
 	
 	public static void initModels() {
 		collectorBasic.initModel();
@@ -113,5 +124,10 @@ public class ModMachines {
 		upgradeFire.initModel();
 		upgradeHeal.initModel();
 		upgradeStrength.initModel();
+
+		solarOpal.initModel();
+		solarTopaz.initModel();
+		solarRuby.initModel();
+		solarSapphire.initModel();
 	}
 }
