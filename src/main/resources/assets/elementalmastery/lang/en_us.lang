@@ -188,7 +188,7 @@ tile.elementalmastery.upgradestrength.name=Strength Upgrade
 
 tile.elementalmastery.miner.name=Quarry
 
-tile.elementalmastery.corecraftor.name=Core Crafter
+tile.elementalmastery.corecrafter.name=Core Crafter
 
 message.elementalmastery.farmer_mode=Mode Changed To: %d
 message.elementalmastery.capacitor_formed=%d

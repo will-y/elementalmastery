@@ -1,10 +1,7 @@
 package eyeroh.elementalmastery.machine;
 
-import java.util.ArrayList;
-
 import javax.annotation.Nonnull;
 
-import eyeroh.elementalmastery.machine.collector.TileCollector;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery.machine.miner;
 
 import eyeroh.elementalmastery.block.UpgradeBlock;
+import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -8,6 +9,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +18,9 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class TileMiner extends TileEnergyAcceptorInventory {
 	
@@ -34,22 +40,31 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private boolean on = false;
 	// stores the upgrade counts
 	private int[] upgradeCount = new int[] {0, 0, 0, 0};
-	BlockPos targetInventoryPos;
+	ArrayList<BlockPos> targetInventoryPos;
 	ItemStack buffer;
+	Random rand = new Random();
 	
 	public TileMiner() {
-		super(new int[] {20000, 20000, 20000, 20000}, new int[] {5, 5, 5, 5}, 10, baseProgress);
+		super(new int[] {20000, 20000, 20000, 20000}, new int[] {50, 50, 50, 50}, 0, baseProgress);
 	}
 
 	@Override
 	public void doAction() {
 		breakNextBlock();
-		incrementValues();
 	}
-	
+
+	@Override
+	public boolean isItemValid(int slot, ItemStack stack) {
+		return false;
+	}
+
 	@Override
 	public boolean getActive() {
-		return !done && on && super.getActive() && (targetInventoryPos != null);
+		return !done && on && super.getActive() && targetInventoryPos != null && (targetInventoryPos.size() != 0);
+	}
+
+	public void clearInventories() {
+		targetInventoryPos = new ArrayList<>();
 	}
 	
 	@Override
@@ -59,23 +74,22 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 			this.useAllEnergy();
 			if(!world.isRemote) {
 				if(this.getCurrentProgress() >= this.getMaxProgress()) {
-					if(buffer == null) {
+					if (buffer == null) {
 						doAction();
-						this.setCurrentProgress(0);
-						markDirty();
 					} else {
-						TileEntity tile = world.getTileEntity(targetInventoryPos);
+						int index = rand.nextInt(targetInventoryPos.size());
+						TileEntity tile = world.getTileEntity(targetInventoryPos.get(index));
 						IInventory targetInventory = null;
 						
 						if (tile instanceof IInventory) {
 							targetInventory = (IInventory) tile;
 						}
-						if(this.insertItem(buffer, targetInventory)) {
+						if (this.insertItem(buffer, targetInventory)) {
 							buffer = null;
 						}
-						this.setCurrentProgress(0);
-						markDirty();
 					}
+					this.setCurrentProgress(0);
+					markDirty();
 				}
 				this.setCurrentProgress(this.getCurrentProgress() + 1);
 			}
@@ -100,9 +114,16 @@ public class TileMiner extends TileEnergyAcceptorInventory {
         } else {
         	upgradeCount = new int[] {0, 0, 0, 0};
         }
-        if (compound.hasKey("inventoryPos")) {
-        	targetInventoryPos = BlockPos.fromLong(compound.getLong("inventoryPos"));
-
+        if (compound.hasKey("container_amount")) {
+        	int containers = compound.getInteger("container_amount");
+			targetInventoryPos = new ArrayList<>();
+        	if (containers != 0) {
+				for (int i = 0; i < containers; i++) {
+					if (compound.hasKey("container" + i)) {
+						targetInventoryPos.add(BlockPos.fromLong(compound.getLong("container" + i)));
+					}
+				}
+			}
         }      
     }
 	
@@ -120,7 +141,10 @@ public class TileMiner extends TileEnergyAcceptorInventory {
         compound.setBoolean("on", on);
         compound.setIntArray("upgrades", upgradeCount);
         if (targetInventoryPos != null) {
-        	compound.setLong("inventoryPos", targetInventoryPos.toLong());
+        	compound.setInteger("container_amount", targetInventoryPos.size());
+        	for (int i = 0; i < targetInventoryPos.size(); i++) {
+        		compound.setLong("container" + i, targetInventoryPos.get(i).toLong());
+			}
         }
         return super.writeToNBT(compound);
     }
@@ -148,36 +172,30 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		currentZ = minZ;
 	}
 	
-	@Override
-	public boolean isItemValid(int slot, ItemStack stack) {
-		return false;
-	}
-	
 	private void breakNextBlock() {
 		try {
-			BlockPos pos = new BlockPos(currentX, currentY, currentZ);
-			IBlockState state = world.getBlockState(pos);
-			float hardness = state.getBlockHardness(world, pos);
-			
-			if(hardness == -1.0F || state.getBlock() instanceof UpgradeBlock) {
-				this.incrementValues();
-				this.breakNextBlock();
-			} else {
+			BlockPos pos;
+			IBlockState state;
+			float hardness;
+
+			do {
+				pos = new BlockPos(currentX, currentY, currentZ);
+				state = world.getBlockState(pos);
+				hardness = state.getBlockHardness(world, pos);
+
 				NonNullList<ItemStack> drops = NonNullList.create();
 				state.getBlock().getDrops(drops, world, pos, state, 0);
-				if(!this.getWorld().destroyBlock(pos, false)) {
-					this.incrementValues();
-					this.breakNextBlock();
-				} else {
+				if (this.getWorld().destroyBlock(pos, false)) {
 					blocksMined++;
-					TileEntity tile = world.getTileEntity(targetInventoryPos);
+					int index = rand.nextInt(targetInventoryPos.size());
+					TileEntity tile = world.getTileEntity(targetInventoryPos.get(index));
 					IInventory targetInventory = null;
-					
+
 					if (tile instanceof IInventory) {
 						targetInventory = (IInventory) tile;
 					}
-					
-					for(ItemStack stack : drops) {
+
+					for (ItemStack stack : drops) {
 						if (upgradeCount[1] > 0) {
 							ItemStack smelted = new ItemStack(FurnaceRecipes.instance().getSmeltingResult(stack).getItem());
 							if (!smelted.isEmpty()) {
@@ -187,17 +205,20 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 							}
 						} else {
 							this.insertItem(stack, targetInventory);
-						}	
+						}
 					}
-					if(upgradeCount[2] > 0) { 
+					if (upgradeCount[2] > 0) {
 						this.getWorld().setBlockState(pos, Blocks.DIRT.getDefaultState());
 					}
+				} else {
+					this.incrementValues();
+					continue;
 				}
-			}
+				this.incrementValues();
+			} while (hardness == -1.0f || state.getBlock() instanceof UpgradeBlock || state.getBlock().isAir(state, world, pos));
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private void incrementValues() {
@@ -230,12 +251,20 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		upgradeCount = newUpgrades;
 		this.setMaxProgress(baseProgress - upgradeCount[0] * 2);
 	}
-	
-	public void setTargetInventoryPos(BlockPos inventoryPos) {
-		this.targetInventoryPos = inventoryPos;
+
+	public void addTargetInventoryPos(BlockPos inventoryPos) {
+		if (this.targetInventoryPos == null) {
+			targetInventoryPos = new ArrayList<>();
+		}
+
+		targetInventoryPos.add(inventoryPos);
 	}
 	
 	private boolean insertItem(ItemStack item, IInventory inventory) {
+		if (inventory == null) {
+			buffer = item;
+			return false;
+		}
 		int size = inventory.getSizeInventory();
 		int stackSize = inventory.getInventoryStackLimit();
 		int insertSize = item.getCount();
@@ -282,5 +311,22 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	@SideOnly(Side.CLIENT)
 	public int[] getUpgrades() {
 		return this.upgradeCount;
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		return writeToNBT(new NBTTagCompound());
+	}
+
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+		this.readFromNBT(packet.getNbtCompound());
 	}
 }
