@@ -190,6 +190,11 @@ tile.elementalmastery.miner.name=Quarry
 
 tile.elementalmastery.corecrafter.name=Core Crafter
 
+tile.elementalmastery.solaropal.name=Speed Solar Panel
+tile.elementalmastery.solartopaz.name=Fire Solar Panel
+tile.elementalmastery.solarruby.name=Healing Solar Panel
+tile.elementalmastery.solarsapphire.name=Strength Solar Panel
+
 message.elementalmastery.farmer_mode=Mode Changed To: %d
 message.elementalmastery.capacitor_formed=%d
 message.elementalmastery.capacitor_amount=%d
