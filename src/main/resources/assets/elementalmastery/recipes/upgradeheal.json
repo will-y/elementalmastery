@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients":[
+    {
+      "item": "elementalmastery:blockruby"
+    },
+    {
+      "item": "elementalmastery:pickaxeruby"
+    }
+  ],
+
+  "result": {
+    "item": "elementalmastery:upgradeheal",
+    "count": 1
+  }
+}

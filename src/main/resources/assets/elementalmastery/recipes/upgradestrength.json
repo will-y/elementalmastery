@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients":[
+    {
+      "item": "elementalmastery:blocksapphire"
+    },
+    {
+      "item": "elementalmastery:strengthpickaxe"
+    }
+  ],
+
+  "result": {
+    "item": "elementalmastery:upgradestrength",
+    "count": 1
+  }
+}

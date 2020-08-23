@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients":[
+    {
+      "item": "elementalmastery:blocktopaz"
+    },
+    {
+      "item": "elementalmastery:firepickaxe"
+    }
+  ],
+
+  "result": {
+    "item": "elementalmastery:upgradefire",
+    "count": 1
+  }
+}

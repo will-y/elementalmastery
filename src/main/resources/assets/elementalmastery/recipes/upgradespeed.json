@@ -1,0 +1,16 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:blockopal"
+        },
+        {
+            "item": "elementalmastery:pickaxeopal"
+        }
+    ],
+
+    "result": {
+        "item": "elementalmastery:upgradespeed",
+        "count": 1
+    }
+}
