@@ -45,7 +45,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	Random rand = new Random();
 	
 	public TileMiner() {
-		super(new int[] {20000, 20000, 20000, 20000}, new int[] {5, 5, 5, 5}, 0, baseProgress);
+		super(new int[] {20000, 20000, 20000, 20000}, new int[] {50, 50, 50, 50}, 0, baseProgress);
 	}
 
 	@Override
