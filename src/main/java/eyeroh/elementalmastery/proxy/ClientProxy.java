@@ -22,10 +22,10 @@ public class ClientProxy extends CommonProxy {
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
     	ModBlocks.initModels();
+        ModMachines.initModels();
     	ModItems.initModels();
     	ModTools.initModels();
     	ModEntities.initModels();
     	ModArmor.initModels();
-    	ModMachines.initModels();
     }
 }

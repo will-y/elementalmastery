@@ -52,6 +52,8 @@ import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import eyeroh.elementalmastery.machine.miner.BlockMiner;
 import eyeroh.elementalmastery.machine.miner.TileMiner;
+import eyeroh.elementalmastery.machine.solar.BlockSolar;
+import eyeroh.elementalmastery.machine.solar.TileSolar;
 import eyeroh.elementalmastery.mob.ModEntities;
 import eyeroh.elementalmastery.world.OreGen;
 import net.minecraft.block.Block;
@@ -149,6 +151,14 @@ public class CommonProxy {
     	event.getRegistry().register(new UpgradeBlock("upgradefire", 1));
     	event.getRegistry().register(new UpgradeBlock("upgradeheal", 2));
     	event.getRegistry().register(new UpgradeBlock("upgradestrength", 3));
+
+    	// Solars
+		event.getRegistry().register(new BlockSolar("solaropal", 0));
+		event.getRegistry().register(new BlockSolar("solartopaz", 1));
+		event.getRegistry().register(new BlockSolar("solarruby", 2));
+		event.getRegistry().register(new BlockSolar("solarsapphire", 3));
+
+		GameRegistry.registerTileEntity(TileSolar.class, new ResourceLocation(ElementalMastery.MODID + "_solar"));
     }
 
     @SubscribeEvent
@@ -198,6 +208,11 @@ public class CommonProxy {
     	event.getRegistry().register(new ItemBlock(ModMachines.upgradeFire).setRegistryName(ModMachines.upgradeFire.getRegistryName()));
     	event.getRegistry().register(new ItemBlock(ModMachines.upgradeHeal).setRegistryName(ModMachines.upgradeHeal.getRegistryName()));
     	event.getRegistry().register(new ItemBlock(ModMachines.upgradeStrength).setRegistryName(ModMachines.upgradeStrength.getRegistryName()));
+
+    	event.getRegistry().register(new ItemBlock(ModMachines.solarOpal).setRegistryName(ModMachines.solarOpal.getRegistryName()));
+		event.getRegistry().register(new ItemBlock(ModMachines.solarTopaz).setRegistryName(ModMachines.solarTopaz.getRegistryName()));
+		event.getRegistry().register(new ItemBlock(ModMachines.solarRuby).setRegistryName(ModMachines.solarRuby.getRegistryName()));
+		event.getRegistry().register(new ItemBlock(ModMachines.solarSapphire).setRegistryName(ModMachines.solarSapphire.getRegistryName()));
     	
     	//Items
     	event.getRegistry().register(new GemItem("gemopal"));
@@ -352,6 +367,11 @@ public class CommonProxy {
     	event.getRegistry().register(new GemItem("nuggetsapphire"));
     	
     	event.getRegistry().register(new GemItem("smallheart"));
+
+    	event.getRegistry().register(new GemItem("cellopal"));
+		event.getRegistry().register(new GemItem("celltopaz"));
+		event.getRegistry().register(new GemItem("cellruby"));
+		event.getRegistry().register(new GemItem("cellsapphire"));
     	
     	event.getRegistry().register(new ItemLinker());
     }

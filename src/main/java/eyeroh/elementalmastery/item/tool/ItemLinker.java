@@ -10,6 +10,7 @@ import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.BlockEnergyAcceptor;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
+import eyeroh.elementalmastery.machine.TileEnergyProvider;
 import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
@@ -55,8 +56,8 @@ public class ItemLinker extends GemItem {
 				}
 				if(blockStored.toLong() != 0) {
 					TileEntity te = world.getTileEntity(pos);
-					if(te instanceof GeneratorTileEntity) {
-						((GeneratorTileEntity) te).setCapacitor(blockStored);
+					if(te instanceof TileEnergyProvider) {
+						((TileEnergyProvider) te).setCapacitor(blockStored);
 						TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.generator_linked", "Generator and Capacitor Linked");
 	    	            component.getStyle().setColor(TextFormatting.BLUE);
 	    	            player.sendStatusMessage(component, true);

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "elementalmastery:blocks/capacitorwall",
+    "down": "elementalmastery:blocks/blocksapphire",
+    "up": "elementalmastery:blocks/solarsapphire",
+    "north": "elementalmastery:blocks/capacitorwall",
+    "south": "elementalmastery:blocks/capacitorwall",
+    "east": "elementalmastery:blocks/capacitorwall",
+    "west": "elementalmastery:blocks/capacitorwall"
+  }
+}

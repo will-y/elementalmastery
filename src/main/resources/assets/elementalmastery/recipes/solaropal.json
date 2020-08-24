@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:solaropal"
+    },
+    "pattern": [
+        "ccc",
+        "wgw",
+        "www"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "c": {
+            "item": "elementalmastery:cellopal"
+        },
+        "g": {
+            "item": "elementalmastery:generatoropal"
+        },
+        "w": {
+            "item": "elementalmastery:capacitorwall"
+        }
+    }
+}

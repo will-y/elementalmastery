@@ -7,44 +7,35 @@ import java.util.Random;
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.ModMachines;
-import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
+import eyeroh.elementalmastery.machine.TileEnergyProvider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class GeneratorTileEntity extends TileEntity implements ITickable, IInventory{
+public class GeneratorTileEntity extends TileEnergyProvider implements ITickable, IInventory{
 	public static final int SIZE = 1;
 	private Random rand = new Random();
 	public String name;
-	public int type;
-	
-	public BlockPos linkedCapacitor = null;
-	public boolean linked = false;
+
 	public boolean active = false;
 	public int maxProgress = 200;
 	public int currentProgress = 0;
 	public int maxEnergy = 10000;
 	public int currentEnergy = 0;
-	public int energyPerSecond = 1000;
-	private int counter = 0;
-	private int maxCounter = 20;
 	private boolean progressed = true;
+
+	public GeneratorTileEntity() {
+		super(-1, 1000);
+	}
 
     private ItemStackHandler itemStackHandler = new ItemStackHandler(SIZE) {
         @Override
@@ -66,23 +57,6 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
     		type = 3;
     	}
     }
-    
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        return writeToNBT(new NBTTagCompound());
-    }
-
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        this.readFromNBT(packet.getNbtCompound());
-    }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -90,30 +64,20 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
         if (compound.hasKey("items")) {
             itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
         }
-        linked = compound.getBoolean("linked");
         active = compound.getBoolean("active");
         maxProgress = compound.getInteger("maxProgress");
         currentProgress = compound.getInteger("currentProgress");
         currentEnergy = compound.getInteger("currentEnergy");
-        counter = compound.getInteger("counter");
-        linkedCapacitor = BlockPos.fromLong(compound.getLong("linkedCapacitor"));
-        type = compound.getInteger("type");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setTag("items", itemStackHandler.serializeNBT());
-        compound.setBoolean("linked", linked);
         compound.setBoolean("active", active);
         compound.setInteger("maxProgress", maxProgress);
         compound.setInteger("currentProgress", currentProgress);
         compound.setInteger("currentEnergy", currentEnergy);
-        compound.setInteger("counter", counter);
-        compound.setInteger("type", type);
-        if(linked) {
-        	compound.setLong("linkedCapacitor", linkedCapacitor.toLong());
-        }
         
         return compound;
     }
@@ -151,16 +115,6 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
     		default:
     			return "tile.elementalmastery.generatoropal.name";
     	}
-		
-	}
-
-	public boolean hasCustomName() {
-		return false;
-	}
-	
-	@Override
-	public ITextComponent getDisplayName() {
-		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
 	}
 
 	@Override
@@ -263,47 +217,6 @@ public class GeneratorTileEntity extends TileEntity implements ITickable, IInven
 	@Override
 	public ItemStack getStackInSlot(int index) {
 		return new ItemStack(ModItems.gemOpal);
-	}
-	
-	public void setCapacitor(BlockPos pos) {
-		this.linkedCapacitor = pos;
-		linked = true;
-	}
-	
-	public boolean canExportEnergy() {
-		if(linked) {
-			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
-			if(capacitor != null && capacitor instanceof TileEntityCapacitorController) {
-				if(((TileEntityCapacitorController) capacitor).canAcceptEnergy(type, this.energyPerSecond/20)) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			
-			}
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean isCapacitorFull() {
-		if(linked) {
-			TileEntity te = world.getTileEntity(linkedCapacitor);
-			if(te != null && te instanceof TileEntityCapacitorController) {
-				TileEntityCapacitorController capacitor = (TileEntityCapacitorController) te;
-				return capacitor.isFull(type);
-			}
-		}
-		return true;
-	}
-	
-	public void sendPower(int amount) {
-		if(!world.isRemote) {
-			TileEntity capacitor = world.getTileEntity(linkedCapacitor);
-			((TileEntityCapacitorController) capacitor).addEnergy(type, amount);
-		}
 	}
 	
 	public void update() {

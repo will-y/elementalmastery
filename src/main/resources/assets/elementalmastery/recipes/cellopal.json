@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:cellopal"
+    },
+    "pattern": [
+        "ddd",
+        "gsg",
+        "ggg"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "d": {
+            "item": "elementalmastery:dustopal"
+        },
+        "g": {
+            "item": "elementalmastery:gemopal"
+        },
+        "s": {
+            "item": "minecraft:daylight_detector"
+        }
+    }
+}
