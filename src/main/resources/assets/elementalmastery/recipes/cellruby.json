@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:cellruby"
+    },
+    "pattern": [
+        "ddd",
+        "gsg",
+        "ggg"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "d": {
+            "item": "elementalmastery:dustruby"
+        },
+        "g": {
+            "item": "elementalmastery:gemruby"
+        },
+        "s": {
+            "item": "minecraft:daylight_detector"
+        }
+    }
+}
