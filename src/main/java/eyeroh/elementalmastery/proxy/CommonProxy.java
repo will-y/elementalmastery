@@ -53,6 +53,7 @@ import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import eyeroh.elementalmastery.machine.miner.BlockMiner;
 import eyeroh.elementalmastery.machine.miner.TileMiner;
 import eyeroh.elementalmastery.machine.solar.BlockSolar;
+import eyeroh.elementalmastery.machine.solar.TileSolar;
 import eyeroh.elementalmastery.mob.ModEntities;
 import eyeroh.elementalmastery.world.OreGen;
 import net.minecraft.block.Block;
@@ -152,10 +153,12 @@ public class CommonProxy {
     	event.getRegistry().register(new UpgradeBlock("upgradestrength", 3));
 
     	// Solars
-		event.getRegistry().register(new BlockSolar("solaropal"));
-		event.getRegistry().register(new BlockSolar("solartopaz"));
-		event.getRegistry().register(new BlockSolar("solarruby"));
-		event.getRegistry().register(new BlockSolar("solarsapphire"));
+		event.getRegistry().register(new BlockSolar("solaropal", 0));
+		event.getRegistry().register(new BlockSolar("solartopaz", 1));
+		event.getRegistry().register(new BlockSolar("solarruby", 2));
+		event.getRegistry().register(new BlockSolar("solarsapphire", 3));
+
+		GameRegistry.registerTileEntity(TileSolar.class, new ResourceLocation(ElementalMastery.MODID + "_solar"));
     }
 
     @SubscribeEvent
