@@ -1,34 +1,22 @@
 package eyeroh.elementalmastery.item.tool;
 
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.item.ModItems;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import eyeroh.elementalmastery.CreativeTabs;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.SwordItem;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 
-public class SpeedSword extends ItemSword{
+public class SpeedSword extends SwordItem {
 	
 	public SpeedSword() {
-		super(ModTools.TOOLMATERIALSPEED);
-		this.setRegistryName("speedsword");
-		this.setUnlocalizedName(ElementalMastery.MODID + ".speedsword");
-		this.setCreativeTab(ModItems.tabGemTools);
+		super(ToolMaterials.SPEED, 8, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools));
 	}
 	
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        stack.damageItem(1, attacker);
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damageItem(1, attacker, t -> {});
 
         if(target.getHealth() <= 0) {
         	attacker.addPotionEffect(this.getStrongPotionEffect());
@@ -38,22 +26,16 @@ public class SpeedSword extends ItemSword{
         return true;
     }
 	
-	public PotionEffect getPotionEffect() {
-		return new PotionEffect(Potion.getPotionById(1), 100, 1);
+	public EffectInstance getPotionEffect() {
+		return new EffectInstance(Effects.SPEED, 100, 1);
 	}
 	
-	public PotionEffect getStrongPotionEffect() {
-		return new PotionEffect(Potion.getPotionById(1), 500, 3);
+	public EffectInstance getStrongPotionEffect() {
+		return new EffectInstance(Effects.SPEED, 500, 3);
 	}
 	
 	@Override
 	public boolean hasEffect(ItemStack itemstack) {
         return true;
     }
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
-
 }

@@ -1,48 +1,32 @@
 package eyeroh.elementalmastery.item.tool;
 
-import java.util.Set;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
-
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.item.ModItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ToolType;
 
-public class ItemMultiTool extends ItemFarmer{
+public class ItemMultiTool extends ItemFarmer {
 	
 	private float efficiency;
 	private int toolHarvestLevel;
 
-	public ItemMultiTool(ToolMaterial material, String name, float speed) {
-		super(material, name, material.getAttackDamage(), speed);
-		this.efficiency = material.getEfficiency();
-		this.toolHarvestLevel = material.getHarvestLevel();
-		this.setCreativeTab(ModItems.tabGemTools);
+	public ItemMultiTool(IItemTier material, float speed) {
+		super(material, material.getAttackDamage(), speed, new Item.Properties()
+				.addToolType(ToolType.PICKAXE, material.getHarvestLevel()));
+		efficiency = material.getEfficiency();
+		toolHarvestLevel = material.getHarvestLevel();
 	}
 	
 	@Override
-	public Set<String> getToolClasses(ItemStack stack) {
-		return ImmutableSet.of("pickaxe", "spade", "axe", "sword");
-	}
-	
-	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state){
+	public float getDestroySpeed(ItemStack stack, BlockState state){
 	    return this.efficiency;
 	}
 	
 	@Override
-	public boolean canHarvestBlock(IBlockState block) {
+	public boolean canHarvestBlock(BlockState block) {
 		int harvestLevel = block.getBlock().getHarvestLevel(block);
-		
-		if(harvestLevel <= toolHarvestLevel) {
-			return true;
-		} else {
-			return false;
-		}
+
+		return harvestLevel <= toolHarvestLevel;
 	}
 }

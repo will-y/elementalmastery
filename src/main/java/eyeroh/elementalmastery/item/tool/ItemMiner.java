@@ -2,93 +2,78 @@ package eyeroh.elementalmastery.item.tool;
 
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.item.ModItems;
+import eyeroh.elementalmastery.CreativeTabs;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.common.ToolType;
 
-public class ItemMiner extends ItemPickaxe{
+public class ItemMiner extends PickaxeItem {
 	
-	public ItemMiner(ToolMaterial material, String name) {
-		super(material);
-		this.setRegistryName(name);
-		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
-		this.setCreativeTab(ModItems.tabGemTools);
+	public ItemMiner(IItemTier material, int damage, float speed) {
+        super(material, damage, speed, new Item.Properties()
+                .addToolType(ToolType.PICKAXE, material.getHarvestLevel())
+                .addToolType(ToolType.SHOVEL, material.getHarvestLevel())
+                .group(CreativeTabs.tabGemTools));
 	}
 
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND, Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER);
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.SOUL_SAND, Blocks.GRASS_PATH);
+
 	
 	@Override
-	public Set<String> getToolClasses(ItemStack stack) {
-		return ImmutableSet.of("pickaxe", "spade");
-	}
-	
-	@Override
-	public boolean canHarvestBlock(IBlockState block) {
+	public boolean canHarvestBlock(BlockState block) {
 		return EFFECTIVE_ON.contains(block.getBlock()) ? true : super.canHarvestBlock(block);
 	}
 	
 	
 	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state){
+	public float getDestroySpeed(ItemStack stack, BlockState state){
 		Material material = state.getMaterial();
-	    return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK && material !=Material.CLAY && material != Material.CRAFTED_SNOW && material != Material.SNOW && material != Material.SAND && material != Material.GRASS && material != Material.GROUND ? super.getDestroySpeed(stack, state) : this.efficiency;
+	    return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK && material !=Material.CLAY && material != Material.SNOW_BLOCK && material != Material.SNOW && material != Material.SAND && material != Material.EARTH ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
-	
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+
+    public ActionResultType onItemUse(ItemUseContext context) {
+	    PlayerEntity player = context.getPlayer();
+	    Hand hand = context.getHand();
         ItemStack itemstack = player.getHeldItem(hand);
+        Direction facing = context.getFace();
+        BlockPos pos = context.getPos();
+        World world = context.getWorld();
 
         if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack))
         {
-            return EnumActionResult.FAIL;
+            return ActionResultType.FAIL;
         }
         else
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
-            Block block = iblockstate.getBlock();
+            BlockState blockstate = world.getBlockState(pos);
+            Block block = blockstate.getBlock();
 
-            if (facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && block == Blocks.GRASS)
+            if (facing != Direction.DOWN && world.getBlockState(pos.up()).getMaterial() == Material.AIR && block == Blocks.GRASS)
             {
-                IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
-                worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                BlockState blockstate1 = Blocks.GRASS_PATH.getDefaultState();
+                world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-                if (!worldIn.isRemote)
+                if (!world.isRemote)
                 {
-                    worldIn.setBlockState(pos, iblockstate1, 11);
-                    itemstack.damageItem(1, player);
+                    world.setBlockState(pos, blockstate1, 11);
+                    itemstack.damageItem(1, player, t -> {});
                 }
 
-                return EnumActionResult.SUCCESS;
+                return ActionResultType.SUCCESS;
             }
             else
             {
-                return EnumActionResult.PASS;
+                return ActionResultType.PASS;
             }
         }
     }
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
 }

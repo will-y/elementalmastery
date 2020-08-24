@@ -18,13 +18,17 @@ import net.minecraftforge.common.ToolType;
 
 public class ItemFarmer extends AxeItem {
 
-	public ItemFarmer(IItemTier material, float damage, float speed) {
-		super(material, damage, speed, new Item.Properties()
+	public ItemFarmer(IItemTier material, float damage, float speed, Item.Properties properties) {
+		super(material, damage, speed, properties
                 .addToolType(ToolType.AXE, material.getHarvestLevel())
                 .addToolType(ToolType.HOE, material.getHarvestLevel())
                 .addToolType(ToolType.SHOVEL, material.getHarvestLevel())
                 .group(CreativeTabs.tabGemTools));
 	}
+
+	public ItemFarmer(IItemTier material, float damage, float speed) {
+	    this(material, damage, speed, new Item.Properties());
+    }
 	
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.SOUL_SAND, Blocks.GRASS_PATH);
 

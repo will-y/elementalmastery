@@ -1,43 +1,37 @@
 package eyeroh.elementalmastery.item.tool;
 
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.item.ModItems;
+import eyeroh.elementalmastery.CreativeTabs;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class StrengthPickaxe extends ItemPickaxe{
-	public StrengthPickaxe(String name) {
-		super(ModTools.TOOLMATERIALSTRENGTH);
-		this.setRegistryName(name);
-		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
-		this.setCreativeTab(ModItems.tabGemTools);
+public class StrengthPickaxe extends PickaxeItem {
+	public StrengthPickaxe() {
+		super(ToolMaterials.STRENGTH, 4, 2.0f, new Item.Properties().group(CreativeTabs.tabGemTools));
 	}
 	
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+	public boolean onBlockDestroyed(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entityLiving) {
         if (!world.isRemote && (double)state.getBlockHardness(world, pos) != 0.0D) {
-            stack.damageItem(1, entityLiving);
+            stack.damageItem(1, entityLiving, t -> {});
             
-            RayTraceResult rayTrace = this.rayTrace(world, (EntityPlayer) entityLiving, false);
+            BlockRayTraceResult rayTrace = rayTrace(world, (PlayerEntity) entityLiving, RayTraceContext.FluidMode.NONE);
             
-            EnumFacing facing = rayTrace.sideHit;
+            Direction facing = rayTrace.getFace();
             
             BlockPos[] posArray;
             posArray = new BlockPos[8];
             
-            if(facing == EnumFacing.SOUTH || facing == EnumFacing.NORTH) {
+            if(facing == Direction.SOUTH || facing == Direction.NORTH) {
             	posArray[0] = pos.add(1, 0, 0);
             	posArray[1] = pos.add(1, 1, 0);
             	posArray[2] = pos.add(1, -1, 0);
@@ -46,7 +40,7 @@ public class StrengthPickaxe extends ItemPickaxe{
             	posArray[5] = pos.add(-1, 0, 0);
             	posArray[6] = pos.add(-1, 1, 0);
             	posArray[7] = pos.add(-1, -1, 0);
-            } else  if(facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
+            } else  if(facing == Direction.EAST || facing == Direction.WEST) {
             	posArray[0] = pos.add(0, 1, 1);
             	posArray[1] = pos.add(0, 1, 0);
             	posArray[2] = pos.add(0, 1, -1);
@@ -55,7 +49,7 @@ public class StrengthPickaxe extends ItemPickaxe{
             	posArray[5] = pos.add(0, -1, 1);
             	posArray[6] = pos.add(0, -1, 0);
             	posArray[7] = pos.add(0, -1, -1);
-            } else if(facing == EnumFacing.UP || facing == EnumFacing.DOWN) {
+            } else if(facing == Direction.UP || facing == Direction.DOWN) {
             	posArray[0] = pos.add(1, 0, 1);
             	posArray[1] = pos.add(1, 0, 0);
             	posArray[2] = pos.add(1, 0, -1);
@@ -70,8 +64,8 @@ public class StrengthPickaxe extends ItemPickaxe{
             	Material material = world.getBlockState(posArray[i]).getMaterial();
             	
             	if(material == Material.ANVIL || material == Material.ROCK || material == Material.IRON) {
-            		if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
-            			stack.damageItem(1, entityLiving);
+            		if(stack.getMaxDamage() - stack.getDamage() > 0) {
+            			stack.damageItem(1, entityLiving, t -> {});
             			world.destroyBlock(posArray[i], true);
             		}
             		  
@@ -87,9 +81,4 @@ public class StrengthPickaxe extends ItemPickaxe{
 	public boolean hasEffect(ItemStack itemstack) {
         return true;
     }
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
 }

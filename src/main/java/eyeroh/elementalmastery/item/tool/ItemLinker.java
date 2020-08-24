@@ -4,47 +4,50 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import eyeroh.elementalmastery.item.ModItems;
+import eyeroh.elementalmastery.CreativeTabs;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import eyeroh.elementalmastery.machine.TileEnergyProvider;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
-import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 
-public class ItemLinker extends GemItem {
+public class ItemLinker extends Item {
 	
 	public BlockPos blockStored = new BlockPos(0, 0, 0);
 	
 	public ItemLinker() {
-		super("linker");
-		setMaxStackSize(1);
-		this.setCreativeTab(ModItems.tabGemTools);
+		super(new Item.Properties()
+				.maxStackSize(1)
+				.group(CreativeTabs.tabGemTools));
 	}
 	
 	@Override
-	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
+	public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
+		PlayerEntity player = context.getPlayer();
+		Hand hand = context.getHand();
+		BlockPos pos = context.getPos();
+		World world = context.getWorld();
 		//if(!world.isRemote) {
-			NBTTagCompound nbt = player.getHeldItem(hand).getTagCompound();
+		CompoundNBT nbt = player.getHeldItem(hand).getTag();
 			if(nbt != null) {
 				String toolTip = "No Block Linked";
-				if(Block.isEqualTo(world.getBlockState(pos).getBlock(), ModMachines.capacitorController)) {
+				if(world.getBlockState(pos).getBlock().equals(ModMachines.capacitorController)) {
 					blockStored = pos;
 					toolTip = "Linked to Capacitor @ " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
-					TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.capacitor_selected", toolTip);
-    	            component.getStyle().setColor(TextFormatting.BLUE);
+					TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_selected", toolTip);
+    	            component.getStyle().func_240723_c_(TextFormatting.BLUE);
     	            player.sendStatusMessage(component, true);
 				} else {
 					blockStored = BlockPos.fromLong(nbt.getLong("position"));
@@ -53,74 +56,70 @@ public class ItemLinker extends GemItem {
 					TileEntity te = world.getTileEntity(pos);
 					if(te instanceof TileEnergyProvider) {
 						((TileEnergyProvider) te).setCapacitor(blockStored);
-						TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.generator_linked", "Generator and Capacitor Linked");
-	    	            component.getStyle().setColor(TextFormatting.BLUE);
+						TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.generator_linked", "Generator and Capacitor Linked");
+	    	            component.getStyle().func_240723_c_(TextFormatting.BLUE);
 	    	            player.sendStatusMessage(component, true);
 					} else if(te instanceof TileEnergyAcceptor) {
 						TileEntity te2 = world.getTileEntity(blockStored);
 						if(te2 instanceof TileEntityCapacitorController) {
 							TileEntityCapacitorController controller = (TileEntityCapacitorController) te2;
 							((TileEnergyAcceptor)te).addCapacitor(controller);
-							TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.machine_linked", "Machine and Capacitor Linked");
-		    	            component.getStyle().setColor(TextFormatting.BLUE);
+							TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.machine_linked", "Machine and Capacitor Linked");
+		    	            component.getStyle().func_240723_c_(TextFormatting.BLUE);
 		    	            player.sendStatusMessage(component, true);
 						}
 					}
 				}
-				nbt.setLong("position", blockStored.toLong());
-				nbt.setString("tooltip", toolTip);
-				player.getHeldItem(hand).setTagCompound(nbt);
+				nbt.putLong("position", blockStored.toLong());
+				nbt.putString("tooltip", toolTip);
+				player.getHeldItem(hand).setTag(nbt);
 			} else {
-				NBTTagCompound compound = new NBTTagCompound();
-				player.getHeldItem(hand).setTagCompound(compound);
-				this.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
+				CompoundNBT compound = new CompoundNBT();
+				player.getHeldItem(hand).setTag(compound);
+				this.onItemUseFirst(stack, context);
 			}
 		//}
-		return EnumActionResult.PASS;
+		return ActionResultType.PASS;
     }
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-    {
+	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
 		if(!world.isRemote){
-			if(player.getHeldItem(hand).getTagCompound() == null) {
-				NBTTagCompound compound = new NBTTagCompound();
-				System.out.println("Item Created from first click --- ");
-				player.getHeldItem(hand).setTagCompound(compound);
+			if(player.getHeldItem(hand).getTag() == null) {
+				CompoundNBT compound = new CompoundNBT();
+				player.getHeldItem(hand).setTag(compound);
 			} else if (player.isSneaking()) {
 				clearSelection(player.getHeldItem(hand), world);
 			} else {
-				System.out.println(BlockPos.fromLong(player.getHeldItem(hand).getTagCompound().getLong("position")));
+				System.out.println(BlockPos.fromLong(player.getHeldItem(hand).getTag().getLong("position")));
 			}
 		}
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(hand));
+        return new ActionResult<>(ActionResultType.PASS, player.getHeldItem(hand));
     }
 
 	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		NBTTagCompound nbt = stack.getTagCompound();
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		CompoundNBT nbt = stack.getTag();
 		if(nbt != null && !nbt.getString("tooltip").equals("")) {
-			tooltip.add(nbt.getString("tooltip"));
+			tooltip.add(new StringTextComponent(nbt.getString("tooltip")));
 		}
 		
 	}
 	
 	@Override
-	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		NBTTagCompound compound = new NBTTagCompound();
-		System.out.println("Item Created from create --- ");
-		stack.setTagCompound(compound);
+	public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+		CompoundNBT compound = new CompoundNBT();
+		stack.setTag(compound);
     }
 	
 	
 	public void clearSelection(ItemStack stack, World world) {
-		NBTTagCompound nbt = stack.getTagCompound();
+		CompoundNBT nbt = stack.getTag();
 		if(!world.isRemote) {
 			if(nbt != null) {
-				nbt.setLong("position", 0);
-				nbt.setString("tooltip", "No Block Selected");
-				stack.setTagCompound(nbt);
-				System.out.println("cleared");
+				nbt.putLong("position", 0);
+				nbt.putString("tooltip", "No Block Selected");
+				stack.setTag(nbt);
 			}
 		}
 	}
