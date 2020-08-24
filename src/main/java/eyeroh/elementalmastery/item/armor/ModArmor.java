@@ -1,6 +1,5 @@
 package eyeroh.elementalmastery.item.armor;
 
-import eyeroh.elementalmastery.item.tool.GemPickaxe;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;

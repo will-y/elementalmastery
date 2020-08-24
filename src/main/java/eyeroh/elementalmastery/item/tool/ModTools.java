@@ -1,6 +1,5 @@
 package eyeroh.elementalmastery.item.tool;
 
-import eyeroh.elementalmastery.item.GemItem;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -8,13 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModTools {
-	
-	public static ToolMaterial TOOLMATERIALGEM = EnumHelper.addToolMaterial("TOOLMATERIALGEM", 2, 550, 7.0f, 2.5f, 10);
-	
-	public static ToolMaterial TOOLMATERIALSPEED = EnumHelper.addToolMaterial("TOOLMATERIALSPEED", 2, 750, 9.0f,  2.5f, 10);
-	public static ToolMaterial TOOLMATERIALFIRE = EnumHelper.addToolMaterial("TOOLMATERIALFIRE", 2, 1000, 7.0f,  3.0f, 10);
-	public static ToolMaterial TOOLMATERIALHEAL = EnumHelper.addToolMaterial("TOOLMATERIALHEAL", 2, 1000, 7.0f,  3.0f, 10);
-	public static ToolMaterial TOOLMATERIALSTRENGTH = EnumHelper.addToolMaterial("TOOLMATERIALSTRENGTH", 2, 1250, 6.0f,  3.5f, 10);
 	
 	//picks
 	@GameRegistry.ObjectHolder("elementalmastery:pickaxeopal")

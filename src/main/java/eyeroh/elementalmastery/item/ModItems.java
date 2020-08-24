@@ -1,162 +1,66 @@
 package eyeroh.elementalmastery.item;
 
-import eyeroh.elementalmastery.item.tool.ModTools;
-import eyeroh.elementalmastery.machine.ModMachines;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
+import eyeroh.elementalmastery.CreativeTabs;
+import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.block.ModBlocks;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
-	
-	public static final CreativeTabs tabGemItems = (new CreativeTabs("tabGemItems") {
 
-		@Override
-		public ItemStack getTabIconItem() {
-			return new ItemStack(ModItems.gemOpal);
-		}
-		
-	});
-	
-	public static final CreativeTabs tabGemTools = (new CreativeTabs("tabGemTools") {
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ElementalMastery.MODID);
 
-		@Override
-		public ItemStack getTabIconItem() {
-			return new ItemStack(ModTools.pickaxeOpal);
-		}
-		
-	});
-	
-	//Items
-	//Gems
-	@GameRegistry.ObjectHolder("elementalmastery:gemopal")
-	public static GemItem gemOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:gemtopaz")
-	public static GemItem gemTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:gemruby")
-	public static GemItem gemRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:gemsapphire")
-	public static GemItem gemSapphire;
-	@GameRegistry.ObjectHolder("elementalmastery:gemmulti")
-	public static GemItem gemMulti;
-	
-	//Misc
-	@GameRegistry.ObjectHolder("elementalmastery:toolbinder")
-	public static GemItem toolBinder;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:energycoreopal")
-	public static GemItem energycoreOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoretopaz")
-	public static GemItem energycoreTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoreruby")
-	public static GemItem energycoreRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoresapphire")
-	public static GemItem energycoreSapphire;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoremulti")
-	public static GemItem energycoreMulti;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:energycoreopal_active")
-	public static GemItem energycoreOpalActive;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoretopaz_active")
-	public static GemItem energycoreTopazActive;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoreruby_active")
-	public static GemItem energycoreRubyActive;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoresapphire_active")
-	public static GemItem energycoreSapphireActive;
-	@GameRegistry.ObjectHolder("elementalmastery:energycoremulti_active")
-	public static GemItem energycoreMultiActive;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:energycorefragment")
-	public static GemItem energycoreFragment;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:dustopal")
-	public static GemItem dustOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:dusttopaz")
-	public static GemItem dustTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:dustruby")
-	public static GemItem dustRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:dustsapphire")
-	public static GemItem dustSapphire;
-	@GameRegistry.ObjectHolder("elementalmastery:dustmulti")
-	public static GemItem dustMulti;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:dustopalsmall")
-	public static GemItem dustOpalSmall;
-	@GameRegistry.ObjectHolder("elementalmastery:dusttopazsmall")
-	public static GemItem dustTopazSmall;
-	@GameRegistry.ObjectHolder("elementalmastery:dustrubysmall")
-	public static GemItem dustRubySmall;
-	@GameRegistry.ObjectHolder("elementalmastery:dustsapphiresmall")
-	public static GemItem dustSapphireSmall;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:nuggetopal")
-	public static GemItem nuggetOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:nuggettopaz")
-	public static GemItem nuggetTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:nuggetruby")
-	public static GemItem nuggetRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:nuggetsapphire")
-	public static GemItem nuggetSapphire;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:smallheart")
-	public static GemItem smallHeart;
+	// Items
+	public static final RegistryObject<Item> GEM_OPAL = ITEMS.register("gemopal", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> GEM_TOPAZ = ITEMS.register("gemtopaz", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> GEM_RUBY = ITEMS.register("gemruby", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> GEM_SAPPHIRE = ITEMS.register("gemsapphire", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 
-	@GameRegistry.ObjectHolder("elementalmastery:cellopal")
-	public static GemItem cellOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:celltopaz")
-	public static GemItem cellTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:cellruby")
-	public static GemItem cellRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:cellsapphire")
-	public static GemItem cellSapphire;
+	public static final RegistryObject<Item> TOOL_BINDER = ITEMS.register("toolbinder", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 
-	@SideOnly(Side.CLIENT)
-	public static void initModels() {
-		gemOpal.initModel();
-		gemTopaz.initModel();
-		gemRuby.initModel();
-		gemSapphire.initModel();
-		gemMulti.initModel();
-		
-		toolBinder.initModel();
-		
-		energycoreOpal.initModel();
-		energycoreTopaz.initModel();
-		energycoreRuby.initModel();
-		energycoreSapphire.initModel();
-		energycoreMulti.initModel();
-		
-		energycoreOpalActive.initModel();
-		energycoreTopazActive.initModel();
-		energycoreRubyActive.initModel();
-		energycoreSapphireActive.initModel();
-		energycoreMultiActive.initModel();
-		
-		energycoreFragment.initModel();
-		
-		dustOpal.initModel();
-		dustTopaz.initModel();
-		dustRuby.initModel();
-		dustSapphire.initModel();
-		dustMulti.initModel();
-		
-		dustOpalSmall.initModel();
-		dustTopazSmall.initModel();
-		dustRubySmall.initModel();
-		dustSapphireSmall.initModel();
-		
-		nuggetOpal.initModel();
-		nuggetTopaz.initModel();
-		nuggetRuby.initModel();
-		nuggetSapphire.initModel();
-		
-		smallHeart.initModel();
+	public static final RegistryObject<Item> ENERGY_CORE_OPAL = ITEMS.register("energycoreopal", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_TOPAZ = ITEMS.register("energycoretopaz", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_RUBY = ITEMS.register("energycoreruby", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_SAPPHIRE = ITEMS.register("energycoresapphire", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_MULTI = ITEMS.register("energycoremulti", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 
-		cellOpal.initModel();
-		cellTopaz.initModel();
-		cellRuby.initModel();
-		cellSapphire.initModel();
-	}
+	public static final RegistryObject<Item> ENERGY_CORE_OPAL_ACTIVE = ITEMS.register("energycoreopal_active", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_TOPAZ_ACTIVE = ITEMS.register("energycoretopaz_active", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_RUBY_ACTIVE = ITEMS.register("energycoreruby_active", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_SAPPHIRE_ACTIVE = ITEMS.register("energycoresapphire_active", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> ENERGY_CORE_MULTI_ACTIVE = ITEMS.register("energycoremulti_active", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+
+	public static final RegistryObject<Item> ENERGY_CORE_FRAGMENT = ITEMS.register("energycorefragment", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+
+	public static final RegistryObject<Item> DUST_OPAL = ITEMS.register("dustopal", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> DUST_TOPAZ = ITEMS.register("dusttopaz", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> DUST_RUBY = ITEMS.register("dustruby", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> DUST_SAPPHIRE = ITEMS.register("dustsapphire", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> DUST_MULTI = ITEMS.register("dustmulti", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+
+	public static final RegistryObject<Item> DUST_OPAL_SMALL = ITEMS.register("dustopalsmall", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> DUST_TOPAZ_SMALL = ITEMS.register("dusttopazsmall", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> DUST_RUBY_SMALL = ITEMS.register("dustrubysmall", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> DUST_SAPPHIRE_SMALL = ITEMS.register("dustsapphiresmall", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+
+	public static final RegistryObject<Item> SMALL_HEART = ITEMS.register("smallheart", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+
+	public static final RegistryObject<Item> CELL_OPAL = ITEMS.register("cellopal", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> CELL_TOPAZ = ITEMS.register("celltopaz", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> CELL_RUBY = ITEMS.register("cellruby", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> CELL_SAPPHIRE = ITEMS.register("cellsapphire", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+
+	// Item Blocks
+	public static final RegistryObject<Item> OPAL_BLOCK_ITEM = ITEMS.register("blockopal", () -> new BlockItem(ModBlocks.OPAL_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
+	public static final RegistryObject<Item> TOPAZ_BLOCK_ITEM = ITEMS.register("blocktopaz", () -> new BlockItem(ModBlocks.TOPAZ_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
+	public static final RegistryObject<Item> RUBY_BLOCK_ITEM = ITEMS.register("blockruby", () -> new BlockItem(ModBlocks.RUBY_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
+	public static final RegistryObject<Item> SAPPHIRE_BLOCK_ITEM = ITEMS.register("blocksapphire", () -> new BlockItem(ModBlocks.SAPPHIRE_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
+
+	public static final RegistryObject<Item> OPAL_ORE_ITEM = ITEMS.register("oreopal", () -> new BlockItem(ModBlocks.OPAL_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
+	public static final RegistryObject<Item> TOPAZ_ORE_ITEM = ITEMS.register("oretopaz", () -> new BlockItem(ModBlocks.TOPAZ_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
+	public static final RegistryObject<Item> RUBY_ORE_ITEM = ITEMS.register("oreruby", () -> new BlockItem(ModBlocks.RUBY_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
+	public static final RegistryObject<Item> SAPPHIRE_ORE_ITEM = ITEMS.register("oresapphire", () -> new BlockItem(ModBlocks.SAPPHIRE_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
 }

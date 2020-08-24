@@ -2,60 +2,43 @@ package eyeroh.elementalmastery.item.tool;
 
 import java.util.Random;
 
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.item.ModItems;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemPickaxe;
+import eyeroh.elementalmastery.CreativeTabs;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.item.Items;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 
-public class FireAxe extends ItemAxe{
+public class FireAxe extends AxeItem {
 	public FireAxe() {
-		super(ModTools.TOOLMATERIALFIRE, 8.0f, -3.0f);
-		this.setRegistryName("fireaxe");
-		this.setUnlocalizedName(ElementalMastery.MODID + ".fireaxe");
-		this.setCreativeTab(ModItems.tabGemTools);
+		super(ToolMaterials.FIRE, 8.0f, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools));
 	}
 	
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+	public boolean onBlockDestroyed(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entityLiving) {
         if (!world.isRemote && (double)state.getBlockHardness(world, pos) != 0.0D) {		
-            stack.damageItem(1, entityLiving);
-            System.out.println("inside world thing");
+            stack.damageItem(1, entityLiving, t -> {});
             if(this.canHarvestBlock(stack, state)) {
-            	System.out.println("can harvest");
-            	if(OreDictionary.getOres("logWood").toString().contains((new ItemStack(state.getBlock(), 1, OreDictionary.WILDCARD_VALUE)).toString()) ) {
-            		ItemStack itemStack2 = new ItemStack(Items.COAL, 1, 1);
-            		System.out.println(itemStack2.toString());
-                	world.setBlockToAir(pos);
-                	EntityItem unsmelted = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
-                	world.spawnEntity(unsmelted);
-                	return true;
-            	}
+            	if (stack.getItem().getTags().contains(ItemTags.LOGS)) {
+					ItemStack itemStack2 = new ItemStack(Items.CHARCOAL, 1);
+					world.destroyBlock(pos, false);
+					ItemEntity unsmelted = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack2);
+					world.addEntity(unsmelted);
+					return true;
+				}
             }
         }
         return false;
     }
 	
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        stack.damageItem(1, attacker);
+	public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damageItem(1, attacker, t -> {});
 
         Random rand = new Random();
         if(rand.nextInt(10) > 6) {
@@ -68,15 +51,4 @@ public class FireAxe extends ItemAxe{
 	public boolean hasEffect(ItemStack itemstack) {
         return true;
     }
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
-	
-	
-	public boolean canHarvestBlock(ItemStack stack, IBlockState state) {
-		System.out.println("canHarvestBlock");
-		return this.getDestroySpeed(stack, state) != 1.0F;
-	}
 }

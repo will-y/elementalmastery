@@ -4,16 +4,11 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import eyeroh.elementalmastery.block.ModBlocks;
-import eyeroh.elementalmastery.item.GemItem;
 import eyeroh.elementalmastery.item.ModItems;
-import eyeroh.elementalmastery.machine.BlockEnergyAcceptor;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import eyeroh.elementalmastery.machine.TileEnergyProvider;
-import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
-import eyeroh.elementalmastery.machine.generator.GeneratorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,56 +1,22 @@
 package eyeroh.elementalmastery.block;
 
-import eyeroh.elementalmastery.machine.ModMachines;
-import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
-import eyeroh.elementalmastery.machine.collector.CollectorBlock;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import eyeroh.elementalmastery.ElementalMastery;
+import net.minecraft.block.Block;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlocks {
-	
-	public static final CreativeTabs tabGemBlocks = (new CreativeTabs("tabGemBlocks") {
 
-		@Override
-		public ItemStack getTabIconItem() {
-			// TODO Auto-generated method stub
-			return new ItemStack(ModMachines.collectorSpeed);
-		}
-		
-	});
-	
-	//Gem Blocks
-	@GameRegistry.ObjectHolder("elementalmastery:blockopal")
-	public static GemBlock blockopal;
-	@GameRegistry.ObjectHolder("elementalmastery:blocktopaz")
-	public static GemBlock blocktopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:blockruby")
-	public static GemBlock blockruby;
-	@GameRegistry.ObjectHolder("elementalmastery:blocksapphire")
-	public static GemBlock blocksapphire;
-	
-	//Gem Ores
-	@GameRegistry.ObjectHolder("elementalmastery:oreopal")
-	public static OreBlock oreopal;
-	@GameRegistry.ObjectHolder("elementalmastery:oretopaz")
-	public static OreBlock oretopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:oreruby")
-	public static OreBlock oreruby;
-	@GameRegistry.ObjectHolder("elementalmastery:oresapphire")
-	public static OreBlock oresapphire;
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ElementalMastery.MODID);
 
-	public static void initModels() {
-		//Gem Blocks
-		blockopal.initModel();
-		blocktopaz.initModel();
-		blockruby.initModel();
-		blocksapphire.initModel();
-		
-		//Gem Ores
-		oreopal.initModel();
-		oretopaz.initModel();
-		oreruby.initModel();
-		oresapphire.initModel();
-		
-	}
+	public static final RegistryObject<Block> OPAL_BLOCK = BLOCKS.register("blockopal", GemBlock::new);
+	public static final RegistryObject<Block> TOPAZ_BLOCK = BLOCKS.register("blocktopaz", GemBlock::new);
+	public static final RegistryObject<Block> RUBY_BLOCK = BLOCKS.register("blockruby", GemBlock::new);
+	public static final RegistryObject<Block> SAPPHIRE_BLOCK = BLOCKS.register("blocksapphire", GemBlock::new);
+
+	public static final RegistryObject<Block> OPAL_ORE = BLOCKS.register("oreopal", OreBlock::new);
+	public static final RegistryObject<Block> TOPAZ_ORE = BLOCKS.register("oretopaz", OreBlock::new);
+	public static final RegistryObject<Block> RUBY_ORE = BLOCKS.register("oreruby", OreBlock::new);
+	public static final RegistryObject<Block> SAPPHIRE_ORE = BLOCKS.register("oresapphire", OreBlock::new);
 }

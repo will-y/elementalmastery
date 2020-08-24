@@ -2,161 +2,150 @@ package eyeroh.elementalmastery.item.tool;
 
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.item.ModItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
+import eyeroh.elementalmastery.CreativeTabs;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.common.ToolType;
 
-public class ItemFarmer extends ItemAxe {
+public class ItemFarmer extends AxeItem {
 
-	public ItemFarmer(ToolMaterial material, String name, float damage, float speed) {
-		super(material, 8.0f, -3.0f);
-		this.setRegistryName(name);
-		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
-		this.setCreativeTab(ModItems.tabGemTools);
+	public ItemFarmer(IItemTier material, float damage, float speed) {
+		super(material, damage, speed, new Item.Properties()
+                .addToolType(ToolType.AXE, material.getHarvestLevel())
+                .addToolType(ToolType.HOE, material.getHarvestLevel())
+                .addToolType(ToolType.SHOVEL, material.getHarvestLevel())
+                .group(CreativeTabs.tabGemTools));
 	}
 	
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND, Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER);
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.SOUL_SAND, Blocks.GRASS_PATH);
+
 	
 	@Override
-	public Set<String> getToolClasses(ItemStack stack) {
-		return ImmutableSet.of("pickaxe", "spade");
-	}
-	
-	@Override
-	public boolean canHarvestBlock(IBlockState block) {
-		return EFFECTIVE_ON.contains(block.getBlock()) ? true : super.canHarvestBlock(block);
+	public boolean canHarvestBlock(BlockState block) {
+		return EFFECTIVE_ON.contains(block.getBlock()) || super.canHarvestBlock(block);
 	}
 	
 	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state){
+	public float getDestroySpeed(ItemStack stack, BlockState state){
 		Material material = state.getMaterial();
-	    return material != Material.CAKE && material != Material.CACTUS && material != Material.WOOD && material != Material.CARPET && material != Material.CLOTH && material != Material.GOURD && material != Material.LEAVES && material != Material.PLANTS && material != Material.VINE && material !=Material.CLAY && material != Material.CRAFTED_SNOW && material != Material.SNOW && material != Material.SAND && material != Material.GRASS && material != Material.GROUND ? super.getDestroySpeed(stack, state) : this.efficiency;
+	    return material != Material.CAKE && material != Material.CACTUS && material != Material.WOOD && material != Material.CARPET && material != Material.WOOL && material != Material.GOURD && material != Material.LEAVES && material != Material.PLANTS && material != Material.OCEAN_PLANT && material !=Material.CLAY && material != Material.SNOW_BLOCK && material != Material.SNOW && material != Material.SAND && material != Material.SEA_GRASS && material != Material.EARTH ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 	
 	private String mode = "Hoe";
 	
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand handIn) {
+	@Override
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand handIn) {
 		 if(player.isSneaking() && world.isRemote) {
 	        	if(mode == "Hoe") {
 	        		mode = "Shovel";
 	        	} else {
 	        		mode = "Hoe";
 	        	}
-	        	 TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.farmer_mode", mode);
-	             component.getStyle().setColor(TextFormatting.GREEN);
+	        	 TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.farmer_mode", mode);
+	             component.getStyle().func_240720_a_(TextFormatting.GREEN);
 	             player.sendStatusMessage(component, true);
 	        }
-		 return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(handIn));
+		 return new ActionResult<ItemStack>(ActionResultType.PASS, player.getHeldItem(handIn));
 	 }
 	
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+	@Override
+    public ActionResultType onItemUse(ItemUseContext context) {
+	    PlayerEntity player = context.getPlayer();
+	    Hand hand = context.getHand();
+	    World world = context.getWorld();
         ItemStack itemstack = player.getHeldItem(hand);
+        BlockPos pos = context.getPos();
+        Direction facing = context.getFace();
         
         if(player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
         	if(!player.isSneaking()) {
             	if(mode=="Hoe") {
-            		int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(itemstack, player, worldIn, pos);
-                    if (hook != 0) return hook > 0 ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
-
-                    IBlockState iblockstate = worldIn.getBlockState(pos);
-                    Block block = iblockstate.getBlock();
-
-                    if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()))
-                    {
-                        if (block == Blocks.GRASS || block == Blocks.GRASS_PATH)
-                        {
-                            this.setBlock(itemstack, player, worldIn, pos, Blocks.FARMLAND.getDefaultState());
-                            return EnumActionResult.SUCCESS;
-                        }
-
-                        if (block == Blocks.DIRT)
-                        {
-                            switch ((BlockDirt.DirtType)iblockstate.getValue(BlockDirt.VARIANT))
-                            {
-                                case DIRT:
-                                    this.setBlock(itemstack, player, worldIn, pos, Blocks.FARMLAND.getDefaultState());
-                                    return EnumActionResult.SUCCESS;
-                                case COARSE_DIRT:
-                                    this.setBlock(itemstack, player, worldIn, pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
-                                    return EnumActionResult.SUCCESS;
-                                default:
-                                	return EnumActionResult.FAIL;
+                    int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(context);
+                    if (hook != 0) {
+                        return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
+                    }
+                    if (context.getFace() != Direction.DOWN && world.isAirBlock(pos.up())) {
+                        BlockState blockstate = world.getBlockState(pos).getToolModifiedState(world, pos, context.getPlayer(), context.getItem(), net.minecraftforge.common.ToolType.HOE);
+                        if (blockstate != null) {
+                            PlayerEntity playerentity = context.getPlayer();
+                            world.playSound(playerentity, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                            if (!world.isRemote) {
+                                world.setBlockState(pos, blockstate, 11);
+                                if (playerentity != null) {
+                                    context.getItem().damageItem(1, playerentity, (p_220043_1_) -> {
+                                        p_220043_1_.sendBreakAnimation(context.getHand());
+                                    });
+                                }
                             }
+
+                            return ActionResultType.func_233537_a_(world.isRemote);
                         }
                     }
 
-                    return EnumActionResult.PASS;
+                    return ActionResultType.PASS;
             	} else {
-            		IBlockState iblockstate = worldIn.getBlockState(pos);
-                    Block block = iblockstate.getBlock();
+            		BlockState blockstate = world.getBlockState(pos);
 
-                    if (facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && block == Blocks.GRASS)
-                    {
-                        IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
-                        worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    if (context.getFace() == Direction.DOWN) {
+                        return ActionResultType.PASS;
+                    } else {
+                        PlayerEntity playerentity = context.getPlayer();
+                        BlockState blockstate1 = blockstate.getToolModifiedState(world, pos, playerentity, context.getItem(), net.minecraftforge.common.ToolType.SHOVEL);
+                        BlockState blockstate2 = null;
+                        if (blockstate1 != null && world.isAirBlock(pos.up())) {
+                            world.playSound(playerentity, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                            blockstate2 = blockstate1;
+                        } else if (blockstate.getBlock() instanceof CampfireBlock && blockstate.get(CampfireBlock.LIT)) {
+                            if (!world.isRemote()) {
+                                world.playEvent((PlayerEntity)null, 1009, pos, 0);
+                            }
 
-                        if (!worldIn.isRemote)
-                        {
-                            worldIn.setBlockState(pos, iblockstate1, 11);
-                            itemstack.damageItem(1, player);
+                            CampfireBlock.func_235475_c_(world, pos, blockstate);
+                            blockstate2 = blockstate.with(CampfireBlock.LIT, Boolean.valueOf(false));
                         }
 
-                        return EnumActionResult.SUCCESS;
-                    }
-                    else
-                    {
-                        return EnumActionResult.PASS;
+                        if (blockstate2 != null) {
+                            if (!world.isRemote) {
+                                world.setBlockState(pos, blockstate2, 11);
+                                if (playerentity != null) {
+                                    context.getItem().damageItem(1, playerentity, (p_220041_1_) -> {
+                                        p_220041_1_.sendBreakAnimation(context.getHand());
+                                    });
+                                }
+                            }
+
+                            return ActionResultType.func_233537_a_(world.isRemote);
+                        } else {
+                            return ActionResultType.PASS;
+                        }
                     }
         	
             	}
         	} else {
-        		return EnumActionResult.PASS;
+        		return ActionResultType.PASS;
         	}
         } else {
-        	return EnumActionResult.FAIL;
+        	return ActionResultType.FAIL;
         }
     }
 	
-	protected void setBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, IBlockState state)
+	protected void setBlock(ItemStack stack, PlayerEntity player, World worldIn, BlockPos pos, BlockState state)
     {
         worldIn.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         if (!worldIn.isRemote)
         {
             worldIn.setBlockState(pos, state, 11);
-            stack.damageItem(1, player);
+            stack.damageItem(1, player, t -> {});
         }
     }
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
 }
