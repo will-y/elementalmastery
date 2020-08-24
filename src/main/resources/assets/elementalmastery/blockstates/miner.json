@@ -1,10 +1,5 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "elementalmastery:miner"
-  },
   "variants": {
-    "normal": [{}],
-    "inventory": [{}]
+    "": { "model": "elementalmastery:block/miner" }
   }
 }

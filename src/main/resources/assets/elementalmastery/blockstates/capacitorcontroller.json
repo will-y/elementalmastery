@@ -1,12 +1,13 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "elementalmastery:capacitorcontroller",
+    "model": "elementalmastery:blocks/capacitorcontroller",
     "textures": {
         "front": "elementalmastery:blocks/capacitorcontroller"
     }
   },
   "variants": {
+    "": { "model": "elementalmastery:block/capacitorcontroller" },
     "normal": [{}],
     "inventory": [{}],
     "facing": {

@@ -1,10 +1,5 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "elementalmastery:oresapphire"
-  },
   "variants": {
-    "normal": [{}],
-    "inventory": [{}]
+    "": { "model": "elementalmastery:block/oresapphire" }
   }
 }
