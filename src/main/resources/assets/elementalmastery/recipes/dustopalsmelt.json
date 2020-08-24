@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "elementalmastery:dustopal"
+  },
+  "result": "elementalmastery:gemopal",
+  "experience": 0.7,
+  "cookingtime": 200
+}

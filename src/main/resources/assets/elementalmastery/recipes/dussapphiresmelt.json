@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "elementalmastery:dustsapphire"
+  },
+  "result": "elementalmastery:gemsapphire",
+  "experience": 0.7,
+  "cookingtime": 200
+}

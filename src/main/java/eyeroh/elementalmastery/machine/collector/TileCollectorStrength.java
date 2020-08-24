@@ -23,7 +23,8 @@ public class TileCollectorStrength extends TileCollector {
 		return this.currentEnergy[3];
 	}
 
-	public int getType() {
+	@Override
+	public int getEnergyType() {
 		return 3;
 	}
 	

@@ -1,5 +1,6 @@
 package eyeroh.elementalmastery;
 
+import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.ModMachines;
@@ -11,7 +12,7 @@ public class CreativeTabs {
     public static final ItemGroup tabGemBlocks = (new ItemGroup("tabGemBlocks") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModMachines.collectorSpeed);
+            return new ItemStack(ModBlocks.OPAL_BLOCK.get());
         }
     });
 
@@ -29,6 +30,15 @@ public class CreativeTabs {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ModTools.OPAL_PICKAXE.get());
+        }
+
+    });
+
+    public static final ItemGroup tabGemMachines = (new ItemGroup("tabGemMachines") {
+
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModMachines.CAPACITOR_CONTROLLER.get());
         }
 
     });

@@ -20,7 +20,7 @@ public class TileEnergyCoreCrafter extends TileEnergyAcceptorInventory{
 			items.getStackInSlot(i).shrink(1);
 		}
 		if(items.getStackInSlot(5).isEmpty()) {
-			items.insertItem(5, new ItemStack(ModItems.energycoreFragment), false);
+			items.insertItem(5, new ItemStack(ModItems.ENERGY_CORE_FRAGMENT.get()), false);
 		} else {
 			items.getStackInSlot(5).grow(1);
 		}

@@ -1,7 +1,6 @@
 package eyeroh.elementalmastery.machine.solar;
 
 import eyeroh.elementalmastery.machine.TileEnergyProvider;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class TileSolar extends TileEnergyProvider {
 
@@ -22,22 +21,22 @@ public class TileSolar extends TileEnergyProvider {
     }
 
     @Override
-    public void update() {
+    public void tick() {
         if (world.isDaytime() && linked) {
             sendPower(energyPerSecond / 20);
         }
     }
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        this.name = compound.getString("name");
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        compound.setString("name", name);
-        return compound;
-    }
+//    @Override
+//    public void readFromNBT(NBTTagCompound compound) {
+//        super.readFromNBT(compound);
+//        this.name = compound.getString("name");
+//    }
+//
+//    @Override
+//    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+//        super.writeToNBT(compound);
+//        compound.setString("name", name);
+//        return compound;
+//    }
 }

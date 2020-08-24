@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 public class TileCollectorHeal extends TileCollector {
 	
-	private static ItemStack[] itemsGenerated = new ItemStack[] {new ItemStack(ModItems.dustOpalSmall), new ItemStack(ModItems.dustTopazSmall), new ItemStack(ModItems.dustRubySmall), new ItemStack(ModItems.dustSapphireSmall), new ItemStack(ModItems.smallHeart)};
+	private static ItemStack[] itemsGenerated = new ItemStack[] {new ItemStack(ModItems.DUST_OPAL_SMALL.get()), new ItemStack(ModItems.DUST_TOPAZ_SMALL.get()), new ItemStack(ModItems.DUST_RUBY_SMALL.get()), new ItemStack(ModItems.DUST_SAPPHIRE_SMALL.get()), new ItemStack(ModItems.SMALL_HEART.get())};
 	
 	
 	public TileCollectorHeal() {
@@ -27,7 +27,8 @@ public class TileCollectorHeal extends TileCollector {
 		return this.currentEnergy[2];
 	}
 
-	public int getType() {
+	@Override
+	public int getEnergyType() {
 		return 2;
 	}
 }

@@ -1,5 +1,6 @@
 package eyeroh.elementalmastery.machine;
 
+import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.block.BlockCapacitorGlass;
 import eyeroh.elementalmastery.block.GemBlock;
 import eyeroh.elementalmastery.block.UpgradeBlock;
@@ -12,122 +13,49 @@ import eyeroh.elementalmastery.machine.collector.CollectorStrength;
 import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.miner.BlockMiner;
 import eyeroh.elementalmastery.machine.solar.BlockSolar;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.Block;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModMachines {
 	
-	public static final CreativeTabs tabGemMachines = (new CreativeTabs("tabGemMachines") {
-
-		@Override
-		public ItemStack getTabIconItem() {
-			return new ItemStack(ModMachines.capacitorController);
-		}
-		
-	});
+	public static final DeferredRegister<Block> MACHINES = DeferredRegister.create(ForgeRegistries.BLOCKS, ElementalMastery.MODID);
 	
-	@GameRegistry.ObjectHolder("elementalmastery:collectorbasic")
-	public static CollectorBlock collectorBasic;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:collectorspeed")
-	public static CollectorSpeed collectorSpeed;
-	@GameRegistry.ObjectHolder("elementalmastery:collectorfire")
-	public static CollectorFire collectorFire;
-	@GameRegistry.ObjectHolder("elementalmastery:collectorheal")
-	public static CollectorHeal collectorHeal;
-	@GameRegistry.ObjectHolder("elementalmastery:collectorstrength")
-	public static CollectorStrength collectorStrength;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:generatoropal")
-	public static GeneratorBlock generatorOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:generatortopaz")
-	public static GeneratorBlock generatorTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:generatorruby")
-	public static GeneratorBlock generatorRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:generatorsapphire")
-	public static GeneratorBlock generatorSapphire;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:corecrafter")
-	public static BlockEnergyAcceptor coreCrafter;
-	
-	@GameRegistry.ObjectHolder("elementalmastery:miner")
-	public static BlockMiner miner;
+	public static final RegistryObject<Block> COLLECTOR_BAISC = MACHINES.register("collectorbasic", () -> new CollectorBlock(4));
 
-	// Capacitor stuff
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorwall")
-	public static GemBlock capacitorWall;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorcontroller")
-	public static BlockCapacitorController capacitorController;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorglass")
-	public static BlockCapacitorGlass capacitorGlass;
+	public static final RegistryObject<Block> COLLECTOR_SPEED = MACHINES.register("collectorspeed", CollectorSpeed::new);
+	public static final RegistryObject<Block> COLLECTOR_FIRE = MACHINES.register("collectorfire", CollectorFire::new);
+	public static final RegistryObject<Block> COLLECTOR_HEAL = MACHINES.register("collectorheal", CollectorHeal::new);
+	public static final RegistryObject<Block> COLLECTOR_STRENGTH = MACHINES.register("collectorstrength", CollectorStrength::new);
 
-	@GameRegistry.ObjectHolder("elementalmastery:capacitoropal")
-	public static GemBlock capacitorOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitortopaz")
-	public static GemBlock capacitorTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorruby")
-	public static GemBlock capacitorRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitorsapphire")
-	public static GemBlock capacitorSapphire;
-	@GameRegistry.ObjectHolder("elementalmastery:capacitormulti")
-	public static GemBlock capacitorMulti;
+	public static final RegistryObject<Block> GENERATOR_SPEED = MACHINES.register("generatorspeed", () -> new GeneratorBlock("speed", 0));
+	public static final RegistryObject<Block> GENERATOR_FIRE = MACHINES.register("generatorfire", () -> new GeneratorBlock("fire", 1));
+	public static final RegistryObject<Block> GENERATOR_HEAL = MACHINES.register("generatorheal", () -> new GeneratorBlock("heal", 2));
+	public static final RegistryObject<Block> GENERATOR_STRENGTH = MACHINES.register("generatorstrength", () -> new GeneratorBlock("strength", 3));
 
-	// Miner Upgrades
-	@GameRegistry.ObjectHolder("elementalmastery:upgradespeed")
-	public static UpgradeBlock upgradeSpeed;
-	@GameRegistry.ObjectHolder("elementalmastery:upgradefire")
-	public static UpgradeBlock upgradeFire;
-	@GameRegistry.ObjectHolder("elementalmastery:upgradeheal")
-	public static UpgradeBlock upgradeHeal;
-	@GameRegistry.ObjectHolder("elementalmastery:upgradestrength")
-	public static UpgradeBlock upgradeStrength;
+	public static final RegistryObject<Block> CORE_CRAFTER = MACHINES.register("corecrafter", () -> new BlockEnergyAcceptor(0, 0));
 
-	// Solars
-	@GameRegistry.ObjectHolder("elementalmastery:solaropal")
-	public static BlockSolar solarOpal;
-	@GameRegistry.ObjectHolder("elementalmastery:solartopaz")
-	public static BlockSolar solarTopaz;
-	@GameRegistry.ObjectHolder("elementalmastery:solarruby")
-	public static BlockSolar solarRuby;
-	@GameRegistry.ObjectHolder("elementalmastery:solarsapphire")
-	public static BlockSolar solarSapphire;
-	
-	public static void initModels() {
-		collectorBasic.initModel();
-		
-		generatorOpal.initModel();
-		generatorTopaz.initModel();
-		generatorRuby.initModel();
-		generatorSapphire.initModel();
-		
-		collectorSpeed.initModel();
-		collectorFire.initModel();
-		collectorHeal.initModel();
-		collectorStrength.initModel();
-		
-		coreCrafter.initModel();
-		
-		miner.initModel();
+	public static final RegistryObject<Block> MINER = MACHINES.register("miner", BlockMiner::new);
 
-		capacitorWall.initModel();
-		capacitorController.initModel();
-		capacitorGlass.initModel();
+	public static final RegistryObject<Block> CAPACITOR_WALL = MACHINES.register("capacitorwall", GemBlock::new);
+	public static final RegistryObject<Block> CAPACITOR_CONTROLLER = MACHINES.register("capacitorcontroller", BlockCapacitorController::new);
+	public static final RegistryObject<Block> CAPACITOR_GLASS = MACHINES.register("capacitorglass", BlockCapacitorGlass::new);
 
-		capacitorOpal.initModel();
-		capacitorTopaz.initModel();
-		capacitorRuby.initModel();
-		capacitorSapphire.initModel();
-		capacitorMulti.initModel();
+	public static final RegistryObject<Block> CAPACITOR_OPAL = MACHINES.register("capacitoropal", GemBlock::new);
+	public static final RegistryObject<Block> CAPACITOR_TOPAZ = MACHINES.register("capacitortopaz", GemBlock::new);
+	public static final RegistryObject<Block> CAPACITOR_RUBY = MACHINES.register("capacitorruby", GemBlock::new);
+	public static final RegistryObject<Block> CAPACITOR_SAPPHIRE = MACHINES.register("capacitorsapphire", GemBlock::new);
+	public static final RegistryObject<Block> CAPACITOR_MULTI = MACHINES.register("capacitormulti", GemBlock::new);
 
-		upgradeSpeed.initModel();
-		upgradeFire.initModel();
-		upgradeHeal.initModel();
-		upgradeStrength.initModel();
+	public static final RegistryObject<Block> UPGRADE_SPEED = MACHINES.register("upgradespeed", () -> new UpgradeBlock(0));
+	public static final RegistryObject<Block> UPGRADE_FIRE = MACHINES.register("upgradefire", () -> new UpgradeBlock(1));
+	public static final RegistryObject<Block> UPGRADE_HEAL = MACHINES.register("upgradeheal", () -> new UpgradeBlock(2));
+	public static final RegistryObject<Block> UPGRADE_STRENGTH = MACHINES.register("upgradestrength", () -> new UpgradeBlock(3));
 
-		solarOpal.initModel();
-		solarTopaz.initModel();
-		solarRuby.initModel();
-		solarSapphire.initModel();
-	}
+	public static final RegistryObject<Block> SOLAR_OPAL = MACHINES.register("solaropal", () -> new BlockSolar("opal", 0));
+	public static final RegistryObject<Block> SOLAR_TOPAZ = MACHINES.register("solartopaz", () -> new BlockSolar("topaz", 1));
+	public static final RegistryObject<Block> SOLAR_RUBY = MACHINES.register("solarruby", () -> new BlockSolar("ruby", 2));
+	public static final RegistryObject<Block> SOLAR_SAPPHIRE = MACHINES.register("solarsapphire", () -> new BlockSolar("sapphire", 3));
 }

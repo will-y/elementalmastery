@@ -8,12 +8,12 @@ import net.minecraft.world.World;
 public class BlockCoreCrafter extends BlockEnergyAcceptor {
 
 	public BlockCoreCrafter() {
-		super("corecrafter", 0, 0);
+		super(0, 0);
 	}
 	
-	@Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEnergyCoreCrafter();
-    }
+//	@Override
+//    public TileEntity createNewTileEntity(World worldIn, int meta) {
+//        return new TileEnergyCoreCrafter();
+//    }
 
 }

@@ -7,12 +7,12 @@ import net.minecraft.world.World;
 public class CollectorHeal extends CollectorBlock {
 
 	public CollectorHeal() {
-		super("heal", 3);
+		super(3);
 	}
 	
-	@Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileCollectorHeal();
-    }
+//	@Override
+//    public TileEntity createNewTileEntity(World worldIn, int meta) {
+//        return new TileCollectorHeal();
+//    }
 
 }

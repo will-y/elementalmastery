@@ -2,6 +2,10 @@ package eyeroh.elementalmastery;
 
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
+import eyeroh.elementalmastery.item.armor.ModArmor;
+import eyeroh.elementalmastery.item.tool.ModTools;
+import eyeroh.elementalmastery.machine.ModMachines;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -20,6 +24,11 @@ public class ElementalMastery {
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModMachines.MACHINES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModTools.TOOLS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModArmor.ARMOR.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

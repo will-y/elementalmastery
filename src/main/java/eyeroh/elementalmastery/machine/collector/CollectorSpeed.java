@@ -7,11 +7,11 @@ import net.minecraft.world.World;
 public class CollectorSpeed extends CollectorBlock {
 
 	public CollectorSpeed() {
-		super("speed", 0);
+		super( 0);
 	}
 	
-	@Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileCollectorSpeed();
-    }
+//	@Override
+//    public TileEntity createNewTileEntity(World worldIn, int meta) {
+//        return new TileCollectorSpeed();
+//    }
 }

@@ -7,12 +7,12 @@ import net.minecraft.world.World;
 public class CollectorFire extends CollectorBlock {
 
 	public CollectorFire() {
-		super("fire", 2);
+		super( 2);
 	}
 	
-	@Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileCollectorFire();
-    }
+//	@Override
+//    public TileEntity createNewTileEntity(World worldIn, int meta) {
+//        return new TileCollectorFire();
+//    }
 
 }

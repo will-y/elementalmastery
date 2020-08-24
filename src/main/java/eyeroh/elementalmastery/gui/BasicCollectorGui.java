@@ -11,7 +11,7 @@ public class BasicCollectorGui {
 	public static final int WIDTH = 177;
     public static final int HEIGHT = 167;
     public static final int progressBarLength = 158;
-    public CollectorBasicTileEntity tileEntity = new CollectorBasicTileEntity();
+    public CollectorBasicTileEntity tileEntity;
     
     private int progressBarCounter = 0;
     private int progressBarMaxCounter = 5;

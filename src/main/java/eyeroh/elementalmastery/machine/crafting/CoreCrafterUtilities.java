@@ -2,8 +2,8 @@ package eyeroh.elementalmastery.machine.crafting;
 
 import java.util.ArrayList;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 public class CoreCrafterUtilities {
 	private static ArrayList<ItemStack> validEdge = new ArrayList<ItemStack>();

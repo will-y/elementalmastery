@@ -7,12 +7,12 @@ import net.minecraft.world.World;
 public class CollectorStrength extends CollectorBlock {
 
 	public CollectorStrength() {
-		super("strength", 2);
+		super(2);
 	}
 	
-	@Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileCollectorStrength();
-    }
+//	@Override
+//    public TileEntity createNewTileEntity(World worldIn, int meta) {
+//        return new TileCollectorStrength();
+//    }
 
 }
