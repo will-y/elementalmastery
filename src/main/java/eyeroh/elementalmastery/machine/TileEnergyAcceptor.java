@@ -2,26 +2,17 @@ package eyeroh.elementalmastery.machine;
 
 import java.util.ArrayList;
 
-import javax.annotation.Nullable;
-
 import com.google.common.primitives.Ints;
 
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class TileEnergyAcceptor extends TileEntity implements ITickable {
 	
@@ -39,56 +30,57 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	public boolean active = false;
 	
 	public TileEnergyAcceptor(int[] storage, int[] usage, int maxProgress) {
+		super(TileEntityType.CHEST);
 		this.storage = storage;
 		this.usage = usage;
 		this.maxProgress = maxProgress;
 	}
 	
 	@Override
-    public NBTTagCompound getUpdateTag() {
-        return writeToNBT(new NBTTagCompound());
+    public CompoundNBT getUpdateTag() {
+        return write(new CompoundNBT());
     }
 
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        this.readFromNBT(packet.getNbtCompound());
-    }
+//    @Override
+//    public SPacketUpdateTileEntity getUpdatePacket() {
+//        NBTTagCompound nbtTag = new NBTTagCompound();
+//        this.writeToNBT(nbtTag);
+//        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+//    }
+//
+//    @Override
+//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+//        this.readFromNBT(packet.getNbtCompound());
+//    }
+//
+//	@Override
+//    public void readFromNBT(NBTTagCompound compound) {
+//        super.readFromNBT(compound);
+//    	this.currentEnergy = compound.getIntArray("energy");
+//    	this.usage = compound.getIntArray("usage");
+//    	this.currentProgress = compound.getInteger("progress");
+//    	this.maxProgress = compound.getInteger("max_progress");
+//    	this.storage = compound.getIntArray("storage");
+//    	this.energyCounter = compound.getInteger("energy_counter");
+//    	this.energyUseCounter = compound.getInteger("energy_use_counter");
+//        if(compound.hasKey("capacitor")) {
+//        	this.capacitorPos = BlockPos.fromLong(compound.getLong("capacitor"));
+//        }
+//    }
 	
-	@Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-    	this.currentEnergy = compound.getIntArray("energy");
-    	this.usage = compound.getIntArray("usage");
-    	this.currentProgress = compound.getInteger("progress");
-    	this.maxProgress = compound.getInteger("max_progress");
-    	this.storage = compound.getIntArray("storage");
-    	this.energyCounter = compound.getInteger("energy_counter");
-    	this.energyUseCounter = compound.getInteger("energy_use_counter");
-        if(compound.hasKey("capacitor")) {
-        	this.capacitorPos = BlockPos.fromLong(compound.getLong("capacitor"));
-        }
-    }
-	
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-    	compound.setIntArray("energy", currentEnergy);
-    	compound.setIntArray("usage", this.usage);
-    	compound.setInteger("progress", this.currentProgress);
-    	compound.setInteger("max_progress", this.maxProgress);
-    	compound.setIntArray("storage", this.storage);
-    	compound.setInteger("energy_counter", this.energyCounter);
-    	compound.setInteger("energy_use_counter", this.energyUseCounter);
+    public CompoundNBT write(CompoundNBT compound) {
+    	compound.putIntArray("energy", currentEnergy);
+    	compound.putIntArray("usage", this.usage);
+    	compound.putInt("progress", this.currentProgress);
+    	compound.putInt("max_progress", this.maxProgress);
+    	compound.putIntArray("storage", this.storage);
+    	compound.putInt("energy_counter", this.energyCounter);
+    	compound.putInt("energy_use_counter", this.energyUseCounter);
     	if(linkedCapacitor != null) {
-    		compound.setLong("capacitor", this.linkedCapacitor.getPos().toLong());
+    		compound.putLong("capacitor", this.linkedCapacitor.getPos().toLong());
     	}
-        return super.writeToNBT(compound);
+        return super.write(compound);
     }
 	
 	public boolean addEnergy(int type, int amount) {
@@ -161,8 +153,7 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		}
 		
 	}
-	
-	@SideOnly(Side.CLIENT)
+
     public int getCurrentProgress() {
     	return this.currentProgress;
     }
@@ -176,7 +167,7 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 	}
 
 	@Override
-	public void update() {
+	public void tick() {
 		retrieveEnergy();
 		if(this.getActive()) {
 			this.useAllEnergy();
@@ -220,8 +211,9 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		}
 	}
     
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
+    public boolean canInteractWith(PlayerEntity playerIn) {
+		return false;
+        //return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
     }
     
     public String getName() {
@@ -232,10 +224,10 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 		return false;
 	}
 	
-	@Override
-	public ITextComponent getDisplayName() {
-		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
-	}
+//	@Override
+//	public ITextComponent getDisplayName() {
+//		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
+//	}
 	
 	public void addCapacitor(TileEntityCapacitorController te) {
 		this.linkedCapacitor = te;

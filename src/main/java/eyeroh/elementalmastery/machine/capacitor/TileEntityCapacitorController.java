@@ -3,28 +3,20 @@ package eyeroh.elementalmastery.machine.capacitor;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.management.NotificationBroadcaster;
-
-import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.machine.ModMachines;
-import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
-import io.netty.channel.MaxBytesRecvByteBufAllocator;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.INBTSerializable;
 
-public class TileEntityCapacitorController extends TileEntity implements ITickable{
+public class TileEntityCapacitorController extends TileEntity implements ITickable {
 	
 	private int[] energyAmount;
 	private int[] energyMax;
@@ -33,6 +25,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 	//private ArrayList<TileEnergyAcceptor> machines = new ArrayList<TileEnergyAcceptor>();
 	
 	public TileEntityCapacitorController() {
+		super(TileEntityType.CHEST);
 		energyAmount = new int[] {0, 0, 0, 0};
 		energyMax = new int[] {0, 0, 0, 0};
 		active = false;
@@ -58,73 +51,73 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 	}
 	
 	public boolean check3x3(String axis, int direction) {
-		if(!this.world.isRemote) {
-			if(axis == "X" || axis == "x") {
-				if(direction == -1) {
-					for (int x = -1; x < 2; x++) {
-						for(int y = -1; y < 2; y++) {
-							for(int z = -2; z < 1; z++) {
-								if(!(x==0 && y==0 && z==0)) {
-									if(!(z==-1 && x==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-											return false;
-										}
-									}
-								}
-							}
-						}
-					}
-					return true;
-				} else if (direction == 1) {
-					for (int x = -1; x < 2; x++) {
-						for(int y = -1; y < 2; y++) {
-							for(int z = 0; z < 3; z++) {
-								if(!(x==0 && y==0 && z==0)) {
-									if(!(z==1 && x==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-											return false;
-										}
-									}
-								}
-							}
-						}
-					}
-					return true;
-				}
-			} else if (axis == "Z" || axis == "z") {
-				if(direction == -1) {
-					for (int x = -2; x < 1; x++) {
-						for(int y = -1; y < 2; y++) {
-							for(int z = -1; z < 2; z++) {
-								if(!(x==0 && y==0 && z==0)) {
-									if(!(x==-1 && z==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-											return false;
-										}
-									}
-								}
-							}
-						}
-					}
-					return true;
-				} else if(direction == 1) {
-					for (int x = 0; x < 3; x++) {
-						for(int y = -1; y < 2; y++) {
-							for(int z = -1; z < 2; z++) {
-								if(!(x==0 && y==0 && z==0)) {
-									if(!(x==1 && z==0 && y==0)) {
-										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-											return false;
-										}
-									}
-								}
-							}
-						}
-					}
-					return true;
-				}
-			}
-		}
+//		if(!this.world.isRemote) {
+//			if(axis == "X" || axis == "x") {
+//				if(direction == -1) {
+//					for (int x = -1; x < 2; x++) {
+//						for(int y = -1; y < 2; y++) {
+//							for(int z = -2; z < 1; z++) {
+//								if(!(x==0 && y==0 && z==0)) {
+//									if(!(z==-1 && x==0 && y==0)) {
+//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
+//											return false;
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//					return true;
+//				} else if (direction == 1) {
+//					for (int x = -1; x < 2; x++) {
+//						for(int y = -1; y < 2; y++) {
+//							for(int z = 0; z < 3; z++) {
+//								if(!(x==0 && y==0 && z==0)) {
+//									if(!(z==1 && x==0 && y==0)) {
+//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
+//											return false;
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//					return true;
+//				}
+//			} else if (axis == "Z" || axis == "z") {
+//				if(direction == -1) {
+//					for (int x = -2; x < 1; x++) {
+//						for(int y = -1; y < 2; y++) {
+//							for(int z = -1; z < 2; z++) {
+//								if(!(x==0 && y==0 && z==0)) {
+//									if(!(x==-1 && z==0 && y==0)) {
+//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
+//											return false;
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//					return true;
+//				} else if(direction == 1) {
+//					for (int x = 0; x < 3; x++) {
+//						for(int y = -1; y < 2; y++) {
+//							for(int z = -1; z < 2; z++) {
+//								if(!(x==0 && y==0 && z==0)) {
+//									if(!(x==1 && z==0 && y==0)) {
+//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
+//											return false;
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//					return true;
+//				}
+//			}
+//		}
 		return false;
 	}
 	
@@ -133,34 +126,34 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 	}
 	
 	public void addMaxEnergy(World world) {
-		Block block = Blocks.AIR;
-		if(this.capacitorDirection.getAxis() == "x") {
-			if(this.capacitorDirection.getDirection() == 1) {
-				block = world.getBlockState(this.pos.add(0, 0, 1)).getBlock();
-			} else if(this.capacitorDirection.getDirection() == -1) {
-				block = world.getBlockState(this.pos.add(0, 0, -1)).getBlock();
-			}
-		} else if (this.capacitorDirection.getAxis() == "z") {
-			if(this.capacitorDirection.getDirection() == 1) {
-				block = world.getBlockState(this.pos.add(1, 0, 0)).getBlock();
-			} else if(this.capacitorDirection.getDirection() == -1) {
-				block = world.getBlockState(this.pos.add(-1, 0, 0)).getBlock();
-			}
-		}
-		if(Block.isEqualTo(block, ModMachines.capacitorOpal)) {
-			this.energyMax[0] += 100000;
-		} else if(Block.isEqualTo(block, ModMachines.capacitorTopaz)) {
-			this.energyMax[1] += 100000;
-		} else if(Block.isEqualTo(block, ModMachines.capacitorRuby)) {
-			this.energyMax[2] += 100000;
-		} else if(Block.isEqualTo(block, ModMachines.capacitorSapphire)) {
-			this.energyMax[3] += 100000;
-		} else if(Block.isEqualTo(block,  ModMachines.capacitorMulti)) {
-			this.energyMax[0] += 25000;
-			this.energyMax[1] += 25000;
-			this.energyMax[2] += 25000;
-			this.energyMax[3] += 25000;
-		}
+//		Block block = Blocks.AIR;
+//		if(this.capacitorDirection.getAxis() == "x") {
+//			if(this.capacitorDirection.getDirection() == 1) {
+//				block = world.getBlockState(this.pos.add(0, 0, 1)).getBlock();
+//			} else if(this.capacitorDirection.getDirection() == -1) {
+//				block = world.getBlockState(this.pos.add(0, 0, -1)).getBlock();
+//			}
+//		} else if (this.capacitorDirection.getAxis() == "z") {
+//			if(this.capacitorDirection.getDirection() == 1) {
+//				block = world.getBlockState(this.pos.add(1, 0, 0)).getBlock();
+//			} else if(this.capacitorDirection.getDirection() == -1) {
+//				block = world.getBlockState(this.pos.add(-1, 0, 0)).getBlock();
+//			}
+//		}
+//		if(Block.isEqualTo(block, ModMachines.capacitorOpal)) {
+//			this.energyMax[0] += 100000;
+//		} else if(Block.isEqualTo(block, ModMachines.capacitorTopaz)) {
+//			this.energyMax[1] += 100000;
+//		} else if(Block.isEqualTo(block, ModMachines.capacitorRuby)) {
+//			this.energyMax[2] += 100000;
+//		} else if(Block.isEqualTo(block, ModMachines.capacitorSapphire)) {
+//			this.energyMax[3] += 100000;
+//		} else if(Block.isEqualTo(block,  ModMachines.capacitorMulti)) {
+//			this.energyMax[0] += 25000;
+//			this.energyMax[1] += 25000;
+//			this.energyMax[2] += 25000;
+//			this.energyMax[3] += 25000;
+//		}
 	}
 	
 	
@@ -223,41 +216,41 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 	}
 	
 	@Override
-    public NBTTagCompound getUpdateTag() {
-        return writeToNBT(new NBTTagCompound());
+    public CompoundNBT getUpdateTag() {
+        return write(new CompoundNBT());
     }
 
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
-    }
+//    @Override
+//    public SPacketUpdateTileEntity getUpdatePacket() {
+//        NBTTagCompound nbtTag = new NBTTagCompound();
+//        this.writeToNBT(nbtTag);
+//        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+//    }
+
+//    @Override
+//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+//        this.readFromNBT(packet.getNbtCompound());
+//    }
+//
+//	@Override
+//    public void readFromNBT(NBTTagCompound compound) {
+//        super.readFromNBT(compound);
+//        energyAmount = compound.getIntArray("energy");
+//        active = compound.getBoolean("active");
+//        energyMax = compound.getIntArray("energy_max");
+//    }
 
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        this.readFromNBT(packet.getNbtCompound());
-    }
-	
-	@Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        energyAmount = compound.getIntArray("energy");
-        active = compound.getBoolean("active");
-        energyMax = compound.getIntArray("energy_max");
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setIntArray("energy", energyAmount);
-        compound.setBoolean("active", active);
-        compound.setIntArray("energy_max", energyMax);
-        return super.writeToNBT(compound);
+    public CompoundNBT write(CompoundNBT compound) {
+        compound.putIntArray("energy", energyAmount);
+        compound.putBoolean("active", active);
+        compound.putIntArray("energy_max", energyMax);
+        return super.write(compound);
     }
     
-    public void showEnergyAmount(EntityPlayer player) {
-    	TextComponentTranslation component = new TextComponentTranslation("message.elementalmastery.capacitor_amount", energyAmount[0] + "/" + energyMax[0] + "(O), " + energyAmount[1] + "/" + energyMax[1] + "(T), " + energyAmount[2] + "/" + energyMax[2] + "(R), " + energyAmount[3] + "/" + energyMax[3] + "(S)");
-    	component.getStyle().setColor(TextFormatting.BLUE);
+    public void showEnergyAmount(PlayerEntity player) {
+    	TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_amount", energyAmount[0] + "/" + energyMax[0] + "(O), " + energyAmount[1] + "/" + energyMax[1] + "(T), " + energyAmount[2] + "/" + energyMax[2] + "(R), " + energyAmount[3] + "/" + energyMax[3] + "(S)");
+    	component.getStyle().func_240723_c_(TextFormatting.BLUE);
         player.sendStatusMessage(component, true);
     }
     
@@ -270,7 +263,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
     }
     
 	@Override
-	public void update() {
+	public void tick() {
 //		if(counter >= 20) {
 //			int[] usage;
 //			for(TileEnergyAcceptor machine : machines) {

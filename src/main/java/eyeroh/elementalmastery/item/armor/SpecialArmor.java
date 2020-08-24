@@ -1,68 +1,62 @@
 package eyeroh.elementalmastery.item.armor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-import eyeroh.elementalmastery.ElementalMastery;
-import eyeroh.elementalmastery.item.ModItems;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import eyeroh.elementalmastery.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SpecialArmor extends ItemArmor{
+public class SpecialArmor extends ArmorItem {
 	
 	private boolean[] returnArray = new boolean[] {false, false, false, false};
 	private int timer = 400;
 	
-	public SpecialArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, String name) {
-		super(materialIn, renderIndexIn, equipmentSlotIn);
-		this.setRegistryName(name);
-		this.setUnlocalizedName(ElementalMastery.MODID + "." + name);
-		this.setCreativeTab(ModItems.tabGemTools);
+	public SpecialArmor(IArmorMaterial materialIn, EquipmentSlotType equipmentSlotIn) {
+		super(materialIn, equipmentSlotIn, new Item.Properties().group(CreativeTabs.tabGemTools));
 	}
-	
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		if(!world.isRemote && this.armorType == EntityEquipmentSlot.HEAD) {
+	public void inventoryTick(ItemStack stack, World world, Entity entityIn, int itemSlot, boolean isSelected) {
+		if(!world.isRemote && this.getEquipmentSlot() == EquipmentSlotType.HEAD && entityIn instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity) entityIn;
 			timer++;
 			if(timer >= 395) {
-				if(this.getArmorMaterial() == ModArmor.ARMORMATERIALSPEED) {
+				if(this.getArmorMaterial() == ArmorMaterials.SPEED) {
 					if(checkArmor(player.getArmorInventoryList(), "Speed")) {
-						applyPotion(player, 1, 800, 2);
-						applyPotion(player, 3, 800, 1);
-						applyPotion(player, 18, 800, 0);
+						applyPotion(player, Effects.SPEED, 800, 2);
+						applyPotion(player, Effects.HASTE, 800, 1);
+						applyPotion(player, Effects.WEAKNESS, 800, 0);
 						timer = 0;
 					}
-				} else if (this.getArmorMaterial() == ModArmor.ARMORMATERIALFIRE) {
+				} else if (this.getArmorMaterial() == ArmorMaterials.FIRE) {
 					if(checkArmor(player.getArmorInventoryList(), "Fire")) {
-						applyPotion(player, 12, 800, 0);
+						applyPotion(player, Effects.FIRE_RESISTANCE, 800, 0);
 						timer = 0;
 					}
-				} else if (this.getArmorMaterial() == ModArmor.ARMORMATERIALHEAL) {
+				} else if (this.getArmorMaterial() == ArmorMaterials.HEAL) {
 					if(checkArmor(player.getArmorInventoryList(), "Healing")) {
-						applyPotion(player, 10, 100, 0);
-						applyPotion(player, 22, 800, 0);
-						applyPotion(player, 4, 800, 0);
+						applyPotion(player, Effects.REGENERATION, 100, 0);
+						applyPotion(player, Effects.ABSORPTION, 800, 0);
+						applyPotion(player, Effects.MINING_FATIGUE, 800, 0);
 						timer = 0;
 					}
-				} else if(this.getArmorMaterial() == ModArmor.ARMORMATERIALSTRENGTH) {
+				} else if(this.getArmorMaterial() == ArmorMaterials.STRENGTH) {
 					if(checkArmor(player.getArmorInventoryList(), "Strength")) {
-						applyPotion(player, 5, 800, 2);
-						applyPotion(player, 11, 800, 1);
-						applyPotion(player, 2, 800, 0);
+						applyPotion(player, Effects.STRENGTH, 800, 2);
+						applyPotion(player, Effects.RESISTANCE, 800, 1);
+						applyPotion(player, Effects.SLOWNESS, 800, 0);
 						timer = 0;
 					}
 				}
-				
+
 			}
 		}
 	}
@@ -70,20 +64,19 @@ public class SpecialArmor extends ItemArmor{
 	public boolean checkArmor(Iterable<ItemStack> itemStack, String name) {
 		resetArray();
 		itemStack.forEach(item -> {
-			
-			if(item.getItem().getItemStackDisplayName(item).equals(name + " Helmet")) {
+			if(item.getItem().getDisplayName(item).equals(name + " Helmet")) {
 				returnArray[0] = true;
-			} else if(item.getItem().getItemStackDisplayName(item).equals(name + " Chestplate")) {
+			} else if(item.getItem().getDisplayName(item).equals(name + " Chestplate")) {
 				returnArray[1] = true; 
-			} else if (item.getItem().getItemStackDisplayName(item).equals(name + " Leggings")) {
+			} else if (item.getItem().getDisplayName(item).equals(name + " Leggings")) {
 				returnArray[2] = true;
-			} else if (item.getItem().getItemStackDisplayName(item).equals(name + " Boots")) {
+			} else if (item.getItem().getDisplayName(item).equals(name + " Boots")) {
 				returnArray[3] = true;
 			}
 		});
-		
-		for (int j = 0; j < returnArray.length; j++) {
-			if(returnArray[j] == false) {
+
+		for (boolean b : returnArray) {
+			if (!b) {
 				return false;
 			}
 		}
@@ -92,24 +85,15 @@ public class SpecialArmor extends ItemArmor{
 	}
 	
 	private void resetArray() {
-		for(int i = 0; i > returnArray.length; i++) {
-			returnArray[i] = false;
-		}
+		Arrays.fill(returnArray, false);
 	}
 	
-	private void applyPotion(EntityPlayer player, int potion, int duration, int level) {
-		player.addPotionEffect(new PotionEffect(Potion.getPotionById(potion), duration, level, true, false));
+	private void applyPotion(PlayerEntity player, Effect effect, int duration, int level) {
+		player.addPotionEffect(new EffectInstance(effect, duration, level, true, false));
 	}
 	
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
-	
-	
-	@SideOnly(Side.CLIENT)
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
-
 }

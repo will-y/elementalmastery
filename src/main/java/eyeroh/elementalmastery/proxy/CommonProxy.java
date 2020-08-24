@@ -7,7 +7,6 @@ import eyeroh.elementalmastery.block.GemBlock;
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.block.OreBlock;
 import eyeroh.elementalmastery.block.UpgradeBlock;
-import eyeroh.elementalmastery.item.armor.GemArmor;
 import eyeroh.elementalmastery.item.armor.ModArmor;
 import eyeroh.elementalmastery.item.armor.SpecialArmor;
 import eyeroh.elementalmastery.item.tool.FireAxe;

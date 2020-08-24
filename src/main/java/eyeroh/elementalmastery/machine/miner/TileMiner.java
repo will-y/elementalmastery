@@ -3,21 +3,18 @@ package eyeroh.elementalmastery.machine.miner;
 import eyeroh.elementalmastery.block.UpgradeBlock;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.chunk.IChunk;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -68,7 +65,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	}
 	
 	@Override
-	public void update() {
+	public void tick() {
 		retrieveEnergy();
 		if(this.getActive()) {
 			this.useAllEnergy();
@@ -96,64 +93,64 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 		}
 	}
 	
-	@Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        currentX = compound.getInteger("curX");
-        currentY = compound.getInteger("curY");
-        currentZ = compound.getInteger("curZ");
-        minX = compound.getInteger("minX");
-        minY = compound.getInteger("minY");
-        minZ = compound.getInteger("minZ");
-        maxX = compound.getInteger("maxX");
-        maxY = compound.getInteger("maxY");
-        maxZ = compound.getInteger("maxZ");
-        on = compound.getBoolean("on");
-        if (compound.hasKey("upgrades")) {
-        	upgradeCount = compound.getIntArray("upgrades");
-        } else {
-        	upgradeCount = new int[] {0, 0, 0, 0};
-        }
-        if (compound.hasKey("container_amount")) {
-        	int containers = compound.getInteger("container_amount");
-			targetInventoryPos = new ArrayList<>();
-        	if (containers != 0) {
-				for (int i = 0; i < containers; i++) {
-					if (compound.hasKey("container" + i)) {
-						targetInventoryPos.add(BlockPos.fromLong(compound.getLong("container" + i)));
-					}
-				}
-			}
-        }      
-    }
+//	@Override
+//    public void readFromNBT(NBTTagCompound compound) {
+//        super.readFromNBT(compound);
+//        currentX = compound.getInteger("curX");
+//        currentY = compound.getInteger("curY");
+//        currentZ = compound.getInteger("curZ");
+//        minX = compound.getInteger("minX");
+//        minY = compound.getInteger("minY");
+//        minZ = compound.getInteger("minZ");
+//        maxX = compound.getInteger("maxX");
+//        maxY = compound.getInteger("maxY");
+//        maxZ = compound.getInteger("maxZ");
+//        on = compound.getBoolean("on");
+//        if (compound.hasKey("upgrades")) {
+//        	upgradeCount = compound.getIntArray("upgrades");
+//        } else {
+//        	upgradeCount = new int[] {0, 0, 0, 0};
+//        }
+//        if (compound.hasKey("container_amount")) {
+//        	int containers = compound.getInteger("container_amount");
+//			targetInventoryPos = new ArrayList<>();
+//        	if (containers != 0) {
+//				for (int i = 0; i < containers; i++) {
+//					if (compound.hasKey("container" + i)) {
+//						targetInventoryPos.add(BlockPos.fromLong(compound.getLong("container" + i)));
+//					}
+//				}
+//			}
+//        }
+//    }
 	
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setInteger("curX", currentX);
-        compound.setInteger("curY", currentY);
-        compound.setInteger("curZ", currentZ);
-        compound.setInteger("minX", minX);
-        compound.setInteger("minY", minY);
-        compound.setInteger("minZ", minZ);
-        compound.setInteger("maxX", maxX);
-        compound.setInteger("maxY", maxY);
-        compound.setInteger("maxZ", maxZ);
-        compound.setBoolean("on", on);
-        compound.setIntArray("upgrades", upgradeCount);
+    public CompoundNBT write(CompoundNBT compound) {
+        compound.putInt("curX", currentX);
+        compound.putInt("curY", currentY);
+        compound.putInt("curZ", currentZ);
+        compound.putInt("minX", minX);
+        compound.putInt("minY", minY);
+        compound.putInt("minZ", minZ);
+        compound.putInt("maxX", maxX);
+        compound.putInt("maxY", maxY);
+        compound.putInt("maxZ", maxZ);
+        compound.putBoolean("on", on);
+        compound.putIntArray("upgrades", upgradeCount);
         if (targetInventoryPos != null) {
-        	compound.setInteger("container_amount", targetInventoryPos.size());
+        	compound.putInt("container_amount", targetInventoryPos.size());
         	for (int i = 0; i < targetInventoryPos.size(); i++) {
-        		compound.setLong("container" + i, targetInventoryPos.get(i).toLong());
+        		compound.putLong("container" + i, targetInventoryPos.get(i).toLong());
 			}
         }
-        return super.writeToNBT(compound);
+        return super.write(compound);
     }
 	
 	protected void calculateValues() {
-		Chunk currentChunk = this.getWorld().getChunkFromBlockCoords(this.pos);
+		IChunk currentChunk = this.getWorld().getChunk(this.pos);
 		ChunkPos pos = currentChunk.getPos();
-		ChunkPos topRight = this.getWorld().getChunkFromChunkCoords(pos.x + upgradeCount[3], pos.z + upgradeCount[3]).getPos();
-		ChunkPos bottomLeft = this.getWorld().getChunkFromChunkCoords(pos.x - upgradeCount[3], pos.z - upgradeCount[3]).getPos();
+		ChunkPos topRight = this.getWorld().getChunk(pos.x + upgradeCount[3], pos.z + upgradeCount[3]).getPos();
+		ChunkPos bottomLeft = this.getWorld().getChunk(pos.x - upgradeCount[3], pos.z - upgradeCount[3]).getPos();
 		
 		
 		minX = bottomLeft.getXStart();
@@ -175,7 +172,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	private void breakNextBlock() {
 		try {
 			BlockPos pos;
-			IBlockState state;
+			BlockState state;
 			float hardness;
 
 			do {
@@ -184,7 +181,7 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 				hardness = state.getBlockHardness(world, pos);
 
 				NonNullList<ItemStack> drops = NonNullList.create();
-				state.getBlock().getDrops(drops, world, pos, state, 0);
+				//state.getBlock().getDrops(drops, world, pos, state, 0);
 				if (this.getWorld().destroyBlock(pos, false)) {
 					blocksMined++;
 					int index = rand.nextInt(targetInventoryPos.size());
@@ -195,18 +192,18 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 						targetInventory = (IInventory) tile;
 					}
 
-					for (ItemStack stack : drops) {
-						if (upgradeCount[1] > 0) {
-							ItemStack smelted = new ItemStack(FurnaceRecipes.instance().getSmeltingResult(stack).getItem());
-							if (!smelted.isEmpty()) {
-								this.insertItem(smelted, targetInventory);
-							} else {
-								this.insertItem(stack, targetInventory);
-							}
-						} else {
-							this.insertItem(stack, targetInventory);
-						}
-					}
+//					for (ItemStack stack : drops) {
+//						if (upgradeCount[1] > 0) {
+//							//ItemStack smelted = new ItemStack(FurnaceRecipes.instance().getSmeltingResult(stack).getItem());
+//							if (!smelted.isEmpty()) {
+//								this.insertItem(smelted, targetInventory);
+//							} else {
+//								this.insertItem(stack, targetInventory);
+//							}
+//						} else {
+//							this.insertItem(stack, targetInventory);
+//						}
+//					}
 					if (upgradeCount[2] > 0) {
 						this.getWorld().setBlockState(pos, Blocks.DIRT.getDefaultState());
 					}
@@ -307,26 +304,25 @@ public class TileMiner extends TileEnergyAcceptorInventory {
 	public String getName() {
 		return "Miner";
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	public int[] getUpgrades() {
 		return this.upgradeCount;
 	}
 
-	@Override
-	public NBTTagCompound getUpdateTag() {
-		return writeToNBT(new NBTTagCompound());
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-		this.readFromNBT(packet.getNbtCompound());
-	}
+//	@Override
+//	public NBTTagCompound getUpdateTag() {
+//		return writeToNBT(new NBTTagCompound());
+//	}
+//
+//	@Override
+//	public SPacketUpdateTileEntity getUpdatePacket() {
+//		NBTTagCompound nbtTag = new NBTTagCompound();
+//		this.writeToNBT(nbtTag);
+//		return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+//	}
+//
+//	@Override
+//	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+//		this.readFromNBT(packet.getNbtCompound());
+//	}
 }

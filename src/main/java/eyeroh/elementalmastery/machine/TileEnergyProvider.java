@@ -1,15 +1,11 @@
 package eyeroh.elementalmastery.machine;
 
 import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 
 public abstract class TileEnergyProvider extends TileEntity implements ITickable {
     public BlockPos linkedCapacitor = null;
@@ -18,43 +14,44 @@ public abstract class TileEnergyProvider extends TileEntity implements ITickable
     public int energyPerSecond;
 
     public TileEnergyProvider(int type, int energyPerSecond) {
+        super(TileEntityType.CHEST);
         this.type = type;
         this.energyPerSecond = energyPerSecond;
     }
 
     @Override
-    public NBTTagCompound getUpdateTag() {
-        return writeToNBT(new NBTTagCompound());
+    public CompoundNBT getUpdateTag() {
+        return write(new CompoundNBT());
     }
 
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
-    }
+//    @Override
+//    public SPacketUpdateTileEntity getUpdatePacket() {
+//        NBTTagCompound nbtTag = new NBTTagCompound();
+//        this.writeToNBT(nbtTag);
+//        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+//    }
+//
+//    @Override
+//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+//        this.readFromNBT(packet.getNbtCompound());
+//    }
+//
+//    @Override
+//    public void readFromNBT(NBTTagCompound compound) {
+//        super.readFromNBT(compound);
+//        linked = compound.getBoolean("linked");
+//        linkedCapacitor = BlockPos.fromLong(compound.getLong("linkedCapacitor"));
+//        type = compound.getInteger("type");
+//    }
 
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        this.readFromNBT(packet.getNbtCompound());
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        linked = compound.getBoolean("linked");
-        linkedCapacitor = BlockPos.fromLong(compound.getLong("linkedCapacitor"));
-        type = compound.getInteger("type");
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        compound.setBoolean("linked", linked);
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+        compound.putBoolean("linked", linked);
         if(linked) {
-            compound.setLong("linkedCapacitor", linkedCapacitor.toLong());
+            compound.putLong("linkedCapacitor", linkedCapacitor.toLong());
         }
-        compound.setInteger("type", type);
+        compound.putInt("type", type);
 
         return compound;
     }
@@ -63,10 +60,10 @@ public abstract class TileEnergyProvider extends TileEntity implements ITickable
         return false;
     }
 
-    @Override
-    public ITextComponent getDisplayName() {
-        return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
-    }
+//    @Override
+//    public ITextComponent getDisplayName() {
+//        return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
+//    }
 
     public boolean canExportEnergy() {
         if(linked) {

@@ -1,23 +1,12 @@
 package eyeroh.elementalmastery.machine.collector;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.TileEnergyAcceptorInventory;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraft.nbt.CompoundNBT;
 
 public abstract class TileCollector extends TileEnergyAcceptorInventory implements ITickable {
 	public int size;
@@ -32,7 +21,7 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
 	}
 	
 	
-	public abstract int getType();
+	public abstract int getEnergyType();
     
     public abstract int getCurrentEnergy();
     
@@ -41,14 +30,14 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
     	return false;
     }
     
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-    }
+//    @Override
+//    public void readFromNBT(CompoundNBT compound) {
+//        super.readFromNBT(compound);
+//    }
 	
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        return super.writeToNBT(compound);
+    public CompoundNBT write(CompoundNBT compound) {
+        return super.write(compound);
     }
     
 	
@@ -60,7 +49,7 @@ public abstract class TileCollector extends TileEnergyAcceptorInventory implemen
 	}
 	
 	public static ItemStack[] getDefaultItemStackArray() {
-		return new ItemStack[] {new ItemStack(ModItems.dustOpalSmall), new ItemStack(ModItems.dustTopazSmall), new ItemStack(ModItems.dustRubySmall), new ItemStack(ModItems.dustSapphireSmall)};
+		return new ItemStack[] {new ItemStack(ModItems.DUST_OPAL_SMALL.get()), new ItemStack(ModItems.DUST_TOPAZ_SMALL.get()), new ItemStack(ModItems.DUST_RUBY_SMALL.get()), new ItemStack(ModItems.DUST_SAPPHIRE_SMALL.get())};
 	}
 	
 	public abstract String getFileName();

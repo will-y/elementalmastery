@@ -9,15 +9,12 @@ import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.machine.TileEnergyProvider;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -45,64 +42,66 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
     };
     
     public void setUpTileEntity() {
-    	Block block = world.getBlockState(this.pos).getBlock();
-    	
-    	if(Block.isEqualTo(block, ModMachines.generatorOpal)) {
-    		type = 0;
-    	} else if (Block.isEqualTo(block, ModMachines.generatorTopaz)) {
-    		type = 1;
-    	} else if (Block.isEqualTo(block, ModMachines.generatorRuby)) {
-    		type = 2;
-    	} else if (Block.isEqualTo(block, ModMachines.generatorSapphire)) {
-    		type = 3;
-    	}
+//    	Block block = world.getBlockState(this.pos).getBlock();
+//
+//    	if(Block.isEqualTo(block, ModMachines.generatorOpal)) {
+//    		type = 0;
+//    	} else if (Block.isEqualTo(block, ModMachines.generatorTopaz)) {
+//    		type = 1;
+//    	} else if (Block.isEqualTo(block, ModMachines.generatorRuby)) {
+//    		type = 2;
+//    	} else if (Block.isEqualTo(block, ModMachines.generatorSapphire)) {
+//    		type = 3;
+//    	}
     }
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        if (compound.hasKey("items")) {
-            itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
-        }
-        active = compound.getBoolean("active");
-        maxProgress = compound.getInteger("maxProgress");
-        currentProgress = compound.getInteger("currentProgress");
-        currentEnergy = compound.getInteger("currentEnergy");
-    }
+//    @Override
+//    public void readFromNBT(NBTTagCompound compound) {
+//        super.readFromNBT(compound);
+//        if (compound.hasKey("items")) {
+//            itemStackHandler.deserializeNBT((NBTTagCompound) compound.getTag("items"));
+//        }
+//        active = compound.getBoolean("active");
+//        maxProgress = compound.getInteger("maxProgress");
+//        currentProgress = compound.getInteger("currentProgress");
+//        currentEnergy = compound.getInteger("currentEnergy");
+//    }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        compound.setTag("items", itemStackHandler.serializeNBT());
-        compound.setBoolean("active", active);
-        compound.setInteger("maxProgress", maxProgress);
-        compound.setInteger("currentProgress", currentProgress);
-        compound.setInteger("currentEnergy", currentEnergy);
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+       // compound.setTag("items", itemStackHandler.serializeNBT());
+        compound.putBoolean("active", active);
+        compound.putInt("maxProgress", maxProgress);
+        compound.putInt("currentProgress", currentProgress);
+        compound.putInt("currentEnergy", currentEnergy);
         
         return compound;
     }
 
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
+    public boolean canInteractWith(PlayerEntity playerIn) {
+    	return false;
+        //return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64D;
     }
 
-    @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return true;
-        }
-        return super.hasCapability(capability, facing);
-    }
-
-    @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(itemStackHandler);
-        }
-        return super.getCapability(capability, facing);
-    }
+//    @Override
+//    public boolean hasCapability(Capability<?> capability, Direction facing) {
+//        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+//            return true;
+//        }
+//        return super.hasCapability(capability, facing);
+//    }
+//
+//    @Override
+//    public <T> T getCapability(Capability<T> capability, Direction facing) {
+//        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+//            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(itemStackHandler);
+//        }
+//        return super.getCapability(capability, facing);
+//    }
     
-    public String getName() {
+    @Override
+	public String getName() {
     	switch(type) {
     	case 0:
     		return "tile.elementalmastery.generatoropal.name";
@@ -148,17 +147,17 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer player) {
+	public boolean isUsableByPlayer(PlayerEntity player) {
 		return true;
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player) {
+	public void openInventory(PlayerEntity player) {
 		
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer player) {
+	public void closeInventory(PlayerEntity player) {
 		
 	}
 
@@ -166,46 +165,28 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		switch(type) {
 		case 0:
-			if (stack.isItemEqual(new ItemStack(ModItems.gemOpal)) || stack.isItemEqual(new ItemStack(ModBlocks.blockopal))) {
+			if (stack.isItemEqual(new ItemStack(ModItems.GEM_OPAL.get())) || stack.isItemEqual(new ItemStack(ModBlocks.OPAL_BLOCK.get()))) {
 				return true;
 			}
 			break;
 		case 1:
-			if (stack.isItemEqual(new ItemStack(ModItems.gemTopaz)) || stack.isItemEqual(new ItemStack(ModBlocks.blocktopaz))) {
+			if (stack.isItemEqual(new ItemStack(ModItems.GEM_TOPAZ.get())) || stack.isItemEqual(new ItemStack(ModBlocks.TOPAZ_BLOCK.get()))) {
 				return true;
 			}
 			break;
 		case 2:
-			if (stack.isItemEqual(new ItemStack(ModItems.gemRuby)) || stack.isItemEqual(new ItemStack(ModBlocks.blockruby))) {
+			if (stack.isItemEqual(new ItemStack(ModItems.GEM_RUBY.get())) || stack.isItemEqual(new ItemStack(ModBlocks.RUBY_BLOCK.get()))) {
 				return true;
 			}
 			break;
 		case 3:
-			if (stack.isItemEqual(new ItemStack(ModItems.gemSapphire)) || stack.isItemEqual(new ItemStack(ModBlocks.blocksapphire))) {
+			if (stack.isItemEqual(new ItemStack(ModItems.GEM_SAPPHIRE.get())) || stack.isItemEqual(new ItemStack(ModBlocks.SAPPHIRE_BLOCK.get()))) {
 				return true;
 			}
 			break;
 		}
 		
 		return false;
-	}
-
-	@Override
-	public int getField(int id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getFieldCount() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -216,10 +197,11 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		return new ItemStack(ModItems.gemOpal);
+		return new ItemStack(ModItems.GEM_OPAL.get());
 	}
 	
-	public void update() {
+	@Override
+	public void tick() {
 		markDirty();
 		if(active) {
 			if(canExportEnergy() || currentEnergy <= maxEnergy) {
@@ -235,11 +217,11 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 			}
 		} else {
 			ItemStack stack = itemStackHandler.getStackInSlot(0);
-			if(stack.isItemEqual(new ItemStack(ModItems.gemOpal)) || stack.isItemEqual(new ItemStack(ModItems.gemTopaz)) || stack.isItemEqual(new ItemStack(ModItems.gemRuby)) || stack.isItemEqual(new ItemStack(ModItems.gemSapphire))) {
+			if(stack.isItemEqual(new ItemStack(ModItems.GEM_OPAL.get())) || stack.isItemEqual(new ItemStack(ModItems.GEM_TOPAZ.get())) || stack.isItemEqual(new ItemStack(ModItems.GEM_RUBY.get())) || stack.isItemEqual(new ItemStack(ModItems.GEM_SAPPHIRE.get()))) {
 				maxProgress = 100;
 				itemStackHandler.extractItem(0, 1, false);
 				active = true;
-			} else if (stack.isItemEqual(new ItemStack(ModBlocks.blockopal)) || stack.isItemEqual(new ItemStack(ModBlocks.blocktopaz)) || stack.isItemEqual(new ItemStack(ModBlocks.blockruby)) || stack.isItemEqual(new ItemStack(ModBlocks.blocksapphire))) {
+			} else if (stack.isItemEqual(new ItemStack(ModBlocks.OPAL_BLOCK.get())) || stack.isItemEqual(new ItemStack(ModBlocks.TOPAZ_BLOCK.get())) || stack.isItemEqual(new ItemStack(ModBlocks.RUBY_BLOCK.get())) || stack.isItemEqual(new ItemStack(ModBlocks.SAPPHIRE_BLOCK.get()))) {
 				maxProgress = 900;
 				itemStackHandler.extractItem(0, 1, false);
 				active = true;
@@ -264,8 +246,7 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 			}
 		}
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	public int getCurrentProgress() {
 		return this.currentProgress;
 	}
@@ -290,7 +271,7 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 		return itemStackHandler;
 	}
 	
-	public int getType() {
+	public int getEnergyType() {
 		return this.type;
 	}
 

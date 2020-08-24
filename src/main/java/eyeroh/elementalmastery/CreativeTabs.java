@@ -19,7 +19,7 @@ public class CreativeTabs {
 
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModItems.gemOpal);
+            return new ItemStack(ModItems.GEM_OPAL.get());
         }
 
     });
@@ -28,7 +28,7 @@ public class CreativeTabs {
 
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModTools.pickaxeOpal);
+            return new ItemStack(ModTools.OPAL_PICKAXE.get());
         }
 
     });
