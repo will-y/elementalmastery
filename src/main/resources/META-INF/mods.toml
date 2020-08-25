@@ -8,7 +8,7 @@ license="All rights reserved"
 
 modId="elementalmastery" #mandatory
 
-version="1.16.2-0.1" #mandatory
+version="1.16.2-0.1.1" #mandatory
 
 displayURL="https://www.curseforge.com/minecraft/mc-mods/elemental-mastery" #optional
 
