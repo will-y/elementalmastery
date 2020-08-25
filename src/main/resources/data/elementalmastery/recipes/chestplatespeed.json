@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:chestplatespeed"
+    },
+    "pattern": [
+        "b b",
+        "ooo",
+        "obo"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "b": {
+            "item": "elementalmastery:blockopal"
+        }
+    }
+}

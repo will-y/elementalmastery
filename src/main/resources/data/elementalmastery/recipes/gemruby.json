@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:blockruby"
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:gemruby",
+        "count": 9
+    }
+}

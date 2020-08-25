@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:generatorsapphire"
+    },
+    "pattern": [
+        "gbg",
+        "bfb",
+        "gbg" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "g": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:blocksapphire"
+        },
+        "f": {
+            "item": "minecraft:furnace"
+        }
+    }
+}

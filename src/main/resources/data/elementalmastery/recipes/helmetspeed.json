@@ -1,0 +1,18 @@
+{
+    "result": {
+        "item": "elementalmastery:helmetspeed"
+    },
+    "pattern": [
+        "bob",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "b": {
+            "item": "elementalmastery:blockopal"
+        }
+    }
+}

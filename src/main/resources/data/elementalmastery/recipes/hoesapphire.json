@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:hoesapphire"
+    },
+    "pattern": [
+        "oo",
+        "s ",
+        "s " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

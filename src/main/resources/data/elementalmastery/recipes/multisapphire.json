@@ -1,0 +1,41 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:gemsapphire"
+        },
+        {
+            "item": "elementalmastery:gemsapphire"
+        },
+        {
+            "item": "elementalmastery:toolbinder"
+        },
+        {
+            "item": "minecraft:stick"
+        },
+        {
+            "item": "elementalmastery:swordsapphire",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:shovelsapphire",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:pickaxesapphire",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:hoesapphire",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:axesapphire",
+            "data": 0
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:multisapphire"
+    }
+}

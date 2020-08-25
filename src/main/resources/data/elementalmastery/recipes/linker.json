@@ -1,0 +1,31 @@
+{
+    "result": {
+        "item": "elementalmastery:linker"
+    },
+    "pattern": [
+        "ost",
+        "sbs",
+        "rsa" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "t": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "r": {
+            "item": "elementalmastery:gemruby"
+        },
+        "a": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

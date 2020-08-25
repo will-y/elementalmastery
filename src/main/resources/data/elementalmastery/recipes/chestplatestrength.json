@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:chestplatestrength"
+    },
+    "pattern": [
+        "b b",
+        "ooo",
+        "obo"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:blocksapphire"
+        }
+    }
+}

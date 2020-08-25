@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:solartopaz"
+    },
+    "pattern": [
+        "ccc",
+        "wgw",
+        "www"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "c": {
+            "item": "elementalmastery:celltopaz"
+        },
+        "g": {
+            "item": "elementalmastery:generatortopaz"
+        },
+        "w": {
+            "item": "elementalmastery:capacitorwall"
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:energycoremulti_active"
+    },
+    "pattern": [
+        "rdr",
+        "gcg",
+        "rdr" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "d": {
+            "item": "elementalmastery:dustsapphire"
+        },
+        "r": {
+            "tag": "forge:dusts/redstone"
+        },
+        "g": {
+            "tag": "forge:dusts/glowstone"
+        },
+        "c": {
+            "item": "elementalmastery:energycoremulti"
+        }
+    }
+}

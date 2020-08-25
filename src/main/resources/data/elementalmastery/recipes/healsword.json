@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:healsword"
+    },
+    "pattern": [
+        "o",
+        "b",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemruby"
+        },
+        "b": {
+            "item": "elementalmastery:blockruby"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

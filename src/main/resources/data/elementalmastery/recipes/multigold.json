@@ -1,0 +1,41 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":[
+        {
+            "tag": "forge:ingots/gold"
+        },
+        {
+            "tag": "forge:ingots/gold"
+        },
+        {
+            "item": "elementalmastery:toolbinder"
+        },
+        {
+            "item": "minecraft:stick"
+        },
+        {
+            "item": "minecraft:golden_sword",
+            "data": 0
+        },
+        {
+            "item": "minecraft:golden_shovel",
+            "data": 0
+        },
+        {
+            "item": "minecraft:golden_pickaxe",
+            "data": 0
+        },
+        {
+            "item": "minecraft:golden_hoe",
+            "data": 0
+        },
+        {
+            "item": "minecraft:golden_axe",
+            "data": 0
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:multigold"
+    }
+}

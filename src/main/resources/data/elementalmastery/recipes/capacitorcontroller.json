@@ -1,0 +1,18 @@
+{
+    "result": {
+        "item": "elementalmastery:capacitorcontroller"
+    },
+    "pattern": [
+        "www",
+        "wrw",
+        "www" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "w": {
+            "item": "elementalmastery:capacitorwall"       },
+        "r": {
+            "tag": "forge:dusts/redstone"
+        }
+    }
+}

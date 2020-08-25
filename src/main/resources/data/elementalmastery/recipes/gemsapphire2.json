@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:gemsapphire"
+    },
+    "pattern": [
+        "ooo",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:nuggetsapphire"
+        }
+    }
+}

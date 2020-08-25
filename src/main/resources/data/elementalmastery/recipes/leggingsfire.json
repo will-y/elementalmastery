@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:leggingsfire"
+    },
+    "pattern": [
+        "bob",
+        "o o",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "b": {
+            "item": "elementalmastery:blocktopaz"
+        }
+    }
+}

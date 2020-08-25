@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:leggingsstrength"
+    },
+    "pattern": [
+        "bob",
+        "o o",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:blocksapphire"
+        }
+    }
+}

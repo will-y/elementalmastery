@@ -1,0 +1,17 @@
+{
+    "result": {
+        "item": "elementalmastery:blockopal",
+        "count": 1
+    },
+    "pattern": [
+        "ooo",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        }
+    }
+}

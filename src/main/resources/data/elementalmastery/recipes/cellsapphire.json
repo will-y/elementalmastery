@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:cellsapphire"
+    },
+    "pattern": [
+        "ddd",
+        "gsg",
+        "ggg"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "d": {
+            "item": "elementalmastery:dustsapphire"
+        },
+        "g": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "s": {
+            "item": "minecraft:daylight_detector"
+        }
+    }
+}

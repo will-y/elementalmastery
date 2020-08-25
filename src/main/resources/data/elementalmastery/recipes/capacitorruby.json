@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:capacitorruby"
+    },
+    "pattern": [
+        "xxx",
+        "xcx",
+        "xxx" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "x": {
+            "item": "elementalmastery:capacitorwall"
+        },
+        "c": {
+            "item": "elementalmastery:energycoreruby_active"
+        }
+    }
+}

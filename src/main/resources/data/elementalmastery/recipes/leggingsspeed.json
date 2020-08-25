@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:leggingsspeed"
+    },
+    "pattern": [
+        "bob",
+        "o o",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "b": {
+            "item": "elementalmastery:blockopal"
+        }
+    }
+}

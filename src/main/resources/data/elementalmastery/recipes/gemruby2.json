@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:gemruby"
+    },
+    "pattern": [
+        "ooo",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:nuggetruby"
+        }
+    }
+}

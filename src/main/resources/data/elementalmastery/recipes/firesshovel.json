@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:fireshovel"
+    },
+    "pattern": [
+        "o",
+        "s",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:blocktopaz"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

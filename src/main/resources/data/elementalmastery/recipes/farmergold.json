@@ -1,0 +1,31 @@
+{
+    "result": {
+        "item": "elementalmastery:farmergold"
+    },
+    "pattern": [
+        "m2m",
+        "1b3",
+        " s " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "minecraft:gold_ingot"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "1": {
+            "item": "minecraft:golden_hoe"
+        },
+        "2": {
+            "item": "minecraft:golden_shovel"
+        },
+        "3": {
+            "item": "minecraft:golden_axe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

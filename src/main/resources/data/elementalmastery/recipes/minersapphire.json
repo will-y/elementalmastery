@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:minersapphire"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "s": {
+            "item": "elementalmastery:shovelsapphire"
+        },
+        "p": {
+            "item": "elementalmastery:pickaxesapphire"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:celltopaz"
+    },
+    "pattern": [
+        "ddd",
+        "gsg",
+        "ggg"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "d": {
+            "item": "elementalmastery:dusttopaz"
+        },
+        "g": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "s": {
+            "item": "minecraft:daylight_detector"
+        }
+    }
+}

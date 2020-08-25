@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:minertopaz"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "s": {
+            "item": "elementalmastery:shoveltopaz"
+        },
+        "p": {
+            "item": "elementalmastery:pickaxetopaz"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

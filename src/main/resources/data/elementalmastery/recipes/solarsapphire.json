@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:solarsapphire"
+    },
+    "pattern": [
+        "ccc",
+        "wgw",
+        "www"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "c": {
+            "item": "elementalmastery:cellsapphire"
+        },
+        "g": {
+            "item": "elementalmastery:generatorsapphire"
+        },
+        "w": {
+            "item": "elementalmastery:capacitorwall"
+        }
+    }
+}

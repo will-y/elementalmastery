@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:swordopal"
+    },
+    "pattern": [
+        "o",
+        "o",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

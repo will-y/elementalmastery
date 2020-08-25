@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:firesword"
+    },
+    "pattern": [
+        "o",
+        "b",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "b": {
+            "item": "elementalmastery:blocktopaz"        
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

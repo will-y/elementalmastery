@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:collectorheal"
+    },
+    "pattern": [
+        "gbg",
+        "clc",
+        "gbg"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "g": {
+            "item": "elementalmastery:gemruby"
+        },
+        "c": {
+            "item": "elementalmastery:energycoreruby"
+        },
+        "b": {
+            "item": "elementalmastery:collectorbasic"
+        },
+        "l": {
+            "item": "elementalmastery:blockruby"
+        }
+    }
+}

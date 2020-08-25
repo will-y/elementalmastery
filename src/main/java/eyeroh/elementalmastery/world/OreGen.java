@@ -1,16 +1,26 @@
 package eyeroh.elementalmastery.world;
 
+import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Predicate;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.block.ModBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.ConfiguredPlacement;
@@ -24,6 +34,39 @@ import javax.xml.bind.Element;
 
 @Mod.EventBusSubscriber(modid = ElementalMastery.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OreGen {
+
+
+
+    // Taken from https://github.com/CorgiTaco/BYG/blob/f92444662038c0e88f95c3ba13c55f792d9a8cbf/src/main/java/voronoiaoc/byg/common/world/feature/biomefeatures/BYGFeaturesInVanilla.java#L17
+    // Temp worldgen workaround
+    public static void addFeatures() {
+        for (Biome biome : WorldGenRegistries.field_243657_i) {
+            if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE) {
+                addFeatureToBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredOreGenFeatures.ORE_OPAL);
+                addFeatureToBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredOreGenFeatures.ORE_TOPAZ);
+                addFeatureToBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredOreGenFeatures.ORE_RUBY);
+                addFeatureToBiome(biome, GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredOreGenFeatures.ORE_SAPPHIRE);
+            }
+        }
+    }
+
+
+    //Use these to add our features to vanilla's biomes.
+    public static void addFeatureToBiome(Biome biome, GenerationStage.Decoration feature, ConfiguredFeature<?, ?> configuredFeature) {
+        ConvertImmutableFeatures(biome);
+        List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = biome.func_242440_e().field_242484_f;
+        while (biomeFeatures.size() <= feature.ordinal()) {
+            biomeFeatures.add(Lists.newArrayList());
+        }
+        biomeFeatures.get(feature.ordinal()).add(() -> configuredFeature);
+
+    }
+
+    private static void ConvertImmutableFeatures(Biome biome) {
+        if (biome.func_242440_e().field_242484_f instanceof ImmutableList) {
+            biome.func_242440_e().field_242484_f = biome.func_242440_e().field_242484_f.stream().map(Lists::newArrayList).collect(Collectors.toList());
+        }
+    }
 
 //	@SubscribeEvent
 //	public static void generateOres(FMLLoadCompleteEvent event) {

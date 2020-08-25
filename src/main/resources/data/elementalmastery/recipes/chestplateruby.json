@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:chestplateruby"
+    },
+    "pattern": [
+        "o o",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemruby"
+        }
+    }
+}

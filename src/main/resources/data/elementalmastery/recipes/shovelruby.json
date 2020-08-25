@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:shovelruby"
+    },
+    "pattern": [
+        "o",
+        "s",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemruby"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

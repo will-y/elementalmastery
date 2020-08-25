@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:leggingstopaz"
+    },
+    "pattern": [
+        "ooo",
+        "o o",
+        "o o" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        }
+    }
+}

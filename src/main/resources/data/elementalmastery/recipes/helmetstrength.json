@@ -1,0 +1,18 @@
+{
+    "result": {
+        "item": "elementalmastery:helmetstrength"
+    },
+    "pattern": [
+        "bob",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:blocksapphire"
+        }
+    }
+}

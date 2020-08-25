@@ -5,11 +5,16 @@ import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.item.armor.ModArmor;
 import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.ModMachines;
+import eyeroh.elementalmastery.world.OreGen;
+import net.minecraft.block.Block;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod("elementalmastery")
 public class ElementalMastery {
@@ -17,7 +22,6 @@ public class ElementalMastery {
     public static final String MODID = "elementalmastery";
     public static final String MODNAME = "Elemental Mastery";
     public static final String VERSION = "1.3";
-
     public ElementalMastery() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
@@ -32,7 +36,7 @@ public class ElementalMastery {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        OreGen.addFeatures();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

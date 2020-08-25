@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:strengthshovel"
+    },
+    "pattern": [
+        "o",
+        "s",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:blocksapphire"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "elementalmastery:bootsopal"
+    },
+    "pattern": [
+        "o o",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        }
+    }
+}

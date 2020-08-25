@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:toolbinder"
+    },
+    "pattern": [
+        " s ",
+        "sos",
+        " s " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "minecraft:slime_ball"
+        },
+        "s": {
+            "item": "minecraft:string"
+        }
+    }
+}

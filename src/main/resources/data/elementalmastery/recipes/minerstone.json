@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:minerstone"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "tag": "forge:blocks/stone"
+        },
+        "s": {
+            "item": "minecraft:stone_shovel"
+        },
+        "p": {
+            "item": "minecraft:stone_pickaxe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "result": {
+        "item": "elementalmastery:capacitorglass",
+        "count": 8
+    },
+    "pattern": [
+        "sis",
+        "isi",
+        "sis" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "s": {
+            "tag": "forge:glass"
+        },
+        "i": {
+            "tag": "forge:ingots/iron"
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "elementalmastery:bootsruby"
+    },
+    "pattern": [
+        "o o",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemruby"
+        }
+    }
+}

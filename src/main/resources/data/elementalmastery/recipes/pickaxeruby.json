@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:pickaxeruby"
+    },
+    "pattern": [
+        "ooo",
+        " s ",
+        " s " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemruby"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

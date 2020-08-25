@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:gemsapphire"
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:nuggetsapphire",
+        "count": 9
+    }
+}

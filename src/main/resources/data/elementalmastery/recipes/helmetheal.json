@@ -1,0 +1,18 @@
+{
+    "result": {
+        "item": "elementalmastery:helmetheal"
+    },
+    "pattern": [
+        "bob",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemruby"
+        },
+        "b": {
+            "item": "elementalmastery:blockruby"
+        }
+    }
+}

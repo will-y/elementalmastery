@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:energycoreruby"
+    },
+    "pattern": [
+        " f ",
+        "fgf",
+        " f " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "f": {
+            "item": "elementalmastery:energycorefragment"
+        },
+        "g": {
+            "item": "elementalmastery:gemruby"
+        }
+    }
+}

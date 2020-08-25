@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:strengthsword"
+    },
+    "pattern": [
+        "o",
+        "b",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "b": {
+            "item": "elementalmastery:blocksapphire"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:capacitoropal"
+    },
+    "pattern": [
+        "xxx",
+        "xcx",
+        "xxx" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "x": {
+            "item": "elementalmastery:capacitorwall"
+        },
+        "c": {
+            "item": "elementalmastery:energycoreopal_active"
+        }
+    }
+}

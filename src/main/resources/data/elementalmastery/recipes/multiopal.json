@@ -1,0 +1,41 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients":[
+        {
+            "item": "elementalmastery:gemopal"
+        },
+        {
+            "item": "elementalmastery:gemopal"
+        },
+        {
+            "item": "elementalmastery:toolbinder"
+        },
+        {
+            "item": "minecraft:stick"
+        },
+        {
+            "item": "elementalmastery:swordopal",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:shovelopal",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:pickaxeopal",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:hoeopal",
+            "data": 0
+        },
+        {
+            "item": "elementalmastery:axeopal",
+            "data": 0
+        }
+    ],
+    
+    "result": {
+        "item": "elementalmastery:multiopal"
+    }
+}

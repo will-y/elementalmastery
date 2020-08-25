@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:mineropal"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "elementalmastery:gemopal"
+        },
+        "s": {
+            "item": "elementalmastery:shovelopal"
+        },
+        "p": {
+            "item": "elementalmastery:pickaxeopal"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

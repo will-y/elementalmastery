@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:chestplatefire"
+    },
+    "pattern": [
+        "b b",
+        "ooo",
+        "obo"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "b": {
+            "item": "elementalmastery:blocktopaz"
+        }
+    }
+}

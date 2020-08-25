@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "elementalmastery:blocktopaz"
+    },
+    "pattern": [
+        "ooo",
+        "ooo",
+        "ooo" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        }
+    }
+}

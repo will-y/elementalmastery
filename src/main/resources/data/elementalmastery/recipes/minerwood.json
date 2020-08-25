@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:minerwood"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "tag": "forge:blocks/wood"
+        },
+        "s": {
+            "item": "minecraft:wooden_shovel"
+        },
+        "p": {
+            "item": "minecraft:wooden_pickaxe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "result": {
+        "item": "elementalmastery:farmersapphire"
+    },
+    "pattern": [
+        "m2m",
+        "1b3",
+        " s " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "elementalmastery:gemsapphire"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "1": {
+            "item": "elementalmastery:hoesapphire"
+        },
+        "2": {
+            "item": "elementalmastery:shovelsapphire"
+        },
+        "3": {
+            "item": "elementalmastery:axesapphire"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

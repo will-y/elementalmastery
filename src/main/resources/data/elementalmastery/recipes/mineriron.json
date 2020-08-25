@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:mineriron"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "minecraft:iron_ingot"
+        },
+        "s": {
+            "item": "minecraft:iron_shovel"
+        },
+        "p": {
+            "item": "minecraft:iron_pickaxe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

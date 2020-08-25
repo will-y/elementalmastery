@@ -1,0 +1,18 @@
+{
+    "result": {
+        "item": "elementalmastery:bootsfire"
+    },
+    "pattern": [
+        "b b",
+        "o o"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemtopaz"
+        },
+        "b": {
+            "item": "elementalmastery:blocktopaz"
+        }
+    }
+}
