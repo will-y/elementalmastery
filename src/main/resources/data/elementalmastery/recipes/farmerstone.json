@@ -10,7 +10,7 @@
     "type": "minecraft:crafting_shaped",
     "key": {
         "m": {
-            "tag": "forge:blocks/stone"
+            "item": "minecraft:stone"
         },
         "s": {
             "item": "minecraft:stick"

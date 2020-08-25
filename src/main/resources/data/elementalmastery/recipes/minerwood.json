@@ -10,7 +10,7 @@
     "type": "minecraft:crafting_shaped",
     "key": {
         "m": {
-            "tag": "forge:blocks/wood"
+            "item": "minecraft:oak_planks"
         },
         "s": {
             "item": "minecraft:wooden_shovel"
