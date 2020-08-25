@@ -1,0 +1,223 @@
+{
+  "item.elementalmastery.gemopal": "Опал",
+  "item.elementalmastery.gemtopaz": "Топаз",
+  "item.elementalmastery.gemruby": "Рубин",
+  "item.elementalmastery.gemsapphire": "Сапфир",
+  "item.elementalmastery.gemmulti": "Мульти драгоценный камень",
+
+
+  "item.elementalmastery.pickaxeopal": "Оплальная кирка",
+  "item.elementalmastery.pickaxetopaz": "Топазная кирка",
+  "item.elementalmastery.pickaxeruby": "Рубиновая кирка",
+  "item.elementalmastery.pickaxesapphire": "Сапфирова кирка",
+
+  "item.elementalmastery.axeopal": "Опаловый топор",
+  "item.elementalmastery.axetopaz": "Топазовый топор",
+  "item.elementalmastery.axeruby": "Рубиновый топор",
+  "item.elementalmastery.axesapphire": "Сапфировый топор",
+
+  "item.elementalmastery.swordopal": "Опаловый меч",
+  "item.elementalmastery.swordtopaz": "Топазный меч",
+  "item.elementalmastery.swordruby": "Рубиновый меч",
+  "item.elementalmastery.swordsapphire": "Сапфировый меч",
+
+  "item.elementalmastery.hoeopal": "Опальная мотыга",
+  "item.elementalmastery.hoetopaz": "Топазная мотыга",
+  "item.elementalmastery.hoeruby": "Рубиновая мотыга",
+  "item.elementalmastery.hoesapphire": "Сапфирова мотыга",
+
+  "item.elementalmastery.shovelopal": "Опальная лопата",
+  "item.elementalmastery.shoveltopaz": "Топазная лопата",
+  "item.elementalmastery.shovelruby": "Рубинова лопата",
+  "item.elementalmastery.shovelsapphire": "Сапфирова лопата",
+
+  "item.elementalmastery.mineropal": "Опальный шахтер",
+  "item.elementalmastery.minertopaz": "Топазный шахтер",
+  "item.elementalmastery.minerruby": "Рубиновый шахтер",
+  "item.elementalmastery.minersapphire": "Сапфировый шахтер",
+  "item.elementalmastery.minerwood": "Деревяный шахтер",
+  "item.elementalmastery.minerstone": "Каменый шахтер",
+  "item.elementalmastery.mineriron": "Железный шахтер",
+  "item.elementalmastery.minergold": "Золотой шахтер",
+  "item.elementalmastery.minerdiamond": "Алмазный шахтер",
+
+  "item.elementalmastery.farmeropal": "Опальный фермер",
+  "item.elementalmastery.farmertopaz": "Топазный фермер",
+  "item.elementalmastery.farmerruby": "Рубиновый фермер",
+  "item.elementalmastery.farmersapphire": "Сапфировый фермер",
+  "item.elementalmastery.farmerwood": "Деревяный фермер",
+  "item.elementalmastery.farmerstone": "Камяный фермер",
+  "item.elementalmastery.farmeriron": "Железный фермер",
+  "item.elementalmastery.farmergold": "Золотой фермер",
+  "item.elementalmastery.farmerdiamond": "Алмазный фермер",
+
+  "item.elementalmastery.multiopal": "Опальный мульти инструмент",
+  "item.elementalmastery.multitopaz": "Топазный мульти инструмент",
+  "item.elementalmastery.multiruby": "Рубиновый мульти инструмент",
+  "item.elementalmastery.multisapphire": "Сапфировый мульти инструмент",
+  "item.elementalmastery.multiwood": "Деревяный мульти инструмент",
+  "item.elementalmastery.multistone": "Каменый мульти инструмент",
+  "item.elementalmastery.multiiron": "Железный мульти инструмент",
+  "item.elementalmastery.multigold": "Золотой мульти инструмент",
+  "item.elementalmastery.multidiamond": "Алмазный мульти инструмент",
+
+  "item.elementalmastery.strengthpickaxe": "Силова кирка",
+  "item.elementalmastery.strengthshovel": "Силова лопата",
+  "item.elementalmastery.strengthaxe": "Силовый топор",
+  "item.elementalmastery.strengthsword": "Силовый меч",
+
+  "item.elementalmastery.speedsword": "Быстрый",
+
+  "item.elementalmastery.healsword": "Меч исцеления",
+  "item.elementalmastery.healaxe": "Топор исцеления",
+
+  "item.elementalmastery.firesword": "Пламеный меч",
+  "item.elementalmastery.firepickaxe": "Пламеная кирка",
+  "item.elementalmastery.fireaxe": "Пламеный топор",
+  "item.elementalmastery.fireshovel": "Пламеная лопата",
+
+  "item.elementalmastery.helmetopal": "Опальный шлем",
+  "item.elementalmastery.chestplateopal": "Опальный нагрудник",
+  "item.elementalmastery.leggingsopal": "Опальные поножи",
+  "item.elementalmastery.bootsopal": "Опальные ботинкы",
+
+  "item.elementalmastery.helmettopaz": "Топазный шлем",
+  "item.elementalmastery.chestplatetopaz": "Топзный нагрудник",
+  "item.elementalmastery.leggingstopaz": "Топазные поножи",
+  "item.elementalmastery.bootstopaz": "Топазные ботинкы",
+
+  "item.elementalmastery.helmetruby": "Рубиновый шлем",
+  "item.elementalmastery.chestplateruby": "Рубиновый нагрудник",
+  "item.elementalmastery.leggingsruby": "Рубиновые поножи",
+  "item.elementalmastery.bootsruby": "Рубиновые ботинкы",
+
+  "item.elementalmastery.helmetsapphire": "Сапфировый шлем",
+  "item.elementalmastery.chestplatesapphire": "Сапфировый нагрудник",
+  "item.elementalmastery.leggingssapphire": "Сапфировые поножи",
+  "item.elementalmastery.bootssapphire": "Сапфировые ботинкы",
+
+  "item.elementalmastery.helmetspeed": "Быстрый шлем",
+  "item.elementalmastery.chestplatespeed": "Быстрый нагрудник",
+  "item.elementalmastery.leggingsspeed": "Быстрые поножи",
+  "item.elementalmastery.bootsspeed": "Быстрые ботинкы",
+
+  "item.elementalmastery.helmetfire": "Пламеный шлем",
+  "item.elementalmastery.chestplatefire": "Пламеный нагрудник",
+  "item.elementalmastery.leggingsfire": "Пламеные поножи",
+  "item.elementalmastery.bootsfire": "Пламеные ботинкы",
+
+  "item.elementalmastery.helmetheal": "Шлем исцеления",
+  "item.elementalmastery.chestplateheal": "Нагрудник исцеления",
+  "item.elementalmastery.leggingsheal": "Поножи исцеления",
+  "item.elementalmastery.bootsheal": "Ботинкы исцеления",
+
+  "item.elementalmastery.helmetstrength": "Шлем силы",
+  "item.elementalmastery.chestplatestrength": "Нагрудник силы",
+  "item.elementalmastery.leggingsstrength": "Поножи силы",
+  "item.elementalmastery.bootsstrength": "Ботинкы силы",
+
+  "item.elementalmastery.toolbinder": "Папка для инструментов",
+
+
+  "item.elementalmastery.energycoreopal": "Опальное енергетичне ядро",
+  "item.elementalmastery.energycoretopaz": "Топазная енергетичне ядро",
+  "item.elementalmastery.energycoreruby": "Рубиновый енергетичне ядро",
+  "item.elementalmastery.energycoresapphire": "Сапфировые енергетичне ядро",
+  "item.elementalmastery.energycoremulti": "Мульти енергетичне ядро",
+
+  "item.elementalmastery.energycoreopal_active": "Опальное активное енергетичне ядро",
+  "item.elementalmastery.energycoretopaz_active": "Топазное активное енергетичне ядро",
+  "item.elementalmastery.energycoreruby_active": "Рубиновое активное енергетичне ядро",
+  "item.elementalmastery.energycoresapphire_active": "Сапфировое активное енергетичне ядро",
+  "item.elementalmastery.energycoremulti_active": "Мульти активное енергетичне ядро",
+
+  "item.elementalmastery.energycorefragment": "Фрагмент енергетичного ядра",
+
+  "item.elementalmastery.dustopal": "Опальная пиль",
+  "item.elementalmastery.dusttopaz": "Топазная пиль",
+  "item.elementalmastery.dustruby": "Рубиновая пиль",
+  "item.elementalmastery.dustsapphire": "Сапфировая пиль",
+  "item.elementalmastery.dustmulti": "Мульти драгоценная каменая пиль",
+
+
+  "item.elementalmastery.dustopalsmall": "Небольшая куча опаловой пыли",
+  "item.elementalmastery.dusttopazsmall": "Небольшая куча топазовой пыли",
+  "item.elementalmastery.dustrubysmall": "Маленькая куча рубиновой пыли",
+  "item.elementalmastery.dustsapphiresmall": "Маленькая куча сапфировой пыли",
+
+  "item.elementalmastery.nuggetopal": "Опальный кусочек",
+  "item.elementalmastery.nuggettopaz": "Топазный кусочек",
+  "item.elementalmastery.nuggetruby": "Рубиновый кусочек",
+  "item.elementalmastery.nuggetsapphire": "Сапфировый кусочек",
+
+  "item.elementalmastery.smallheart": "Маленькое сердце",
+
+  "item.elementalmastery.cellopal": "Опаловый солнечный элемент",
+  "item.elementalmastery.celltopaz": "Топаз солнечная батарея",
+  "item.elementalmastery.cellruby": "Рубиновый солнечный элемент",
+  "item.elementalmastery.cellsapphire": "Сапфировый солнечный элемент",
+
+  "item.elementalmastery.linker": "Инструмент связывания",
+
+  "block.elementalmastery.blockopal": "Опальный блок",
+  "block.elementalmastery.blocktopaz": "Топазный блок",
+  "block.elementalmastery.blockruby": "Рубиновый блок",
+  "block.elementalmastery.blocksapphire": "Сапфировый блок",
+
+  "block.elementalmastery.oreopal": "Опальная руда",
+  "block.elementalmastery.oretopaz": "Топазная руда",
+  "block.elementalmastery.oreruby": "Рубиновая руда",
+  "block.elementalmastery.oresapphire": "Сапфировая руда",
+
+  "block.elementalmastery.capacitorwall": "Капасеторна стена",
+  "block.elementalmastery.capacitorglass": "Капаситорное стекло",
+  "block.elementalmastery.capacitorcontroller": "Капаситорный контролер",
+
+  "block.elementalmastery.capacitoropal": "Опальный капаситор",
+  "block.elementalmastery.capacitortopaz": "Топазный капаситор",
+  "block.elementalmastery.capacitorruby": "Рубиновый капаситор",
+  "block.elementalmastery.capacitorsapphire": "Сапфировый капаситор",
+  "block.elementalmastery.capacitormulti": "Мульти капаситор",
+
+  "block.elementalmastery.collectorbasic": "Базовый колектор",
+  "block.elementalmastery.collectorspeed": "Быстрый колектор",
+  "block.elementalmastery.collectorfire": "Пламеный колектор",
+  "block.elementalmastery.collectorheal": "Колектор исцеленмя",
+  "block.elementalmastery.collectorstrength": "Силовый колектор",
+
+  "block.elementalmastery.generatoropal": "Опальный генератор",
+  "block.elementalmastery.generatortopaz": "Топазный генератор",
+  "block.elementalmastery.generatorruby": "Рубиновый генератор",
+  "block.elementalmastery.generatorsapphire": "Сапфировый генератор",
+
+  "block.elementalmastery.upgradespeed": "Быстрое улучшения",
+  "block.elementalmastery.upgradefire": "Огненое улучшение",
+  "block.elementalmastery.upgradeheal": "Исцеленое улучшение",
+  "block.elementalmastery.upgradestrength": "Силовое улучшение",
+
+  "block.elementalmastery.miner": "Карьер",
+
+  "block.elementalmastery.corecrafter": "Крафт ядро",
+
+  "block.elementalmastery.solaropal": "Солнечная панель Скорости",
+  "block.elementalmastery.solartopaz": "Солнечная панель Огня",
+  "block.elementalmastery.solarruby": "Солнечная панель исцеления",
+  "block.elementalmastery.solarsapphire": "Солнечная панель силы",
+
+  "message.elementalmastery.farmer_mode": "Режим изменен на: %d",
+  "message.elementalmastery.capacitor_formed": "%d",
+  "message.elementalmastery.capacitor_amount": "%d",
+  "message.elementalmastery.capacitor_selected": "%d",
+  "message.elementalmastery.generator_linked": "%d",
+  "message.elementalmastery.machine_linked": "%d",
+
+  "entity.StrengthCreeper": "Силовый крипер",
+  "entity.SpeedCreeper": "Быстрый крипер",
+  "entity.FireCreeper": "Огненый крипер",
+  "entity.HealCreeper": "Исцеленый крипер",
+
+  "itemGroup.tabGemMachines": "Машины мастерства стихий",
+  "itemGroup.tabGemTools": "Инструменты мастерства стихий",
+  "itemGroup.tabGemItems": "Предметы мастерства стихий",
+  "itemGroup.tabGemBlocks": "Блоки мастерства стихий"
+}
