@@ -1,0 +1,221 @@
+item.elementalmastery.gemopal.name=Опал
+item.elementalmastery.gemtopaz.name=Топаз
+item.elementalmastery.gemruby.name=Рубин
+item.elementalmastery.gemsapphire.name=Сапфир
+item.elementalmastery.gemmulti.name=Мульти драгоценный камень
+
+
+item.elementalmastery.pickaxeopal.name=Оплальная кирка
+item.elementalmastery.pickaxetopaz.name=Топазная кирка
+item.elementalmastery.pickaxeruby.name=Рубиновая кирка
+item.elementalmastery.pickaxesapphire.name=Сапфирова кирка
+
+item.elementalmastery.axeopal.name=Опаловый топор
+item.elementalmastery.axetopaz.name=Топазовый топор
+item.elementalmastery.axeruby.name=Рубиновый топор
+item.elementalmastery.axesapphire.name=Сапфировый топор
+
+item.elementalmastery.swordopal.name=Опаловый меч
+item.elementalmastery.swordtopaz.name=Топазный меч
+item.elementalmastery.swordruby.name=Рубиновый меч
+item.elementalmastery.swordsapphire.name=Сапфировый меч
+
+item.elementalmastery.hoeopal.name=Опальная мотыга
+item.elementalmastery.hoetopaz.name=Топазная мотыга
+item.elementalmastery.hoeruby.name=Рубиновая мотыга
+item.elementalmastery.hoesapphire.name=Сапфирова мотыга
+
+item.elementalmastery.shovelopal.name=Опальная лопата
+item.elementalmastery.shoveltopaz.name=Топазная лопата
+item.elementalmastery.shovelruby.name=Рубинова лопата
+item.elementalmastery.shovelsapphire.name=Сапфирова лопата
+
+item.elementalmastery.mineropal.name=Опальный шахтер
+item.elementalmastery.minertopaz.name=Топазный шахтер
+item.elementalmastery.minerruby.name=Рубиновый шахтер
+item.elementalmastery.minersapphire.name=Сапфировый шахтер
+item.elementalmastery.minerwood.name=Деревяный шахтер
+item.elementalmastery.minerstone.name=Каменый шахтер
+item.elementalmastery.mineriron.name=Железный шахтер
+item.elementalmastery.minergold.name=Золотой шахтер
+item.elementalmastery.minerdiamond.name=Алмазный шахтер
+
+item.elementalmastery.farmeropal.name=Опальный фермер
+item.elementalmastery.farmertopaz.name=Топазный фермер
+item.elementalmastery.farmerruby.name=Рубиновый фермер
+item.elementalmastery.farmersapphire.name=Сапфировый фермер
+item.elementalmastery.farmerwood.name=Деревяный фермер
+item.elementalmastery.farmerstone.name=Камяный фермер
+item.elementalmastery.farmeriron.name=Железный фермер
+item.elementalmastery.farmergold.name=Золотой фермер
+item.elementalmastery.farmerdiamond.name=Алмазный фермер
+
+item.elementalmastery.multiopal.name=Опальный мульти инструмент
+item.elementalmastery.multitopaz.name=Топазный мульти инструмент
+item.elementalmastery.multiruby.name=Рубиновый мульти инструмент
+item.elementalmastery.multisapphire.name=Сапфировый мульти инструмент
+item.elementalmastery.multiwood.name=Деревяный мульти инструмент
+item.elementalmastery.multistone.name=Каменый мульти инструмент
+item.elementalmastery.multiiron.name=Железный мульти инструмент
+item.elementalmastery.multigold.name=Золотой мульти инструмент
+item.elementalmastery.multidiamond.name=Алмазный мульти инструмент
+
+item.elementalmastery.strengthpickaxe.name=Силова кирка
+item.elementalmastery.strengthshovel.name=Силова лопата
+item.elementalmastery.strengthaxe.name=Силовый топор
+item.elementalmastery.strengthsword.name=Силовый меч
+
+item.elementalmastery.speedsword.name=Быстрый
+
+item.elementalmastery.healsword.name=Меч исцеления
+item.elementalmastery.healaxe.name=Топор исцеления
+
+item.elementalmastery.firesword.name=Пламеный меч
+item.elementalmastery.firepickaxe.name=Пламеная кирка
+item.elementalmastery.fireaxe.name=Пламеный топор
+item.elementalmastery.fireshovel.name=Пламеная лопата
+
+item.elementalmastery.helmetopal.name=Опальный шлем
+item.elementalmastery.chestplateopal.name=Опальный нагрудник
+item.elementalmastery.leggingsopal.name=Опальные поножи
+item.elementalmastery.bootsopal.name=Опальные ботинкы
+
+item.elementalmastery.helmettopaz.name=Топазный шлем
+item.elementalmastery.chestplatetopaz.name=Топзный нагрудник
+item.elementalmastery.leggingstopaz.name=Топазные поножи
+item.elementalmastery.bootstopaz.name=Топазные ботинкы
+
+item.elementalmastery.helmetruby.name=Рубиновый шлем
+item.elementalmastery.chestplateruby.name=Рубиновый нагрудник
+item.elementalmastery.leggingsruby.name=Рубиновые поножи
+item.elementalmastery.bootsruby.name=Рубиновые ботинкы
+
+item.elementalmastery.helmetsapphire.name=Сапфировый шлем
+item.elementalmastery.chestplatesapphire.name=Сапфировый нагрудник
+item.elementalmastery.leggingssapphire.name=Сапфировые поножи
+item.elementalmastery.bootssapphire.name=Сапфировые ботинкы
+
+item.elementalmastery.helmetspeed.name=Быстрый шлем
+item.elementalmastery.chestplatespeed.name=Быстрый нагрудник
+item.elementalmastery.leggingsspeed.name=Быстрые поножи
+item.elementalmastery.bootsspeed.name=Быстрые ботинкы
+
+item.elementalmastery.helmetfire.name=Пламеный шлем
+item.elementalmastery.chestplatefire.name=Пламеный нагрудник
+item.elementalmastery.leggingsfire.name=Пламеные поножи
+item.elementalmastery.bootsfire.name=Пламеные ботинкы
+
+item.elementalmastery.helmetheal.name=Шлем исцеления
+item.elementalmastery.chestplateheal.name=Нагрудник исцеления
+item.elementalmastery.leggingsheal.name=Поножи исцеления
+item.elementalmastery.bootsheal.name=Ботинкы исцеления
+
+item.elementalmastery.helmetstrength.name=Шлем силы
+item.elementalmastery.chestplatestrength.name=Нагрудник силы
+item.elementalmastery.leggingsstrength.name=Поножи силы
+item.elementalmastery.bootsstrength.name=Ботинкы силы
+
+item.elementalmastery.toolbinder.name=Папка для инструментов
+
+
+item.elementalmastery.energycoreopal.name=Опальное енергетичне ядро
+item.elementalmastery.energycoretopaz.name=Топазная енергетичне ядро
+item.elementalmastery.energycoreruby.name=Рубиновый енергетичне ядро
+item.elementalmastery.energycoresapphire.name=Сапфировые енергетичне ядро
+item.elementalmastery.energycoremulti.name=Мульти енергетичне ядро
+
+item.elementalmastery.energycoreopal_active.name=Опальное активное енергетичне ядро
+item.elementalmastery.energycoretopaz_active.name=Топазное активное енергетичне ядро
+item.elementalmastery.energycoreruby_active.name=Рубиновое активное енергетичне ядро
+item.elementalmastery.energycoresapphire_active.name=Сапфировое активное енергетичне ядро
+item.elementalmastery.energycoremulti_active.name=Мульти активное енергетичне ядро
+
+item.elementalmastery.energycorefragment.name=Фрагмент енергетичного ядра
+
+item.elementalmastery.dustopal.name=Опальная пиль
+item.elementalmastery.dusttopaz.name=Топазная пиль
+item.elementalmastery.dustruby.name=Рубиновая пиль
+item.elementalmastery.dustsapphire.name=Сапфировая пиль
+item.elementalmastery.dustmulti.name=Мульти драгоценная каменая пиль
+
+
+item.elementalmastery.dustopalsmall.name=Небольшая куча опаловой пыли
+item.elementalmastery.dusttopazsmall.name=Небольшая куча топазовой пыли
+item.elementalmastery.dustrubysmall.name=Маленькая куча рубиновой пыли
+item.elementalmastery.dustsapphiresmall.name=Маленькая куча сапфировой пыли
+
+item.elementalmastery.nuggetopal.name=Опальный кусочек
+item.elementalmastery.nuggettopaz.name=Топазный кусочек
+item.elementalmastery.nuggetruby.name=Рубиновый кусочек
+item.elementalmastery.nuggetsapphire.name=Сапфировый кусочек
+
+item.elementalmastery.smallheart.name=Маленькое сердце
+
+item.elementalmastery.cellopal.name=Опаловый солнечный элемент
+item.elementalmastery.celltopaz.name=Топаз солнечная батарея
+item.elementalmastery.cellruby.name=Рубиновый солнечный элемент
+item.elementalmastery.cellsapphire.name=Сапфировый солнечный элемент
+
+item.elementalmastery.linker.name=Инструмент связывания
+
+tile.elementalmastery.blockopal.name=Опальный блок
+tile.elementalmastery.blocktopaz.name=Топазный блок
+tile.elementalmastery.blockruby.name=Рубиновый блок
+tile.elementalmastery.blocksapphire.name=Сапфировый блок
+
+tile.elementalmastery.oreopal.name=Опальная руда
+tile.elementalmastery.oretopaz.name=Топазная руда
+tile.elementalmastery.oreruby.name=Рубиновая руда
+tile.elementalmastery.oresapphire.name=Сапфировая руда
+
+tile.elementalmastery.capacitorwall.name=Капасеторна стена
+tile.elementalmastery.capacitorglass.name=Капаситорное стекло
+tile.elementalmastery.capacitorcontroller.name=Капаситорный контролер
+
+tile.elementalmastery.capacitoropal.name=Опальный капаситор
+tile.elementalmastery.capacitortopaz.name=Топазный капаситор
+tile.elementalmastery.capacitorruby.name=Рубиновый капаситор
+tile.elementalmastery.capacitorsapphire.name=Сапфировый капаситор
+tile.elementalmastery.capacitormulti.name=Мульти капаситор
+
+tile.elementalmastery.collectorbasic.name=Базовый колектор
+tile.elementalmastery.collectorspeed.name=Быстрый колектор
+tile.elementalmastery.collectorfire.name=Пламеный колектор
+tile.elementalmastery.collectorheal.name=Колектор исцеленмя
+tile.elementalmastery.collectorstrength.name=Силовый колектор
+
+tile.elementalmastery.generatoropal.name=Опальный генератор
+tile.elementalmastery.generatortopaz.name=Топазный генератор
+tile.elementalmastery.generatorruby.name=Рубиновый генератор
+tile.elementalmastery.generatorsapphire.name=Сапфировый генератор
+
+tile.elementalmastery.upgradespeed.name=Быстрое улучшения
+tile.elementalmastery.upgradefire.name=Огненое улучшение
+tile.elementalmastery.upgradeheal.name=Исцеленое улучшение
+tile.elementalmastery.upgradestrength.name=Силовое улучшение
+
+tile.elementalmastery.miner.name=Карьер
+
+tile.elementalmastery.corecrafter.name=Крафт ядро
+
+tile.elementalmastery.solaropal.name=Солнечная панель Скорости
+tile.elementalmastery.solartopaz.name=Солнечная панель Огня
+tile.elementalmastery.solarruby.name=Солнечная панель исцеления
+tile.elementalmastery.solarsapphire.name=Солнечная панель силы
+
+message.elementalmastery.farmer_mode=Режим изменен на: %d
+message.elementalmastery.capacitor_formed=%d
+message.elementalmastery.capacitor_amount=%d
+message.elementalmastery.capacitor_selected=%d
+message.elementalmastery.generator_linked=%d
+message.elementalmastery.machine_linked=%d
+
+entity.StrengthCreeper.name=Силовый крипер
+entity.SpeedCreeper.name=Быстрый крипер
+entity.FireCreeper.name=Огненый крипер
+entity.HealCreeper.name=Исцеленый крипер
+
+itemGroup.tabGemMachines=Машины мастерства стихий
+itemGroup.tabGemTools=Инструменты мастерства стихий
+itemGroup.tabGemItems=Предметы мастерства стихий
+itemGroup.tabGemBlocks=Блоки мастерства стихий
