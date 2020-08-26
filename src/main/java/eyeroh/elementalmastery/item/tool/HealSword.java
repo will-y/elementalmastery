@@ -31,7 +31,7 @@ public class HealSword extends SwordItem {
     }
 	
 	public EffectInstance getPotionEffect() {
-		return new EffectInstance(Effects.POISON, 40, 1);
+		return new EffectInstance(Effects.REGENERATION, 40, 1);
 	}
 	
 	@Override
