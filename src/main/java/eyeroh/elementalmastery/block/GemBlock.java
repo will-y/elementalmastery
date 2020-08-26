@@ -10,16 +10,8 @@ public class GemBlock extends Block {
 		super(Block.Properties.create(Material.IRON)
 				.hardnessAndResistance(3.0f, 5.0f)
 				.sound(SoundType.STONE)
-				.harvestLevel(3)
-				.harvestTool(ToolType.PICKAXE));
-
-//		setUnlocalizedName(ElementalMastery.MODID + "." + name);
-//		setRegistryName(name);
-//		this.setCreativeTab(ModBlocks.tabGemBlocks);
+				.harvestLevel(0)
+				.harvestTool(ToolType.PICKAXE)
+				.func_235861_h_());
 	}
-	
-//	@SideOnly(Side.CLIENT)
-//    public void initModel() {
-//        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-//    }
 }
