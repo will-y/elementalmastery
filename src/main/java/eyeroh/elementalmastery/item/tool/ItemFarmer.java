@@ -49,7 +49,7 @@ public class ItemFarmer extends AxeItem {
 	@Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand handIn) {
 		 if(player.isSneaking() && world.isRemote) {
-	        	if(mode == "Hoe") {
+	        	if("Hoe".equals(mode)) {
 	        		mode = "Shovel";
 	        	} else {
 	        		mode = "Hoe";

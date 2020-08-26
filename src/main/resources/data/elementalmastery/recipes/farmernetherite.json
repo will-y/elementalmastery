@@ -1,0 +1,31 @@
+{
+    "result": {
+        "item": "elementalmastery:farmernetherite"
+    },
+    "pattern": [
+        "m2m",
+        "1b3",
+        " s " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "minecraft:netherite_ingot"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        },
+        "1": {
+            "item": "minecraft:netherite_hoe"
+        },
+        "2": {
+            "item": "minecraft:netherite_shovel"
+        },
+        "3": {
+            "item": "minecraft:netherite_axe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "result": {
+        "item": "elementalmastery:minernetherite"
+    },
+    "pattern": [
+        "  s",
+        "mbm",
+        "p  " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "m": {
+            "item": "minecraft:netherite_ingot"
+        },
+        "s": {
+            "item": "minecraft:netherite_shovel"
+        },
+        "p": {
+            "item": "minecraft:netherite_pickaxe"
+        },
+        "b": {
+            "item": "elementalmastery:toolbinder"
+        }
+    }
+}
