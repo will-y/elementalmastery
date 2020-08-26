@@ -3,12 +3,16 @@ package eyeroh.elementalmastery.item;
 import eyeroh.elementalmastery.CreativeTabs;
 import eyeroh.elementalmastery.ElementalMastery;
 import eyeroh.elementalmastery.block.ModBlocks;
+import eyeroh.elementalmastery.entity.CreeperSpawnEgg;
+import eyeroh.elementalmastery.entity.ModEntities;
 import eyeroh.elementalmastery.machine.ModMachines;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.xml.bind.Element;
 
 public class ModItems {
 
@@ -107,4 +111,13 @@ public class ModItems {
 	public static final RegistryObject<Item> SOLAR_RUBY_ITEM = ITEMS.register("solarruby", () -> new BlockItem(ModMachines.SOLAR_RUBY.get(), new Item.Properties().group(CreativeTabs.tabGemMachines)));
 	public static final RegistryObject<Item> SOLAR_SAPPHIRE_ITEM = ITEMS.register("solarsapphire", () -> new BlockItem(ModMachines.SOLAR_SAPPHIRE.get(), new Item.Properties().group(CreativeTabs.tabGemMachines)));
 
+
+	public static final RegistryObject<CreeperSpawnEgg> SPEED_CREEPER_SPAWN_EGG = ITEMS.register("speed_creeper_spawn_egg",
+			() -> new CreeperSpawnEgg(ModEntities.SPEED_CREEPER, 0xda0bed, 0x860b91, new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<CreeperSpawnEgg> FIRE_CREEPER_SPAWN_EGG = ITEMS.register("fire_creeper_spawn_egg",
+			() -> new CreeperSpawnEgg(ModEntities.FIRE_CREEPER, 0xf2860c, 0xa35b0b, new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<CreeperSpawnEgg> STRENGTH_CREEPER_SPAWN_EGG = ITEMS.register("strength_creeper_spawn_egg",
+			() -> new CreeperSpawnEgg(ModEntities.STRENGTH_CREEPER, 0x00235b, 0x1d68e0, new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<CreeperSpawnEgg> HEAL_CREEPER_SPAWN_EGG = ITEMS.register("heal_creeper_spawn_egg",
+			() -> new CreeperSpawnEgg(ModEntities.HEAL_CREEPER, 0xff0000, 0xad1414, new Item.Properties().group(CreativeTabs.tabGemItems)));
 }
