@@ -19,9 +19,11 @@ public class SpecialArmor extends ArmorItem {
 	
 	private boolean[] returnArray = new boolean[] {false, false, false, false};
 	private int timer = 400;
+	private IArmorMaterial material;
 	
 	public SpecialArmor(IArmorMaterial materialIn, EquipmentSlotType equipmentSlotIn) {
 		super(materialIn, equipmentSlotIn, new Item.Properties().group(CreativeTabs.tabGemTools));
+		this.material = materialIn;
 	}
 	@Override
 	public void inventoryTick(ItemStack stack, World world, Entity entityIn, int itemSlot, boolean isSelected) {
@@ -30,26 +32,26 @@ public class SpecialArmor extends ArmorItem {
 			timer++;
 			if(timer >= 395) {
 				if(this.getArmorMaterial() == ArmorMaterials.SPEED) {
-					if(checkArmor(player.getArmorInventoryList(), "Speed")) {
+					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.SPEED, 800, 2);
 						applyPotion(player, Effects.HASTE, 800, 1);
 						applyPotion(player, Effects.WEAKNESS, 800, 0);
 						timer = 0;
 					}
 				} else if (this.getArmorMaterial() == ArmorMaterials.FIRE) {
-					if(checkArmor(player.getArmorInventoryList(), "Fire")) {
+					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.FIRE_RESISTANCE, 800, 0);
 						timer = 0;
 					}
 				} else if (this.getArmorMaterial() == ArmorMaterials.HEAL) {
-					if(checkArmor(player.getArmorInventoryList(), "Healing")) {
+					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.REGENERATION, 100, 0);
 						applyPotion(player, Effects.ABSORPTION, 800, 0);
 						applyPotion(player, Effects.MINING_FATIGUE, 800, 0);
 						timer = 0;
 					}
 				} else if(this.getArmorMaterial() == ArmorMaterials.STRENGTH) {
-					if(checkArmor(player.getArmorInventoryList(), "Strength")) {
+					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.STRENGTH, 800, 2);
 						applyPotion(player, Effects.RESISTANCE, 800, 1);
 						applyPotion(player, Effects.SLOWNESS, 800, 0);
@@ -61,22 +63,15 @@ public class SpecialArmor extends ArmorItem {
 		}
 	}
 	
-	public boolean checkArmor(Iterable<ItemStack> itemStack, String name) {
+	public boolean checkArmor(Iterable<ItemStack> itemStack, IArmorMaterial material) {
 		resetArray();
-		itemStack.forEach(item -> {
-			if(item.getItem().getDisplayName(item).equals(name + " Helmet")) {
-				returnArray[0] = true;
-			} else if(item.getItem().getDisplayName(item).equals(name + " Chestplate")) {
-				returnArray[1] = true; 
-			} else if (item.getItem().getDisplayName(item).equals(name + " Leggings")) {
-				returnArray[2] = true;
-			} else if (item.getItem().getDisplayName(item).equals(name + " Boots")) {
-				returnArray[3] = true;
-			}
-		});
-
-		for (boolean b : returnArray) {
-			if (!b) {
+		for (ItemStack stack : itemStack) {
+			if (stack.getItem() instanceof ArmorItem) {
+				ArmorItem newItem = (ArmorItem) stack.getItem();
+				if (!newItem.getArmorMaterial().equals(material)) {
+					return false;
+				}
+			} else {
 				return false;
 			}
 		}
