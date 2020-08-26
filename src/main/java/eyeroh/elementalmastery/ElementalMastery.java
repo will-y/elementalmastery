@@ -3,26 +3,22 @@ package eyeroh.elementalmastery;
 import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.entity.ModEntities;
 import eyeroh.elementalmastery.entity.SpeedCreeperEntity;
+import eyeroh.elementalmastery.entity.StrengthCreeperEntity;
 import eyeroh.elementalmastery.entity.render.SpeedCreeperRenderer;
+import eyeroh.elementalmastery.entity.render.StrengthCreeperRenderer;
 import eyeroh.elementalmastery.item.ModItems;
 import eyeroh.elementalmastery.item.armor.ModArmor;
 import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.world.OreGen;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DeferredWorkQueue;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod("elementalmastery")
 public class ElementalMastery {
@@ -49,10 +45,14 @@ public class ElementalMastery {
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.SPEED_CREEPER.get(), SpeedCreeperEntity.setCustomAttributes().func_233813_a_());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.STRENGTH_CREEPER.get(), StrengthCreeperEntity.setCustomAttributes().func_233813_a_());
+        });
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPEED_CREEPER.get(), SpeedCreeperRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.STRENGTH_CREEPER.get(), StrengthCreeperRenderer::new);
     }
 
 //    @SidedProxy(clientSide = "eyeroh.elementalmastery.proxy.ClientProxy", serverSide = "eyeroh.elementalmastery.proxy.ServerProxy")
