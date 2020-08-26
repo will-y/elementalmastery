@@ -36,13 +36,12 @@ public class StrengthAxe extends AxeItem {
 		for (int i = -1; i < 2; i++) {
 			for(int j = -1; j < 2; j++) {
 				for(int k = -1; k < 2; k++) {
-					if(stack.getItem().getTags().contains(ItemTags.LOGS) ) {
+					if(world.getBlockState(pos.add(i, j, k)).getBlock().getTags().contains(ItemTags.LOGS.func_230234_a_()) ) {
 						if(stack.getMaxDamage() - stack.getDamage() > 0) {
 							world.destroyBlock(pos.add(i, j, k), true);
 							stack.damageItem(1, entityLiving, t -> {});
 							checkForWood(pos.add(i, j, k), world, entityLiving, stack);
 						}
-						
 					}
 				}
 			}
