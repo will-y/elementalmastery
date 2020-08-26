@@ -1,9 +1,11 @@
 package eyeroh.elementalmastery;
 
 import eyeroh.elementalmastery.block.ModBlocks;
+import eyeroh.elementalmastery.entity.FireCreeperEntity;
 import eyeroh.elementalmastery.entity.ModEntities;
 import eyeroh.elementalmastery.entity.SpeedCreeperEntity;
 import eyeroh.elementalmastery.entity.StrengthCreeperEntity;
+import eyeroh.elementalmastery.entity.render.FireCreeperRenderer;
 import eyeroh.elementalmastery.entity.render.SpeedCreeperRenderer;
 import eyeroh.elementalmastery.entity.render.StrengthCreeperRenderer;
 import eyeroh.elementalmastery.item.ModItems;
@@ -48,11 +50,15 @@ public class ElementalMastery {
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.STRENGTH_CREEPER.get(), StrengthCreeperEntity.setCustomAttributes().func_233813_a_());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.FIRE_CREEPER.get(), FireCreeperEntity.setCustomAttributes().func_233813_a_());
+        });
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPEED_CREEPER.get(), SpeedCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.STRENGTH_CREEPER.get(), StrengthCreeperRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FIRE_CREEPER.get(), FireCreeperRenderer::new);
     }
 
 //    @SidedProxy(clientSide = "eyeroh.elementalmastery.proxy.ClientProxy", serverSide = "eyeroh.elementalmastery.proxy.ServerProxy")
