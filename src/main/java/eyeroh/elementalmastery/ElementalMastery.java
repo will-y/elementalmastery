@@ -1,11 +1,9 @@
 package eyeroh.elementalmastery;
 
 import eyeroh.elementalmastery.block.ModBlocks;
-import eyeroh.elementalmastery.entity.FireCreeperEntity;
-import eyeroh.elementalmastery.entity.ModEntities;
-import eyeroh.elementalmastery.entity.SpeedCreeperEntity;
-import eyeroh.elementalmastery.entity.StrengthCreeperEntity;
+import eyeroh.elementalmastery.entity.*;
 import eyeroh.elementalmastery.entity.render.FireCreeperRenderer;
+import eyeroh.elementalmastery.entity.render.HealCreeperRenderer;
 import eyeroh.elementalmastery.entity.render.SpeedCreeperRenderer;
 import eyeroh.elementalmastery.entity.render.StrengthCreeperRenderer;
 import eyeroh.elementalmastery.item.ModItems;
@@ -28,6 +26,7 @@ public class ElementalMastery {
     public static final String MODID = "elementalmastery";
     public static final String MODNAME = "Elemental Mastery";
     public static final String VERSION = "1.3";
+
     public ElementalMastery() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
@@ -53,12 +52,16 @@ public class ElementalMastery {
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(ModEntities.FIRE_CREEPER.get(), FireCreeperEntity.setCustomAttributes().func_233813_a_());
         });
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(ModEntities.HEAL_CREEPER.get(), HealCreeperEntity.setCustomAttributes().func_233813_a_());
+        });
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPEED_CREEPER.get(), SpeedCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.STRENGTH_CREEPER.get(), StrengthCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FIRE_CREEPER.get(), FireCreeperRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HEAL_CREEPER.get(), HealCreeperRenderer::new);
     }
 
 //    @SidedProxy(clientSide = "eyeroh.elementalmastery.proxy.ClientProxy", serverSide = "eyeroh.elementalmastery.proxy.ServerProxy")

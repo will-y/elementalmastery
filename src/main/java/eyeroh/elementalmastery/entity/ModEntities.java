@@ -28,4 +28,9 @@ public class ModEntities {
 			() -> EntityType.Builder.create(FireCreeperEntity::new, EntityClassification.MONSTER)
 					.size(1.0f, 2.0f) // Hitbox Size
 					.build(new ResourceLocation(ElementalMastery.MODID, "firecreeper").toString()));
+
+	public static final RegistryObject<EntityType<HealCreeperEntity>> HEAL_CREEPER = ENTITY_TYPES.register("healcreeper",
+			() -> EntityType.Builder.create(HealCreeperEntity::new, EntityClassification.MONSTER)
+					.size(1.0f, 2.0f) // Hitbox Size
+					.build(new ResourceLocation(ElementalMastery.MODID, "healcreeper").toString()));
 }
