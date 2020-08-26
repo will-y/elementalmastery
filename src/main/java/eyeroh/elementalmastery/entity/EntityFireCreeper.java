@@ -1,13 +1,9 @@
-package eyeroh.elementalmastery.mob;
-
-import java.util.List;
+package eyeroh.elementalmastery.entity;
 
 import javax.annotation.Nullable;
 
 import eyeroh.elementalmastery.ElementalMastery;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityFireCreeper extends EntityGemCreeper{

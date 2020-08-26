@@ -1,4 +1,4 @@
-package eyeroh.elementalmastery.mob;
+package eyeroh.elementalmastery.entity;
 
 import net.minecraft.entity.LivingEntity;
 

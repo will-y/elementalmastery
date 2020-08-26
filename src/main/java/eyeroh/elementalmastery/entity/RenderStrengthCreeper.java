@@ -1,9 +1,6 @@
-package eyeroh.elementalmastery.mob;
-
-import javax.annotation.Nonnull;
+package eyeroh.elementalmastery.entity;
 
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class RenderStrengthCreeper {
 	private ResourceLocation mobTexture = new ResourceLocation("elementalmastery:textures/entity/strengthcreeper.png");

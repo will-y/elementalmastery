@@ -1,19 +1,9 @@
-package eyeroh.elementalmastery.mob;
-
-import java.util.List;
-import java.util.Random;
+package eyeroh.elementalmastery.entity;
 
 import javax.annotation.Nullable;
 
 import eyeroh.elementalmastery.ElementalMastery;
-import net.minecraft.entity.Entity;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityHealCreeper extends EntityGemCreeper{

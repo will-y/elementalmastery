@@ -1,22 +1,10 @@
-package eyeroh.elementalmastery.mob;
+package eyeroh.elementalmastery.entity;
 
-import java.util.Collection;
-
-import javax.annotation.Nullable;
-
-import eyeroh.elementalmastery.ElementalMastery;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityGemCreeper extends MobEntity {
