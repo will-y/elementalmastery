@@ -41,7 +41,7 @@ public class ItemFarmer extends AxeItem {
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state){
 		Material material = state.getMaterial();
-	    return material != Material.CAKE && material != Material.CACTUS && material != Material.WOOD && material != Material.CARPET && material != Material.WOOL && material != Material.GOURD && material != Material.LEAVES && material != Material.PLANTS && material != Material.OCEAN_PLANT && material !=Material.CLAY && material != Material.SNOW_BLOCK && material != Material.SNOW && material != Material.SAND && material != Material.SEA_GRASS && material != Material.EARTH ? super.getDestroySpeed(stack, state) : this.efficiency;
+	    return material != Material.CAKE && material != Material.CACTUS && material != Material.WOOD && material != Material.CARPET && material != Material.WOOL && material != Material.GOURD && material != Material.LEAVES && material != Material.PLANTS && material != Material.OCEAN_PLANT && material !=Material.CLAY && material != Material.SNOW_BLOCK && material != Material.SNOW && material != Material.SAND && material != Material.SEA_GRASS && material != Material.EARTH && material != Material.ORGANIC? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 	
 	private String mode = "Hoe";

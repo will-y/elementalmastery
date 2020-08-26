@@ -64,7 +64,7 @@ public class StrengthShovel extends ShovelItem {
             for(int i = 0; i < 8; i++) {
             	Material material = world.getBlockState(posArray[i]).getMaterial();
             	
-            	if(material == Material.EARTH || material == Material.SNOW || material == Material.SNOW_BLOCK || material == Material.SAND) {
+            	if(material == Material.EARTH || material == Material.SNOW || material == Material.SNOW_BLOCK || material == Material.SAND || material == Material.ORGANIC) {
             		if(stack.getMaxDamage() - stack.getDamage() > 0) {
             			stack.damageItem(1, entityLiving, t -> {});
             			world.destroyBlock(posArray[i], true);
