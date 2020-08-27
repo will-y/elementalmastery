@@ -32,7 +32,7 @@ public class ScreenGemChest extends ContainerScreen<ContainerGemChest> {
     //drawGuiContainerForegroundLayer
     protected void func_230451_b_ (MatrixStack matrix, int mouseX, int mouseY) {
         // font
-        this.field_230712_o_.func_238421_b_(matrix, "Opal Barrel", this.field_230712_o_.getStringWidth("Opal Barrel") / 2, 6.0F, 4210752);
+        this.field_230712_o_.func_238421_b_(matrix, "Opal Barrel", 9, 6.0F, 4210752);
     }
 
     @Override

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "elementalmastery:chestopal"
+  },
+  "pattern": [
+    "ggg",
+    "gbg",
+    "ggg"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "g": {
+      "item": "elementalmastery:gemopal"
+    },
+    "b": {
+      "item": "minecraft:barrel"
+    }
+  }
+}
