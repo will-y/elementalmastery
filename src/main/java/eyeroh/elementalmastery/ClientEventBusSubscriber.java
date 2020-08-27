@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.Mod;
 public class ClientEventBusSubscriber {
     @SubscribeEvent
     public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
-        System.out.println("Register entites");
         CreeperSpawnEgg.initSpawnEggs();
     }
 }

@@ -62,17 +62,6 @@ public class ModItems {
 	public static final RegistryObject<Item> CELL_TOPAZ = ITEMS.register("celltopaz", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 	public static final RegistryObject<Item> CELL_RUBY = ITEMS.register("cellruby", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 	public static final RegistryObject<Item> CELL_SAPPHIRE = ITEMS.register("cellsapphire", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
-
-	// Item Blocks
-	public static final RegistryObject<Item> OPAL_BLOCK_ITEM = ITEMS.register("blockopal", () -> new BlockItem(ModBlocks.OPAL_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
-	public static final RegistryObject<Item> TOPAZ_BLOCK_ITEM = ITEMS.register("blocktopaz", () -> new BlockItem(ModBlocks.TOPAZ_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
-	public static final RegistryObject<Item> RUBY_BLOCK_ITEM = ITEMS.register("blockruby", () -> new BlockItem(ModBlocks.RUBY_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
-	public static final RegistryObject<Item> SAPPHIRE_BLOCK_ITEM = ITEMS.register("blocksapphire", () -> new BlockItem(ModBlocks.SAPPHIRE_BLOCK.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
-
-	public static final RegistryObject<Item> OPAL_ORE_ITEM = ITEMS.register("oreopal", () -> new BlockItem(ModBlocks.OPAL_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
-	public static final RegistryObject<Item> TOPAZ_ORE_ITEM = ITEMS.register("oretopaz", () -> new BlockItem(ModBlocks.TOPAZ_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
-	public static final RegistryObject<Item> RUBY_ORE_ITEM = ITEMS.register("oreruby", () -> new BlockItem(ModBlocks.RUBY_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
-	public static final RegistryObject<Item> SAPPHIRE_ORE_ITEM = ITEMS.register("oresapphire", () -> new BlockItem(ModBlocks.SAPPHIRE_ORE.get(), new Item.Properties().group(CreativeTabs.tabGemBlocks)));
 	
 	// Machines
 	public static final RegistryObject<Item> COLLECTOR_BAISC_ITEM = ITEMS.register("collectorbasic", () -> new BlockItem(ModMachines.COLLECTOR_BAISC.get(), new Item.Properties().group(CreativeTabs.tabGemMachines)));

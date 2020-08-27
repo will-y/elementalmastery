@@ -1,6 +1,7 @@
 package eyeroh.elementalmastery;
 
 import eyeroh.elementalmastery.block.ModBlocks;
+import eyeroh.elementalmastery.block.ScreenGemChest;
 import eyeroh.elementalmastery.entity.*;
 import eyeroh.elementalmastery.entity.render.FireCreeperRenderer;
 import eyeroh.elementalmastery.entity.render.HealCreeperRenderer;
@@ -11,6 +12,7 @@ import eyeroh.elementalmastery.item.armor.ModArmor;
 import eyeroh.elementalmastery.item.tool.ModTools;
 import eyeroh.elementalmastery.machine.ModMachines;
 import eyeroh.elementalmastery.world.OreGen;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +37,9 @@ public class ElementalMastery {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlocks.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlocks.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlocks.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModMachines.MACHINES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTools.TOOLS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -61,6 +66,7 @@ public class ElementalMastery {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
+        ScreenManager.registerFactory(ModBlocks.CHEST_OPAL_CONTAINER.get(), ScreenGemChest::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPEED_CREEPER.get(), SpeedCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.STRENGTH_CREEPER.get(), StrengthCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FIRE_CREEPER.get(), FireCreeperRenderer::new);

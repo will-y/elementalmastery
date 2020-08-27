@@ -1,5 +1,6 @@
 package eyeroh.elementalmastery.item.tool;
 
+import eyeroh.elementalmastery.block.ModBlocks;
 import eyeroh.elementalmastery.item.ModItems;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
@@ -25,19 +26,19 @@ public enum ToolMaterials implements IItemTier {
     }),
 
     SPEED(2, 750, 9.0f, 2.5f, 10, () -> {
-        return Ingredient.fromItems(ModItems.OPAL_BLOCK_ITEM.get());
+        return Ingredient.fromItems(ModBlocks.OPAL_BLOCK_ITEM.get());
     }),
 
     FIRE(2, 1000, 7.0f, 3.0f, 10, () -> {
-        return Ingredient.fromItems(ModItems.OPAL_BLOCK_ITEM.get());
+        return Ingredient.fromItems(ModBlocks.OPAL_BLOCK_ITEM.get());
     }),
 
     HEAL(2, 1000, 7.0f, 3.0f, 10, () -> {
-        return Ingredient.fromItems(ModItems.OPAL_BLOCK_ITEM.get());
+        return Ingredient.fromItems(ModBlocks.OPAL_BLOCK_ITEM.get());
     }),
 
     STRENGTH(2, 1250, 6.0f, 3.5f, 10, () -> {
-        return Ingredient.fromItems(ModItems.OPAL_BLOCK_ITEM.get());
+        return Ingredient.fromItems(ModBlocks.OPAL_BLOCK_ITEM.get());
     });
 
     private final int harvestLevel;
