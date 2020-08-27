@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "elementalmastery:blocks/opal_barrel_side",
+    "down": "elementalmastery:blocks/opal_barrel_bottom",
+    "up": "elementalmastery:blocks/opal_barrel_top",
+    "north": "elementalmastery:blocks/opal_barrel_side",
+    "south": "elementalmastery:blocks/opal_barrel_side",
+    "east": "elementalmastery:blocks/opal_barrel_side",
+    "west": "elementalmastery:blocks/opal_barrel_side"
+  }
+}

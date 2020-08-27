@@ -24,13 +24,15 @@ public class ScreenGemChest extends ContainerScreen<ContainerGemChest> {
         // renderBackground
         this.func_230446_a_(matrix);
         super.func_230430_a_(matrix, mouseX, mouseY, partialTicks);
+        this.func_230459_a_(matrix, mouseX, mouseY);
         // this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
     //drawGuiContainerForegroundLayer
     protected void func_230451_b_ (MatrixStack matrix, int mouseX, int mouseY) {
-
+        // font
+        this.field_230712_o_.func_238421_b_(matrix, "Opal Barrel", this.field_230712_o_.getStringWidth("Opal Barrel") / 2, 6.0F, 4210752);
     }
 
     @Override
