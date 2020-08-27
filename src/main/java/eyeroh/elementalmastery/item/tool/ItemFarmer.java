@@ -48,7 +48,7 @@ public class ItemFarmer extends AxeItem {
 	
 	@Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand handIn) {
-		 if(player.isSneaking() && world.isRemote) {
+		 if(player.isSneaking() && !world.isRemote) {
 	        	if("Hoe".equals(mode)) {
 	        		mode = "Shovel";
 	        	} else {
@@ -72,7 +72,7 @@ public class ItemFarmer extends AxeItem {
         
         if(player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
         	if(!player.isSneaking()) {
-            	if(mode=="Hoe") {
+            	if("Hoe".equals(mode)) {
                     int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(context);
                     if (hook != 0) {
                         return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
@@ -114,7 +114,7 @@ public class ItemFarmer extends AxeItem {
                             }
 
                             CampfireBlock.func_235475_c_(world, pos, blockstate);
-                            blockstate2 = blockstate.with(CampfireBlock.LIT, Boolean.valueOf(false));
+                            blockstate2 = blockstate.with(CampfireBlock.LIT, false);
                         }
 
                         if (blockstate2 != null) {
