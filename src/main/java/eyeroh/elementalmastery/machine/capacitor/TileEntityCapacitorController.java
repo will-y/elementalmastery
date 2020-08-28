@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import eyeroh.elementalmastery.machine.ModMachines;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -232,13 +234,14 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 //        this.readFromNBT(packet.getNbtCompound());
 //    }
 //
-//	@Override
-//    public void readFromNBT(NBTTagCompound compound) {
-//        super.readFromNBT(compound);
-//        energyAmount = compound.getIntArray("energy");
-//        active = compound.getBoolean("active");
-//        energyMax = compound.getIntArray("energy_max");
-//    }
+	@Override
+	// read
+    public void func_230337_a_(BlockState state, CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
+        energyAmount = compound.getIntArray("energy");
+        active = compound.getBoolean("active");
+        energyMax = compound.getIntArray("energy_max");
+    }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
@@ -308,9 +311,10 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 		return "Capacitor at " + this.pos.toString() + "\nWith energy: " + Arrays.toString(this.energyAmount);
 	}
 	
-	public ArrayList<String> getToolTipString(int type) {
-		ArrayList<String> list = new ArrayList<String>();
-		list.add(this.getEnergy(type) + "/" + this.getMaxEnergy(type));
+	public ArrayList<ITextComponent> getToolTipString(int type) {
+		ArrayList<ITextComponent> list = new ArrayList<>();
+
+		list.add(ITextComponent.func_244388_a(this.getEnergy(type) + "/" + this.getMaxEnergy(type)));
 		return list;
 	}
 }

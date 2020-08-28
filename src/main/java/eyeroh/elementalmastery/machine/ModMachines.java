@@ -5,6 +5,7 @@ import eyeroh.elementalmastery.block.BlockCapacitorGlass;
 import eyeroh.elementalmastery.block.GemBlock;
 import eyeroh.elementalmastery.block.UpgradeBlock;
 import eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController;
+import eyeroh.elementalmastery.machine.capacitor.TileEntityCapacitorController;
 import eyeroh.elementalmastery.machine.collector.CollectorBlock;
 import eyeroh.elementalmastery.machine.collector.CollectorFire;
 import eyeroh.elementalmastery.machine.collector.CollectorHeal;
@@ -14,6 +15,9 @@ import eyeroh.elementalmastery.machine.generator.GeneratorBlock;
 import eyeroh.elementalmastery.machine.miner.BlockMiner;
 import eyeroh.elementalmastery.machine.solar.BlockSolar;
 import net.minecraft.block.Block;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,7 +26,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModMachines {
 	
 	public static final DeferredRegister<Block> MACHINES = DeferredRegister.create(ForgeRegistries.BLOCKS, ElementalMastery.MODID);
-	
+
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ElementalMastery.MODID);
+	public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ElementalMastery.MODID);
+	public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, ElementalMastery.MODID);
+
 	public static final RegistryObject<Block> COLLECTOR_BAISC = MACHINES.register("collectorbasic", () -> new CollectorBlock(4));
 
 	public static final RegistryObject<Block> COLLECTOR_SPEED = MACHINES.register("collectorspeed", CollectorSpeed::new);
@@ -42,6 +50,8 @@ public class ModMachines {
 	public static final RegistryObject<Block> CAPACITOR_WALL = MACHINES.register("capacitorwall", GemBlock::new);
 	public static final RegistryObject<Block> CAPACITOR_CONTROLLER = MACHINES.register("capacitorcontroller", BlockCapacitorController::new);
 	public static final RegistryObject<Block> CAPACITOR_GLASS = MACHINES.register("capacitorglass", BlockCapacitorGlass::new);
+
+	public static final RegistryObject<TileEntityType<TileEntityCapacitorController>> CAPACITOR_CONTROLLER_TILE = TILES.register("capacitorcontroller", () -> TileEntityType.Builder.create(TileEntityCapacitorController::new, CAPACITOR_CONTROLLER.get()).build(null));
 
 	public static final RegistryObject<Block> CAPACITOR_OPAL = MACHINES.register("capacitoropal", GemBlock::new);
 	public static final RegistryObject<Block> CAPACITOR_TOPAZ = MACHINES.register("capacitortopaz", GemBlock::new);
