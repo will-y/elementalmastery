@@ -20,9 +20,7 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -36,9 +34,8 @@ public class BlockCapacitorController extends Block {
 	
 	//public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
-	public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.FACING;
+	public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty PROPERTY_ACTIVE = BooleanProperty.create("active");
-	public static final int GUI_ID = 2;
 	
 	public BlockCapacitorController() {
 		super(Block.Properties.create(Material.ROCK)
@@ -51,7 +48,7 @@ public class BlockCapacitorController extends Block {
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(PROPERTY_FACING).add(PROPERTY_ACTIVE);
+		builder.add(PROPERTY_FACING, PROPERTY_ACTIVE);
 	}
 
 	@Override
@@ -71,10 +68,10 @@ public class BlockCapacitorController extends Block {
 	
 	@Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-//        if (!world.isRemote) {
+        if (!world.isRemote) {
 //        	if(getTE(world, pos).checkForMultiBlock()) {
 //        		if(!getTE(world, pos).getActive()) {
-//        			world.setBlockState(pos, state.with(PROPERTY_ACTIVE, true));
+        			world.setBlockState(pos, state.with(PROPERTY_ACTIVE, true));
 //        			getTE(world, pos).checkForMultiBlock();
 //        			getTE(world, pos).setActive();
 //            		TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_formed", "Capacitor Multiblock Formed");
@@ -84,7 +81,7 @@ public class BlockCapacitorController extends Block {
 //        			getTE(world, pos).showEnergyAmount(player);
 //        		}
 //        	}
-//        }
+        }
 
         TileEntity te = world.getTileEntity(pos);
         if (!(te instanceof TileEntityCapacitorController)) {
