@@ -130,6 +130,13 @@ public class ModTools {
 
 	public static final RegistryObject<SpeedSword> SPEED_SWORD = TOOLS.register("speedsword",
 			SpeedSword::new);
+	public static final RegistryObject<SpeedShovel> SPEED_SHOVEL = TOOLS.register("speedshovel",
+			SpeedShovel::new);
+	public static final RegistryObject<SpeedPickaxe> SPEED_PICKAXE = TOOLS.register("speedpickaxe",
+			SpeedPickaxe::new);
+	public static final RegistryObject<SpeedAxe> SPEED_AXE = TOOLS.register("speedaxe",
+			SpeedAxe::new);
+
 
 	public static final RegistryObject<FirePickaxe> FIRE_PICKAXE = TOOLS.register("firepickaxe",
 			FirePickaxe::new);

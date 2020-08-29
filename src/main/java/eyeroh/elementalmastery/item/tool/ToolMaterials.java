@@ -25,7 +25,7 @@ public enum ToolMaterials implements IItemTier {
         return Ingredient.fromItems(ModItems.GEM_SAPPHIRE.get());
     }),
 
-    SPEED(2, 750, 9.0f, 2.5f, 10, () -> {
+    SPEED(2, 750, 15.0f, 2.5f, 10, () -> {
         return Ingredient.fromItems(ModBlocks.OPAL_BLOCK_ITEM.get());
     }),
 
