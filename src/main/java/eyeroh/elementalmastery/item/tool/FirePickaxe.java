@@ -51,4 +51,9 @@ public class FirePickaxe extends PickaxeItem {
 	public boolean hasEffect(ItemStack itemstack) {
         return true;
     }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
 }

@@ -29,4 +29,9 @@ public class FireSword extends SwordItem {
 	public boolean hasEffect(ItemStack itemstack) {
         return true;
     }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
 }

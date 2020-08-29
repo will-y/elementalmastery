@@ -91,4 +91,9 @@ public class SpecialArmor extends ArmorItem {
 	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
+
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
 }

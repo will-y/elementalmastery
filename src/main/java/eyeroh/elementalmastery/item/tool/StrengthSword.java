@@ -44,4 +44,9 @@ public class StrengthSword extends SwordItem {
         return true;
     }
 
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
+
 }
