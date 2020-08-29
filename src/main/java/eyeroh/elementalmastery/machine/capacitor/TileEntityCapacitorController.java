@@ -1,7 +1,6 @@
 package eyeroh.elementalmastery.machine.capacitor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import eyeroh.elementalmastery.machine.IEnergyAcceptor;
 import eyeroh.elementalmastery.machine.IEnergyStorage;
@@ -11,19 +10,14 @@ import eyeroh.elementalmastery.machine.util.Energy;
 import eyeroh.elementalmastery.machine.util.EnergyType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.texture.ITickable;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
 
 public class TileEntityCapacitorController extends TileEntity implements ITickable, IEnergyStorage {
 
@@ -32,7 +26,6 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
 	private Energy currentEnergy;
 	private Energy maxEnergy;
-	private CapacitorDirection capacitorDirection;
 	private ArrayList<IEnergyAcceptor> machines = new ArrayList<>();
 	int size;
 	
@@ -88,7 +81,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
 	@Override
 	public int getMaxEnergy(EnergyType type) {
-		return 0;
+		return this.maxEnergy.get(type);
 	}
 
 	@Override
@@ -200,5 +193,49 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 		}
 
 		return null;
+	}
+
+	// read
+	@Override
+	public void func_230337_a_(BlockState state, CompoundNBT compound) {
+		size = compound.getInt("size");
+		currentEnergy = Energy.fromIntArray(compound.getIntArray("currentEnergy"));
+		maxEnergy = Energy.fromIntArray(compound.getIntArray("maxEnergy"));
+
+		System.out.println("READING: " + maxEnergy);
+
+		super.func_230337_a_(state, compound);
+	}
+
+	@Override
+	public CompoundNBT write(CompoundNBT compound) {
+		super.write(compound);
+		compound.putInt("size", size);
+		if (currentEnergy != null) {
+			compound.putIntArray("currentEnergy", currentEnergy.toIntArray());
+		}
+		if (maxEnergy != null) {
+			compound.putIntArray("maxEnergy", maxEnergy.toIntArray());
+		}
+
+		System.out.println("Writing: " + maxEnergy);
+		return compound;
+	}
+
+	@Override
+	public CompoundNBT getUpdateTag() {
+		return write(new CompoundNBT());
+	}
+
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() {
+		CompoundNBT nbtTag = new CompoundNBT();
+		this.write(nbtTag);
+		return new SUpdateTileEntityPacket(getPos(), 1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+		this.func_230337_a_(this.getBlockState(), packet.getNbtCompound());
 	}
 }

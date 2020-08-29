@@ -36,6 +36,21 @@ public class Energy {
         return sapphire;
     }
 
+    public int get(EnergyType type) {
+        switch (type) {
+            case OPAL:
+                return getOpal();
+            case TOPAZ:
+                return getTopaz();
+            case RUBY:
+                return getRuby();
+            case SAPPHIRE:
+                return getSapphire();
+            default:
+                return 0;
+        }
+    }
+
     public void setOpal(int opal) {
         this.opal = opal;
     }
@@ -78,5 +93,17 @@ public class Energy {
     @Override
     public String toString() {
         return String.format("{Opal = %s, Topaz = %s, Ruby = %s, Sapphire = %s}", opal, topaz, ruby, sapphire);
+    }
+
+    public int[] toIntArray() {
+        return new int[] {opal, topaz, ruby, sapphire};
+    }
+
+    public static Energy fromIntArray(int[] energyArray) {
+        if (energyArray.length != 4) {
+            return new Energy();
+        } else {
+            return new Energy(energyArray[0], energyArray[1], energyArray[2], energyArray[3]);
+        }
     }
 }
