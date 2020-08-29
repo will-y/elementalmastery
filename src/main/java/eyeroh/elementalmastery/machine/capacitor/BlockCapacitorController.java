@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
@@ -110,7 +111,7 @@ public class BlockCapacitorController extends Block {
 //    }
 //
 	@Override
-    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		world.setBlockState(pos, state.with(PROPERTY_FACING, placer.getHorizontalFacing().getOpposite()), 2);
-    }
+	public BlockState getStateForPlacement(BlockItemUseContext blockItemUseContext) {
+		return this.getDefaultState().with(PROPERTY_FACING, blockItemUseContext.getPlacementHorizontalFacing().getOpposite());
+	}
 }
