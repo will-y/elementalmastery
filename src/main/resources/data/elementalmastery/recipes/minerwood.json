@@ -19,7 +19,7 @@
             "item": "minecraft:wooden_pickaxe"
         },
         "b": {
-            "item": "elementalmastery:toolbinder"
+            "item": "elementalmastery:primitivebinder"
         }
     }
 }

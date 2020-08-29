@@ -23,8 +23,10 @@ public class ModItems {
 	public static final RegistryObject<Item> GEM_TOPAZ = ITEMS.register("gemtopaz", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 	public static final RegistryObject<Item> GEM_RUBY = ITEMS.register("gemruby", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 	public static final RegistryObject<Item> GEM_SAPPHIRE = ITEMS.register("gemsapphire", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> GEM_MULTI = ITEMS.register("gemmulti", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 
 	public static final RegistryObject<Item> TOOL_BINDER = ITEMS.register("toolbinder", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
+	public static final RegistryObject<Item> PRIMITIVE_BINDER = ITEMS.register("primitivebinder", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 
 	public static final RegistryObject<Item> ENERGY_CORE_OPAL = ITEMS.register("energycoreopal", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));
 	public static final RegistryObject<Item> ENERGY_CORE_TOPAZ = ITEMS.register("energycoretopaz", () -> new Item(new Item.Properties().group(CreativeTabs.tabGemItems)));

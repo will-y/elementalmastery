@@ -19,7 +19,7 @@
             "item": "minecraft:iron_pickaxe"
         },
         "b": {
-            "item": "elementalmastery:toolbinder"
+            "item": "elementalmastery:primitivebinder"
         }
     }
 }
