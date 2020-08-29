@@ -58,6 +58,9 @@
 "item.elementalmastery.strengthaxe": "Strength Axe",
 "item.elementalmastery.strengthsword": "Strength Sword",
 "item.elementalmastery.speedsword": "Speed Sword",
+"item.elementalmastery.speedpickaxe": "Speed Pickaxe",
+"item.elementalmastery.speedshovel": "Speed Shovel",
+"item.elementalmastery.speedaxe": "Speed Axe",
 "item.elementalmastery.healsword": "Healing Sword",
 "item.elementalmastery.healaxe": "Healing Axe",
 "item.elementalmastery.firesword": "Flame Sword",
@@ -180,4 +183,5 @@
 "item.elementalmastery.fire_creeper_spawn_egg":  "Spawn Fire Creeper",
 "item.elementalmastery.heal_creeper_spawn_egg":  "Spawn Healing Creeper",
 "item.elementalmastery.strength_creeper_spawn_egg":  "Spawn Strength Creeper",
-"block.elementalmastery.chestopal": "Opal Barrel"}
+"block.elementalmastery.chestopal": "Opal Barrel",
+"item.elementalmastery.primitivebinder":  "Primitive Tool Binder"}

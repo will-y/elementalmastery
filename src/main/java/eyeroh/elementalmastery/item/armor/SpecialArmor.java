@@ -34,37 +34,32 @@ public class SpecialArmor extends ArmorItem {
 				if(this.getArmorMaterial() == ArmorMaterials.SPEED) {
 					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.SPEED, 800, 2);
-						applyPotion(player, Effects.HASTE, 800, 1);
+						applyPotion(player, Effects.JUMP_BOOST, 800, 0);
 						applyPotion(player, Effects.WEAKNESS, 800, 0);
-						timer = 0;
 					}
 				} else if (this.getArmorMaterial() == ArmorMaterials.FIRE) {
 					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.FIRE_RESISTANCE, 800, 0);
-						timer = 0;
 					}
 				} else if (this.getArmorMaterial() == ArmorMaterials.HEAL) {
 					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.REGENERATION, 100, 0);
 						applyPotion(player, Effects.ABSORPTION, 800, 0);
 						applyPotion(player, Effects.MINING_FATIGUE, 800, 0);
-						timer = 0;
 					}
 				} else if(this.getArmorMaterial() == ArmorMaterials.STRENGTH) {
 					if(checkArmor(player.getArmorInventoryList(), material)) {
 						applyPotion(player, Effects.STRENGTH, 800, 2);
 						applyPotion(player, Effects.RESISTANCE, 800, 1);
 						applyPotion(player, Effects.SLOWNESS, 800, 0);
-						timer = 0;
 					}
 				}
-
+				timer = 0;
 			}
 		}
 	}
 	
 	public boolean checkArmor(Iterable<ItemStack> itemStack, IArmorMaterial material) {
-		resetArray();
 		for (ItemStack stack : itemStack) {
 			if (stack.getItem() instanceof ArmorItem) {
 				ArmorItem newItem = (ArmorItem) stack.getItem();
@@ -79,10 +74,6 @@ public class SpecialArmor extends ArmorItem {
 		return true;
 	}
 	
-	private void resetArray() {
-		Arrays.fill(returnArray, false);
-	}
-	
 	private void applyPotion(PlayerEntity player, Effect effect, int duration, int level) {
 		player.addPotionEffect(new EffectInstance(effect, duration, level, true, false));
 	}
@@ -90,5 +81,10 @@ public class SpecialArmor extends ArmorItem {
 	@Override
 	public boolean hasEffect(ItemStack stack) {
 		return true;
+	}
+
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
 	}
 }

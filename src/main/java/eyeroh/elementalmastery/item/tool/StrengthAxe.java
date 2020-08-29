@@ -47,4 +47,9 @@ public class StrengthAxe extends AxeItem {
 			}
 		}
 	}
+
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
 }

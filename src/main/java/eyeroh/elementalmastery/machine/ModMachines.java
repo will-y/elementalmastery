@@ -38,10 +38,10 @@ public class ModMachines {
 	public static final RegistryObject<Block> COLLECTOR_HEAL = MACHINES.register("collectorheal", CollectorHeal::new);
 	public static final RegistryObject<Block> COLLECTOR_STRENGTH = MACHINES.register("collectorstrength", CollectorStrength::new);
 
-	public static final RegistryObject<Block> GENERATOR_SPEED = MACHINES.register("generatorspeed", () -> new GeneratorBlock("speed", 0));
-	public static final RegistryObject<Block> GENERATOR_FIRE = MACHINES.register("generatorfire", () -> new GeneratorBlock("fire", 1));
-	public static final RegistryObject<Block> GENERATOR_HEAL = MACHINES.register("generatorheal", () -> new GeneratorBlock("heal", 2));
-	public static final RegistryObject<Block> GENERATOR_STRENGTH = MACHINES.register("generatorstrength", () -> new GeneratorBlock("strength", 3));
+	public static final RegistryObject<Block> GENERATOR_SPEED = MACHINES.register("generatoropal", () -> new GeneratorBlock("speed", 0));
+	public static final RegistryObject<Block> GENERATOR_FIRE = MACHINES.register("generatortopaz", () -> new GeneratorBlock("fire", 1));
+	public static final RegistryObject<Block> GENERATOR_HEAL = MACHINES.register("generatorruby", () -> new GeneratorBlock("heal", 2));
+	public static final RegistryObject<Block> GENERATOR_STRENGTH = MACHINES.register("generatorsapphire", () -> new GeneratorBlock("strength", 3));
 
 	public static final RegistryObject<Block> CORE_CRAFTER = MACHINES.register("corecrafter", () -> new BlockEnergyAcceptor(0, 0));
 

@@ -3,15 +3,25 @@ package eyeroh.elementalmastery.item.tool;
 import java.util.List;
 
 import eyeroh.elementalmastery.CreativeTabs;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.FurnaceContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.crafting.FurnaceRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
+import net.minecraft.util.datafix.fixes.FurnaceRecipes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 public class FirePickaxe extends PickaxeItem {
@@ -24,24 +34,15 @@ public class FirePickaxe extends PickaxeItem {
         if (!world.isRemote && (double)state.getBlockHardness(world, pos) != 0.0D) {		
             stack.damageItem(1, entityLiving, t -> {});
             
-            if(this.canHarvestBlock(state)) {
-				LootTable table = ServerLifecycleHooks.getCurrentServer().getLootTableManager().getLootTableFromLocation(state.getBlock().getLootTable());
-				List<ItemStack> drops = table.generate(new LootContext.Builder(ServerLifecycleHooks.getCurrentServer().func_241755_D_()).build(table.getParameterSet()));
-
-				//TODO: Figure out how to get smelting recipes
-//                ItemStack smelted = new ItemStack(FurnaceRecipes.instance().getSmeltingResult(itemStack).getItem());
-
-//                if(!smelted.isEmpty()) {
-//                	world.setBlockToAir(pos);
-//                	EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), smelted);
-//                	world.spawnEntity(entityItem);
-//                	return true;
-//                } else {
-//                	world.setBlockToAir(pos);
-//                	EntityItem unsmelted = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
-//                	world.spawnEntity(unsmelted);
-//                	return true;
-//                }
+            if(this.canHarvestBlock(stack, state)) {
+                List<ItemStack> drops = state.getDrops(new LootContext.Builder((ServerWorld) world).withParameter(LootParameters.TOOL, stack).withParameter(LootParameters.field_237457_g_, entityLiving.func_241205_ce_()));
+				for (ItemStack itemStack : drops) {
+                    world.getRecipeManager().getRecipe(IRecipeType.SMELTING, new Inventory(itemStack), world).ifPresent((furnaceRecipe) -> {
+                        ItemStack smelted = furnaceRecipe.getRecipeOutput();
+                        world.destroyBlock(pos, false);
+                        Block.spawnAsEntity(world, pos, smelted);
+                    });
+                }
             }
         }
         return true;
@@ -50,5 +51,10 @@ public class FirePickaxe extends PickaxeItem {
 	@Override
 	public boolean hasEffect(ItemStack itemstack) {
         return true;
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
     }
 }

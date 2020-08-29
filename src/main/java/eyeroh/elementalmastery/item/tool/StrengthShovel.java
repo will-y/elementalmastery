@@ -82,4 +82,9 @@ public class StrengthShovel extends ShovelItem {
     {
         return true;
     }
+
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
 }
