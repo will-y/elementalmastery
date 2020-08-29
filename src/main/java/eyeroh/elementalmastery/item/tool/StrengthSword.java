@@ -28,15 +28,15 @@ public class StrengthSword extends SwordItem {
     }
 
 	public EffectInstance getPotionEffect() {
-		return new EffectInstance(Effects.STRENGTH, 100, 1);
+		return new EffectInstance(Effects.STRENGTH, 50, 0);
 	}
 
 	public EffectInstance getStrongPotionEffect() {
-		return new EffectInstance(Effects.STRENGTH, 500, 3);
+		return new EffectInstance(Effects.STRENGTH, 200, 2);
 	}
 
 	public EffectInstance getStrongPotionEffect2() {
-		return new EffectInstance(Effects.RESISTANCE, 500, 3);
+		return new EffectInstance(Effects.RESISTANCE, 200, 2);
 	}
 	
 	@Override
