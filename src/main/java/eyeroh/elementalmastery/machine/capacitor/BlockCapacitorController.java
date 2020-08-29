@@ -31,8 +31,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.ToolType;
 
 public class BlockCapacitorController extends Block {
-	
-	//public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
 	public static final DirectionProperty PROPERTY_FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty PROPERTY_ACTIVE = BooleanProperty.create("active");
@@ -69,44 +67,28 @@ public class BlockCapacitorController extends Block {
 	@Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if (!world.isRemote) {
-//        	if(getTE(world, pos).checkForMultiBlock()) {
-//        		if(!getTE(world, pos).getActive()) {
-        			world.setBlockState(pos, state.with(PROPERTY_ACTIVE, true));
-//        			getTE(world, pos).checkForMultiBlock();
-//        			getTE(world, pos).setActive();
-//            		TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_formed", "Capacitor Multiblock Formed");
-//    	            component.getStyle().func_240723_c_(TextFormatting.BLUE);
-//    	            player.sendStatusMessage(component, true);
-//        		} else {
-//        			getTE(world, pos).showEnergyAmount(player);
-//        		}
-//        	}
+        	TileEntityCapacitorController tileEntity = getTE(world, pos);
+        	if (state.get(PROPERTY_ACTIVE)) {
+        		if (!player.getHeldItem(hand).getItem().equals(ModTools.LINKER)) {
+					Minecraft.getInstance().displayGuiScreen(new ScreenCapacitor(tileEntity));
+				}
+			} else {
+				int size = tileEntity.checkAllMultiBlocks(state, pos, 2);
+				if (size > 0) {
+					world.setBlockState(pos, state.with(PROPERTY_ACTIVE, true));
+					TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_formed", "Capacitor Multiblock Formed");
+					component.getStyle().func_240723_c_(TextFormatting.BLUE);
+					player.sendStatusMessage(component, true);
+				} else {
+					TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_formed", "Invalid Capacitor Multiblock");
+					component.getStyle().func_240723_c_(TextFormatting.RED);
+					player.sendStatusMessage(component, true);
+				}
+			}
         }
-
-        TileEntity te = world.getTileEntity(pos);
-        if (!(te instanceof TileEntityCapacitorController)) {
-            return ActionResultType.FAIL;
-        }
-
-        TileEntityCapacitorController tileEntityCapacitorController = (TileEntityCapacitorController) te;
-		//tileEntityCapacitorController.getActive() &&
-        if(!world.isRemote && !player.getHeldItemMainhand().isItemEqual(new ItemStack(ModTools.LINKER.get()))) {
-			Minecraft.getInstance().displayGuiScreen(new ScreenCapacitor(tileEntityCapacitorController));
-			// player.openGui(ElementalMastery.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
-		}
         return ActionResultType.SUCCESS;
     }
-//
-//	@Override
-//    public IBlockState getStateFromMeta(int meta) {
-//        return getDefaultState().withProperty(FACING, EnumFacing.getFront((meta & 3) + 2)).withProperty(ACTIVE, (meta & 8) != 0);
-//    }
-//
-//    @Override
-//    public int getMetaFromState(IBlockState state) {
-//        return state.getValue(FACING).getIndex() + (state.getValue(ACTIVE) ? 8 : 0);
-//    }
-//
+
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext blockItemUseContext) {
 		return this.getDefaultState().with(PROPERTY_FACING, blockItemUseContext.getPlacementHorizontalFacing().getOpposite());

@@ -3,6 +3,7 @@ package eyeroh.elementalmastery.machine.capacitor;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import eyeroh.elementalmastery.ElementalMastery;
+import eyeroh.elementalmastery.machine.util.EnergyType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.ResourceLocation;
@@ -30,26 +31,29 @@ public class ScreenCapacitor extends Screen {
     	int guiLeft = (this.field_230708_k_ - WIDTH)/2;
     	int guiTop = (this.field_230709_l_ - HEIGHT)/2;
         func_238474_b_(matrix, guiLeft, guiTop, 0, 0, WIDTH, HEIGHT);
-
-        for(int i = 0; i < 4; i++) {
-        	if(tileEntity.getEnergy(i) > 0) {
-        		float scaledEnergyFactor = ((float)tileEntity.getEnergy(i) / tileEntity.getMaxEnergy(i));
+        int i = 0;
+        for(EnergyType type : EnergyType.values()) {
+        	if(tileEntity.getCurrentEnergy(type) > 0) {
+        		float scaledEnergyFactor = ((float)tileEntity.getCurrentEnergy(type) / tileEntity.getMaxEnergy(type));
         		int scaledEnergyHeight = (int) (scaledEnergyFactor * energyBarHeight);
         		int scaledEnergyY = (int) (energyBarY + (energyBarHeight - scaledEnergyHeight));
         		int scaledEnergyTexture = (int) (energyBarTextureY + (energyBarHeight - scaledEnergyHeight));
                 func_238474_b_(matrix,guiLeft + 21 + i*38, guiTop + energyBarY, 21, 43, 20, energyBarHeight);
                 func_238474_b_(matrix,guiLeft + 21 + i*38, guiTop + scaledEnergyY, 176 + i*20, scaledEnergyTexture, 20, scaledEnergyHeight);
         	}
+        	i++;
         }
         drawEnergyTooltips(matrix, mouseX, mouseY, guiTop, guiLeft);
     }
 
     private void drawEnergyTooltips(MatrixStack matrix, int x, int y, int top, int left) {
     	if(y > top + energyBarY && y < top + energyBarY + energyBarHeight) {
-    		for(int i = 0; i < 4; i++) {
+    	    int i = 0;
+    		for(EnergyType type : EnergyType.values()) {
     			if(x > left + 21 + i * 38 && x < left + 21 + i * 38 + 20) {
-    				this.renderToolTip(matrix, Lists.transform(this.tileEntity.getToolTipString(i), ITextComponent::func_241878_f), x, y, this.field_230712_o_);
+    				this.renderToolTip(matrix, Lists.transform(this.tileEntity.getToolTipString(type), ITextComponent::func_241878_f), x, y, this.field_230712_o_);
     			}
+    			i++;
     		}
     	}
     }

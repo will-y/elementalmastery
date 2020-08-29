@@ -196,8 +196,8 @@ public abstract class TileEnergyAcceptor extends TileEntity implements ITickable
 					
 					for(int i = 0; i < 4; i++) {
 						if(this.canAcceptEnergy(this.usage[i] * 2, i)) {
-							int amount = this.linkedCapacitor.takeEnergy(this.usage[i] * 2, i);
-							this.currentEnergy[i] += amount;
+							//int amount = this.linkedCapacitor.takeEnergy(this.usage[i] * 2, i);
+							//this.currentEnergy[i] += amount;
 						}
 					}
 					

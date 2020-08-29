@@ -3,7 +3,12 @@ package eyeroh.elementalmastery.machine.capacitor;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import eyeroh.elementalmastery.machine.IEnergyAcceptor;
+import eyeroh.elementalmastery.machine.IEnergyStorage;
 import eyeroh.elementalmastery.machine.ModMachines;
+import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
+import eyeroh.elementalmastery.machine.util.Energy;
+import eyeroh.elementalmastery.machine.util.EnergyType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,308 +18,154 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class TileEntityCapacitorController extends TileEntity implements ITickable {
+public class TileEntityCapacitorController extends TileEntity implements ITickable, IEnergyStorage {
 	
-	private int[] energyAmount;
-	private int[] energyMax;
-	private boolean active;
+	private Energy currentEnergy;
+	private Energy maxEnergy;
 	private CapacitorDirection capacitorDirection;
-	//private ArrayList<TileEnergyAcceptor> machines = new ArrayList<TileEnergyAcceptor>();
+	private ArrayList<IEnergyAcceptor> machines = new ArrayList<>();
+	int size;
 	
 	public TileEntityCapacitorController() {
-		super(TileEntityType.CHEST);
-		energyAmount = new int[] {0, 0, 0, 0};
-		energyMax = new int[] {0, 0, 0, 0};
-		active = false;
+		super(ModMachines.CAPACITOR_CONTROLLER_TILE.get());
 	}
 	
-	
-	public boolean checkForMultiBlock() {
-		if(check3x3("x", -1)) {
-			capacitorDirection = new CapacitorDirection("x", -1);
-			return true;
-		} else if(check3x3("x", 1)) {
-			capacitorDirection = new CapacitorDirection("x", 1);
-			return true;
-		} else if (check3x3("z", -1)) {
-			capacitorDirection = new CapacitorDirection("z", -1);
-			return true;
-		} else if (check3x3("z", 1)) {
-			capacitorDirection = new CapacitorDirection("z", 1);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean check3x3(String axis, int direction) {
-//		if(!this.world.isRemote) {
-//			if(axis == "X" || axis == "x") {
-//				if(direction == -1) {
-//					for (int x = -1; x < 2; x++) {
-//						for(int y = -1; y < 2; y++) {
-//							for(int z = -2; z < 1; z++) {
-//								if(!(x==0 && y==0 && z==0)) {
-//									if(!(z==-1 && x==0 && y==0)) {
-//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-//											return false;
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//					return true;
-//				} else if (direction == 1) {
-//					for (int x = -1; x < 2; x++) {
-//						for(int y = -1; y < 2; y++) {
-//							for(int z = 0; z < 3; z++) {
-//								if(!(x==0 && y==0 && z==0)) {
-//									if(!(z==1 && x==0 && y==0)) {
-//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-//											return false;
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//					return true;
-//				}
-//			} else if (axis == "Z" || axis == "z") {
-//				if(direction == -1) {
-//					for (int x = -2; x < 1; x++) {
-//						for(int y = -1; y < 2; y++) {
-//							for(int z = -1; z < 2; z++) {
-//								if(!(x==0 && y==0 && z==0)) {
-//									if(!(x==-1 && z==0 && y==0)) {
-//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-//											return false;
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//					return true;
-//				} else if(direction == 1) {
-//					for (int x = 0; x < 3; x++) {
-//						for(int y = -1; y < 2; y++) {
-//							for(int z = -1; z < 2; z++) {
-//								if(!(x==0 && y==0 && z==0)) {
-//									if(!(x==1 && z==0 && y==0)) {
-//										if(!(Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorWall) || Block.isEqualTo(this.getWorld().getBlockState(this.pos.add(x, y, z)).getBlock(), ModMachines.capacitorGlass))) {
-//											return false;
-//										}
-//									}
-//								}
-//							}
-//						}
-//					}
-//					return true;
-//				}
-//			}
-//		}
-		return false;
-	}
-	
-	private boolean check5x5() {
-		return false;
-	}
-	
-	public void addMaxEnergy(World world) {
-//		Block block = Blocks.AIR;
-//		if(this.capacitorDirection.getAxis() == "x") {
-//			if(this.capacitorDirection.getDirection() == 1) {
-//				block = world.getBlockState(this.pos.add(0, 0, 1)).getBlock();
-//			} else if(this.capacitorDirection.getDirection() == -1) {
-//				block = world.getBlockState(this.pos.add(0, 0, -1)).getBlock();
-//			}
-//		} else if (this.capacitorDirection.getAxis() == "z") {
-//			if(this.capacitorDirection.getDirection() == 1) {
-//				block = world.getBlockState(this.pos.add(1, 0, 0)).getBlock();
-//			} else if(this.capacitorDirection.getDirection() == -1) {
-//				block = world.getBlockState(this.pos.add(-1, 0, 0)).getBlock();
-//			}
-//		}
-//		if(Block.isEqualTo(block, ModMachines.capacitorOpal)) {
-//			this.energyMax[0] += 100000;
-//		} else if(Block.isEqualTo(block, ModMachines.capacitorTopaz)) {
-//			this.energyMax[1] += 100000;
-//		} else if(Block.isEqualTo(block, ModMachines.capacitorRuby)) {
-//			this.energyMax[2] += 100000;
-//		} else if(Block.isEqualTo(block, ModMachines.capacitorSapphire)) {
-//			this.energyMax[3] += 100000;
-//		} else if(Block.isEqualTo(block,  ModMachines.capacitorMulti)) {
-//			this.energyMax[0] += 25000;
-//			this.energyMax[1] += 25000;
-//			this.energyMax[2] += 25000;
-//			this.energyMax[3] += 25000;
-//		}
-	}
-	
-	
-	
-	public int[] getMaxEnergy() {
-		return this.energyMax;
-	}
-	
-	public int getMaxEnergy(int type){
-		return energyMax[type];
-	}
-	
-	public int getEnergy(int type) {
-		return energyAmount[type];
-	}
-	
-	public int[] getEnergy() {
-		return this.energyAmount;
-	}
-	
-	public void addEnergy(int type, int amount) {
-		
-		if(energyAmount[type] + amount >= energyMax[type]) {
-			energyAmount[type] = energyMax[type];
-		} else {
-			energyAmount[type] += amount;
-		}
-		markDirty();
-	}
-	
-	public void setActive() {
-		active = true;
-		addMaxEnergy(world);
-		markDirty();
-	}
-	
-	public void setDeActive() {
-		active = false;
-		markDirty();
-	}
-	
-	public boolean getActive() {
-		return this.active;
-	}
-	
-	public int[] getCapacitorTypes() {
-		markDirty();
-		return new int[] {0, 0, 0, 0};
-	}
-	
-	public boolean canAcceptEnergy(int type, int amount) {
-		if(active) {
-			
-			if(energyAmount[type] + amount >= energyMax[type]) {
-				return false;
-			}
-			return true;
-		}
-		return false;		
-	}
-	
-	@Override
-    public CompoundNBT getUpdateTag() {
-        return write(new CompoundNBT());
-    }
-
-//    @Override
-//    public SPacketUpdateTileEntity getUpdatePacket() {
-//        NBTTagCompound nbtTag = new NBTTagCompound();
-//        this.writeToNBT(nbtTag);
-//        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
-//    }
-
-//    @Override
-//    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-//        this.readFromNBT(packet.getNbtCompound());
-//    }
-//
-	@Override
-	// read
-    public void func_230337_a_(BlockState state, CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
-        energyAmount = compound.getIntArray("energy");
-        active = compound.getBoolean("active");
-        energyMax = compound.getIntArray("energy_max");
-    }
-
-    @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        compound.putIntArray("energy", energyAmount);
-        compound.putBoolean("active", active);
-        compound.putIntArray("energy_max", energyMax);
-        return super.write(compound);
-    }
-    
-    public void showEnergyAmount(PlayerEntity player) {
-    	TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_amount", energyAmount[0] + "/" + energyMax[0] + "(O), " + energyAmount[1] + "/" + energyMax[1] + "(T), " + energyAmount[2] + "/" + energyMax[2] + "(R), " + energyAmount[3] + "/" + energyMax[3] + "(S)");
-    	component.getStyle().func_240723_c_(TextFormatting.BLUE);
-        player.sendStatusMessage(component, true);
-    }
-    
-    public boolean isFull(int type) {
-    	
-    	if(energyAmount[type] == energyMax[type]) {
-    		return true;
-    	}
-    	return false;
-    }
-    
-	@Override
-	public void tick() {
-//		if(counter >= 20) {
-//			int[] usage;
-//			for(TileEnergyAcceptor machine : machines) {
-//				usage = machine.getUsage();
-//				for(int i = 0; i < usage.length; i++) {
-//					if(energyAmount[i] - usage[i] >= 0) {
-//						if(machine.addEnergy(i, usage[i])) {
-//							energyAmount[i]  -= usage[i];
-//						}
-//					}
-//				}
-//			}
-//			counter = 0;
-//		}
-//		counter++;
-	}
-	
-//	public void addMachine(TileEnergyAcceptor machine) {
-//		if(!machines.contains(machine))
-//			machines.add(machine);
-//	}
-	
-//	public void removeMachine(TileEnergyAcceptor machine) {
-//		machines.remove(machine);
-//	}
-//	
-	public int takeEnergy(int amount, int type) {
-		if(this.energyAmount[type] >= amount) {
-			this.energyAmount[type] -= amount;
-			this.markDirty();
-			return amount;
-		} else {
-			int temp = energyAmount[type];
-			energyAmount[type] = 0;
-			this.markDirty();
-			return temp;
-		}
-	}
-	
-	@Override
-	public String toString() {
-		return "Capacitor at " + this.pos.toString() + "\nWith energy: " + Arrays.toString(this.energyAmount);
-	}
-	
-	public ArrayList<ITextComponent> getToolTipString(int type) {
+	public ArrayList<ITextComponent> getToolTipString(EnergyType type) {
 		ArrayList<ITextComponent> list = new ArrayList<>();
 
-		list.add(ITextComponent.func_244388_a(this.getEnergy(type) + "/" + this.getMaxEnergy(type)));
+		list.add(ITextComponent.func_244388_a(this.getCurrentEnergy(type) + "/" + this.getMaxEnergy(type)));
 		return list;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	@Override
+	public int sendEnergy(EnergyType type, int amount) {
+		return 0;
+	}
+
+	@Override
+	public boolean addEnergyAcceptor(TileEnergyAcceptor in) {
+		return false;
+	}
+
+	@Override
+	public boolean removeEnergyAcceptor(TileEnergyAcceptor in) {
+		return false;
+	}
+
+	@Override
+	public Energy getCurrentEnergy() {
+		return null;
+	}
+
+	@Override
+	public Energy getMaxEnergy() {
+		return null;
+	}
+
+	@Override
+	public int getCurrentEnergy(EnergyType type) {
+		return 0;
+	}
+
+	@Override
+	public int getMaxEnergy(EnergyType type) {
+		return 0;
+	}
+
+	@Override
+	public void exportEnergy() {
+
+	}
+
+	@Override
+	public void tick() {
+
+	}
+
+	/**
+	 * Checks for a valid multiblock
+	 * @param state - blockstate of the capcitor controller
+	 * @param capacitorPosition - position of the capcitor controller
+	 * @return the size of the capacitor, -1 if it failed
+	 */
+	public int checkAllMultiBlocks(BlockState state, BlockPos capacitorPosition, int maxSize) {
+		for (int i = 1; i <= maxSize; i++) {
+			if (checkMultiBlock(state, capacitorPosition, i) == 0) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Checks for a valid multiblock
+	 * @param state - blockstate of the capcitor controller
+	 * @param capacitorPosition - position of the capcitor controller
+	 * @return error code, 0 if no error:
+	 * 		-1: invalid capacitor block (in the center)
+	 * 		-2: invalid capacitor wall
+	 */
+	public int checkMultiBlock(BlockState state, BlockPos capacitorPosition, int size) {
+		BlockPos center = getCenterBlock(state, capacitorPosition, size);
+		if (isCapacitor(getWorld().getBlockState(center).getBlock())) {
+			for (int i = -size; i <= size; i++) {
+				for (int j = -size; j <= size; j++) {
+					for (int k = -size; k <= size; k++) {
+						if (Math.abs(i) == size || Math.abs(j) == size || Math.abs(k) == size) {
+							//System.out.println("WALL: " + i + ", " + j + ", " + k);
+							// !wall and !center
+							if (!isWall(getWorld().getBlockState(center.add(i, j, k)).getBlock()) && !(center.add(i, j, k).getX() == capacitorPosition.getX() && center.add(i, j, k).getY() == capacitorPosition.getY() && center.add(i, j, k).getZ() == capacitorPosition.getZ())) {
+								return -2;
+							}
+						} else {
+							//System.out.println("CAPACITOR: " + i + ", " + j + ", " + k);
+							if (!isCapacitor(getWorld().getBlockState(center.add(i, j, k)).getBlock())) {
+								return -1;
+							}
+						}
+					}
+				}
+			}
+		} else {
+			System.out.println("Bad center");
+			return -1;
+		}
+		return 0;
+	}
+
+	/**
+	 * Gets the center block for the capacitor
+	 * @param state - blockstate of the capacitor controller
+	 * @param capacitorPosition - position of that capacitor controller
+	 * @param size - size of the capacitor (1 = 3x3, 2 = 5x5, ...)
+	 * @return - the position of the center block of the capacitor
+	 */
+	public BlockPos getCenterBlock(BlockState state, BlockPos capacitorPosition, int size) {
+		if (size < 1) {
+			throw new IllegalArgumentException("Size must be at least 1");
+		}
+
+		Direction direction = state.get(BlockCapacitorController.PROPERTY_FACING).getOpposite();
+
+		return capacitorPosition.offset(direction, size);
+	}
+
+	private boolean isCapacitor(Block block) {
+		return block.equals(ModMachines.CAPACITOR_MULTI.get()) || block.equals(ModMachines.CAPACITOR_OPAL.get()) || block.equals(ModMachines.CAPACITOR_TOPAZ.get()) || block.equals(ModMachines.CAPACITOR_RUBY.get()) || block.equals(ModMachines.CAPACITOR_SAPPHIRE.get());
+	}
+
+	private boolean isWall(Block block) {
+		return block.equals(ModMachines.CAPACITOR_WALL.get()) || block.equals(ModMachines.CAPACITOR_GLASS.get());
 	}
 }

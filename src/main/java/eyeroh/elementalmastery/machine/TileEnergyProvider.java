@@ -65,23 +65,23 @@ public abstract class TileEnergyProvider extends TileEntity implements ITickable
 //        return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
 //    }
 
-    public boolean canExportEnergy() {
-        if(linked) {
-            TileEntity capacitor = world.getTileEntity(linkedCapacitor);
-            if(capacitor instanceof TileEntityCapacitorController) {
-                if(((TileEntityCapacitorController) capacitor).canAcceptEnergy(type, this.energyPerSecond/20)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-
-            }
-        } else {
-            return false;
-        }
-    }
+//    public boolean canExportEnergy() {
+//        if(linked) {
+//            TileEntity capacitor = world.getTileEntity(linkedCapacitor);
+//            if(capacitor instanceof TileEntityCapacitorController) {
+//                if(((TileEntityCapacitorController) capacitor).canAcceptEnergy(type, this.energyPerSecond/20)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            } else {
+//                return false;
+//
+//            }
+//        } else {
+//            return false;
+//        }
+//    }
 
     public void setCapacitor(BlockPos pos) {
         this.linkedCapacitor = pos;
@@ -89,23 +89,23 @@ public abstract class TileEnergyProvider extends TileEntity implements ITickable
         markDirty();
     }
 
-    public boolean isCapacitorFull() {
-        if(linked) {
-            TileEntity te = world.getTileEntity(linkedCapacitor);
-            if(te instanceof TileEntityCapacitorController) {
-                TileEntityCapacitorController capacitor = (TileEntityCapacitorController) te;
-                return capacitor.isFull(type);
-            }
-        }
-        return true;
-    }
-
-    public void sendPower(int amount) {
-        if(!world.isRemote) {
-            TileEntity capacitor = world.getTileEntity(linkedCapacitor);
-            ((TileEntityCapacitorController) capacitor).addEnergy(type, amount);
-        }
-    }
+//    public boolean isCapacitorFull() {
+//        if(linked) {
+//            TileEntity te = world.getTileEntity(linkedCapacitor);
+//            if(te instanceof TileEntityCapacitorController) {
+//                TileEntityCapacitorController capacitor = (TileEntityCapacitorController) te;
+//                return capacitor.isFull(type);
+//            }
+//        }
+//        return true;
+//    }
+//
+//    public void sendPower(int amount) {
+//        if(!world.isRemote) {
+//            TileEntity capacitor = world.getTileEntity(linkedCapacitor);
+//            ((TileEntityCapacitorController) capacitor).addEnergy(type, amount);
+//        }
+//    }
 
     public abstract String getName();
 }
