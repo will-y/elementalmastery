@@ -39,6 +39,8 @@ public interface IEnergyStorage {
      */
     Energy getMaxEnergy();
 
+    void setMaxEnergy(Energy energy);
+
     /**
      * Gets the current energy of a specific type
      * @param type - the type to get
@@ -52,6 +54,8 @@ public interface IEnergyStorage {
      * @return - the max storage for that type
      */
     int getMaxEnergy(EnergyType type);
+
+    void setMaxEnergy(EnergyType type, int amount);
 
     /**
      * Exports energy to all stored energy acceptors

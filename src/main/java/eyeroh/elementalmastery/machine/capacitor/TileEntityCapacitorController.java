@@ -26,7 +26,10 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class TileEntityCapacitorController extends TileEntity implements ITickable, IEnergyStorage {
-	
+
+	public static final int CAPACITOR_ENERGY = 100000;
+	public static final int CAPACITOR_ENERGY_MULTI = 25000;
+
 	private Energy currentEnergy;
 	private Energy maxEnergy;
 	private CapacitorDirection capacitorDirection;
@@ -70,7 +73,12 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
 	@Override
 	public Energy getMaxEnergy() {
-		return null;
+		return this.maxEnergy;
+	}
+
+	@Override
+	public void setMaxEnergy(Energy energy) {
+		this.maxEnergy = energy;
 	}
 
 	@Override
@@ -81,6 +89,11 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 	@Override
 	public int getMaxEnergy(EnergyType type) {
 		return 0;
+	}
+
+	@Override
+	public void setMaxEnergy(EnergyType type, int amount) {
+
 	}
 
 	@Override
@@ -119,6 +132,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 	public int checkMultiBlock(BlockState state, BlockPos capacitorPosition, int size) {
 		BlockPos center = getCenterBlock(state, capacitorPosition, size);
 		if (isCapacitor(getWorld().getBlockState(center).getBlock())) {
+			Energy energy = new Energy();
 			for (int i = -size; i <= size; i++) {
 				for (int j = -size; j <= size; j++) {
 					for (int k = -size; k <= size; k++) {
@@ -132,11 +146,14 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 							//System.out.println("CAPACITOR: " + i + ", " + j + ", " + k);
 							if (!isCapacitor(getWorld().getBlockState(center.add(i, j, k)).getBlock())) {
 								return -1;
+							} else {
+								energy.add(getEnergyFromBlock(getWorld().getBlockState(center.add(i, j, k)).getBlock()));
 							}
 						}
 					}
 				}
 			}
+			setMaxEnergy(energy);
 		} else {
 			System.out.println("Bad center");
 			return -1;
@@ -167,5 +184,21 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
 	private boolean isWall(Block block) {
 		return block.equals(ModMachines.CAPACITOR_WALL.get()) || block.equals(ModMachines.CAPACITOR_GLASS.get());
+	}
+
+	private Energy getEnergyFromBlock(Block block) {
+		if (block.equals(ModMachines.CAPACITOR_OPAL.get())) {
+			return new Energy(CAPACITOR_ENERGY, 0, 0, 0);
+		} else if (block.equals(ModMachines.CAPACITOR_TOPAZ.get())) {
+			return new Energy(0, CAPACITOR_ENERGY, 0, 0);
+		} else if (block.equals(ModMachines.CAPACITOR_RUBY.get())) {
+			return new Energy(0, 0, CAPACITOR_ENERGY, 0);
+		} else if (block.equals(ModMachines.CAPACITOR_SAPPHIRE.get())) {
+			return new Energy(0, 0, 0, CAPACITOR_ENERGY);
+		} else if (block.equals(ModMachines.CAPACITOR_MULTI.get())) {
+			return new Energy(CAPACITOR_ENERGY_MULTI, CAPACITOR_ENERGY_MULTI, CAPACITOR_ENERGY_MULTI, CAPACITOR_ENERGY_MULTI);
+		}
+
+		return null;
 	}
 }

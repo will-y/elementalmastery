@@ -13,6 +13,13 @@ public class Energy {
         this.sapphire = sapphire;
     }
 
+    public Energy() {
+        this.opal = 0;
+        this.topaz = 0;
+        this.ruby = 0;
+        this.sapphire = 0;
+    }
+
     public int getOpal() {
         return opal;
     }
@@ -27,5 +34,49 @@ public class Energy {
 
     public int getSapphire() {
         return sapphire;
+    }
+
+    public void setOpal(int opal) {
+        this.opal = opal;
+    }
+
+    public void setTopaz(int topaz) {
+        this.topaz = topaz;
+    }
+
+    public void setRuby(int ruby) {
+        this.ruby = ruby;
+    }
+
+    public void setSapphire(int sapphire) {
+        this.sapphire = sapphire;
+    }
+
+    public void addOpal(int opal) {
+        this.opal += opal;
+    }
+
+    public void addTopaz(int topaz) {
+        this.topaz += topaz;
+    }
+
+    public void addRuby(int ruby) {
+        this.ruby += ruby;
+    }
+
+    public void addSapphire(int sapphire) {
+        this.sapphire += sapphire;
+    }
+
+    public void add(Energy in) {
+        addOpal(in.opal);
+        addTopaz(in.topaz);
+        addRuby(in.ruby);
+        addSapphire(in.sapphire);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("{Opal = %s, Topaz = %s, Ruby = %s, Sapphire = %s}", opal, topaz, ruby, sapphire);
     }
 }
