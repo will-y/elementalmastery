@@ -42,6 +42,7 @@ public class ElementalMastery {
         ModBlocks.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModMachines.MACHINES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModMachines.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTools.TOOLS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModArmor.ARMOR.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntities.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -67,6 +68,7 @@ public class ElementalMastery {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(ModBlocks.CHEST_OPAL_CONTAINER.get(), ScreenGemChest::new);
+
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SPEED_CREEPER.get(), SpeedCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.STRENGTH_CREEPER.get(), StrengthCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FIRE_CREEPER.get(), FireCreeperRenderer::new);

@@ -3,7 +3,7 @@
   "textures": {
     "particle": "elementalmastery:blocks/capacitorwall",
     "top": "elementalmastery:blocks/capacitorwall",
-    "front": "elementalmastery:blocks/capacitorcontroller",
+    "front": "elementalmastery:blocks/capacitorcontroller_active",
     "side": "elementalmastery:blocks/capacitorwall"
   }
 }

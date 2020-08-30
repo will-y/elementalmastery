@@ -23,7 +23,7 @@ public class TileSolar extends TileEnergyProvider {
     @Override
     public void tick() {
         if (world.isDaytime() && linked) {
-            sendPower(energyPerSecond / 20);
+           // sendPower(energyPerSecond / 20);
         }
     }
 

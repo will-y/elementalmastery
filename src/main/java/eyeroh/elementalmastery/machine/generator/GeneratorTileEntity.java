@@ -204,12 +204,12 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 	public void tick() {
 		markDirty();
 		if(active) {
-			if(canExportEnergy() || currentEnergy <= maxEnergy) {
-				currentProgress++;
-				progressed = true;
-			} else {
-				progressed = false;
-			}
+//			if(canExportEnergy() || currentEnergy <= maxEnergy) {
+//				currentProgress++;
+//				progressed = true;
+//			} else {
+//				progressed = false;
+//			}
 			
 			if(currentProgress >= maxProgress) {
 				active = false;
@@ -228,23 +228,23 @@ public class GeneratorTileEntity extends TileEnergyProvider implements ITickable
 			}
 		}
 		
-		if(active && progressed) {
-			if(canExportEnergy()) {
-				sendPower((int)energyPerSecond/20);
-			} else {
-				currentEnergy += (int)energyPerSecond/20;
-			}
-		} else if(currentEnergy > 0 && linked) {
-			if(canExportEnergy()) {
-				if(currentEnergy <= (int)energyPerSecond/20) {
-					sendPower(currentEnergy);
-					currentEnergy = 0;
-				} else {
-					sendPower((int)energyPerSecond/20);
-					currentEnergy -= (int)energyPerSecond/20;
-				}
-			}
-		}
+//		if(active && progressed) {
+//			if(canExportEnergy()) {
+//				sendPower((int)energyPerSecond/20);
+//			} else {
+//				currentEnergy += (int)energyPerSecond/20;
+//			}
+//		} else if(currentEnergy > 0 && linked) {
+//			if(canExportEnergy()) {
+//				if(currentEnergy <= (int)energyPerSecond/20) {
+//					sendPower(currentEnergy);
+//					currentEnergy = 0;
+//				} else {
+//					sendPower((int)energyPerSecond/20);
+//					currentEnergy -= (int)energyPerSecond/20;
+//				}
+//			}
+//		}
 	}
 
 	public int getCurrentProgress() {
