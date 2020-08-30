@@ -67,6 +67,23 @@ public class Energy {
         this.sapphire = sapphire;
     }
 
+    public void set(EnergyType type, int amount) {
+        switch (type) {
+            case OPAL:
+                setOpal(amount);
+                break;
+            case TOPAZ:
+                setTopaz(amount);
+                break;
+            case RUBY:
+                setRuby(amount);
+                break;
+            case SAPPHIRE:
+                setSapphire(amount);
+                break;
+        }
+    }
+
     public void addOpal(int opal) {
         this.opal += opal;
     }
@@ -83,11 +100,68 @@ public class Energy {
         this.sapphire += sapphire;
     }
 
+    public void addEnergy(EnergyType type, int amount) {
+        switch (type) {
+            case OPAL:
+                addOpal(amount);
+                break;
+            case TOPAZ:
+                addTopaz(amount);
+                break;
+            case RUBY:
+                addRuby(amount);
+                break;
+            case SAPPHIRE:
+                addSapphire(amount);
+                break;
+        }
+    }
+
     public void add(Energy in) {
         addOpal(in.opal);
         addTopaz(in.topaz);
         addRuby(in.ruby);
         addSapphire(in.sapphire);
+    }
+
+    public void subOpal(int opal) {
+        this.opal -= opal;
+    }
+
+    public void subTopaz(int topaz) {
+        this.topaz -= topaz;
+    }
+
+    public void subRuby(int ruby) {
+        this.ruby -= ruby;
+    }
+
+    public void subSapphire(int sapphire) {
+        this.sapphire -= sapphire;
+    }
+
+    public void subEnergy(EnergyType type, int amount) {
+        switch (type) {
+            case OPAL:
+                subOpal(amount);
+                break;
+            case TOPAZ:
+                subTopaz(amount);
+                break;
+            case RUBY:
+                subRuby(amount);
+                break;
+            case SAPPHIRE:
+                subSapphire(amount);
+                break;
+        }
+    }
+
+    public void subtract(Energy in) {
+        subOpal(in.opal);
+        subTopaz(in.topaz);
+        subRuby(in.ruby);
+        subSapphire(in.sapphire);
     }
 
     @Override

@@ -79,7 +79,6 @@ public class BlockCapacitorController extends Block {
 					TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_formed", "Capacitor Multiblock Formed");
 					component.getStyle().func_240723_c_(TextFormatting.BLUE);
 					player.sendStatusMessage(component, true);
-					System.out.println(tileEntity.getMaxEnergy());
 				} else {
 					TranslationTextComponent component = new TranslationTextComponent("message.elementalmastery.capacitor_formed", "Invalid Capacitor Multiblock");
 					component.getStyle().func_240723_c_(TextFormatting.RED);

@@ -13,19 +13,31 @@ public interface IEnergyStorage {
      */
     int sendEnergy(EnergyType type, int amount);
 
+    Energy sendAllEnergy(Energy in);
+
+    /**
+     * Retrieves energy from the capacitor, if there is not enough, it will empty the storage
+     * @param type - the type of energy
+     * @param amount - the amount to take
+     * @return - the amount that was actually taken from the storage
+     */
+    int retrieveEnergy(EnergyType type, int amount);
+
+    Energy retrieveAllEnergy(Energy in);
+
     /**
      * Adds an energy acceptor to the capacitor
      * @param in - the energy acceptor to add
      * @return - true if added
      */
-    boolean addEnergyAcceptor(TileEnergyAcceptor in);
+    boolean addEnergyAcceptor(IEnergyAcceptor in);
 
     /**
      * Removes an energy acceptor from the storage
      * @param in - energy acceptor to remove
      * @return - true if removed
      */
-    boolean removeEnergyAcceptor(TileEnergyAcceptor in);
+    boolean removeEnergyAcceptor(IEnergyAcceptor in);
 
     /**
      * Gets all of the current energy stored

@@ -1,11 +1,13 @@
 package eyeroh.elementalmastery.machine.capacitor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import eyeroh.elementalmastery.machine.IEnergyAcceptor;
 import eyeroh.elementalmastery.machine.IEnergyStorage;
 import eyeroh.elementalmastery.machine.ModMachines;
-import eyeroh.elementalmastery.machine.TileEnergyAcceptor;
 import eyeroh.elementalmastery.machine.util.Energy;
 import eyeroh.elementalmastery.machine.util.EnergyType;
 import net.minecraft.block.Block;
@@ -18,16 +20,22 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import org.lwjgl.system.CallbackI;
+
+import static eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController.PROPERTY_ACTIVE;
 
 public class TileEntityCapacitorController extends TileEntity implements ITickable, IEnergyStorage {
 
 	public static final int CAPACITOR_ENERGY = 100000;
 	public static final int CAPACITOR_ENERGY_MULTI = 25000;
+	// Time to wait before checking multiblock again
+	public static final int MULTIBLOCK_COOLDOWN = 100;
 
 	private Energy currentEnergy;
 	private Energy maxEnergy;
-	private ArrayList<IEnergyAcceptor> machines = new ArrayList<>();
+	private List<IEnergyAcceptor> machines = new ArrayList<>();
 	int size;
+	int counter = 0;
 	
 	public TileEntityCapacitorController() {
 		super(ModMachines.CAPACITOR_CONTROLLER_TILE.get());
@@ -46,22 +54,62 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
 	@Override
 	public int sendEnergy(EnergyType type, int amount) {
-		return 0;
+		if (currentEnergy.get(type) + amount > maxEnergy.get(type)) {
+			currentEnergy.set(type, maxEnergy.get(type));
+			return currentEnergy.get(type) + amount - maxEnergy.get(type);
+		} else {
+			currentEnergy.addEnergy(type, amount);
+			return 0;
+		}
 	}
 
 	@Override
-	public boolean addEnergyAcceptor(TileEnergyAcceptor in) {
-		return false;
+	public Energy sendAllEnergy(Energy in) {
+		Energy energy = new Energy();
+
+		for (EnergyType type : EnergyType.values()) {
+			energy.set(type, sendEnergy(type, in.get(type)));
+		}
+
+		return energy;
 	}
 
 	@Override
-	public boolean removeEnergyAcceptor(TileEnergyAcceptor in) {
-		return false;
+	public int retrieveEnergy(EnergyType type, int amount) {
+		if (getCurrentEnergy(type) >= amount) {
+			currentEnergy.subEnergy(type, amount);
+			return amount;
+		} else {
+			int energy = currentEnergy.get(type);
+			currentEnergy.set(type, 0);
+			return energy;
+		}
+	}
+
+	@Override
+	public Energy retrieveAllEnergy(Energy in) {
+		Energy energy = new Energy();
+
+		for (EnergyType type : EnergyType.values()) {
+			energy.set(type, retrieveEnergy(type, in.get(type)));
+		}
+
+		return energy;
+	}
+
+	@Override
+	public boolean addEnergyAcceptor(IEnergyAcceptor in) {
+		return machines.add(in);
+	}
+
+	@Override
+	public boolean removeEnergyAcceptor(IEnergyAcceptor in) {
+		return machines.remove(in);
 	}
 
 	@Override
 	public Energy getCurrentEnergy() {
-		return null;
+		return this.currentEnergy;
 	}
 
 	@Override
@@ -76,7 +124,7 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
 	@Override
 	public int getCurrentEnergy(EnergyType type) {
-		return 0;
+		return this.currentEnergy.get(type);
 	}
 
 	@Override
@@ -86,23 +134,39 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 
 	@Override
 	public void setMaxEnergy(EnergyType type, int amount) {
-
+		this.maxEnergy.set(type, amount);
 	}
 
 	@Override
 	public void exportEnergy() {
-
+		for (IEnergyAcceptor machine : machines) {
+			Energy use = machine.getEnergyPerTick();
+			// give the machine energy and then store all of the energy that it can't hold
+			sendAllEnergy(machine.sendAllEnergy(use));
+		}
 	}
 
 	@Override
 	public void tick() {
-
+		if (!world.isRemote) {
+			// right now call every tick but will probably reduce later
+			if (getBlockState().get(PROPERTY_ACTIVE)) {
+				exportEnergy();
+				counter++;
+				if (counter > MULTIBLOCK_COOLDOWN) {
+					counter = 0;
+					if (checkMultiBlock(getBlockState(), getPos(), size) <= 0) {
+						world.setBlockState(getPos(), getBlockState().with(PROPERTY_ACTIVE, false));
+					}
+				}
+			}
+		}
 	}
 
 	/**
 	 * Checks for a valid multiblock
-	 * @param state - blockstate of the capcitor controller
-	 * @param capacitorPosition - position of the capcitor controller
+	 * @param state - blockstate of the capacitor controller
+	 * @param capacitorPosition - position of the capacitor controller
 	 * @return the size of the capacitor, -1 if it failed
 	 */
 	public int checkAllMultiBlocks(BlockState state, BlockPos capacitorPosition, int maxSize) {
@@ -148,7 +212,6 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 			}
 			setMaxEnergy(energy);
 		} else {
-			System.out.println("Bad center");
 			return -1;
 		}
 		return 0;
@@ -201,8 +264,13 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 		size = compound.getInt("size");
 		currentEnergy = Energy.fromIntArray(compound.getIntArray("currentEnergy"));
 		maxEnergy = Energy.fromIntArray(compound.getIntArray("maxEnergy"));
+		counter = compound.getInt("counter");
+		if (compound.contains("machines")) {
+			machines = Arrays.stream(compound.getLongArray("machines")).mapToObj((pos)-> (IEnergyAcceptor) world.getTileEntity(BlockPos.fromLong(pos))).collect(Collectors.toList());
+		} else {
+			machines = new ArrayList<>();
+		}
 
-		System.out.println("READING: " + maxEnergy);
 
 		super.func_230337_a_(state, compound);
 	}
@@ -217,8 +285,10 @@ public class TileEntityCapacitorController extends TileEntity implements ITickab
 		if (maxEnergy != null) {
 			compound.putIntArray("maxEnergy", maxEnergy.toIntArray());
 		}
+		compound.putInt("counter", counter);
+		long[] machineArray = machines.stream().map((machine) -> machine.getPos().toLong()).mapToLong(Long::longValue).toArray();
+		compound.putLongArray("machines", machineArray);
 
-		System.out.println("Writing: " + maxEnergy);
 		return compound;
 	}
 
