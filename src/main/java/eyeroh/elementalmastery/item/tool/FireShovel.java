@@ -28,7 +28,7 @@ public class FireShovel extends ShovelItem {
         if (!world.isRemote && (double)state.getBlockHardness(world, pos) != 0.0D) {
             stack.damageItem(1, entityLiving, t -> {});
             if(state.getHarvestTool() == ToolType.SHOVEL || state.getHarvestTool() == null) {
-                List<ItemStack> drops = state.getDrops(new LootContext.Builder((ServerWorld) world).withParameter(LootParameters.TOOL, stack).withParameter(LootParameters.field_237457_g_, entityLiving.func_241205_ce_()));
+                List<ItemStack> drops = state.getDrops(new LootContext.Builder((ServerWorld) world).withParameter(LootParameters.TOOL, stack).withParameter(LootParameters.field_237457_g_, entityLiving.getLookVec()));
                 for (ItemStack itemStack : drops) {
                     world.getRecipeManager().getRecipe(IRecipeType.SMELTING, new Inventory(itemStack), world).ifPresent((furnaceRecipe) -> {
                         ItemStack smelted = furnaceRecipe.getRecipeOutput();

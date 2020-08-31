@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -24,7 +25,7 @@ import org.lwjgl.system.CallbackI;
 
 import static eyeroh.elementalmastery.machine.capacitor.BlockCapacitorController.PROPERTY_ACTIVE;
 
-public class TileEntityCapacitorController extends TileEntity implements ITickable, IEnergyStorage {
+public class TileEntityCapacitorController extends TileEntity implements ITickableTileEntity, IEnergyStorage {
 
 	public static final int CAPACITOR_ENERGY = 100000;
 	public static final int CAPACITOR_ENERGY_MULTI = 25000;

@@ -27,8 +27,12 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.NetworkRegistry;
 
 public class BlockCapacitorController extends Block {
 
@@ -66,11 +70,12 @@ public class BlockCapacitorController extends Block {
 	
 	@Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        if (!world.isRemote) {
-        	TileEntityCapacitorController tileEntity = getTE(world, pos);
+		TileEntityCapacitorController tileEntity = getTE(world, pos);
+		if (!world.isRemote) {
+
         	if (state.get(PROPERTY_ACTIVE)) {
         		if (!player.getHeldItem(hand).getItem().equals(ModTools.LINKER)) {
-					Minecraft.getInstance().displayGuiScreen(new ScreenCapacitor(tileEntity));
+
 				}
 			} else {
 				int size = tileEntity.checkAllMultiBlocks(state, pos, 2);
@@ -85,9 +90,16 @@ public class BlockCapacitorController extends Block {
 					player.sendStatusMessage(component, true);
 				}
 			}
+        	openGui(tileEntity);
         }
+
         return ActionResultType.SUCCESS;
     }
+
+	@OnlyIn(Dist.CLIENT)
+	private void openGui(TileEntityCapacitorController tileEntity) {
+		Minecraft.getInstance().displayGuiScreen(new ScreenCapacitor(tileEntity));
+	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext blockItemUseContext) {

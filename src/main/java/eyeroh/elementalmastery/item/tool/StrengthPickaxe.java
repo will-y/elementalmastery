@@ -21,7 +21,7 @@ public class StrengthPickaxe extends PickaxeItem {
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-        if (!world.isRemote && (double)state.getBlockHardness(world, pos) != 0.0D) {
+        if (!world.isRemote && stack.canHarvestBlock(state)) {
             stack.damageItem(1, entityLiving, t -> {});
             
             BlockRayTraceResult rayTrace = rayTrace(world, (PlayerEntity) entityLiving, RayTraceContext.FluidMode.NONE);
@@ -31,7 +31,7 @@ public class StrengthPickaxe extends PickaxeItem {
             BlockPos[] posArray;
             posArray = new BlockPos[8];
             
-            if(facing == Direction.SOUTH || facing == Direction.NORTH) {
+            if (facing == Direction.SOUTH || facing == Direction.NORTH) {
             	posArray[0] = pos.add(1, 0, 0);
             	posArray[1] = pos.add(1, 1, 0);
             	posArray[2] = pos.add(1, -1, 0);
@@ -40,7 +40,7 @@ public class StrengthPickaxe extends PickaxeItem {
             	posArray[5] = pos.add(-1, 0, 0);
             	posArray[6] = pos.add(-1, 1, 0);
             	posArray[7] = pos.add(-1, -1, 0);
-            } else  if(facing == Direction.EAST || facing == Direction.WEST) {
+            } else if(facing == Direction.EAST || facing == Direction.WEST) {
             	posArray[0] = pos.add(0, 1, 1);
             	posArray[1] = pos.add(0, 1, 0);
             	posArray[2] = pos.add(0, 1, -1);
@@ -61,14 +61,12 @@ public class StrengthPickaxe extends PickaxeItem {
             }
             
             for(int i = 0; i < 8; i++) {
-            	Material material = world.getBlockState(posArray[i]).getMaterial();
-            	
-            	if(material == Material.ANVIL || material == Material.ROCK || material == Material.IRON) {
+            	if(stack.canHarvestBlock(world.getBlockState(posArray[i])) && world.getBlockState(posArray[i]).getBlockHardness(world, posArray[i]) != -1.0f) {
+            		System.out.println(world.getBlockState(posArray[i]));
             		if(stack.getMaxDamage() - stack.getDamage() > 0) {
             			stack.damageItem(1, entityLiving, t -> {});
             			world.destroyBlock(posArray[i], true);
             		}
-            		  
             	}
             	
             }
