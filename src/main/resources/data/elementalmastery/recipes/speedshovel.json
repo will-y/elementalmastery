@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "elementalmastery:speedshovel"
+    },
+    "pattern": [
+        "o",
+        "s",
+        "s" 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:blockopal"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}

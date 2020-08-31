@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "elementalmastery:speedpickaxe"
+    },
+    "pattern": [
+        "obo",
+        " s ",
+        " s " 
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "o": {
+            "item": "elementalmastery:gemopal"
+        },
+        "b": {
+            "item": "elementalmastery:blockopal"
+        },
+        "s": {
+            "item": "minecraft:stick"
+        }
+    }
+}
