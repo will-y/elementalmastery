@@ -1,14 +1,13 @@
 package eyeroh.elementalmastery.block;
 
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
@@ -26,8 +25,10 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlockGemChest extends Block {
@@ -89,5 +90,18 @@ public class BlockGemChest extends Block {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(PROPERTY_FACING, context.getNearestLookingDirection().getOpposite());
+    }
+
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        TileGemChest tile = (TileGemChest) worldIn.getTileEntity(pos);
+        tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent((itemHandler) -> {
+            List<ItemStack> stacks = new ArrayList<>();
+             for (int i = 0; i < itemHandler.getSlots(); i++) {
+                 stacks.add(itemHandler.getStackInSlot(i));
+             }
+             NonNullList<ItemStack> list = NonNullList.from(ItemStack.EMPTY, stacks.toArray(new ItemStack[0]));
+             InventoryHelper.dropItems(worldIn, pos, list);
+        });
     }
 }
