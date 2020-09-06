@@ -37,11 +37,12 @@ public class FirePickaxe extends PickaxeItem {
             if(this.canHarvestBlock(stack, state)) {
                 List<ItemStack> drops = state.getDrops(new LootContext.Builder((ServerWorld) world).withParameter(LootParameters.TOOL, stack).withParameter(LootParameters.field_237457_g_, entityLiving.func_241205_ce_()));
 				for (ItemStack itemStack : drops) {
-                    world.getRecipeManager().getRecipe(IRecipeType.SMELTING, new Inventory(itemStack), world).ifPresent((furnaceRecipe) -> {
-                        ItemStack smelted = furnaceRecipe.getRecipeOutput();
+				    Inventory inv = new Inventory(itemStack);
+                    if (world.getRecipeManager().getRecipe(IRecipeType.SMELTING, inv, world).isPresent()) {
+                        ItemStack smelted = world.getRecipeManager().getRecipe(IRecipeType.SMELTING, inv, world).get().getRecipeOutput();
                         world.destroyBlock(pos, false);
                         Block.spawnAsEntity(world, pos, smelted);
-                    });
+                    }
                 }
             }
         }

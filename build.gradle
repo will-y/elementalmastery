@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-version = "1.16.2-0.1.4"
+version = "1.16.2-0.1.5"
 group = "eyeroh.elementalmastery" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "elementalmastery"
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
