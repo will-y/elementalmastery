@@ -6,10 +6,7 @@ import eyeroh.elementalmastery.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -61,6 +58,9 @@ public class SpecialArmor extends ArmorItem {
 	
 	public boolean checkArmor(Iterable<ItemStack> itemStack, IArmorMaterial material) {
 		for (ItemStack stack : itemStack) {
+			if (stack.getItem() instanceof ElytraItem) {
+				continue;
+			}
 			if (stack.getItem() instanceof ArmorItem) {
 				ArmorItem newItem = (ArmorItem) stack.getItem();
 				if (!newItem.getArmorMaterial().equals(material)) {

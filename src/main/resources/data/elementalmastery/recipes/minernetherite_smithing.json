@@ -1,12 +1,12 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "elementalmastery:farmerdiamond"
+    "item": "elementalmastery:minerdiamond"
   },
   "addition": {
     "item": "minecraft:netherite_ingot"
   },
   "result": {
-    "item": "elementalmastery:farmernetherite"
+    "item": "elementalmastery:minernetherite"
   }
 }
