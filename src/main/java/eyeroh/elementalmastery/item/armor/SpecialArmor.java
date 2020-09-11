@@ -18,9 +18,13 @@ public class SpecialArmor extends ArmorItem {
 	private int timer = 400;
 	private IArmorMaterial material;
 	
-	public SpecialArmor(IArmorMaterial materialIn, EquipmentSlotType equipmentSlotIn) {
-		super(materialIn, equipmentSlotIn, new Item.Properties().group(CreativeTabs.tabGemTools));
+	public SpecialArmor(IArmorMaterial materialIn, EquipmentSlotType equipmentSlotIn, Item.Properties properties) {
+		super(materialIn, equipmentSlotIn, properties.group(CreativeTabs.tabGemTools));
 		this.material = materialIn;
+	}
+
+	public SpecialArmor(IArmorMaterial material, EquipmentSlotType equipmentSlotType) {
+		this(material, equipmentSlotType, new Item.Properties());
 	}
 	@Override
 	public void inventoryTick(ItemStack stack, World world, Entity entityIn, int itemSlot, boolean isSelected) {

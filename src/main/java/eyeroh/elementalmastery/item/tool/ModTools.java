@@ -75,7 +75,7 @@ public class ModTools {
 	public static final RegistryObject<ItemMiner> DIAMOND_MINER = TOOLS.register("minerdiamond",
 			() -> new ItemMiner(ItemTier.DIAMOND, 1, -3f));
 	public static final RegistryObject<ItemMiner> NETHERITE_MINER = TOOLS.register("minernetherite",
-			() -> new ItemMiner(ItemTier.NETHERITE, 1, -3f));
+			() -> new ItemMiner(ItemTier.NETHERITE, 1, -3f, new Item.Properties().func_234689_a_()));
 
 	public static final RegistryObject<ItemFarmer> OPAL_FARMER = TOOLS.register("farmeropal",
 			() -> new ItemFarmer(ToolMaterials.OPAL, 1, -2.8f));
@@ -96,7 +96,7 @@ public class ModTools {
 	public static final RegistryObject<ItemFarmer> DIAMOND_FARMER = TOOLS.register("farmerdiamond",
 			() -> new ItemFarmer(ItemTier.DIAMOND, 1, -3f));
 	public static final RegistryObject<ItemFarmer> NETHERITE_FARMER = TOOLS.register("farmernetherite",
-			() -> new ItemFarmer(ItemTier.NETHERITE, 1, -3f));
+			() -> new ItemFarmer(ItemTier.NETHERITE, 1, -3f, new Item.Properties().func_234689_a_()));
 
 	public static final RegistryObject<ItemFarmer> OPAL_MULTI_TOOL = TOOLS.register("multiopal",
 			() -> new ItemFarmer(ToolMaterials.OPAL, 1, -2.8f));
@@ -117,7 +117,7 @@ public class ModTools {
 	public static final RegistryObject<ItemFarmer> DIAMOND_MULTI_TOOL = TOOLS.register("multidiamond",
 			() -> new ItemFarmer(ItemTier.DIAMOND, 1, -3f));
 	public static final RegistryObject<ItemFarmer> NETHERITE_MULTI_TOOL = TOOLS.register("multinetherite",
-			() -> new ItemFarmer(ItemTier.NETHERITE, 1, -3f));
+			() -> new ItemFarmer(ItemTier.NETHERITE, 1, -3f, new Item.Properties().func_234689_a_()));
 
 	public static final RegistryObject<StrengthPickaxe> STRENGTH_PICKAXE = TOOLS.register("strengthpickaxe",
 			StrengthPickaxe::new);

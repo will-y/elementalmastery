@@ -24,7 +24,7 @@ import java.util.List;
 
 public class FireShovel extends ShovelItem {
 	public FireShovel() {
-		super(ToolMaterials.FIRE, 8.0f, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools));
+		super(ToolMaterials.FIRE, 8.0f, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools).func_234689_a_());
 	}
 	
 	@Override

@@ -18,19 +18,23 @@ import net.minecraftforge.common.ToolType;
 
 public class ItemMiner extends PickaxeItem {
 	
-	public ItemMiner(IItemTier material, int damage, float speed) {
-        super(material, damage, speed, new Item.Properties()
+	public ItemMiner(IItemTier material, int damage, float speed, Item.Properties properties) {
+        super(material, damage, speed, properties
                 .addToolType(ToolType.PICKAXE, material.getHarvestLevel())
                 .addToolType(ToolType.SHOVEL, material.getHarvestLevel())
                 .group(CreativeTabs.tabGemTools));
 	}
+
+	public ItemMiner(IItemTier material, int damage, float speed) {
+	    this(material, damage, speed, new Item.Properties());
+    }
 
 	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_BLOCK, Blocks.SOUL_SAND, Blocks.GRASS_PATH);
 
 	
 	@Override
 	public boolean canHarvestBlock(BlockState block) {
-		return EFFECTIVE_ON.contains(block.getBlock()) ? true : super.canHarvestBlock(block);
+		return EFFECTIVE_ON.contains(block.getBlock()) || super.canHarvestBlock(block);
 	}
 	
 	
@@ -40,6 +44,7 @@ public class ItemMiner extends PickaxeItem {
 	    return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK && material !=Material.CLAY && material != Material.SNOW_BLOCK && material != Material.SNOW && material != Material.SAND && material != Material.EARTH ? super.getDestroySpeed(stack, state) : this.efficiency;
 	}
 
+    @Override
     public ActionResultType onItemUse(ItemUseContext context) {
 	    PlayerEntity player = context.getPlayer();
 	    Hand hand = context.getHand();

@@ -11,7 +11,7 @@ import net.minecraft.item.SwordItem;
 public class FireSword extends SwordItem {
 	
 	public FireSword() {
-		super(ToolMaterials.FIRE, 8, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools));
+		super(ToolMaterials.FIRE, 8, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools).func_234689_a_());
 	}
 	
 	@Override

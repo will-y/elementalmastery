@@ -24,7 +24,7 @@ import net.minecraftforge.common.ToolType;
 
 public class FireAxe extends AxeItem {
 	public FireAxe() {
-		super(ToolMaterials.FIRE, 8.0f, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools));
+		super(ToolMaterials.FIRE, 8.0f, 3.0f, new Item.Properties().group(CreativeTabs.tabGemTools).func_234689_a_());
 	}
 	
 	@Override

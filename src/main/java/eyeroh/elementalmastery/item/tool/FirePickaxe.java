@@ -26,7 +26,7 @@ import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 public class FirePickaxe extends PickaxeItem {
 	public FirePickaxe() {
-		super(ToolMaterials.FIRE, 4, 2.0f, new Item.Properties().group(CreativeTabs.tabGemTools));
+		super(ToolMaterials.FIRE, 4, 2.0f, new Item.Properties().group(CreativeTabs.tabGemTools).func_234689_a_());
 	}
 	
 	@Override
